@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://fernando-pc/CI_Otica_Pan/index.php';
+$config['base_url']	= 'http://localhost/CI_Otica_Pan/index.php';
 
 /*
 |--------------------------------------------------------------------------
