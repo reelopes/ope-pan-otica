@@ -49,8 +49,8 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'fernando';
-$db['default']['password'] = '1311990';
+$db['default']['username'] = 'oticapan';
+$db['default']['password'] = 'oticapan';
 $db['default']['database'] = 'otica_pan';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
