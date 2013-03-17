@@ -6,6 +6,8 @@ class Principal extends CI_Controller{
         parent::__construct();
         $this->load->helper('url');
               
+                $this->login_model->logado();//Verifica se o usuário está logado
+
     }
 
 public function index(){

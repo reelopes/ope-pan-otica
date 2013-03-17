@@ -20,6 +20,11 @@ class Agendamento extends CI_Controller {
         $this->load->library('calendar', $prefs);
         $this->load->helper('date');
         $this->load->library('table');
+        
+        
+                $this->login_model->logado();//Verifica se o usuário está logado
+
+        
     }
 
     public function index() {

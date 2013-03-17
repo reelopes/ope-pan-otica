@@ -9,10 +9,16 @@ class Cliente extends CI_Controller {
         parent::__construct();
         $this->load->helpers('url');
         $this->load->helper('form');
-        $this->load->helper('array');
         $this->load->model('cliente_model');
         $this->load->library('form_validation');
         $this->load->library('table');
+            
+        $this->login_model->logado();//Verifica se o usuário está logado
+            
+            
+            
+        
+             
     }
     
     public function index() {

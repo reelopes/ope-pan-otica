@@ -16,7 +16,7 @@ if($clientes==NULL){
     echo"Sua pesquisa não encontrou nenhum dado correspondente.";
 }else{
 
-
+echo"<br><br>";
 $this->table->set_heading('NOME','CPF','EMAIL','TELEFONE','EDITAR','EXCLUIR');
 foreach ($clientes as $linha) {
 

@@ -36,8 +36,8 @@ class Login_model extends CI_Model {
         $logado = $this->session->userdata('logado');
 
         if (!isset($logado) || $logado != true) {
-            echo 'Voce nao tem permissao para entrar nessa pagina. <a href="/login">Efetuar Login</a>';
-            die();
+             $this->session->set_flashdata('erroLogin','É necessário logar no sistema');//Adiciona na sessão temporaria o status do cadastro
+            redirect('login');
         }
     }
 

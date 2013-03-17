@@ -13,6 +13,9 @@ class Fornecedor extends CI_Controller {
 		$this -> load -> library('form_validation');
 		$this -> load -> library('session');
 		$this -> load -> library('table');
+                
+                        $this->login_model->logado();//Verifica se o usuário está logado
+
 	}
 
 	public function index() {

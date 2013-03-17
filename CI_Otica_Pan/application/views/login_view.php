@@ -1,36 +1,36 @@
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Ótica Pan</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
-    <body>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Login Form</title>
+  <link rel="stylesheet" href="../../CI_otica_pan/public/css/login.css">
+</head>
+<body>
 
         
-           <?php echo validation_errors(); 
-            echo form_open();
-            echo"<br><br><br><br><center><table><tr><td>";//Essa linha pode remover
-            echo form_label('Usuário', 'usuario');
-            echo"</td><td>"; //Essa linha pode remover
-            echo form_input('usuario', '');
-            echo"</td></tr><tr><td>";//Essa linha pode remover
-            echo form_label('Senha', 'senha');
-            echo"</td><td>";//Essa linha pode remover
-            echo  form_password('senha', '');   
-            echo"</td></tr><tr><td></td><td>";//Essa linha pode remover
-            echo form_submit('submit', 'Entrar no sistema');
-            echo"</td></tr></table></center>";//Essa linha pode remover
-            form_close(); 
-            
-            if($this->session->flashdata('erroLogin')){
-            echo"<center>";//Essa linha pode remover
+  <section class="container">
+    <div class="login">
+      <h1>SisGO</h1>
+      <form method="post" action="<? echo base_url('login'); ?>">
+        <p><input type="text" name="usuario" value="" placeholder="Usuário"></p>
+        <p><input type="password" name="senha" value="" placeholder="Senha"></p>
+        <p class="remember_me"><img src="..\..\..\../CI_Otica_Pan/public/img/Oculos.png" width="63" height="63">
+
+        <p class="submit"><input type="submit" name="commit" value="Login"></p>
+      </form>
+      <?
+      echo validation_errors('<p>','</p>');
+      if($this->session->flashdata('erroLogin')){
             echo '<p>'.$this->session->flashdata('erroLogin').'</p>';
-            echo"</center>";//Essa linha pode remover
-            
-            
-}   
-          
+    } 
             ?>
-    </body>
+    </div>
+
+    <div class="login-help">
+      <p>Esqueceu a sua senha? <a href="index.html">Clique aqui.</a></p>
+    </div>
+  </section>
+</body>
 </html>
+
+        
+        
