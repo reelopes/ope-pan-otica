@@ -14,7 +14,7 @@ class Produto extends CI_Controller {
 		$this -> load -> library('session');
 		$this -> load -> library('table');
                 
-                        $this->login_model->logado();//Verifica se o usuário está logado
+                $this->login_model->logado();//Verifica se o usuário está logado
 
 	}
 
@@ -26,13 +26,13 @@ class Produto extends CI_Controller {
 	public function adiciona() {
 		$dados = array('pagina' => 'adiciona_produto', 'titulo' => 'Criar Produto');
 
-		$this -> form_validation -> set_rules('cod_barra', 'Codigo de Barra', 'trim|required|max_length[100]|ucwords');
-		$this -> form_validation -> set_rules('data_entrega', 'Data de Entrega', 'trim|numeric|max_length[100]');
+		//$this -> form_validation -> set_rules('cod_barra', 'Codigo de Barra', 'trim|required|max_length[100]|ucwords');
+		$this -> form_validation -> set_rules('data_entrega', 'Data de Entrega', 'trim|max_length[100]');
 		$this -> form_validation -> set_rules('descricao', 'Descricao', 'trim|max_length[60]|ucwords');
 		$this -> form_validation -> set_rules('preco', 'Preco', 'trim|numeric|ucwords');
 		$this -> form_validation -> set_rules('quantidade', 'Quantidade', 'trim');
 		$this -> form_validation -> set_rules('status', 'Status', 'ucwords');
-		$this -> form_validation -> set_rules('validade', 'Validade', 'trim|numeric');
+		$this -> form_validation -> set_rules('validade', 'Validade', 'trim');
 
 		if ($this -> form_validation -> run()) {
 			$dados = elements(array('cod_barra', 'data_entrega', 'descricao', 'preco', 'quantidade', 'status', 'validade'), $this -> input -> post());
@@ -67,13 +67,13 @@ class Produto extends CI_Controller {
 	}
 
 	public function update() {
-		$this -> form_validation -> set_rules('cod_barra', 'Codigo de Barra', 'trim|required|max_length[100]|ucwords');
+                //$this -> form_validation -> set_rules('cod_barra', 'Codigo de Barra', 'trim|required|max_length[100]|ucwords');
 		$this -> form_validation -> set_rules('data_entrega', 'Data de Entrega', 'trim|max_length[100]');
-		$this -> form_validation -> set_rules('descricao', 'Descricao', 'trim|numeric|max_length[60]|ucwords');
+		$this -> form_validation -> set_rules('descricao', 'Descricao', 'trim|max_length[60]|ucwords');
 		$this -> form_validation -> set_rules('preco', 'Preco', 'trim|numeric|ucwords');
 		$this -> form_validation -> set_rules('quantidade', 'Quantidade', 'trim');
-		$this -> form_validation -> set_rules('status', 'Status', 'ucwords');
-		$this -> form_validation -> set_rules('validade', 'Validade', 'trim|numeric');
+		$this -> form_validation -> set_rules('status', 'Status');
+		$this -> form_validation -> set_rules('validade', 'Validade', 'trim');
         
         if ($this->form_validation->run() == true) {
 
