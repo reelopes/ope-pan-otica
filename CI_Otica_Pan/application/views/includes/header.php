@@ -3,6 +3,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="../../../../../../../../../CI_otica_pan/public/css/menu.css">
     <link rel="stylesheet" href="../../../../../../../../../CI_otica_pan/public/css/estilo.css">
+    <link rel="stylesheet" href="../../../../../../../../../CI_otica_pan/public/css/calendario.css">
     <style type="text/css">
 
     </style>

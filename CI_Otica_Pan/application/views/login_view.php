@@ -18,10 +18,11 @@
         <p class="submit"><input type="submit" name="commit" value="Login"></p>
       </form>
       <?
+      
       echo validation_errors('<p>','</p>');
       if($this->session->flashdata('erroLogin')){
             echo '<p>'.$this->session->flashdata('erroLogin').'</p>';
-    } 
+    }
             ?>
     </div>
 

@@ -19,10 +19,8 @@
 	color:#E00;
 }
 
-
-
     #logo {
-	position: fixed;
+	position: absolute;
 	width: 149px;
 	height: 81px;
 	z-index: 2;
