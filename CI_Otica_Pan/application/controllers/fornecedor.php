@@ -14,7 +14,7 @@ class Fornecedor extends CI_Controller {
 		$this -> load -> library('session');
 		$this -> load -> library('table');
                 
-                        $this->login_model->logado();//Verifica se o usuário está logado
+                $this->login_model->logado();//Verifica se o usuário está logado
 
 	}
 
@@ -54,16 +54,13 @@ class Fornecedor extends CI_Controller {
 	}
 
 	public function pesquisa() {
-		$dados = array('pagina' => 'pesquisa_fornecedor', 'titulo' => 'Procurar', 'pesquisa' => '');
-
-		$this -> form_validation -> set_rules('nome', 'NOME', 'trim|required|max_length[100]|ucwords');
-
-		if ($this -> form_validation -> run()) {
-			$pesquisaView = elements(array('nome'), $this -> input -> post());
-			$dados = array('pagina' => 'pesquisa_fornecedor', 'titulo' => 'Procurar', 
-			'pesquisa' => $this -> fornecedor_model -> do_select($pesquisaView) -> result());
-		}
-
+            $this->form_validation->set_rules('pesquisa');
+            $this->form_validation->run();
+            $dados = Array(
+            'pagina' => 'lista_fornecedor',
+            'titulo' => 'Lista Todos os Fornecedores',
+            'fornecedor' => $this->fornecedor_model->do_select($this->input->post('pesquisa'))->result(),
+        );
 		$this -> load -> view('Principal', $dados);
 	}
 

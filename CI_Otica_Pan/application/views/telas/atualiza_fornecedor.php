@@ -7,9 +7,7 @@ $id_pessoa = $this->uri->segment(3);
 $id_fornecedor = $this->uri->segment(4);
 
 if($id_pessoa == NULL || $id_fornecedor == NULL){
-    
     redirect ('fornecedor/lista');
-    
 }
 
 $query = $this->fornecedor_model->get_byid($id_pessoa,$id_fornecedor);

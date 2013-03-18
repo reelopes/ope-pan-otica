@@ -43,17 +43,15 @@ class Fornecedor_model extends CI_Model {
 	}
 
 	public function do_select($pesquisa = null) {
-
-		$pesq = element('nome', $pesquisa);
-
+                
 		$this -> db -> select('pessoa.id as id_pessoa, pessoa.nome, pessoa.email, fornecedor.id as id_fornecedor, fornecedor.cnpj, telefone.num_telefone');
 		$this -> db -> from('pessoa');
 		$this -> db -> join('fornecedor', 'fornecedor.id_pessoa = pessoa.id');
 		$this -> db -> join('telefone', 'pessoa.id = telefone.id_pessoa');
-		$this -> db -> like('pessoa.nome', $pesq);
-		$this -> db -> or_like('pessoa.email', $pesq);
-		$this -> db -> or_like('fornecedor.cnpj', $pesq);
-		$this -> db -> or_like('telefone.num_telefone', $pesq);
+		$this -> db -> like('pessoa.nome', $pesquisa);
+		$this -> db -> or_like('pessoa.email', $pesquisa);
+		$this -> db -> or_like('fornecedor.cnpj', $pesquisa);
+		$this -> db -> or_like('telefone.num_telefone', $pesquisa);
 		$this -> db -> group_by('pessoa.id');
 
 		return $this -> db -> get();
