@@ -16,11 +16,11 @@ echo form_open('produto/adiciona');
 
 echo"<br><center><table>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
-echo form_label('Código de Barra');
-echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'cod_barra'),  set_value('cod_barra'),'autofocus');
-echo"</td></tr>";//Essa linha pode remover
-echo"<tr><td>";//Essa linha pode remover
+//echo form_label('Código de Barra');
+//echo"</td><td>"; //Essa linha pode remover
+//echo form_input(array('name'=>'cod_barra'),  set_value('cod_barra'),'autofocus');
+//echo"</td></tr>";//Essa linha pode remover
+//echo"<tr><td>";//Essa linha pode remover
 echo form_label('Data de Entrega');
 echo"</td><td>";//Essa linha pode remover
 echo form_input(array('name'=>'data_entrega'),set_value('data_entrega'));
