@@ -8,11 +8,17 @@ class Cliente_model extends CI_Model {
     public function cadastrarCliente($dados = null) {
         if ($dados != null) {
 
+            if(element('email', $dados)==NULL){$email = "";}else{$email=element('email', $dados);}
+                
+            
+            
+            
+            
             $this->db->trans_start(); //Começa uma transação em diversas tabelas
             //Trata os elementos de Pesspa
             $pessoa = array(
                 'nome' => element('nome', $dados),
-                'email' => element('email', $dados),
+                'email' => $email,
             );
             $this->db->insert('pessoa', $pessoa); //insere no BD
             $id_pessoa = $this->db->insert_id(); //Pega o ultimo ID inserido no BD

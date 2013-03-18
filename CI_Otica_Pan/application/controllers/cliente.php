@@ -45,7 +45,12 @@ class Cliente extends CI_Controller {
         $this->form_validation->set_rules('complemento', 'COMPLEMENTO', 'trim|max_length[20]');
         $this->form_validation->set_rules('estado', 'ESTADO', 'trim|max_length[2]');
         $this->form_validation->set_rules('cep', 'CEP', 'trim|max_length[10]');
-
+        
+        
+        
+        
+        
+        
         //Trata a mensagem que CPF já Existe no sistema
         //$this-> form_validation->set_message('is_unique','Campo %s já existe no sistema');
 

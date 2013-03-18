@@ -1,7 +1,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Login Form</title>
+  <title>SisGO - Login</title>
   <link rel="stylesheet" href="../../CI_otica_pan/public/css/login.css">
 </head>
 <body>
@@ -11,7 +11,7 @@
     <div class="login">
       <h1>SisGO</h1>
       <form method="post" action="<? echo base_url('login'); ?>">
-        <p><input type="text" name="usuario" value="" placeholder="Usuário"></p>
+        <p><input type="text" name="usuario" value="" placeholder="Usuário" autofocus></p>
         <p><input type="password" name="senha" value="" placeholder="Senha"></p>
         <p class="remember_me"><img src="..\..\..\../CI_Otica_Pan/public/img/Oculos.png" width="63" height="63">
 

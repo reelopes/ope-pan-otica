@@ -48,7 +48,7 @@
             <a href="<? echo base_url('produto/lista'); ?>" style="text-decoration:none" >
                 <img src="..\public/img/pesquisa_produto.png"/>
                 <br />
-                Pesquisa de Clientes  
+                Pesquisa de Produtos
             </a>
         </td>
         <td>&nbsp;</td>
