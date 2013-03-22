@@ -11,19 +11,20 @@ class Login extends CI_Controller {
         $this->load->helper('array');
         $this->load->library('table');
         $this->load->model('login_model');
+        $this->load->library('form_validation');
     }
 
     function index() {
         // VALIDATION RULES
-        $this->load->library('form_validation');
         $this->form_validation->set_rules('usuario', 'Username', 'required', 'strtolower');
-        $this->form_validation->set_rules('senha', 'Password', 'strtolower');
+        $this->form_validation->set_rules('senha', 'Password');
         $this->form_validation->set_error_delimiters('<p class="error">', '</p>');
 
 
         if ($this->form_validation->run() == FALSE) {
-
+            
             $this->load->view('login_view');
+            
         } else {
 
             $dados = array(

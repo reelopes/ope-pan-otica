@@ -14,6 +14,64 @@ if($this->session->flashdata('cadastrook')){
 
 echo form_open('produto/adiciona');
 
+echo "<body onload=\"ocultaArmacao();ocultaLente();\" />";
+
+echo"<p><p><p><p>";
+echo'<select name=produto onChange="mostra(value);">
+   <option value="0"> Selecione...</option>
+   <option value="1"> Armação</option>
+   <option value="2"> Lente</option>
+</select>';
+
+echo'<div id="armacao">';
+echo"<p>";
+echo"<table>"; //Essa linha pode remover
+echo"<tr><td>";//Essa linha pode remover
+echo form_label('Aro');
+echo"</td><td>"; //Essa linha pode remover
+echo form_input(array('name'=>'aro'),  set_value('aro'),'autofocus');
+echo"</td></tr>";//Essa linha pode remover
+echo"<tr><td>";//Essa linha pode remover
+echo form_label('Marca');
+echo"</td><td>"; //Essa linha pode remover
+echo form_input(array('name'=>'marca'),  set_value('marca'),'autofocus');
+echo"</td></tr>";//Essa linha pode remover
+echo"<tr><td>";//Essa linha pode remover
+echo form_label('Modelo');
+echo"</td><td>"; //Essa linha pode remover
+echo form_input(array('name'=>'modelo'),  set_value('modelo'),'autofocus');
+echo"</td></tr>";//Essa linha pode remover
+echo"<tr><td>";//Essa linha pode remover
+echo form_label('Preço');
+echo"</td><td>"; //Essa linha pode remover
+echo form_input(array('name'=>'preco_custo'),  set_value('preco_custo'),'autofocus');
+echo"</td></tr>";//Essa linha pode remover
+echo"</table>"; //Essa linha pode remover
+echo"</div>";
+
+echo'<div id="lente">';
+echo"<table>"; //Essa linha pode remover
+echo"<tr><td>";//Essa linha pode remover
+echo form_label('Tipo da Lente');
+echo"</td><td>"; //Essa linha pode remover
+echo'<select name=lente">
+   <option value="0"> Selecione...</option>
+   <option value="1"> Lente de Contato</option>
+   <option value="2"> Lente de Acrílico</option>
+</select>';
+echo"<tr><td>";//Essa linha pode remover
+echo form_label('Descrição');
+echo"</td><td>"; //Essa linha pode remover
+echo form_input(array('name'=>'descricao'),  set_value('descricao'),'autofocus');
+echo"</td></tr>";//Essa linha pode remover
+echo"<tr><td>";//Essa linha pode remover
+echo form_label('Marca');
+echo"</td><td>"; //Essa linha pode remover
+echo form_input(array('name'=>'marca'),  set_value('marca'),'autofocus');
+echo"</td></tr>";//Essa linha pode remover
+echo"</table>"; //Essa linha pode remover
+echo"</div>";
+
 echo"<br><center><table>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 //echo form_label('Código de Barra');
@@ -55,6 +113,7 @@ echo"<td>"; //Essa linha pode remover
 echo form_submit(array('name'=>'Cadastrar'),'Cadastrar');
 echo"</td><tr>"; //Essa linha pode remover
 echo"</table>"; //Essa linha pode remover
+
 echo form_close();
 
 ?>
