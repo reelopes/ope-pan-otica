@@ -41,8 +41,7 @@ CREATE TABLE `armacao` (
   KEY `id_produto` (`id_produto`),
   KEY `id_fornecedor` (`id_fornecedor`),
   CONSTRAINT `armacao_ibfk_1` FOREIGN KEY (`id_fornecedor`) REFERENCES `fornecedor` (`id`),
-  CONSTRAINT `armacao_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id`),
-  CONSTRAINT `armacao_ibfk_3` FOREIGN KEY (`id_fornecedor`) REFERENCES `fornecedor` (`id`)
+  CONSTRAINT `armacao_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*
@@ -74,14 +73,17 @@ CREATE TABLE `cliente` (
   PRIMARY KEY (`id`),
   KEY `id_pessoa` (`id_pessoa`),
   CONSTRAINT `cliente_ibfk_2` FOREIGN KEY (`id_pessoa`) REFERENCES `pessoa` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 /*
 Table data for otica_pan.cliente
 */
 
 INSERT INTO `cliente` VALUES 
-('39160321865','1990-01-13',4,4);
+('39160321865','1990-01-13',4,4),
+('83647592091','1989-01-01',5,6),
+('9373636363','2013-04-03',6,8),
+('96373928271','1954-10-10',7,9);
 
 /*
 Table structure for consulta
@@ -130,14 +132,17 @@ CREATE TABLE `endereco` (
   PRIMARY KEY (`id`),
   KEY `id_cliente` (`id_cliente`),
   CONSTRAINT `endereco_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 /*
 Table data for otica_pan.endereco
 */
 
 INSERT INTO `endereco` VALUES 
-('Vila Carmela','07859180','Franco da Rocha','Casa','SP',3,'Guaratingueta,70',4);
+('Vila Carmela','07859180','Franco da Rocha','Casa','SP',3,'Guaratingueta,70',4),
+('Centro','07856-030','Franco da Rocha','Casa','SP',4,'Vinte e cinco de Janeiro, 284',5),
+('Lago Azul','07856-030','Franco da rocha','Casa','SP',5,'Tibagi,285',6),
+('Vila Carmela','07859180','Franco da Rocha','Casa','SP',6,'Guaratingueta,70',7);
 
 /*
 Table structure for fornecedor
@@ -151,7 +156,14 @@ CREATE TABLE `fornecedor` (
   PRIMARY KEY (`id`),
   KEY `id_pessoa` (`id_pessoa`),
   CONSTRAINT `fornecedor_ibfk_1` FOREIGN KEY (`id_pessoa`) REFERENCES `pessoa` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+/*
+Table data for otica_pan.fornecedor
+*/
+
+INSERT INTO `fornecedor` VALUES 
+('05324000112',7,1);
 
 /*
 Table structure for informacoes_olho
@@ -251,14 +263,18 @@ CREATE TABLE `pessoa` (
   `nome` varchar(100) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 /*
 Table data for otica_pan.pessoa
 */
 
 INSERT INTO `pessoa` VALUES 
-('fdias.d.neves@gmail.com','Fernando Dias Das Neves',4);
+('fdias.d.neves@gmail.com','Fernando Dias Das Neves',4),
+('adrikisgilneves@gmail.com','Adriana Neves Da Silva',6),
+('jose.mendes@armacoes.com.br','José Mendes Maria',7),
+('kauanelucena@yahoo.com.br','Kauane Ferreira Lucena',8),
+('rosarinha@yahoo.com.br','Rosarinha Dias Das Neves',9);
 
 /*
 Table structure for produto
@@ -267,6 +283,7 @@ Table structure for produto
 drop table if exists `produto`;
 CREATE TABLE `produto` (
   `cod_barra` varchar(20) DEFAULT NULL,
+  `nome` varchar(50) NOT NULL,
   `data_entrega` date DEFAULT NULL,
   `descricao` text,
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -308,7 +325,7 @@ CREATE TABLE `telefone` (
   KEY `id_pessoa` (`id_pessoa`),
   CONSTRAINT `telefone_ibfk_1` FOREIGN KEY (`id_tipo_telefone`) REFERENCES `tipo_telefone` (`id`),
   CONSTRAINT `telefone_ibfk_2` FOREIGN KEY (`id_pessoa`) REFERENCES `pessoa` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 /*
 Table data for otica_pan.telefone
@@ -316,7 +333,15 @@ Table data for otica_pan.telefone
 
 INSERT INTO `telefone` VALUES 
 (4,'1144447088',1,4),
-(5,'11965099747',2,4);
+(5,'11965099747',2,4),
+(6,'(11)44448132',1,6),
+(7,'(11)997543440',2,6),
+(8,'(11)59084170',1,7),
+(9,'(11)997375550',2,7),
+(10,'1148115487',1,8),
+(11,'1148115487',2,8),
+(12,'(11)4444-7088',1,9),
+(13,'(11)99880-0000',2,9);
 
 /*
 Table structure for tipo_lente
@@ -359,7 +384,17 @@ CREATE TABLE `usuario` (
   `senha` varchar(20) DEFAULT NULL,
   `lembrete_senha` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+/*
+Table data for otica_pan.usuario
+*/
+
+INSERT INTO `usuario` VALUES 
+(1,'admin','admin','admin'),
+(2,'eduardo','eduardo','eduardo'),
+(3,'renan','renan','renan'),
+(4,'fernando','fernando','fernando');
 
 SET FOREIGN_KEY_CHECKS=1;
 
