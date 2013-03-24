@@ -4,20 +4,33 @@ if (!defined('BASEPATH'))
 
 class produto_model extends CI_Model {
 	public function do_insert($dados = null) {
-		if ($dados != null) {
+            if ($dados != null) {
+                
+		$this -> db -> trans_start();
+		$produto = array('cod_barra' => element('cod_barra', $dados), 'data_entrega' => element('data_entrega', $dados), 'descricao' => element('descricao', $dados), 'preco' => element('preco', $dados), 'quantidade' => element('quantidade', $dados), 'status' => element('status', $dados), 'validade' => element('validade', $dados), );
+		$this -> db -> insert('produto', $produto);
 
-			$this -> db -> trans_start();
-			$produto = array('cod_barra' => element('cod_barra', $dados), 'data_entrega' => element('data_entrega', $dados), 'descricao' => element('descricao', $dados), 'preco' => element('preco', $dados), 'quantidade' => element('quantidade', $dados), 'status' => element('status', $dados), 'validade' => element('validade', $dados), );
-			$this -> db -> insert('produto', $produto);
+		$id_produto = $this -> db -> insert_id();
 
-			//$id_produto = $this -> db -> insert_id();
+		$this -> db -> trans_complete();
+                
+                if (element('aro', $dados) != null) {
+                    $this -> db -> trans_start();
+                    $tipoProduto = array('aro', 'marca_armacao', 'modelo', 'preco_custo');
+                    $this -> db -> insert('armacao', $tipoProduto, 'id_produto', $id_produto, 'id_fornecedor', 1);
+                    $this -> db -> trans_complete();
+                } else {
+                    $this -> db -> trans_start();
+                    $tipoProduto = array('referencia');
+                    $this -> db -> insert('lente', $tipoProduto, 'id_produto', $id_produto, 'id_tipo_lente', 1);
 
-			$this -> db -> trans_complete();
+                    $this -> db -> trans_complete();
+                }
 
-			$this -> session -> set_flashdata('cadastrook', 'Cadastro efetuado com sucesso');
+		$this -> session -> set_flashdata('cadastrook', 'Cadastro efetuado com sucesso');
 
-			redirect('produto');
-		}
+		redirect('produto');
+            }
 	}
 
 	public function getAll() {
