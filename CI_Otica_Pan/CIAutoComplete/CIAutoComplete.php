@@ -37,6 +37,7 @@
 * @property CI_Xmlrpc $xmlrpc
 * @property CI_Xmlrpcs $xmlrpcs
 * @property CI_Zip $zip
+* @property Util $util
 */
 
 class CI_Controller {};

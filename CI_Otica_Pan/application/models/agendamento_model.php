@@ -20,7 +20,23 @@ public function listarConsultasDia($data){
    
 }
 
+public function cadastrarAgendamento($agendamento = NULL) {
+            if ($agendamento != null) {
+               
+            //Trata os elementos do cliente
+            $dadosAgendamento = array(
+                'id_cliente' => element('idCliente', $agendamento),
+                'horario_consulta' => element('horario', $agendamento),
+                'data_consulta' => $this->util->data_user_para_mysql (element('data', $agendamento)),
+            );
+            $this->db->insert('agendamento', $dadosAgendamento);
+            
+            $this->session->set_flashdata('msgCadastro', 'Cliente Agendado com Sucesso'); //Adiciona na sessão temporaria o status do cadastro
+                 redirect('agendamento/horarioConsulta/'.$this->util->data_user_para_mysql (element('data', $agendamento)));
+            
+}
 
+}
 }
 
 

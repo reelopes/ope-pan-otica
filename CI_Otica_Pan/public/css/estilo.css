@@ -27,3 +27,11 @@
 	left: 1%;
 	top: 1%;
 }
+
+.pesquisaDinamica tr:hover{
+   
+    background: #bbb;
+ 
+    
+    
+}
