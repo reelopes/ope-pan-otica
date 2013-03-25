@@ -112,7 +112,7 @@ body {
 }
 
 header {
-  padding-top: 90px;
+  padding-top: 80px;
   background: #404040 url("../img/bg.png") 0 0 repeat;
   border-bottom: 1px solid #dadada;
   -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.04);

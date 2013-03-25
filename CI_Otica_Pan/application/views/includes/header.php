@@ -12,7 +12,7 @@
     <body>
  <header>
     <nav>
-    <div id="logo"><img src="../../../../../../../../../CI_otica_pan/public/img/logo.png" width="146" height="79"></div>
+    <div id="logo"><img src="../../../../../../../../../CI_otica_pan/public/img/logo.png" width="124" height="66"></div>
     <div class="headerInfo">
     
     <?
