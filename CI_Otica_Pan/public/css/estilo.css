@@ -28,10 +28,11 @@
 	top: 1%;
 }
 
-.pesquisaDinamica tr:hover{
-   
+.pesquisaDinamica tr.alt:hover{
+       background: #bbb;
+
+}
+
+.listaAgendamento tr.alt:hover{
     background: #bbb;
- 
-    
-    
 }

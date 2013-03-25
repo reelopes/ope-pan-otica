@@ -18,7 +18,7 @@ Table structure for agendamento
 drop table if exists `agendamento`;
 CREATE TABLE `agendamento` (
   `data_consulta` date DEFAULT NULL,
-  `horario_consulta` varchar(4) DEFAULT NULL,
+  `horario_consulta` varchar(5) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_cliente` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -272,7 +272,7 @@ Table data for otica_pan.pessoa
 INSERT INTO `pessoa` VALUES 
 ('fdias.d.neves@gmail.com','Fernando Dias Das Neves',4),
 ('adrikisgilneves@gmail.com','Adriana Neves Da Silva',6),
-('jose.mendes@armacoes.com.br','José Mendes Maria',7),
+('jose.mendes@armacoes.com.br','Josï¿½ Mendes Maria',7),
 ('kauanelucena@yahoo.com.br','Kauane Ferreira Lucena',8),
 ('rosarinha@yahoo.com.br','Rosarinha Dias Das Neves',9);
 

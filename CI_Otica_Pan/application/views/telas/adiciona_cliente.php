@@ -8,8 +8,8 @@ echo"<h2>$titulo</h2>";
 echo validation_errors('<p>','</p>');
 
 if($this->session->flashdata('cadastrook')){
-    
-    echo '<p>'.$this->session->flashdata('cadastrook').'</p>';
+    $msg = $this->session->flashdata('cadastrook');
+    echo "<body onLoad=\" alert('$msg');\">";
 }
 
 echo form_open('cliente/cadastrarCliente');

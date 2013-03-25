@@ -1,9 +1,7 @@
 <script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/js/agendamento.js"></script> 
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
 
 class Agendamento extends CI_Controller {
 
@@ -17,7 +15,7 @@ class Agendamento extends CI_Controller {
 
         $prefs = array(
             'show_next_prev' => TRUE,
-            'next_prev_url' => base_url('agendamento/index'),
+            'next_prev_url' => base_url('agendamento/horarioConsulta'),
             'month_type' => 'long',
             'day_type' => 'short',
             'template' =>
@@ -36,14 +34,17 @@ class Agendamento extends CI_Controller {
     }
 
     public function index() {
-        
-        redirect('agendamento/horarioConsulta/'.date('Y').'/'.date('m').'/'.date('d'));
+
+        redirect('agendamento/horarioConsulta/' . date('Y') . '/' . date('m') . '/' . date('d'));
     }
-        
-    public function horarioConsulta($anoCalendario = NULL,$mesCalendario = NULL,$diaCalendario = NULL) {
-            if($anoCalendario==null)$anoCalendario = $this->uri->segment(3); //Captura o ano da URL
-            if($mesCalendario==NULL)$mesCalendario = $this->uri->segment(4); //Captura o mes da URL
-            if($diaCalendario==NULL)$diaCalendario = $this->uri->segment(5); //Captura o mes da URL
+
+    public function horarioConsulta($anoCalendario = NULL, $mesCalendario = NULL, $diaCalendario = NULL) {
+        if ($anoCalendario == null)
+            $anoCalendario = $this->uri->segment(3); //Captura o ano da URL
+        if ($mesCalendario == NULL)
+            $mesCalendario = $this->uri->segment(4); //Captura o mes da URL
+        if ($diaCalendario == NULL)
+            $diaCalendario = $this->uri->segment(5); //Captura o mes da URL
         $dados = Array(
             'pagina' => 'agenda_cliente',
             'titulo' => 'Agendamento de Consulta',
@@ -51,70 +52,77 @@ class Agendamento extends CI_Controller {
         );
         $this->load->view('Principal', $dados);
     }
-    
-    public function pesquisaDinamica(){
-        
-            $pesquisaCliente = $this->uri->segment(3); //Captura o ano da URL
-             $this->load->model('cliente_model');
-     
-             $clientes =  $this->cliente_model->listarClientes($pesquisaCliente,'5')->result();
-                      
-             
-if($clientes==NULL){
-    echo"Sua pesquisa não encontrou nenhum dado correspondente.";
-}else{
 
-        echo"
+    public function pesquisaDinamica() {
+
+        $pesquisaCliente = $this->uri->segment(3); //Captura o ano da URL
+        $this->load->model('cliente_model');
+
+        $clientes = $this->cliente_model->listarClientes($pesquisaCliente, '5')->result();
+
+
+        if ($clientes == NULL) {
+            echo"Sua pesquisa não encontrou nenhum dado correspondente.";
+        } else {
+
+            echo"
           <table border='1' cellpadding='2' cellspacing='1' class = 'pesquisaDinamica'>
           <tr>
-          
-          <td>Nome</td>
-          <td>Cpf</td>
-          <td>E-mail</td>
+          <th>Nome</th>
+          <th>Cpf</th>
+          <th>E-mail</th>
           </tr>
           
           ";
-foreach ($clientes as $linha) {
-    
-    echo"
-        <tr ONCLICK=\"agendaCliente('$linha->id_cliente','$linha->nome','$linha->cpf');\" style=\"cursor: hand;\">
+            foreach ($clientes as $linha) {
+
+                echo"
+        <tr class=\"alt\" ONCLICK=\"agendaCliente('$linha->id_cliente','$linha->nome','$linha->cpf');\" style=\"cursor: hand;\">
         <td>$linha->nome</td>
         <td>$linha->cpf</td>
         <td>$linha->email</td>
         </tr>
-        ";    
-}
-echo "</table>";
-}
-             
-            
-             
+        ";
+            }
+            echo "</table>";
+        }
     }
-   
-       public function cadastrarAgendamento() {
-           
-           if($this->input->post()!= NULL){
-        
-       $agendamento = elements(array('idCliente', 'horario','data'), $this->input->post());
-            $this->agendamento_model->cadastrarAgendamento($agendamento);
 
-                        
+    public function cadastrarAgendamento() {
+
+        if ($this->input->post() != NULL) {
+
+            $agendamento = elements(array('idCliente', 'horario', 'data'), $this->input->post());
+            $this->agendamento_model->cadastrarAgendamento($agendamento);
         } else {
 
             $dados = Array(
-            'pagina' => 'agenda_cliente',
-            'titulo' => 'Agendamento de Consulta'
-        );
-            
+                'pagina' => 'agenda_cliente',
+                'titulo' => 'Agendamento de Consulta'
+            );
+
 
             $this->load->view('Principal', $dados);
         }
     }
     
-    
+    public function deletarAgendamento(){
+        
+         if ($this->uri->segment(6) != NULL) {
+
+            $id_agendamento = $this->uri->segment(6);
+            
+            if($this->agendamento_model->deleteAgendamento($id_agendamento)){
+            $this->session->set_flashdata('msg','Agendamento deletado com sucesso!');
+           redirect('agendamento/horarioConsulta/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'/'.$this->uri->segment(5));
+            }
+            
+        } else {
+            $this->session->set_flashdata('msg','Erro ao deletar agendamento!');
+           redirect('agendamento/horarioConsulta/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'/'.$this->uri->segment(5));
+        }
     }
     
-    
 
-
+}
 ?>

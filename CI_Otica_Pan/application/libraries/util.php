@@ -1,5 +1,12 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+
+setlocale(LC_ALL, 'ptb', 'portuguese-brazil', 'pt-br', 'bra', 'brazil');
+date_default_timezone_set('America/Sao_Paulo');
+
+
+
+
 class Util {
 
 function data_user_para_mysql($y){
@@ -69,6 +76,36 @@ function valida_data($data, $tipo = "pt")
 		return false;
 	}
 }
+
+function subtraiHora($hora1,$hora2){
+$hora1 = explode(":",$hora1);
+$hora2 = explode(":",$hora2);
+$acumulador1 = ($hora1[0] * 3600) + ($hora1[1] * 60);
+$acumulador2 = ($hora2[0] * 3600) + ($hora2[1] * 60);
+$resultado = $acumulador1 - $acumulador2;
+$hora = floor($resultado / 3600);
+$resultado = $resultado - ($hora * 3600);
+$min = floor($resultado / 60);
+
+if($hora>0 && $hora<10)$hora = '0'.$hora;
+if($min>0 && $min<10)$min = '0'.$min;
+return $hora.":".$min; 
+} 
+function somaHora($hora1,$hora2){
+$hora1 = explode(":",$hora1);
+$hora2 = explode(":",$hora2);
+$acumulador1 = ($hora1[0] * 3600) + ($hora1[1] * 60);
+$acumulador2 = ($hora2[0] * 3600) + ($hora2[1] * 60);
+$resultado = $acumulador1 + $acumulador2;
+$hora = floor($resultado / 3600);
+$resultado = $resultado - ($hora * 3600);
+$min = floor($resultado / 60);
+
+if($hora>0 && $hora<10)$hora = '0'.$hora;
+if($min>0 && $min<10)$min = '0'.$min;
+return $hora.":".$min; 
+} 
+
 
 
 

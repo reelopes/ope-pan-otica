@@ -34,16 +34,32 @@
 }
 .day_listing a  {
     text-decoration: none;
+    color: mediumblue;
     
 }
 
 .day_listing a:hover  {
     color: #E00;
+    font-weight: bold;
+    font-size: 14px;
+}
+.today {
+    display: block;
+    text-align: center;
+    font-size: 13px;
+    color: #2C2C2C;
+    border: #000 1px solid;
     
     
 }
-.today {
+.today a{
+    text-decoration: none;
+    color: mediumblue;
+    
+}
+.today a:hover  {
+    color: #E00;
     font-weight: bold;
-    border: #000 1px solid;
+    font-size: 14px;
 }
 
