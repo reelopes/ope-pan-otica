@@ -23,8 +23,8 @@ class Produto extends CI_Controller {
 		$dados = array('pagina' => 'adiciona_produto', 'titulo' => 'Criar Produto', 'carrega' => 0);
 		$this -> load -> view('Principal', $dados);
 	}
-
-	public function adiciona() {
+        
+        public function adiciona() {
             $this -> form_validation -> set_rules('descricao', 'Descricao', 'trim|max_length[60]|ucwords');
             $this -> form_validation -> set_rules('preco', 'Preço', 'trim|numeric|ucwords|required');
             $this -> form_validation -> set_rules('quantidade', 'Quantidade', 'trim');
@@ -35,27 +35,19 @@ class Produto extends CI_Controller {
                 $this -> form_validation -> set_rules('marca_armacao', 'Marca', 'trim|max_length[60]|required');
                 $this -> form_validation -> set_rules('modelo', 'modelo', 'trim');
                 $this -> form_validation -> set_rules('preco_custo', 'Preco de Custo', 'trim|numeric|ucwords');
-                    
-                if ($this -> form_validation -> run()) {
-                    $dados = elements(array('descricao', 'preco', 'quantidade', 'status', 'validade', 'aro', 'marca_armacao', 'modelo', 'preco_custo'), $this -> input -> post());
-                    $this -> produto_model -> do_insert($dados);
-		} else {
-                    $dados = array('titulo' => 'Criar Produto', 'pagina' => 'adiciona_produto', 'carrega' => $this -> input -> post('produto'));
-                    $this -> load -> view('Principal', $dados);
-		}
-           } else if($this -> input -> post('produto') == 2) {
-               $this -> form_validation -> set_rules('referencia', 'Referência', 'trim|required');
-               if ($this -> form_validation -> run()) {
-                   $dados = elements(array('descricao', 'preco', 'quantidade', 'validade', 'referencia'), $this -> input -> post());
-                   $this -> produto_model -> do_insert($dados);
-		} else {
-                    $dados = array('titulo' => 'Criar Produto', 'pagina' => 'adiciona_produto', 'carrega' => $this -> input -> post('produto'));
-                    $this -> load -> view('Principal', $dados);
-		}
-           } else {
-               $dados = array('titulo' => 'Criar Produto', 'pagina' => 'adiciona_produto', 'carrega' => $this -> input -> post('produto'));
-               $this -> load -> view('Principal', $dados);
-           }
+                
+            } else if($this -> input -> post('produto') == 2) {
+                $this -> form_validation -> set_rules('referencia', 'Referência', 'trim|required');   
+            }
+            
+            if ($this -> form_validation -> run()) {
+                $dados = elements(array('descricao', 'preco', 'quantidade', 'validade', 'aro', 'marca_armacao', 'modelo', 'preco_custo', 'referencia'), $this -> input -> post());
+                $this -> produto_model -> do_insert($dados);
+                
+            } else {
+                $dados = array('titulo' => 'Criar Produto', 'pagina' => 'adiciona_produto', 'carrega' => $this -> input -> post('produto'));
+                $this -> load -> view('Principal', $dados);
+            }
 	}
 
 	public function lista() {
