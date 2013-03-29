@@ -32,16 +32,19 @@ Table structure for armacao
 
 drop table if exists `armacao`;
 CREATE TABLE `armacao` (
-  `aro` int(11) DEFAULT NULL,
-  `marca` varchar(50) DEFAULT NULL,
-  `modelo` varchar(50) DEFAULT NULL,
-  `preco_custo` double DEFAULT NULL,
+  `largura_lente` int(11) DEFAULT NULL,
+  `largura_ponte` int(11) DEFAULT NULL,
+  `comprimento_haste` int(11) DEFAULT NULL,
+  `modelo` varchar(20) DEFAULT NULL,
   `id_fornecedor` int(11) DEFAULT NULL,
   `id_produto` int(11) DEFAULT NULL,
+  `id_grife` int(11) DEFAULT NULL,
   KEY `id_produto` (`id_produto`),
   KEY `id_fornecedor` (`id_fornecedor`),
+  KEY `id_grife` (`id_grife`),
   CONSTRAINT `armacao_ibfk_1` FOREIGN KEY (`id_fornecedor`) REFERENCES `fornecedor` (`id`),
-  CONSTRAINT `armacao_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id`)
+  CONSTRAINT `armacao_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id`),
+  CONSTRAINT `armacao_ibfk_3` FOREIGN KEY (`id_grife`) REFERENCES `grife` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*
@@ -99,6 +102,23 @@ CREATE TABLE `consulta` (
   KEY `id_medico` (`id_medico`),
   CONSTRAINT `consulta_ibfk_1` FOREIGN KEY (`id_agendamento`) REFERENCES `agendamento` (`id`),
   CONSTRAINT `consulta_ibfk_2` FOREIGN KEY (`id_medico`) REFERENCES `medico` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*
+Table structure for dependente
+*/
+
+drop table if exists `dependente`;
+CREATE TABLE `dependente` (
+  `data_nascimento` date DEFAULT NULL,
+  `nome` varchar(100) DEFAULT NULL,
+  `responsavel` varchar(20) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_cliente` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`),
+  KEY `dependente_ibfk_1` (`id_cliente`),
+  CONSTRAINT `dependente_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*
@@ -166,6 +186,17 @@ INSERT INTO `fornecedor` VALUES
 ('05324000112',7,1);
 
 /*
+Table structure for grife
+*/
+
+drop table if exists `grife`;
+CREATE TABLE `grife` (
+  `nome` varchar(50) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*
 Table structure for informacoes_olho
 */
 
@@ -203,6 +234,28 @@ CREATE TABLE `medico` (
   `nome` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*
+Table structure for nivel
+*/
+
+drop table if exists `nivel`;
+CREATE TABLE `nivel` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(40) NOT NULL,
+  `descricao` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+/*
+Table data for otica_pan.nivel
+*/
+
+INSERT INTO `nivel` VALUES 
+(1,'Administrador','Administrador do Sistema.'),
+(2,'Atentende','Realiza o atendimento para a venda de produtos.'),
+(3,'Caixa','Finaliza a venda de produtos.'),
+(4,'Oftalmologista','Médica que realiza as consultas nos clientes.');
 
 /*
 Table structure for orcamento
@@ -272,7 +325,7 @@ Table data for otica_pan.pessoa
 INSERT INTO `pessoa` VALUES 
 ('fdias.d.neves@gmail.com','Fernando Dias Das Neves',4),
 ('adrikisgilneves@gmail.com','Adriana Neves Da Silva',6),
-('jose.mendes@armacoes.com.br','Josï¿½ Mendes Maria',7),
+('jose.mendes@armacoes.com.br','Jos? Mendes Maria',7),
 ('kauanelucena@yahoo.com.br','Kauane Ferreira Lucena',8),
 ('rosarinha@yahoo.com.br','Rosarinha Dias Das Neves',9);
 
@@ -282,12 +335,13 @@ Table structure for produto
 
 drop table if exists `produto`;
 CREATE TABLE `produto` (
-  `cod_barra` varchar(20) DEFAULT NULL,
+  `referencia` varchar(20) DEFAULT NULL,
   `nome` varchar(50) NOT NULL,
   `data_entrega` date DEFAULT NULL,
   `descricao` text,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `preco` double DEFAULT NULL,
+  `preco_custo` double DEFAULT NULL,
+  `preco_venda` double DEFAULT NULL,
   `quantidade` int(11) DEFAULT NULL,
   `status` varchar(20) DEFAULT NULL,
   `validade` date DEFAULT NULL,
@@ -383,18 +437,25 @@ CREATE TABLE `usuario` (
   `login` varchar(20) DEFAULT NULL,
   `senha` varchar(20) DEFAULT NULL,
   `lembrete_senha` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  `email` varchar(100) DEFAULT NULL,
+  `id_nivel` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_nivel` (`id_nivel`),
+  CONSTRAINT `nivel_ibfk_1` FOREIGN KEY (`id_nivel`) REFERENCES `nivel` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 /*
 Table data for otica_pan.usuario
 */
 
 INSERT INTO `usuario` VALUES 
-(1,'admin','admin','admin'),
-(2,'eduardo','eduardo','eduardo'),
-(3,'renan','renan','renan'),
-(4,'fernando','fernando','fernando');
+(1,'admin','admin','admin','grupoabdfr@gmail.com',1),
+(2,'eduardo','eduardo','eduardo','eduardo.pereira2806@gmail.com',1),
+(3,'renan','renan','renan','reee.lopes@gmail.com',1),
+(4,'atendente','atendente','atendente','atendente@gmail.com',2),
+(5,'caixa','caixa','caixa','caixa@gmail.com',3),
+(6,'oftalmologista','oftalmologista','oftalmologista','oftalmologista@gmail.com',4),
+(7,'fernando','fernado','fernando','fdias.d.neves@gmail.com',1);
 
 SET FOREIGN_KEY_CHECKS=1;
 
