@@ -82,15 +82,21 @@ echo"</table>";
 echo"</div>";
 
 echo'<div id="lente">';
-echo"<table>"; 
+echo "<table>";
+    echo"<tr><td>";
+    echo form_label('Tipo de Lente');
+    echo"</td><td>"; 
+    echo'<select name="tipo_lente">';
+    if ($tipo_lente != NULL) {
+        foreach ($tipo_lente as $linha) {
+           echo'<option value=', $linha -> id; echo'>', $linha -> descricao; echo'</option>';
+        }
+    }
+    echo'</select>';
+    echo"</td></tr>";
+    echo"<tr><td>";
+    echo"</table>";
 
-echo"<tr><td>";
-echo form_label('Referência no Catalogo');
-echo"</td><td>"; 
-echo form_input(array('name'=>'referencia'),  set_value('referencia'),'autofocus');
-echo"</td></tr>";
-echo"<tr><td>";
-echo"</table>"; 
 echo"</div>";
 
 echo"<center><table>";

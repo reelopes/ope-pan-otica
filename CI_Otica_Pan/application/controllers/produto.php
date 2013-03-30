@@ -10,6 +10,7 @@ class Produto extends CI_Controller {
 		$this -> load -> helper('form');
 		$this -> load -> helper('array');
 		$this -> load -> model('produto_model');
+                $this -> load -> model('tipo_lente_model');
                 $this -> load -> library('uri');
 		$this -> load -> library('form_validation');
 		$this -> load -> library('session');
@@ -25,6 +26,7 @@ class Produto extends CI_Controller {
 	}
         
         public function adiciona() {
+            
             $this -> form_validation -> set_rules('descricao', 'Descricao', 'trim|max_length[60]|ucwords');
             $this -> form_validation -> set_rules('preco', 'Preço', 'trim|numeric|ucwords|required');
             $this -> form_validation -> set_rules('quantidade', 'Quantidade', 'trim');
@@ -37,7 +39,7 @@ class Produto extends CI_Controller {
                 $this -> form_validation -> set_rules('preco_custo', 'Preco de Custo', 'trim|numeric|ucwords');
                 
             } else if($this -> input -> post('produto') == 2) {
-                $this -> form_validation -> set_rules('referencia', 'Referência', 'trim|required');   
+                $dados = array('tipo_lente' => $this -> tipo_lente_model -> getAll() -> result());
             }
             
             if ($this -> form_validation -> run()) {

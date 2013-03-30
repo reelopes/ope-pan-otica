@@ -1,7 +1,7 @@
-function mostra(opicao) {
-    if (opicao == 1) {
+function mostra(opcao) {
+    if (opcao == 1) {
         mostraArmacao();
-    } else if(opicao == 2) {
+    } else if(opcao == 2) {
         mostraLente();
     } else {
         ocultaArmacao();
