@@ -11,6 +11,7 @@ class Produto extends CI_Controller {
 		$this -> load -> helper('array');
 		$this -> load -> model('produto_model');
                 $this -> load -> model('tipo_lente_model');
+                $this -> load -> model('fornecedor_model');
                 $this -> load -> library('uri');
 		$this -> load -> library('form_validation');
 		$this -> load -> library('session');
@@ -22,7 +23,8 @@ class Produto extends CI_Controller {
 
 	public function index() {
 		$dados = array('pagina' => 'adiciona_produto', 'titulo' => 'Criar Produto', 'carrega' => 0,
-                    'tipo_lente' => $this -> tipo_lente_model -> getAll() -> result());
+                    'tipo_lente' => $this -> tipo_lente_model -> getAll() -> result(),
+                    'fornecedor' => $this -> fornecedor_model -> getAll() -> result());
 		$this -> load -> view('Principal', $dados);
 	}
         
@@ -38,6 +40,7 @@ class Produto extends CI_Controller {
                 $this -> form_validation -> set_rules('marca_armacao', 'Marca', 'trim|max_length[60]|required');
                 $this -> form_validation -> set_rules('modelo', 'modelo', 'trim');
                 $this -> form_validation -> set_rules('preco_custo', 'Preco de Custo', 'trim|numeric|ucwords');
+                $this -> form_validation -> set_rules('fornecedor', 'Fornecedor');
                 
             } else if($this -> input -> post('produto') == 2) {
                 $this -> form_validation -> set_rules('lista_tipo_lente', 'Tipo de Lente', 'required');

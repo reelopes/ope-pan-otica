@@ -11,8 +11,11 @@ if($this->session->flashdata('cadastrook')){
 
 echo form_open('produto/adiciona');
 
-$tipo_lente = $tipo_lente; // Boa pratica, pega variavel da Controller
+// Boa pratica, pega variavel da Controller
+$tipo_lente = $tipo_lente; 
+$fornecedor = $fornecedor;
 
+// Oculta campos e mostra campos de acordo com a escolha
 if($carrega == 1) {
     echo '<body onload="ocultaLente();" />';
     echo "<table>";
@@ -57,6 +60,7 @@ if($carrega == 1) {
     echo"</table>";
 }
 
+// div armacao, carrega campos de armacao
 echo'<div id="armacao">';
 echo"<p>";
 echo"<table>"; 
@@ -80,9 +84,23 @@ echo form_label('Preço de Custo');
 echo"</td><td>"; 
 echo form_input(array('name'=>'preco_custo'),  set_value('preco_custo'),'autofocus');
 echo"</td></tr>";
+echo"<tr><td>";
+echo form_label('Fornecedor');
+echo"</td><td>";
+   
+echo'<select name="fornecedor">';
+if ($fornecedor != NULL) {
+    foreach ($fornecedor as $linha) {
+        echo'<option value="'.$linha -> id_pessoa.'">'.$linha -> nome.'</option>';
+   }
+}
+echo'</select>';
+echo"</td></tr>";
+echo"<tr><td>";
 echo"</table>"; 
 echo"</div>";
 
+// div lente, carrega campos de lente
 echo'<div id="lente">';
 echo "<table>";
     echo"<tr><td>";
@@ -95,15 +113,7 @@ echo "<table>";
            echo'<option value="'.$linha -> id.'">'.$linha -> descricao.'</option>';
         }
     }
-    echo'</select>';    
-    
-    
-//echo '<select name="myselect"><option value="one"'; echo set_select("myselect", "one", ($model->selection == "one")); 
-//echo'>One</option>';
-//echo'<option value="two";'; echo set_select("myselect", "two", ($model->selection == "two")); 
-//echo' >Two</option>';
-//echo'<option value="three"'; echo set_select("myselect", "three", ($model->selection == "three")); 
-//echo'>Three</option> </select>';
+    echo'</select>';
 
     echo"</td></tr>";
     echo"<tr><td>";
@@ -111,6 +121,7 @@ echo "<table>";
     
 echo"</div>";
 
+// Campos da tabela Produto
 echo"<center><table>";
 echo"<tr><td>";
 //echo form_label('Código de Barra');
@@ -151,8 +162,7 @@ echo"</tr><td>";
 echo"<td>"; 
 echo form_submit('', 'Cadastrar');
 echo"</td><tr>"; 
-echo"</table>"; 
+echo"</table>";
 
 echo form_close();
-
 ?>
