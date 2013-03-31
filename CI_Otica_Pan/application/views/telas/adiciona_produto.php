@@ -11,6 +11,8 @@ if($this->session->flashdata('cadastrook')){
 
 echo form_open('produto/adiciona');
 
+$tipo_lente = $tipo_lente; // Boa pratica, pega variavel da Controller
+
 if($carrega == 1) {
     echo '<body onload="ocultaLente();" />';
     echo "<table>";
@@ -85,18 +87,28 @@ echo'<div id="lente">';
 echo "<table>";
     echo"<tr><td>";
     echo form_label('Tipo de Lente');
-    echo"</td><td>"; 
-    echo'<select name="tipo_lente">';
+    echo"</td><td>";
+    
+    echo'<select name="lista_tipo_lente">';
     if ($tipo_lente != NULL) {
         foreach ($tipo_lente as $linha) {
-           echo'<option value=', $linha -> id; echo'>', $linha -> descricao; echo'</option>';
+           echo'<option value="'.$linha -> id.'">'.$linha -> descricao.'</option>';
         }
     }
-    echo'</select>';
+    echo'</select>';    
+    
+    
+//echo '<select name="myselect"><option value="one"'; echo set_select("myselect", "one", ($model->selection == "one")); 
+//echo'>One</option>';
+//echo'<option value="two";'; echo set_select("myselect", "two", ($model->selection == "two")); 
+//echo' >Two</option>';
+//echo'<option value="three"'; echo set_select("myselect", "three", ($model->selection == "three")); 
+//echo'>Three</option> </select>';
+
     echo"</td></tr>";
     echo"<tr><td>";
     echo"</table>";
-
+    
 echo"</div>";
 
 echo"<center><table>";

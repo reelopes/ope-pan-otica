@@ -19,8 +19,8 @@ if($tipo_lente==NULL){
         $this -> table -> set_heading('DESCRICAO');
         foreach ($tipo_lente as $linha) {
 
-            $this -> table -> add_row($linha -> descricao, anchor("tipo_lente/update/$linha->id_tipo_lente",'Editar').'
-                  |  '.anchor("tipo_lente/delete/$linha->id_tipo_lente",'Excluir'));
+            $this -> table -> add_row($linha -> descricao, anchor("tipo_lente/update/$linha->id",'Editar').'
+                  |  '.anchor("tipo_lente/delete/$linha->id",'Excluir'));
         }
         $tmpl = array ( 'table_open'  => '<table border="1" cellpadding="2" width="100%" cellspacing="1" class="mytable">' );
         $this->table->set_template($tmpl);

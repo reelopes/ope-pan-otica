@@ -21,7 +21,8 @@ class Produto extends CI_Controller {
 	}
 
 	public function index() {
-		$dados = array('pagina' => 'adiciona_produto', 'titulo' => 'Criar Produto', 'carrega' => 0);
+		$dados = array('pagina' => 'adiciona_produto', 'titulo' => 'Criar Produto', 'carrega' => 0,
+                    'tipo_lente' => $this -> tipo_lente_model -> getAll() -> result());
 		$this -> load -> view('Principal', $dados);
 	}
         
@@ -39,15 +40,16 @@ class Produto extends CI_Controller {
                 $this -> form_validation -> set_rules('preco_custo', 'Preco de Custo', 'trim|numeric|ucwords');
                 
             } else if($this -> input -> post('produto') == 2) {
-                $dados = array('tipo_lente' => $this -> tipo_lente_model -> getAll() -> result());
+                $this -> form_validation -> set_rules('lista_tipo_lente', 'Tipo de Lente', 'required');
             }
             
             if ($this -> form_validation -> run()) {
-                $dados = elements(array('descricao', 'preco', 'quantidade', 'validade', 'aro', 'marca_armacao', 'modelo', 'preco_custo', 'referencia'), $this -> input -> post());
+                $dados = elements(array('descricao', 'preco', 'quantidade', 'validade', 'aro', 'marca_armacao', 'modelo', 'preco_custo', 'lista_tipo_lente'), $this -> input -> post());
                 $this -> produto_model -> do_insert($dados);
                 
             } else {
-                $dados = array('titulo' => 'Criar Produto', 'pagina' => 'adiciona_produto', 'carrega' => $this -> input -> post('produto'));
+                $dados = array('titulo' => 'Criar Produto', 'pagina' => 'adiciona_produto', 'carrega' => $this -> input -> post('produto'),
+                    'tipo_lente' => $this -> tipo_lente_model -> getAll() -> result());
                 $this -> load -> view('Principal', $dados);
             }
 	}

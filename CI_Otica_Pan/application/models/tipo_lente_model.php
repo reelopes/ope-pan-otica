@@ -10,8 +10,6 @@ class tipo_lente_model extends CI_Model {
 		$tipo_lente = array('descricao' => element('descricao', $dados));
 		$this -> db -> insert('tipo_lente', $tipo_lente);
 
-		$id_tipo_lente = $this -> db -> insert_id();
-
 		$this -> db -> trans_complete();
 
 		$this -> session -> set_flashdata('cadastrook', 'Cadastro efetuado com sucesso');
@@ -22,18 +20,16 @@ class tipo_lente_model extends CI_Model {
 
 	public function getAll() {
 
-		$this -> db -> select('id as id_tipo_lente, descricao');
+		$this -> db -> select('id, descricao');
 		$this -> db -> from('tipo_lente');
 		return $this -> db -> get();
 	}
 
 	public function do_select($pesquisa = null) {
 
-		$pesq = element('nome', $pesquisa);
-
-		$this -> db -> select('id as id_tipo_lente, descricao');
+		$this -> db -> select('id, descricao');
 		$this -> db -> from('tipo_lente');
-		$this -> db -> like('descricao', $pesq);
+		$this -> db -> like('descricao', $pesquisa);
 
 		return $this -> db -> get();
 	}
@@ -67,7 +63,7 @@ class tipo_lente_model extends CI_Model {
 				$this -> session -> set_flashdata('statusUpdate', 'Não foi possível alterar o fornecedor');
 			}
 
-			redirect(current_url());
+			redirect('tipo_lente/lista');
 		}
 		redirect('tipo_lente/lista');
 	}

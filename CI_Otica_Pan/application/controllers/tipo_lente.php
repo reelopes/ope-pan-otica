@@ -49,10 +49,11 @@ class Tipo_lente extends CI_Controller {
             $this->form_validation->run();
             $dados = Array(
             'pagina' => 'lista_tipo_lente',
-            'titulo' => 'Lista Todos as lentes',
+            'titulo' => 'Manter Tipo de Lente',
             'tipo_lente' => $this->tipo_lente_model->do_select($this->input->post('pesquisa'))->result(),
-        );
-		$this -> load -> view('Principal', $dados);
+            );
+            
+            $this -> load -> view('Principal', $dados);
 	}
 
 	public function update() {
