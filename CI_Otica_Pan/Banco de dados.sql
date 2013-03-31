@@ -214,7 +214,6 @@ Table structure for lente
 
 drop table if exists `lente`;
 CREATE TABLE `lente` (
-  `referencia` varchar(100) DEFAULT NULL,
   `id_tipo_lente` int(11) DEFAULT NULL,
   `id_produto` int(11) DEFAULT NULL,
   KEY `id_tipo_lente` (`id_tipo_lente`),
@@ -255,7 +254,7 @@ INSERT INTO `nivel` VALUES
 (1,'Administrador','Administrador do Sistema.'),
 (2,'Atentende','Realiza o atendimento para a venda de produtos.'),
 (3,'Caixa','Finaliza a venda de produtos.'),
-(4,'Oftalmologista','Médica que realiza as consultas nos clientes.');
+(4,'Oftalmologista','Mï¿½dica que realiza as consultas nos clientes.');
 
 /*
 Table structure for orcamento
@@ -403,7 +402,7 @@ Table structure for tipo_lente
 
 drop table if exists `tipo_lente`;
 CREATE TABLE `tipo_lente` (
-  `descricao` text,
+  `tipo` varchar(20) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
