@@ -16,12 +16,7 @@ function mostraFormAgendamento(idCliente,nome,cpf) {
     inputIdCliente.value=idCliente;
     inputNome.value=nome;
     inputcpf.value=cpf;
-    
-    
-    
-    
-    
-    
+  
 }
 
 function ocultaPesquisaDinamica() {

@@ -10,6 +10,8 @@ date_default_timezone_set('America/Sao_Paulo');
 class Util {
 
 function data_user_para_mysql($y){
+    if($y=='') return null;
+    
     $data_inverter = explode("/",$y);
     $x = $data_inverter[2].'/'. $data_inverter[1].'/'. $data_inverter[0];
     return $x;

@@ -105,24 +105,22 @@ class Agendamento extends CI_Controller {
             $this->load->view('Principal', $dados);
         }
     }
-    
-    public function deletarAgendamento(){
-        
-         if ($this->uri->segment(6) != NULL) {
+
+    public function deletarAgendamento() {
+
+        if ($this->uri->segment(6) != NULL) {
 
             $id_agendamento = $this->uri->segment(6);
-            
-            if($this->agendamento_model->deleteAgendamento($id_agendamento)){
-            $this->session->set_flashdata('msg','Agendamento deletado com sucesso!');
-           redirect('agendamento/horarioConsulta/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'/'.$this->uri->segment(5));
+
+            if ($this->agendamento_model->deleteAgendamento($id_agendamento)) {
+                $this->session->set_flashdata('msg', 'Agendamento deletado com sucesso!');
+                redirect('agendamento/horarioConsulta/' . $this->uri->segment(3) . '/' . $this->uri->segment(4) . '/' . $this->uri->segment(5));
             }
-            
         } else {
-            $this->session->set_flashdata('msg','Erro ao deletar agendamento!');
-           redirect('agendamento/horarioConsulta/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'/'.$this->uri->segment(5));
+            $this->session->set_flashdata('msg', 'Erro ao deletar agendamento!');
+            redirect('agendamento/horarioConsulta/' . $this->uri->segment(3) . '/' . $this->uri->segment(4) . '/' . $this->uri->segment(5));
         }
     }
-    
 
 }
 ?>

@@ -150,6 +150,38 @@ class Cliente extends CI_Controller {
 
         $this->load->view('Principal', $dados);
     }
-}
+    
+    public function cadastrarDependente() {
+        
+        $this->form_validation->set_rules('nomeDependente', 'NOME', 'trim|required|max_length[100]|ucwords');
+        $this->form_validation->set_rules('dataNascimentoDependente', 'Data Nascimento', 'trim');
+        $this->form_validation->set_rules('responsavelDependente', 'RESPONSAVEL', 'trim|max_length[20]|ucwords');
+               
+      if($this->form_validation->run()==true){
+
+            $dependente = elements(array('nomeDependente', 'dataNascimentoDependente', 'responsavelDependente'), $this->input->post());
+            
+            
+            $dados = array(
+                'titulo' => 'Cadastro de Depedente',
+                'pagina' => 'adiciona_dependente',
+               );
+
+            $this->load->view('Principal_popup', $dados);
+            
+            
+           
+      }else{
+            $dados = array(
+                'titulo' => 'Cadastro de Depedente',
+                'pagina' => 'adiciona_dependente',
+            );
+
+            $this->load->view('Principal_popup', $dados);
+    }}
+    }
+    
+    
+
 
 ?>

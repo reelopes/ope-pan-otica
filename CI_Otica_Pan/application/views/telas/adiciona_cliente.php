@@ -14,6 +14,17 @@ if($this->session->flashdata('cadastrook')){
 
 echo form_open('cliente/cadastrarCliente');
 
+
+$atts = array(
+              'width'      => '800',
+              'height'     => '600',
+              'scrollbars' => 'no',
+              'status'     => 'no',
+              'resizable'  => 'no',
+              'screenx'    => '0',
+              'screeny'    => '0'
+            );
+
 echo"<br><center><table>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Nome');

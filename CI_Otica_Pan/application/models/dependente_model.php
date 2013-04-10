@@ -3,78 +3,39 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Cliente_model extends CI_Model {
+class Dependente_model extends CI_Model {
 
-    public function cadastrarCliente($dados = null) {
+    public function cadastrarDependente($dados = null) {
         if ($dados != null) {
 
-            if(element('email', $dados)==NULL){$email = "";}else{$email=element('email', $dados);}
-                
-            
-            
-            
-            
-            $this->db->trans_start(); //Começa uma transação em diversas tabelas
-            //Trata os elementos de Pesspa
-            $pessoa = array(
-                'nome' => element('nome', $dados),
-                'email' => $email,
+            $this->db->trans_start(); //Começa uma transação no banco de dados
+            //Trata os elementos de Dependente
+            $dependente = array(
+                'nome' => element('nomeDependente', $dados),
+                'data_nascimento' => $this->util->data_user_para_mysql(element('dataNascimentoDependente', $dados)),
+                'responsavel' => element('responsavelDependente', $dados),
+                'id_cliente' => element('idCliente', $dados),
             );
-            $this->db->insert('pessoa', $pessoa); //insere no BD
-            $id_pessoa = $this->db->insert_id(); //Pega o ultimo ID inserido no BD
-            //Trata os elemenos
-            $cliente = array(
-                'cpf' => element('cpf', $dados),
-                'data_nascimento' => $this->util->data_user_para_mysql(element('data_nascimento', $dados)),
-                'id_pessoa' => $id_pessoa,
-            );
-            
-            $this->db->insert('cliente', $cliente); //insere no BD
-            $id_cliente = $this->db->insert_id(); //Pega o ultimo ID inserido no BD
-            //trata os elementos de endereço
-            $endereco = array(
-                'logradouro' => element('rua', $dados),
-                'bairro' => element('bairro', $dados),
-                'cidade' => element('cidade', $dados),
-                'complemento' => element('complemento', $dados),
-                'estado' => element('estado', $dados),
-                'cep' => element('cep', $dados),
-                'id_cliente' => $id_cliente,
-            );
-            $this->db->insert('endereco', $endereco); //insere no BD
-
-
-            $telefone_fixo = array(
-                'num_telefone' => element('num_telefone1', $dados),
-                'id_tipo_telefone' => '1',
-                'id_pessoa' => $id_pessoa,
-            );
-
-            $this->db->insert('telefone', $telefone_fixo); //insere no BD
-
-            $telefone_celular = array(
-                'num_telefone' => element('num_telefone2', $dados),
-                'id_tipo_telefone' => '2',
-                'id_pessoa' => $id_pessoa,
-            );
-            $this->db->insert('telefone', $telefone_celular); //insere no BD
+            $this->db->insert('dependente', $dependente); //insere no BD
 
             $this->db->trans_complete();
 
             $this->session->set_flashdata('cadastrook', 'Cadastro efetuado com sucesso'); //Adiciona na sessão temporaria o status do cadastro
-            redirect('cliente');
+            redirect('dependente');
         }
     }
 
-    public function listarClientes($pesquisa, $limite=NULL) {
+    public function listarDependentes($pesquisa, $limite = NULL) {
 
-        
+
+
         $this->db->select('pessoa.id as id_pessoa,cliente.id as id_cliente, pessoa.nome,cliente.cpf,pessoa.email,telefone.num_telefone');
         $this->db->from('pessoa');
         $this->db->join('cliente', 'pessoa.id = cliente.id_pessoa');
         $this->db->join('telefone', 'pessoa.id = telefone.id_pessoa');
         $this->db->where("nome like '%$pesquisa%' or email like '%$pesquisa%' or cpf like '%$pesquisa%' ");
-        if($limite!=NULL)$this->db->limit($limite);
+        if ($limite != NULL)
+            $this->db->limit($limite);
         $this->db->group_by('pessoa.id');
         return $this->db->get();
     }
@@ -114,7 +75,7 @@ class Cliente_model extends CI_Model {
         if ($dados != null || $condicao != null) {
 
             $this->db->trans_start();
-            
+
             //Inicio de Update Pessoa
             $pessoa = array(
                 'nome' => element('nome', $dados),
@@ -172,32 +133,29 @@ class Cliente_model extends CI_Model {
             );
             $this->db->update('telefone', $telefone_celular, $condicao_telefone_celular);
             //Final de Update Telefone
-              if($this->db->trans_complete()){
-                  $this->session->set_flashdata('statusUpdate', 'Alterado com sucesso');
-              }else{
-                  $this->session->set_flashdata('statusUpdate', 'Não foi possível alterar o cliente');
-              }
-             
+            if ($this->db->trans_complete()) {
+                $this->session->set_flashdata('statusUpdate', 'Alterado com sucesso');
+            } else {
+                $this->session->set_flashdata('statusUpdate', 'Não foi possível alterar o cliente');
+            }
+
             //retorna para a pagina que chamou a função
             redirect(current_url());
         }
-            redirect('cliente/listarClientes');
-
+        redirect('cliente/listarClientes');
     }
-    
-    public function deleteCliente($id=null){
-            
-                 if($id !=null){
-                     
-                     $this->db->where('id',$id);
-                     $this->db->delete('pessoa');
-                     return true;
-                 }
-                 
-                 return false;
-            
+
+    public function deleteCliente($id = null) {
+
+        if ($id != null) {
+
+            $this->db->where('id', $id);
+            $this->db->delete('pessoa');
+            return true;
         }
-    
-    
+
+        return false;
+    }
+
 }
 
