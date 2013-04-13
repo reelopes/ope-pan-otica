@@ -13,9 +13,9 @@ echo form_open('tipo_lente/adiciona');
 
 echo"<center><table>";
 echo"<tr><td>";
-echo form_label('Descrição');
+echo form_label('Tipo');
 echo"</td><td>";
-echo form_input(array('name'=>'descricao'),  set_value('descricao'));
+echo form_input(array('name'=>'tipo'),  set_value('tipo'));
 echo"</td></tr>";
 echo"<tr><td>";
 

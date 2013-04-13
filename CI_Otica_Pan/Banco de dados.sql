@@ -336,6 +336,7 @@ drop table if exists `produto`;
 CREATE TABLE `produto` (
   `referencia` varchar(20) DEFAULT NULL,
   `nome` varchar(50) NOT NULL,
+  `categoria` int(2) NOT NULL,
   `data_entrega` date DEFAULT NULL,
   `descricao` text,
   `id` int(11) NOT NULL AUTO_INCREMENT,

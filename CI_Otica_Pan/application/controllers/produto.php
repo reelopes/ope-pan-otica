@@ -12,6 +12,7 @@ class Produto extends CI_Controller {
 		$this -> load -> model('produto_model');
                 $this -> load -> model('tipo_lente_model');
                 $this -> load -> model('fornecedor_model');
+                $this -> load -> model('grife_model');
                 $this -> load -> library('uri');
 		$this -> load -> library('form_validation');
 		$this -> load -> library('session');
@@ -24,35 +25,42 @@ class Produto extends CI_Controller {
 	public function index() {
 		$dados = array('pagina' => 'adiciona_produto', 'titulo' => 'Criar Produto', 'carrega' => 0,
                     'tipo_lente' => $this -> tipo_lente_model -> getAll() -> result(),
-                    'fornecedor' => $this -> fornecedor_model -> getAll() -> result());
+                    'todos_fornecedor' => $this -> fornecedor_model -> getAll() -> result(),
+                    'todas_grife' => $this -> grife_model -> getAll() -> result());
 		$this -> load -> view('Principal', $dados);
 	}
         
         public function adiciona() {
-            
-            $this -> form_validation -> set_rules('descricao', 'Descricao', 'trim|max_length[60]|ucwords');
-            $this -> form_validation -> set_rules('preco', 'Preço', 'trim|numeric|ucwords|required');
+            $this -> form_validation -> set_rules('referencia', 'Referencia', 'trim|required');
+            $this -> form_validation -> set_rules('nome', 'Nome', 'trim|required');
+            $this -> form_validation -> set_rules('descricao', 'Descricao', 'trim|max_length[60]|');
+            $this -> form_validation -> set_rules('preco_custo', 'Preço de Custo', 'trim|numeric|ucwords|required');
+            $this -> form_validation -> set_rules('preco_venda', 'Preço de Venda', 'trim|numeric|ucwords|required');
             $this -> form_validation -> set_rules('quantidade', 'Quantidade', 'trim');
+            $this -> form_validation -> set_rules('status', 'Status', 'trim');
             $this -> form_validation -> set_rules('validade', 'Validade', 'trim');
+            $this -> form_validation -> set_rules('data_entrega', 'Data de entrega', 'trim');
             
             if($this -> input -> post('produto') == 1) {
-                $this -> form_validation -> set_rules('aro', 'Aro', 'required');
-                $this -> form_validation -> set_rules('marca_armacao', 'Marca', 'trim|max_length[60]|required');
+                $this -> form_validation -> set_rules('largura_lente', 'Largura da lente', 'required');
+                $this -> form_validation -> set_rules('largura_ponte', 'Largura da Ponte', 'required');
+                $this -> form_validation -> set_rules('comprimento_haste', 'Comprimento da haste', 'required');
                 $this -> form_validation -> set_rules('modelo', 'modelo', 'trim');
-                $this -> form_validation -> set_rules('preco_custo', 'Preco de Custo', 'trim|numeric|ucwords');
-                $this -> form_validation -> set_rules('fornecedor', 'Fornecedor');
+                $this -> form_validation -> set_rules('grife', 'Grife', 'required');
+                $this -> form_validation -> set_rules('fornecedor', 'Fornecedor', 'required');
                 
-            } else if($this -> input -> post('produto') == 2) {
-                $this -> form_validation -> set_rules('lista_tipo_lente', 'Tipo de Lente', 'required');
             }
             
             if ($this -> form_validation -> run()) {
-                $dados = elements(array('descricao', 'preco', 'quantidade', 'validade', 'aro', 'marca_armacao', 'modelo', 'preco_custo', 'lista_tipo_lente'), $this -> input -> post());
+                $dados = elements(array('referencia', 'nome', 'descricao', 'preco_custo', 'preco_venda', 'quantidade', 'status', 'validade', 'data_entrega',
+                    'largura_lente', 'largura_ponte', 'comprimento_haste', 'modelo', 'grife', 'fornecedor',
+                    'produto'), $this -> input -> post());
                 $this -> produto_model -> do_insert($dados);
                 
             } else {
                 $dados = array('titulo' => 'Criar Produto', 'pagina' => 'adiciona_produto', 'carrega' => $this -> input -> post('produto'),
-                    'tipo_lente' => $this -> tipo_lente_model -> getAll() -> result());
+                    'todos_fornecedor' => $this -> fornecedor_model -> getAll() -> result(),
+                    'todas_grife' => $this -> grife_model -> getAll() -> result());
                 $this -> load -> view('Principal', $dados);
             }
 	}
@@ -79,27 +87,39 @@ class Produto extends CI_Controller {
 	}
 
 	public function update() {
-                //$this -> form_validation -> set_rules('cod_barra', 'Codigo de Barra', 'trim|required|max_length[100]|ucwords');
-		$this -> form_validation -> set_rules('data_entrega', 'Data de Entrega', 'trim|max_length[100]');
-		$this -> form_validation -> set_rules('descricao', 'Descricao', 'trim|max_length[60]|ucwords');
-		$this -> form_validation -> set_rules('preco', 'Preco', 'trim|numeric|ucwords');
-		$this -> form_validation -> set_rules('quantidade', 'Quantidade', 'trim');
-		$this -> form_validation -> set_rules('status', 'Status');
-		$this -> form_validation -> set_rules('validade', 'Validade', 'trim');
-        
-        if ($this->form_validation->run() == true) {
+            $this -> form_validation -> set_rules('referencia', 'Referencia', 'trim|required');
+            $this -> form_validation -> set_rules('nome', 'Nome', 'trim|required');
+            $this -> form_validation -> set_rules('descricao', 'Descricao', 'trim|max_length[60]|');
+            $this -> form_validation -> set_rules('preco_custo', 'Preço de Custo', 'trim|numeric|ucwords|required');
+            $this -> form_validation -> set_rules('preco_venda', 'Preço de Venda', 'trim|numeric|ucwords|required');
+            $this -> form_validation -> set_rules('quantidade', 'Quantidade', 'trim');
+            $this -> form_validation -> set_rules('status', 'Status', 'trim');
+            $this -> form_validation -> set_rules('validade', 'Validade', 'trim');
+            $this -> form_validation -> set_rules('data_entrega', 'Data de entrega', 'trim');
+            
+            if($this -> input -> post('produto') == 1) {
+                $this -> form_validation -> set_rules('largura_lente', 'Largura da lente', 'required');
+                $this -> form_validation -> set_rules('largura_ponte', 'Largura da Ponte', 'required');
+                $this -> form_validation -> set_rules('comprimento_haste', 'Comprimento da haste', 'required');
+                $this -> form_validation -> set_rules('modelo', 'modelo', 'trim');
+                $this -> form_validation -> set_rules('grife', 'Grife', 'required');
+                $this -> form_validation -> set_rules('fornecedor', 'Fornecedor', 'required');
+                
+            }
+            
+            if ($this -> form_validation -> run()) {
+                $dados = elements(array('referencia', 'nome', 'descricao', 'preco_custo', 'preco_venda', 'quantidade', 'status', 'validade', 'data_entrega',
+                    'largura_lente', 'largura_ponte', 'comprimento_haste', 'modelo', 'grife', 'fornecedor',
+                    'produto'), $this -> input -> post());
 
-            $dados = elements(array('cod_barra', 'data_entrega', 'descricao', 'preco',
-                'quantidade', 'status', 'validade'), $this->input->post());
-
-            $this->produto_model->do_update(
-                    $dados, array('id_produto' => $this->input->post('id_produto')));
+                $this->produto_model->do_update(
+                        $dados, array('id_produto' => $this->input->post('id_produto')));
+            }
+            
+            $dados = array('titulo' => 'Atualiza Produto', 'pagina' => 'atualiza_produto');
+            $this -> load -> view('Principal', $dados);
         }
-		
-		$dados = array('titulo' => 'Atualiza Produto', 'pagina' => 'atualiza_produto');
-		$this -> load -> view('Principal', $dados);
-	}
-
+        
 	public function delete() {
 		$dados = array('titulo' => 'CRUD &raquo; Delete', 'tela' => 'Delete', );
 		$iduser = $this -> uri -> segment(3);

@@ -65,24 +65,24 @@ class Fornecedor extends CI_Controller {
 	}
 
 	public function update() {
-		$this->form_validation->set_rules('nome', 'NOME', 'trim|required|max_length[100]|ucwords');
-        $this->form_validation->set_rules('email', 'EMAIL', 'trim|max_length[100]|strtolower|valid_email');
-        $this->form_validation->set_rules('cnpj', 'CNPJ', 'trim|numeric|max_length[15]');
-        $this->form_validation->set_rules('num_telefone1', 'Numero do Telefone', 'trim|max_length[15]');
-        $this->form_validation->set_rules('num_telefone2', 'Numero do Celular', 'trim|max_length[15]');
-        
-        if ($this->form_validation->run() == true) {
+            $this->form_validation->set_rules('nome', 'NOME', 'trim|required|max_length[100]|ucwords');
+            $this->form_validation->set_rules('email', 'EMAIL', 'trim|max_length[100]|strtolower|valid_email');
+            $this->form_validation->set_rules('cnpj', 'CNPJ', 'trim|numeric|max_length[15]');
+            $this->form_validation->set_rules('num_telefone1', 'Numero do Telefone', 'trim|max_length[15]');
+            $this->form_validation->set_rules('num_telefone2', 'Numero do Celular', 'trim|max_length[15]');
 
-            $dados = elements(array('nome', 'email', 'cnpj', 'num_telefone1',
-                'num_telefone2'), $this->input->post());
+            if ($this->form_validation->run() == true) {
 
-            $this->fornecedor_model->do_update(
-                    $dados, array('id_pessoa' => $this->input->post('id_pessoa'),
-                'id_fornecedor' => $this->input->post('id_fornecedor')));
-        }
-		
-		$dados = array('titulo' => 'Atualiza Fornecedor', 'pagina' => 'atualiza_fornecedor');
-		$this -> load -> view('Principal', $dados);
+                $dados = elements(array('nome', 'email', 'cnpj', 'num_telefone1',
+                    'num_telefone2'), $this->input->post());
+
+                $this->fornecedor_model->do_update(
+                        $dados, array('id_pessoa' => $this->input->post('id_pessoa'),
+                    'id_fornecedor' => $this->input->post('id_fornecedor')));
+            }
+            
+            $dados = array('titulo' => 'Atualiza Fornecedor', 'pagina' => 'atualiza_fornecedor');
+            $this -> load -> view('Principal', $dados);
 	}
 
 	public function delete() {

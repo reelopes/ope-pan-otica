@@ -25,10 +25,10 @@ class Tipo_lente extends CI_Controller {
 	}
         
         public function adiciona() {
-            $this -> form_validation -> set_rules('descricao', 'Descricao', 'trim|max_length[60]|ucwords|required');
+            $this -> form_validation -> set_rules('tipo', 'Tipo', 'trim|max_length[60]|ucwords|required');
             
             if ($this -> form_validation -> run()) {
-                $dados = elements(array('descricao'), $this -> input -> post());
+                $dados = elements(array('tipo'), $this -> input -> post());
                 $this -> tipo_lente_model -> do_insert($dados);
                 
             } else {
@@ -57,11 +57,11 @@ class Tipo_lente extends CI_Controller {
 	}
 
 	public function update() {
-            $this -> form_validation -> set_rules('descricao', 'Descricao', 'trim|max_length[60]|ucwords|required');
+            $this -> form_validation -> set_rules('tipo', 'Tipo', 'trim|max_length[60]|ucwords|required');
             
             if ($this->form_validation->run() == true) {
 
-            $dados = elements(array('descricao'), $this->input->post());
+            $dados = elements(array('tipo'), $this->input->post());
 
             $this->tipo_lente_model->do_update(
                     $dados, array('id_tipo_lente' => $this->input->post('id_tipo_lente')));

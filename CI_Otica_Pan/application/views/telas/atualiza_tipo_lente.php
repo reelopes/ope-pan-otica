@@ -23,7 +23,7 @@ echo"<br><center><table>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Descrição');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'descricao'),  set_value('descricao',$query['tipo_lente']->descricao),'autofocus');
+echo form_input(array('name'=>'tipo'),  set_value('tipo',$query['tipo_lente']->tipo),'autofocus');
 echo"</td></tr>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 

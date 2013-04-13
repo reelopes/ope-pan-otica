@@ -16,10 +16,10 @@ if($tipo_lente==NULL){
 }else{
     echo"<br><center><table>";//Essa linha pode remover
     if ($tipo_lente != NULL) {
-        $this -> table -> set_heading('DESCRICAO');
+        $this -> table -> set_heading('TIPO');
         foreach ($tipo_lente as $linha) {
 
-            $this -> table -> add_row($linha -> descricao, anchor("tipo_lente/update/$linha->id",'Editar').'
+            $this -> table -> add_row($linha -> tipo, anchor("tipo_lente/update/$linha->id",'Editar').'
                   |  '.anchor("tipo_lente/delete/$linha->id",'Excluir'));
         }
         $tmpl = array ( 'table_open'  => '<table border="1" cellpadding="2" width="100%" cellspacing="1" class="mytable">' );

@@ -7,7 +7,7 @@ class tipo_lente_model extends CI_Model {
             if ($dados != null) {
                 
 		$this -> db -> trans_start();
-		$tipo_lente = array('descricao' => element('descricao', $dados));
+		$tipo_lente = array('tipo' => element('tipo', $dados));
 		$this -> db -> insert('tipo_lente', $tipo_lente);
 
 		$this -> db -> trans_complete();
@@ -20,16 +20,16 @@ class tipo_lente_model extends CI_Model {
 
 	public function getAll() {
 
-		$this -> db -> select('id, descricao');
+		$this -> db -> select('id, tipo');
 		$this -> db -> from('tipo_lente');
 		return $this -> db -> get();
 	}
 
 	public function do_select($pesquisa = null) {
 
-		$this -> db -> select('id, descricao');
+		$this -> db -> select('id, tipo');
 		$this -> db -> from('tipo_lente');
-		$this -> db -> like('descricao', $pesquisa);
+		$this -> db -> like('tipo', $pesquisa);
 
 		return $this -> db -> get();
 	}
@@ -53,7 +53,7 @@ class tipo_lente_model extends CI_Model {
 
 			$this -> db -> trans_start();
 
-			$tipo_lente = array('descricao' => element('descricao', $dados));
+			$tipo_lente = array('tipo' => element('tipo', $dados));
                         $condicao_tipo_lente = array('id' => $condicao['id_tipo_lente']);
 			$this -> db -> update('tipo_lente', $tipo_lente, $condicao_tipo_lente);
 
