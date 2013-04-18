@@ -81,18 +81,16 @@ class produto_model extends CI_Model {
 
 	public function do_select($pesquisa = null) {
 
-		$pesq = element('nome', $pesquisa);
-
 		$this -> db -> select
                         ('referencia, nome, descricao, preco_custo, preco_venda,
-                          quantidade, status, validade, data_entrega');
+                          quantidade, status, validade, data_entrega, id as id_produto');
 		$this -> db -> from('produto');
-		$this -> db -> like('referencia', $pesq);
-		$this -> db -> or_like('nome', $pesq);
-		$this -> db -> or_like('status', $pesq);
-                $this -> db -> or_like('validade', $pesq);
-                $this -> db -> or_like('descricao', $pesq);
-		$this -> db -> or_like('data_entrega', $pesq);
+		$this -> db -> like('referencia', $pesquisa);
+		$this -> db -> or_like('nome', $pesquisa);
+		$this -> db -> or_like('status', $pesquisa);
+                $this -> db -> or_like('validade', $pesquisa);
+                $this -> db -> or_like('descricao', $pesquisa);
+		$this -> db -> or_like('data_entrega', $pesquisa);
 
 		return $this -> db -> get();
 	}
@@ -119,9 +117,11 @@ class produto_model extends CI_Model {
                     $this -> db -> where('id', $armacao -> id_grife);
                     $this -> db -> limit(1);
                     $grife = $this -> db -> get('grife') -> row();
+                    
+                    $dados = array('produto' => $produto, 'armacao' => $armacao, 'fornecedor' => $dadosForn, 'fornecedorE' => $fornecedorE, 'grife' => $grife);
+                } else {
+                    $dados = array('produto' => $produto);
                 }
-                
-                $dados = array('produto' => $produto, 'armacao' => $armacao, 'fornecedor' => $dadosForn, 'fornecedorE' => $fornecedorE, 'grife' => $grife);
                 
 		return $dados;
             }
@@ -130,9 +130,6 @@ class produto_model extends CI_Model {
 	public function do_update($dados = NULL, $condicao = NULL) {
             if ($dados != null || $condicao != null) {
                 $this -> db -> trans_start();
-                
-                echo $condicao;
-                break;
                 
                 $produto = array(
                 'referencia' => element('referencia', $dados),
@@ -146,34 +143,27 @@ class produto_model extends CI_Model {
                 'data_entrega' => element('data_entrega', $dados),
                 'quantidade' => element('quantidade', $dados),
                 'status' => element('status', $dados),
-                'validade' => element('validade', $dados),);
+                'validade' => element('validade', $dados));
                 
-                $condicao_produto = array('id' => $condicao['id_produto'], );
-                $this -> db -> update('produto', $produto, $condicao_produto);
+                $this->db->update('produto', $produto, 'id = '.$condicao);
                 
             if (element('produto', $dados) == 1) {
-                    $tipoProduto = array(
+                $tipoProduto = array(
                         'largura_lente' => element('largura_lente', $dados),
                         'largura_ponte' => element('largura_ponte', $dados),
                         'comprimento_haste' => element('comprimento_haste', $dados),
                         'modelo' => element('modelo', $dados),
                         'id_fornecedor' => element('id_fornecedor' ,element('fornecedor', $dados)),
-                        'id_produto' => $condicao_produto,
+                        'id_produto' => $condicao,
                         'id_grife' => element('id' ,element('grife', $dados))
                         );
-                    $this -> db ->update('armacao', $tipoProduto);
-                } else if(element('produto', $dados) == 2) {
-                    $tipoProduto = array(
-                        'id_tipo_lente' => element('id', element('lista_tipo_lente', $dados)),
-                        'id_produto' => $condicao_produto
-                        );
-                    $this -> db -> insert('lente', $tipoProduto);
-                }
+                    $this -> db ->update('armacao', $tipoProduto, 'id_produto = '.$condicao);
+            }
             
             if ($this -> db -> trans_complete()) {
                 $this -> session -> set_flashdata('statusUpdate', 'Alterado com sucesso');
             } else {
-                $this -> session -> set_flashdata('statusUpdate', 'Não foi possível alterar o fornecedor');
+                $this -> session -> set_flashdata('statusUpdate', 'Não foi possível alterar o produto');
             }
                 redirect(current_url());
             }
@@ -182,8 +172,13 @@ class produto_model extends CI_Model {
 
 	public function do_delete($id = null) {
             if ($id != null) {
+                
+                $this -> db -> where('id_produto', $id);
+                $this -> db -> delete('armacao');
+                
                 $this -> db -> where('id', $id);
                 $this -> db -> delete('produto');
+                
                 $this -> session -> set_flashdata('deleteok', 'Dados deletados com sucesso');
                 redirect('produto/delete');
                 

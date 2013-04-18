@@ -137,11 +137,12 @@ echo"</td></tr>";
 
 echo"</tr><td>"; 
 echo"<td>"; 
-echo form_submit('', 'Cadastrar');
+echo form_submit('', 'Alterar');
 echo"</td><tr>"; 
 echo"</table>";
 
 echo form_hidden('id_produto',$id_produto);
+echo form_hidden('produto',$query['produto']->categoria);
 
 echo form_close();
 ?>

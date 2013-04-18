@@ -72,7 +72,6 @@ echo"<tr><td>";
 echo form_label('Grife');
 echo"</td><td>";    
 echo'<select name="grife">';
-echo'<option value="'. 1 .'">'. 2 .'</option>';
 if ($todas_grife != NULL) {
     foreach ($todas_grife as $linha) {
         echo'<option value="'.$linha -> id.'">'.$linha -> nome.'</option>';

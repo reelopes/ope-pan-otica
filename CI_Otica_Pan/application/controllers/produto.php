@@ -73,13 +73,13 @@ class Produto extends CI_Controller {
 	}
 
 	public function pesquisa() {
-		$dados = array('pagina' => 'pesquisa_produto', 'titulo' => 'Procurar', 'pesquisa' => '');
+		$dados = array('pagina' => 'pesquisa_produto', 'titulo' => 'Manter Produto', 'pesquisa' => '');
 
-		$this -> form_validation -> set_rules('nome', 'NOME', 'trim|required|max_length[100]|ucwords');
+		$this -> form_validation -> set_rules('pesquisa', 'NOME', 'trim|required|max_length[100]|ucwords');
 
 		if ($this -> form_validation -> run()) {
-			$pesquisaView = elements(array('nome'), $this -> input -> post());
-			$dados = array('pagina' => 'pesquisa_produto', 'titulo' => 'Procurar', 
+			$pesquisaView = $this -> input -> post('pesquisa');
+			$dados = array('pagina' => 'pesquisa_produto', 'titulo' => 'Manter Produto', 
 			'pesquisa' => $this -> produto_model -> do_select($pesquisaView) -> result());
 		}
 
@@ -111,9 +111,9 @@ class Produto extends CI_Controller {
                 $dados = elements(array('referencia', 'nome', 'descricao', 'preco_custo', 'preco_venda', 'quantidade', 'status', 'validade', 'data_entrega',
                     'largura_lente', 'largura_ponte', 'comprimento_haste', 'modelo', 'grife', 'fornecedor',
                     'produto'), $this -> input -> post());
-
+                
                 $this->produto_model->do_update(
-                        $dados, array('id_produto' => $this->input->post('id_produto')));
+                        $dados, $this->input->post('id_produto'));
             }
             
             $dados = array('titulo' => 'Atualiza Produto', 'pagina' => 'atualiza_produto');
@@ -122,13 +122,13 @@ class Produto extends CI_Controller {
         
 	public function delete() {
 		$dados = array('titulo' => 'CRUD &raquo; Delete', 'tela' => 'Delete', );
-		$iduser = $this -> uri -> segment(3);
+		$id = $this -> uri -> segment(3);
 
-		if ($iduser == NULL)
-			redirect('produto/lista');
+		if ($id == NULL) {
+                    redirect('produto/lista');
+                }
 
-		$this -> produto_model -> do_delete($iduser);
-
+		$this -> produto_model -> do_delete($id);
 		$this -> load -> view('Principal', $dados);
 	}
 
