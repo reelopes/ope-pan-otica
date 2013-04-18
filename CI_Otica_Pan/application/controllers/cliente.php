@@ -91,7 +91,7 @@ class Cliente extends CI_Controller {
         $dados = Array(
             'pagina' => 'lista_cliente',
             'titulo' => 'Visualiza Cliente',
-            'cliente' => $this->cliente_model->retornaCliente($this->uri->segment(3),$this->uri->segment(4)),
+            'cliente' => $this->cliente_model->retornaCliente($this->uri->segment(3)),
         );
 
 

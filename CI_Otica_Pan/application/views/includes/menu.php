@@ -30,7 +30,7 @@ echo"<hr>"
           </ul>
         </li>
         <li><a href="<? echo base_url('agendamento'); ?>">Agendamento</a></li>
-
+        <li><a href="<? echo base_url('consulta'); ?>">Consulta Oftalm.</a></li>
         
       </ul>
     </nav>

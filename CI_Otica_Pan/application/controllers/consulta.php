@@ -1,41 +1,26 @@
-<script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/js/agendamento.js"></script> 
+<script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/js/consulta.js"></script> 
 <?php
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Agendamento extends CI_Controller {
+class Consulta extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
             $this->load->helper('url');
-                $prefs = array(
-            'show_next_prev' => TRUE,
-            'next_prev_url' => base_url('agendamento/horarioConsulta'),
-            'month_type' => 'long',
-            'day_type' => 'short',
-            'template' =>
-            '{table_open}<table class="calendar">{/table_open}
-    {week_day_cell}<th class="day_header">{week_day}</th>{/week_day_cell}
-   {cal_cell_content}<div class="day_listing"> <a href="{content}">{day}</a></div>{/cal_cell_content}
-   {cal_cell_content_today}<div class="today"><a href="{content}">{day}</a></div>{/cal_cell_content_today}
-   {cal_cell_no_content}<span class="day_listing">{day}</span>&nbsp;{/cal_cell_no_content}
-    {cal_cell_no_content_today}<div class="today"><span class="day_listing">{day}</span></div>{/cal_cell_no_content_today}
-');
-        
+      
         $this->load->model('agendamento_model');
         $this->load->model('dependente_model');
         $this->load->model('cliente_model');
         $this->load->library('table');
         $this->load->library('uri');
-        $this->load->library('calendar', $prefs);
         $this->load->helper('date');
-        $this->load->library('table');
-     
+             
     }
 
     public function index() {
 
-        redirect('agendamento/horarioConsulta/' . date('Y') . '/' . date('m') . '/' . date('d'));
+        redirect('consulta/horarioConsulta');
     }
 
     public function horarioConsulta($anoCalendario = NULL, $mesCalendario = NULL, $diaCalendario = NULL) {
@@ -46,9 +31,9 @@ class Agendamento extends CI_Controller {
         if ($diaCalendario == NULL)
             $diaCalendario = $this->uri->segment(5); //Captura o mes da URL
         $dados = Array(
-            'pagina' => 'agenda_cliente',
-            'titulo' => 'Agendamento de Consulta',
-            'horarioAgendamento' => $this->agendamento_model->listarConsultasDia($anoCalendario . '/' . $mesCalendario . '/' . $diaCalendario)->result(),
+            'pagina' => 'consulta_cliente',
+            'titulo' => 'Consulta Oftalmológica',
+            'horarioAgendamento' => $this->agendamento_model->listarConsultasPendentes(),
         );
         $this->load->view('Principal', $dados);
     }

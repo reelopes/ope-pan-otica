@@ -53,9 +53,9 @@ class Dependente extends CI_Controller {
 
     public function deletarDependente() {
 
-        $id_pessoa = $this->uri->segment(3);
-        $id_cliente = $this->uri->segment(4);
-        $id_dependente = $this->uri->segment(5);
+        
+        $id_cliente = $this->uri->segment(3);
+        $id_dependente = $this->uri->segment(4);
         if ($id_dependente != NULL) {
 
             if ($this->dependente_model->deletaDependente($id_dependente)) {

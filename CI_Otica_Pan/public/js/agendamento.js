@@ -1,22 +1,24 @@
 function agendaCliente(idCliente,nome,cpf) {
-    
     ocultaPesquisaDinamica();
-    mostraFormAgendamento(idCliente,nome,cpf);
+    var link = window.location.toString()+'/'+idCliente;
+    var contador=0;
+    for(i=0; i< link.length; i++){
+        if(link[i] === "/"){
+            contador++;
+        }
+   }
+   if(contador===10)window.location.href = window.location.toString()+'/'+idCliente;
+   if(contador > 10)window.location.href = window.location.toString()+'/../'+idCliente;
+
+    mostraFormAgendamento();
         
 }
 
-function mostraFormAgendamento(idCliente,nome,cpf) {
+function mostraFormAgendamento() {
     
     var elem = document.getElementById("formAgendamento");
-    var inputIdCliente = document.getElementById("inputIdCliente");
-    var inputNome = document.getElementById("inputNome");
-    var inputcpf = document.getElementById("inputCpf");
     elem.style.display = "block";
-    
-    inputIdCliente.value=idCliente;
-    inputNome.value=nome;
-    inputcpf.value=cpf;
-  
+   
 }
 
 function ocultaPesquisaDinamica() {

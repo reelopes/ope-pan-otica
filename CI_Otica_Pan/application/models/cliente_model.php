@@ -80,24 +80,24 @@ class Cliente_model extends CI_Model {
     }
 
    
-    public function retornaCliente($id_pessoa = NULL, $id_cliente = NULL) {
+    public function retornaCliente($id_cliente = NULL) {
 
 
-        if ($id_cliente != NULL || $id_pessoa != NULL) {
-
-            $this->db->where('id', $id_pessoa);
-            $this->db->limit(1);
-            $pessoa = $this->db->get('pessoa')->row();
-
+        if ($id_cliente != NULL) {
+            
             $this->db->where('id', $id_cliente);
             $this->db->limit(1);
             $cliente = $this->db->get('cliente')->row();
+            
+            $this->db->where('id', $cliente->id_pessoa);
+            $this->db->limit(1);
+            $pessoa = $this->db->get('pessoa')->row();
 
             $this->db->where('id_cliente', $id_cliente);
             $this->db->limit(1);
             $endereco = $this->db->get('endereco')->row();
 
-            $this->db->where('id_pessoa', $id_pessoa);
+            $this->db->where('id_pessoa', $cliente->id_pessoa);
             $telefone = $this->db->get('telefone')->result();
 
             $dados = array(
@@ -109,7 +109,8 @@ class Cliente_model extends CI_Model {
             return $dados;
         }
     }
-
+    
+ 
     public function atualizaCliente($dados = NULL, $condicao = NULL) {
 
         if ($dados != null || $condicao != null) {

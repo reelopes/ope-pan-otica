@@ -22,6 +22,7 @@ CREATE TABLE `agendamento` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_cliente` int(11) NOT NULL,
   `id_dependente` int(11) DEFAULT NULL,
+  `status` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_cliente` (`id_cliente`),
   KEY `id_dependente` (`id_dependente`),
@@ -100,11 +101,14 @@ CREATE TABLE `consulta` (
   `id_agendamento` int(11) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_medico` int(11) DEFAULT NULL,
+  `id_receita` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_agendamento` (`id_agendamento`),
+  KEY `id_receita` (`id_receita`),
   KEY `id_medico` (`id_medico`),
   CONSTRAINT `consulta_ibfk_1` FOREIGN KEY (`id_agendamento`) REFERENCES `agendamento` (`id`),
-  CONSTRAINT `consulta_ibfk_2` FOREIGN KEY (`id_medico`) REFERENCES `medico` (`id`)
+CONSTRAINT `consulta_ibfk_2` FOREIGN KEY (`id_receita`) REFERENCES `receita` (`id`),
+  CONSTRAINT `consulta_ibfk_3` FOREIGN KEY (`id_medico`) REFERENCES `medico` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*
@@ -257,7 +261,7 @@ INSERT INTO `nivel` VALUES
 (1,'Administrador','Administrador do Sistema.'),
 (2,'Atentende','Realiza o atendimento para a venda de produtos.'),
 (3,'Caixa','Finaliza a venda de produtos.'),
-(4,'Oftalmologista','M�dica que realiza as consultas nos clientes.');
+(4,'Oftalmologista','M?dica que realiza as consultas nos clientes.');
 
 /*
 Table structure for orcamento

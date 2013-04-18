@@ -3,8 +3,7 @@
 
 echo"<h2>$titulo</h2>";
 
-$id_pessoa = $this->uri->segment(3);
-$id_cliente = $this->uri->segment(4);
+$id_cliente = $this->uri->segment(3);
 
 echo validation_errors('<p>','</p>');
 
@@ -120,7 +119,7 @@ foreach ($dependentes as $linha) {
         <td>".$this->util->data_mysql_para_user($linha->data_nascimento)."</td>
         <td>$linha->responsavel</td>
         <td><a href=\"javascript:abrirPopUpAlteraDependente('".base_url('dependente/atualizarDependente/'.$linha->id_dependente)."');\"><center>Editar</center></a></td>
-        <td>".anchor('dependente/deletarDependente/'.$id_pessoa.'/'.$id_cliente.'/'.$linha->id_dependente,'<center>Excluir</center>','onclick="if (! confirm(\'Tem certeza que deseja excluir o dependente abaixo? \n\n Nome: '.$linha->nome.'\n Data de Nascimento: '.$this->util->data_mysql_para_user($linha->data_nascimento).'\n Responsável: '.$linha->responsavel.'\')) { return false; }"')."</td>
+        <td>".anchor('dependente/deletarDependente/'.$id_cliente.'/'.$linha->id_dependente,'<center>Excluir</center>','onclick="if (! confirm(\'Tem certeza que deseja excluir o dependente abaixo? \n\n Nome: '.$linha->nome.'\n Data de Nascimento: '.$this->util->data_mysql_para_user($linha->data_nascimento).'\n Responsável: '.$linha->responsavel.'\')) { return false; }"')."</td>
             
 </tr>";
     

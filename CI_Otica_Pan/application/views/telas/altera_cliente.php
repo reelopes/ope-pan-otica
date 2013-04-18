@@ -3,16 +3,15 @@
 
 echo"<h2>$titulo</h2>";
 
-$id_pessoa = $this->uri->segment(3);
-$id_cliente = $this->uri->segment(4);
+$id_cliente = $this->uri->segment(3);
 
-if($id_pessoa == NULL || $id_cliente == NULL){
+if($id_cliente == NULL){
     
     redirect ('cliente/listarClientes');
     
 }
 
-$query = $this->cliente_model->retornaCliente($id_pessoa,$id_cliente);
+$query = $this->cliente_model->retornaCliente($id_cliente);
 
 echo validation_errors('<p>','</p>');
 
@@ -20,7 +19,7 @@ echo validation_errors('<p>','</p>');
  echo '<p>'.$this->session->flashdata('statusUpdate').'</p>';
 
 
-echo form_open("cliente/atualizarCliente/$id_pessoa/$id_cliente");
+echo form_open("cliente/atualizarCliente/$id_cliente");
 
 echo"<br><center><table>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
@@ -91,7 +90,7 @@ echo"</td><tr>"; //Essa linha pode remover
 echo"</table>"; //Essa linha pode remover
 
 
-echo form_hidden('id_pessoa',$id_pessoa);//Campo oculto que armazena id_pessoa
+echo form_hidden('id_pessoa',$query['cliente']->id_pessoa);//Campo oculto que armazena id_pessoa
 echo form_hidden('id_cliente',$id_cliente);//Campo oculto que armazena id_cliente
 echo form_close();
 

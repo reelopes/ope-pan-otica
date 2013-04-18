@@ -1,14 +1,18 @@
 <?php
+
+echo"<h2>$titulo</h2>";//TITULO
+
+
 //Exime mensagem de agendamento do cliente Javascript
 if ($this->session->flashdata('msg')) {
     $msg = $this->session->flashdata('msg');
     echo "<body onLoad=\" alert('$msg');\">";
 }
 
+$id_cliente = $this->uri->segment(6); //Captura o id do cliente da URL
 $ano = $this->uri->segment(3); //Captura o ano da URL
 $mes = $this->uri->segment(4); //Captura o mês da URL
 $dia = $this->uri->segment(5); //Captura o dia da URL
-
 
 if ($ano == null) {
     $anoCalendario = date('Y'); //Captura o ano do sistema
@@ -56,52 +60,50 @@ if ($diaCalendario != NULL) {//verifica se o usuário escolheu algum dia no cale
     echo "</div>";
 
     echo "<div id='formAgendamento'  style='display:none;'";
+    echo"<form></form>";
+    //Se vier algum parametro na URL Mostro o Form com os dados do Cliente
+    if ($id_cliente != null) {
 
-   
-    
-    
-    $dependentes = $this->dependente_model->listarDependentes(5); //Resgata os dependentes do cliente
-    
-        
-    ?>
-    <form></form>
-
-    <form method="POST" action=<? echo base_url('agendamento/cadastrarAgendamento') ?>/>
-    <input type="hidden" id="inputIdCliente" name="idCliente" value="" />
-    <table><tr>
-            <td>Data:</td><td><input type="text" name="data" value="<? echo $diaCalendario . '/' . $mesCalendario . '/' . $anoCalendario ?>" /></td></tr><tr>
-            <td>Horário:</td><td><input type="text" name="horario" value="" autofocus /></td></tr><tr>
-            <td>Nome:</td><td><input type="text" id="inputNome" name="nome" value="" disabled/></td></tr><tr>
-            <td>CPF:</td><td><input type="text" id="inputCpf" name="cpf" value="" disabled /></td></tr><tr>
+        $cliente = $this->cliente_model->retornaCliente($id_cliente); //Captura o cliente no 
+        $dependentes = $this->dependente_model->listarDependentes($id_cliente); //Resgata os dependentes do cliente
+        ?>
 
 
-            <td>Dependente:</td><td>
+        <form method="POST" action=<? echo base_url('agendamento/cadastrarAgendamento') ?>/>
+        <input type="hidden" name="idCliente" value='<? echo $cliente['cliente']->id; ?>' />
+        <table><tr>
+                <td>Data:</td><td><input type="text" name="data" value="<? echo $diaCalendario . '/' . $mesCalendario . '/' . $anoCalendario ?>" /></td></tr><tr>
+                <td>Horário:</td><td><input type="text" name="horario" value="" autofocus /></td></tr><tr>
+                <td>Nome:</td><td><input type="text" name="nome" value='<? echo $cliente['pessoa']->nome; ?>' disabled/></td></tr><tr>
+                <td>CPF:</td><td><input type="text" name="cpf" value="<? echo $cliente['cliente']->cpf; ?>" disabled /></td></tr><tr>
 
-                <select name="dependente">
-                    <option value="0">Próprio Cliente</option>
 
-    <?
-    
-    foreach ($dependentes as $linha) {
-        echo "<option value=$linha->id>$linha->nome</option>";
-        
+                <td>Dependente:</td><td>
+
+                    <select name="dependente">
+                        <option value="0">Próprio Cliente</option>
+
+        <?
+        foreach ($dependentes as $linha) {
+            echo "<option value=\"$linha->id_dependente\">$linha->nome</option>";
+        }
+        ?>
+
+                    </select>
+
+                </td></tr><tr>
+
+                <td></td><td><input type="submit" value="Agendar" /></td>
+            </tr>
+        </table>
+        </form>
+
+        <?
     }
-    ?>
-
-                </select>
-
-            </td></tr><tr>
-
-            <td></td><td><input type="submit" value="Agendar" /></td>
-        </tr>
-    </table>
-    </form>
-
-    <?
     echo"</div>";
 
 
-    $horarioAgendamento = $horarioAgendamento;
+    $horarioAgendamento = $horarioAgendamento; //Boa pratica esse dado vem da controller
 
     if ($horarioAgendamento == null) {
 
@@ -109,13 +111,26 @@ if ($diaCalendario != NULL) {//verifica se o usuário escolheu algum dia no cale
         $tmpl = array('table_open' => '<table border="0" cellpadding="2" width="100%" cellspacing="1" class="mytable">');
         $this->table->set_template($tmpl);
     } else {
-
-        $this->table->set_heading('Data', 'Horário', 'Nome', 'CPF', 'E-mail', 'Excluir');
+        if ($anoCalendario . $mesCalendario . $diaCalendario >= date('Y') . date('m') . date('d')) {
+        $this->table->set_heading('Data', 'Horário', 'Nome', 'CPF', 'E-mail','Dependente','Excluir');
+        }else{
+            $this->table->set_heading('Data', 'Horário', 'Nome', 'CPF', 'E-mail','Dependente');
+        }
         foreach ($horarioAgendamento as $linha) {
+            
+                     
+            if($linha->id_dependente==NULL){
+                $nome = $linha->nome_cliente;
+                $strDependente="N";
+            }else{
+                $nome = $linha->nome_dependente;
+                $strDependente="S";
+            }
+            
             if ($anoCalendario . $mesCalendario . $diaCalendario >= date('Y') . date('m') . date('d')) {
-                $this->table->add_row($this->util->data_mysql_para_user($linha->data_consulta), $linha->horario_consulta, $linha->nome, $linha->cpf, $linha->email, anchor('agendamento/deletarAgendamento/' . $anoCalendario . '/' . $mesCalendario . '/' . $diaCalendario . '/' . $linha->id_agendamento, '<center>Excluir</center>', 'onclick="if (! confirm(\'Tem certeza que deseja excluir o agendamento abaixo? \n\n Nome: ' . $linha->nome . '\n Data do agendamento: ' . $this->util->data_mysql_para_user($linha->data_consulta) . '\n Horário: ' . $linha->horario_consulta . '\')) { return false; }"'));
+                $this->table->add_row($this->util->data_mysql_para_user($linha->data_consulta), $linha->horario_consulta, $nome, $linha->cpf, $linha->email,$strDependente, anchor('agendamento/deletarAgendamento/' . $anoCalendario . '/' . $mesCalendario . '/' . $diaCalendario . '/' . $linha->id_agendamento, '<center>Excluir</center>', 'onclick="if (! confirm(\'Tem certeza que deseja excluir o agendamento abaixo? \n\n Nome: ' . $nome . '\n Data do agendamento: ' . $this->util->data_mysql_para_user($linha->data_consulta) . '\n Horário: ' . $linha->horario_consulta . '\')) { return false; }"'));
             } else {
-                $this->table->add_row($this->util->data_mysql_para_user($linha->data_consulta), $linha->horario_consulta, $linha->nome, $linha->cpf, $linha->email, '');
+                $this->table->add_row($this->util->data_mysql_para_user($linha->data_consulta), $linha->horario_consulta, $nome, $linha->cpf, $linha->email,$strDependente);
             }
         }
         $tmpl = array(
@@ -127,5 +142,9 @@ if ($diaCalendario != NULL) {//verifica se o usuário escolheu algum dia no cale
     }
 
     echo $this->table->generate();
+}
+
+if ($id_cliente != NULL) {
+    echo"<body onLoad=\"mostraFormAgendamento();\"";
 }
 ?>

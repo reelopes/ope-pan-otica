@@ -20,7 +20,7 @@ echo"<br><br>";
 $this->table->set_heading('NOME','CPF','EMAIL','TELEFONE','VISUALIZAR','EDITAR','EXCLUIR');
 foreach ($clientes as $linha) {
 
-    $this->table->add_row($linha->nome, $linha->cpf, $linha->email, $linha->num_telefone,anchor("cliente/listaCliente/$linha->id_pessoa/$linha->id_cliente", '<center>Visualizar</center>'),anchor("cliente/atualizarCliente/$linha->id_pessoa/$linha->id_cliente", '<center>Editar</center>'),anchor("cliente/deletarCliente/$linha->id_pessoa/$linha->id_cliente", '<center>Excluir</center>'));
+    $this->table->add_row($linha->nome, $linha->cpf, $linha->email, $linha->num_telefone,anchor("cliente/listaCliente/$linha->id_cliente", '<center>Visualizar</center>'),anchor("cliente/atualizarCliente/$linha->id_cliente", '<center>Editar</center>'),anchor("cliente/deletarCliente/$linha->id_pessoa/$linha->id_cliente", '<center>Excluir</center>'));
 }
 
 $tmpl = array(
