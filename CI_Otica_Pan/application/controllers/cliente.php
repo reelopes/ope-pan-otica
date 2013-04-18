@@ -10,6 +10,7 @@ class Cliente extends CI_Controller {
         $this->load->helpers('url');
         $this->load->helper('form');
         $this->load->model('cliente_model');
+        $this->load->model('dependente_model');
         $this->load->library('form_validation');
         $this->load->library('table');
             
@@ -77,6 +78,20 @@ class Cliente extends CI_Controller {
             'pagina' => 'listar_clientes',
             'titulo' => 'Lista Todos os Clientes',
             'clientes' => $this->cliente_model->listarClientes('')->result(),
+        );
+
+
+
+
+        $this->load->view('Principal', $dados);
+    }
+
+        public function listaCliente() {
+
+        $dados = Array(
+            'pagina' => 'lista_cliente',
+            'titulo' => 'Visualiza Cliente',
+            'cliente' => $this->cliente_model->retornaCliente($this->uri->segment(3),$this->uri->segment(4)),
         );
 
 

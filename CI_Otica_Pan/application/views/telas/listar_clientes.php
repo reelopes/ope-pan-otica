@@ -17,13 +17,17 @@ if($clientes==NULL){
 }else{
 
 echo"<br><br>";
-$this->table->set_heading('NOME','CPF','EMAIL','TELEFONE','EDITAR','EXCLUIR');
+$this->table->set_heading('NOME','CPF','EMAIL','TELEFONE','VISUALIZAR','EDITAR','EXCLUIR');
 foreach ($clientes as $linha) {
 
-    $this->table->add_row($linha->nome, $linha->cpf, $linha->email, $linha->num_telefone, anchor("cliente/atualizarCliente/$linha->id_pessoa/$linha->id_cliente", 'Editar'),anchor("cliente/deletarCliente/$linha->id_pessoa/$linha->id_cliente", 'Excluir'));
+    $this->table->add_row($linha->nome, $linha->cpf, $linha->email, $linha->num_telefone,anchor("cliente/listaCliente/$linha->id_pessoa/$linha->id_cliente", '<center>Visualizar</center>'),anchor("cliente/atualizarCliente/$linha->id_pessoa/$linha->id_cliente", '<center>Editar</center>'),anchor("cliente/deletarCliente/$linha->id_pessoa/$linha->id_cliente", '<center>Excluir</center>'));
 }
 
-$tmpl = array ( 'table_open'  => '<table border="1" cellpadding="2" width="100%" cellspacing="1" class="mytable">' );
+$tmpl = array(
+            'table_open' => '<table border="1" cellpadding="2" width="100%" cellspacing="1" class="listholover">',
+             'row_start' => '<tr class="alt">',
+             'row_alt_start'=> '<tr class="alt">',
+            );
 $this->table->set_template($tmpl);
 echo $this->table->generate();
 }

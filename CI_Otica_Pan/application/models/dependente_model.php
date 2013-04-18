@@ -25,114 +25,46 @@ class Dependente_model extends CI_Model {
         }
     }
 
-    public function listarDependentes($pesquisa, $limite = NULL) {
-
-
-
-        $this->db->select('pessoa.id as id_pessoa,cliente.id as id_cliente, pessoa.nome,cliente.cpf,pessoa.email,telefone.num_telefone');
-        $this->db->from('pessoa');
-        $this->db->join('cliente', 'pessoa.id = cliente.id_pessoa');
-        $this->db->join('telefone', 'pessoa.id = telefone.id_pessoa');
-        $this->db->where("nome like '%$pesquisa%' or email like '%$pesquisa%' or cpf like '%$pesquisa%' ");
-        if ($limite != NULL)
-            $this->db->limit($limite);
-        $this->db->group_by('pessoa.id');
-        return $this->db->get();
+    public function listarDependentes($id_cliente=NULL) {
+     
+        if($id_cliente==null) return $teste=banana;
+          
+        $this->db->select('dependente.id as id_dependente,dependente.id_cliente as id_cliente, dependente.nome,dependente.data_nascimento,dependente.responsavel');
+        $this->db->from('dependente');
+        $this->db->where("dependente.id_cliente = '$id_cliente'");
+        return $this->db->get()->result();
     }
 
-    public function retornaCliente($id_pessoa = NULL, $id_cliente = NULL) {
+    public function retornaDependente($id_dependente) {
 
+        if ($id_dependente != NULL) {
 
-        if ($id_cliente != NULL || $id_pessoa != NULL) {
+            $this->db->where('id', $id_dependente);
+            $dependente = $this->db->get('dependente')->row();
 
-            $this->db->where('id', $id_pessoa);
-            $this->db->limit(1);
-            $pessoa = $this->db->get('pessoa')->row();
-
-            $this->db->where('id', $id_cliente);
-            $this->db->limit(1);
-            $cliente = $this->db->get('cliente')->row();
-
-            $this->db->where('id_cliente', $id_cliente);
-            $this->db->limit(1);
-            $endereco = $this->db->get('endereco')->row();
-
-            $this->db->where('id_pessoa', $id_pessoa);
-            $telefone = $this->db->get('telefone')->result();
-
-            $dados = array(
-                'pessoa' => $pessoa,
-                'cliente' => $cliente,
-                'endereco' => $endereco,
-                'telefone' => $telefone,
-            );
-            return $dados;
+            return $dependente;
         }
     }
 
-    public function atualizaCliente($dados = NULL, $condicao = NULL) {
+    public function atualizaDependente($dados = NULL, $condicao = NULL) {
 
         if ($dados != null || $condicao != null) {
 
             $this->db->trans_start();
 
-            //Inicio de Update Pessoa
-            $pessoa = array(
+            //Inicio de Update Dependente
+            $dependente = array(
                 'nome' => element('nome', $dados),
-                'email' => element('email', $dados),
+                'data_nascimento' => $this->util->data_user_para_mysql(element('data_nascimento', $dados)),
+                'responsavel' => element('responsavel', $dados),
             );
 
-            $condicao_pessoa = array(
-                'id' => $condicao['id_pessoa'],
+            $condicao_dependente = array(
+                'id' => $condicao['id_dependente'],
             );
-            $this->db->update('pessoa', $pessoa, $condicao_pessoa);
-            //Final de Update pessoa
-            //Inicio de Update cliente
-            $cliente = array(
-                'cpf' => element('cpf', $dados),
-                'data_nascimento' => element('data_nascimento', $dados),
-            );
-
-            $condicao_cliente = array(
-                'id_pessoa' => $condicao['id_pessoa'],
-            );
-            $this->db->update('cliente', $cliente, $condicao_cliente);
-            //Final de Update Cliente
-            //Inicio de Update Endereço
-            $endereco = array(
-                'bairro' => element('bairro', $dados),
-                'cep' => element('cep', $dados),
-                'cidade' => element('cidade', $dados),
-                'complemento' => element('complemento', $dados),
-                'estado' => element('estado', $dados),
-                'logradouro' => element('rua', $dados),
-            );
-
-            $condicao_endereco = array(
-                'id_cliente' => $condicao['id_cliente'],
-            );
-            $this->db->update('endereco', $endereco, $condicao_endereco);
-            //Final de Update Endereco
-            //Inicio de Update Telefone
-            $telefone_fixo = array(
-                'num_telefone' => element('num_telefone1', $dados),
-            );
-            $condicao_telefone_fixo = array(
-                'id_pessoa' => $condicao['id_pessoa'],
-                'id_tipo_telefone' => 1,
-            );
-            $this->db->update('telefone', $telefone_fixo, $condicao_telefone_fixo);
-            //Final de Update Telefone
-            //Inicio de Update Telefone
-            $telefone_celular = array(
-                'num_telefone' => element('num_telefone2', $dados),
-            );
-            $condicao_telefone_celular = array(
-                'id_pessoa' => $condicao['id_pessoa'],
-                'id_tipo_telefone' => 2,
-            );
-            $this->db->update('telefone', $telefone_celular, $condicao_telefone_celular);
-            //Final de Update Telefone
+            $this->db->update('dependente', $dependente, $condicao_dependente);
+            //Final de Update dependente
+            
             if ($this->db->trans_complete()) {
                 $this->session->set_flashdata('statusUpdate', 'Alterado com sucesso');
             } else {
@@ -142,15 +74,15 @@ class Dependente_model extends CI_Model {
             //retorna para a pagina que chamou a função
             redirect(current_url());
         }
-        redirect('cliente/listarClientes');
+            redirect(current_url());
     }
 
-    public function deleteCliente($id = null) {
+    public function deletaDependente($id = null) {
 
         if ($id != null) {
 
             $this->db->where('id', $id);
-            $this->db->delete('pessoa');
+            $this->db->delete('dependente');
             return true;
         }
 

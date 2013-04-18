@@ -7,13 +7,8 @@ class Agendamento extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-
-        $this->load->helper('url');
-        $this->load->model('agendamento_model');
-        $this->load->library('table');
-        $this->load->library('uri');
-
-        $prefs = array(
+            $this->load->helper('url');
+                $prefs = array(
             'show_next_prev' => TRUE,
             'next_prev_url' => base_url('agendamento/horarioConsulta'),
             'month_type' => 'long',
@@ -26,11 +21,15 @@ class Agendamento extends CI_Controller {
    {cal_cell_no_content}<span class="day_listing">{day}</span>&nbsp;{/cal_cell_no_content}
     {cal_cell_no_content_today}<div class="today"><span class="day_listing">{day}</span></div>{/cal_cell_no_content_today}
 ');
-
-
+        
+        $this->load->model('agendamento_model');
+        $this->load->model('dependente_model');
+        $this->load->library('table');
+        $this->load->library('uri');
         $this->load->library('calendar', $prefs);
         $this->load->helper('date');
         $this->load->library('table');
+     
     }
 
     public function index() {

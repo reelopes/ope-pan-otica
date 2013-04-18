@@ -79,6 +79,7 @@ class Cliente_model extends CI_Model {
         return $this->db->get();
     }
 
+   
     public function retornaCliente($id_pessoa = NULL, $id_cliente = NULL) {
 
 

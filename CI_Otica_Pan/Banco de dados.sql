@@ -20,10 +20,13 @@ CREATE TABLE `agendamento` (
   `data_consulta` date DEFAULT NULL,
   `horario_consulta` varchar(5) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_cliente` int(11) DEFAULT NULL,
+  `id_cliente` int(11) NOT NULL,
+  `id_dependente` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_cliente` (`id_cliente`),
-  CONSTRAINT `agendamento_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`)
+  KEY `id_dependente` (`id_dependente`),
+  CONSTRAINT `agendamento_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`),
+  CONSTRAINT `agendamento_ibfk_2` FOREIGN KEY (`id_dependente`) REFERENCES `dependente` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*

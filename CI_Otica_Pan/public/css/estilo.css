@@ -33,6 +33,13 @@
 
 }
 
-.listaAgendamento tr.alt:hover{
+.listholover tr.alt:hover{
     background: #bbb;
+}
+
+.cabecalhoTabela {
+    
+    font-weight: bold;
+    text-align: center;
+        
 }
