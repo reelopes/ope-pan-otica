@@ -177,7 +177,7 @@ Table structure for fornecedor
 
 drop table if exists `fornecedor`;
 CREATE TABLE `fornecedor` (
-  `cnpj` varchar(15) DEFAULT NULL,
+  `cnpj` varchar(20) DEFAULT NULL,
   `id_pessoa` int(11) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),

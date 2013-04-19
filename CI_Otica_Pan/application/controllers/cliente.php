@@ -16,9 +16,8 @@ class Cliente extends CI_Controller {
             
         $this->login_model->logado();//Verifica se o usuário está logado
             
-            
-            
-        
+          
+        $this->form_validation->set_error_delimiters('<erro class="errorFormulario">','</erro>');
              
     }
     
@@ -36,10 +35,10 @@ class Cliente extends CI_Controller {
 
         $this->form_validation->set_rules('nome', 'NOME', 'trim|required|max_length[100]|ucwords');
         $this->form_validation->set_rules('email', 'EMAIL', 'trim|max_length[100]|strtolower|valid_email');
-        $this->form_validation->set_rules('cpf', 'CPF', 'trim|numeric|required|max_length[15]|is_unique[cliente.cpf]');
-        $this->form_validation->set_rules('data_nascimento', 'Data Nascimento', 'trim');
-        $this->form_validation->set_rules('num_telefone1', 'Numero do Telefone', 'trim|max_length[15]');
-        $this->form_validation->set_rules('num_telefone2', 'Numero do Celular', 'trim|max_length[15]');
+        $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|max_length[15]|valid_cpf|is_unique[cliente.cpf]');
+        $this->form_validation->set_rules('data_nascimento', 'Data Nascimento', 'trim|valid_date');
+        $this->form_validation->set_rules('num_telefone1', 'Telefone Residencial', 'trim|max_length[15]');
+        $this->form_validation->set_rules('num_telefone2', 'Telefone Celular', 'trim|max_length[15]');
         $this->form_validation->set_rules('rua', 'RUA', 'trim|max_length[80]');
         $this->form_validation->set_rules('bairro', 'BAIRRO', 'trim|max_length[50]|');
         $this->form_validation->set_rules('cidade', 'CIDADE', 'trim||max_length[50]');
@@ -48,14 +47,6 @@ class Cliente extends CI_Controller {
         $this->form_validation->set_rules('cep', 'CEP', 'trim|max_length[10]');
         
         
-        
-        
-        
-        
-        //Trata a mensagem que CPF já Existe no sistema
-        //$this-> form_validation->set_message('is_unique','Campo %s já existe no sistema');
-
-
         if ($this->form_validation->run() == true) {
 
             $dados = elements(array('nome', 'email', 'cpf', 'data_nascimento', 'num_telefone1',
@@ -104,12 +95,11 @@ class Cliente extends CI_Controller {
 
         $this->form_validation->set_rules('nome', 'NOME', 'trim|required|max_length[100]|ucwords');
         $this->form_validation->set_rules('email', 'EMAIL', 'trim|max_length[100]|strtolower|valid_email');
-        $this->form_validation->set_rules('cpf', 'CPF', 'trim|numeric|max_length[15]');
-        $this->form_validation->set_rules('data_nascimento', 'Data Nascimento', 'trim');
-        $this->form_validation->set_rules('num_telefone1', 'Numero do Telefone', 'trim|max_length[15]');
-        $this->form_validation->set_rules('num_telefone2', 'Numero do Celular', 'trim|max_length[15]');
+        $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|max_length[15]|valid_cpf');
+        $this->form_validation->set_rules('data_nascimento', 'Data Nascimento', 'trim|valid_date');
+        $this->form_validation->set_rules('num_telefone1', 'Telefone Residencial', 'trim|max_length[15]');
+        $this->form_validation->set_rules('num_telefone2', 'Telefone Celular', 'trim|max_length[15]');
         $this->form_validation->set_rules('rua', 'RUA', 'trim|max_length[80]');
-        $this->form_validation->set_rules('numero', 'NUMERO', 'trim|max_length[10]');
         $this->form_validation->set_rules('bairro', 'BAIRRO', 'trim|max_length[50]|');
         $this->form_validation->set_rules('cidade', 'CIDADE', 'trim||max_length[50]');
         $this->form_validation->set_rules('complemento', 'COMPLEMENTO', 'trim|max_length[20]');

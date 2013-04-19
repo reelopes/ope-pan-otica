@@ -51,11 +51,12 @@ if ($diaCalendario != NULL) {//verifica se o usuário escolheu algum dia no cale
     if ($anoCalendario . $mesCalendario . $diaCalendario >= date('Y') . date('m') . date('d') && $diaSemana_url != "0" && $diaSemana_url != "6") {
         ?>
         Pesquisa Cliente: <input type="text" name="nome" onKeyDown="ocultaFormAgendamento();" onKeyUp="carregaAjax('pesquisaDinamica', '<? echo base_url('agendamento/pesquisaDinamica') ?>/' + this.value)" autofocus autocomplete="off">
-        <?
+        
+            <?
     }//Acaba o if de verificação se a data é inferior a data atual
     echo"</div>";
 
-    echo "<br><br><div id='pesquisaDinamica' style='display:none;'>";
+    echo "<br><br><br><div id='pesquisaDinamica' style='display:none;'>";
 
     echo "</div>";
 

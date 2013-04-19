@@ -34,7 +34,7 @@ if($this->session->flashdata('cadastrook')){
     <form method="POST" action=<? echo base_url('dependente/cadastrarDependente') ?>/>
     <input type="hidden" id="inputIdCliente" name="idCliente" value="" />
     <table><tr>
-            <td>Nome do Cliente:</td><td><input type="text" id="inputNomeCliente" name="nomeCliente" value="<? echo set_value('nomeCliente'); ?>" readonly /></td></tr><tr>
+            <td>Nome do Cliente:</td><td><input type="text" id="inputNomeCliente" name="nomeCliente" value="<? echo set_value('nomeCliente'); ?>" readonly/></td></tr><tr>
             <td>CPF do Cliente:</td><td><input type="text" id="inputCpfCliente" name="cpfCliente" value="<? echo set_value('cpfCliente'); ?>" readonly /></td></tr><tr>
             <td>Nome do Dependente:</td><td><input type="text" id="inputNomeDependente" name="nomeDependente" value="<? echo set_value('nomeDependente'); ?>" /></td></tr><tr>
             <td>Data Nascimento do Dependente:</td><td><input type="text" id="inputDataNascimentoDependente" name="dataNascimentoDependente" value="<? echo set_value('dataNascimentoDependente'); ?>"/></td></tr><tr>

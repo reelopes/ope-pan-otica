@@ -4,8 +4,8 @@ a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, label, legend,
+dl, dt, dd, ol, ul, li
+,
 caption, tbody, tfoot, thead,
 article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
@@ -113,7 +113,7 @@ body {
 
 header {
   padding-top: 80px;
-  background: #404040 url("../img/bg.png") 0 0 repeat;
+  background: #696969;
   border-bottom: 1px solid #dadada;
   -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.04);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.04);
@@ -157,7 +157,6 @@ nav {
 }
 .nav > li > a:hover {
   text-decoration: none;
-  background: #85a6b8;
   background-image: -webkit-linear-gradient(top, #afc5d1, #85a6b8);
   background-image: -moz-linear-gradient(top, #afc5d1, #85a6b8);
   background-image: -o-linear-gradient(top, #afc5d1, #85a6b8);
@@ -233,5 +232,5 @@ nav {
   margin: 0 -18px;
 }
 .dropdown li a:hover {
-  color: black;
+  color: red;
 }

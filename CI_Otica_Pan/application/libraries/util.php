@@ -17,8 +17,7 @@ function data_user_para_mysql($y){
     return $x;
 }
 
-function data_mysql_para_user($y)
-{
+function data_mysql_para_user($y){
 	if ($y != '')
 	{
 		$data_inverter = explode("-",$y);
@@ -31,8 +30,7 @@ function data_mysql_para_user($y)
 	}
 
 }
-function valida_data($data, $tipo = "pt")
-{
+function valida_data($data, $tipo = "pt"){
 
 	if ($tipo == 'pt')
 	{

@@ -131,7 +131,7 @@ class Cliente_model extends CI_Model {
             //Inicio de Update cliente
             $cliente = array(
                 'cpf' => element('cpf', $dados),
-                'data_nascimento' => element('data_nascimento', $dados),
+                'data_nascimento' => $this->util->data_user_para_mysql(element('data_nascimento', $dados)),
             );
 
             $condicao_cliente = array(
