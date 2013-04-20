@@ -8,7 +8,11 @@ if($this->session->flashdata('cadastrook')){
     echo "<body onload=\"ocultaArmacao(); alert('$msg');\">";
 }
 
-echo '<body onload="ocultaArmacao();" />';
+if($carrega == 1) {
+    echo '<body onload="mostraArmacao();" />';
+} else {
+    echo '<body onload="ocultaArmacao();" />';
+}
 
 echo form_open('produto/adiciona');
 
@@ -26,6 +30,7 @@ echo form_label('Categoria','',array('style' => 'padding-right: 78px;'));
 echo"</td><td>";
 // Oculta campos e mostra campos de acordo com a escolha
 if($carrega == 1) {
+    echo '<body onload="mostraArmacao();" />';
     echo'<select name=produto onChange="mostra(value);">
        <option value="0"> Outro</option>
        <option value="1"  selected> Armação</option>
