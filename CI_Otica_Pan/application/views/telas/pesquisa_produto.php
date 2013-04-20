@@ -18,10 +18,10 @@ echo "<br><center><table>";
 
 if ($pesquisa != NULL) {
 
-	$this -> table -> set_heading('NOME', 'DESCRIÇÃO', 'PREÇO CUSTO', 'PREÇO VENDA', 'VALIDADE', 'QUANTIDADE', 'STATUS', 'DATA DE ENTREGA', 'MANTER');
+	$this -> table -> set_heading('NOME', 'DESCRIÇÃO', 'PREÇO CUSTO', 'PREÇO VENDA', 'VALIDADE', 'QUANTIDADE', 'STATUS', 'MANTER');
         foreach ($pesquisa as $linha) {
             $this -> table -> add_row($linha -> nome, $linha -> descricao, $linha -> preco_custo, $linha -> preco_venda, $linha -> validade,
-                    $linha -> quantidade, $linha -> status, $linha -> data_entrega,
+                    $linha -> quantidade, $linha -> status,
                     anchor("produto/update/$linha->id_produto",'Editar').'|'.
                     anchor("produto/delete/$linha->id_produto",'Excluir'));
         }

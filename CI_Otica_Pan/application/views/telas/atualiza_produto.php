@@ -128,12 +128,6 @@ echo"</td><td>";
 echo form_input(array('name'=>'validade'),
         set_value('validade', $query['produto']->validade),'autofocus');
 echo"</td></tr>";
-echo"<tr><td>";
-echo form_label('Data de entrega');
-echo"</td><td>"; 
-echo form_input(array('name'=>'data_entrega'),
-        set_value('data_entrega', $query['produto']->data_entrega),'autofocus');
-echo"</td></tr>";
 
 echo"</tr><td>"; 
 echo"<td>"; 

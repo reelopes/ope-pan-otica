@@ -16,7 +16,6 @@ class produto_model extends CI_Model {
                     'quantidade'  => element('quantidade', $dados),
                     'status' => element('status', $dados),
                     'validade' => element('validade', $dados),
-                    'data_entrega' => element('data_entrega', $dados),
                     'quantidade' => element('quantidade', $dados),
                     'status' => element('status', $dados),
                     'validade' => element('validade', $dados),
@@ -56,7 +55,7 @@ class produto_model extends CI_Model {
 
 		$this -> db -> select('id as id_produto, referencia, nome, 
                     descricao, preco_custo, preco_venda,
-                    quantidade, status, validade, data_entrega, categoria');
+                    quantidade, status, validade, categoria');
 		$this -> db -> from('produto');
                 
 		return $this -> db -> get();
@@ -83,14 +82,13 @@ class produto_model extends CI_Model {
 
 		$this -> db -> select
                         ('referencia, nome, descricao, preco_custo, preco_venda,
-                          quantidade, status, validade, data_entrega, id as id_produto');
+                          quantidade, status, validade, id as id_produto');
 		$this -> db -> from('produto');
 		$this -> db -> like('referencia', $pesquisa);
 		$this -> db -> or_like('nome', $pesquisa);
 		$this -> db -> or_like('status', $pesquisa);
                 $this -> db -> or_like('validade', $pesquisa);
                 $this -> db -> or_like('descricao', $pesquisa);
-		$this -> db -> or_like('data_entrega', $pesquisa);
 
 		return $this -> db -> get();
 	}
@@ -140,7 +138,6 @@ class produto_model extends CI_Model {
                 'quantidade'  => element('quantidade', $dados),
                 'status' => element('status', $dados),
                 'validade' => element('validade', $dados),
-                'data_entrega' => element('data_entrega', $dados),
                 'quantidade' => element('quantidade', $dados),
                 'status' => element('status', $dados),
                 'validade' => element('validade', $dados));

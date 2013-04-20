@@ -33,13 +33,12 @@ class Produto extends CI_Controller {
         public function adiciona() {
             $this -> form_validation -> set_rules('referencia', 'Referencia', 'trim|required');
             $this -> form_validation -> set_rules('nome', 'Nome', 'trim|required');
-            $this -> form_validation -> set_rules('descricao', 'Descricao', 'trim|max_length[60]|');
+            $this -> form_validation -> set_rules('descricao', 'Descricao', 'trim|max_length[60]');
             $this -> form_validation -> set_rules('preco_custo', 'Preço de Custo', 'trim|numeric|ucwords|required');
             $this -> form_validation -> set_rules('preco_venda', 'Preço de Venda', 'trim|numeric|ucwords|required');
             $this -> form_validation -> set_rules('quantidade', 'Quantidade', 'trim');
             $this -> form_validation -> set_rules('status', 'Status', 'trim');
             $this -> form_validation -> set_rules('validade', 'Validade', 'trim');
-            $this -> form_validation -> set_rules('data_entrega', 'Data de entrega', 'trim');
             
             if($this -> input -> post('produto') == 1) {
                 $this -> form_validation -> set_rules('largura_lente', 'Largura da lente', 'required');
@@ -52,7 +51,7 @@ class Produto extends CI_Controller {
             }
             
             if ($this -> form_validation -> run()) {
-                $dados = elements(array('referencia', 'nome', 'descricao', 'preco_custo', 'preco_venda', 'quantidade', 'status', 'validade', 'data_entrega',
+                $dados = elements(array('referencia', 'nome', 'descricao', 'preco_custo', 'preco_venda', 'quantidade', 'status', 'validade',
                     'largura_lente', 'largura_ponte', 'comprimento_haste', 'modelo', 'grife', 'fornecedor',
                     'produto'), $this -> input -> post());
                 $this -> produto_model -> do_insert($dados);
@@ -95,7 +94,6 @@ class Produto extends CI_Controller {
             $this -> form_validation -> set_rules('quantidade', 'Quantidade', 'trim');
             $this -> form_validation -> set_rules('status', 'Status', 'trim');
             $this -> form_validation -> set_rules('validade', 'Validade', 'trim');
-            $this -> form_validation -> set_rules('data_entrega', 'Data de entrega', 'trim');
             
             if($this -> input -> post('produto') == 1) {
                 $this -> form_validation -> set_rules('largura_lente', 'Largura da lente', 'required');

@@ -131,4 +131,6 @@ echo"</fieldset>";
 
 echo form_close();
 
+echo "</div>";
+
 ?>

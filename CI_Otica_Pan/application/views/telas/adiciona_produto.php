@@ -1,8 +1,7 @@
 <?php
 
+echo"<div class=formulario>";
 echo"<h2>$titulo</h2>";
-
-echo validation_errors('<p>','</p>');
 
 if($this->session->flashdata('cadastrook')){
     echo '<p>'.$this->session->flashdata('cadastrook').'</p>';
@@ -15,139 +14,132 @@ $todos_fornecedor = $todos_fornecedor;
 $todas_grife = $todas_grife;
 $carrega = $carrega;
 
+echo '<body onload="ocultaArmacao();" />';
+
+// Campos da tabela Produto
+echo"<fieldset>";
+echo"<legend>Produto:</legend>";
+echo"<table>";
+echo"<tr><td>";
+echo form_label('Categoria','',array('style' => 'padding-right: 78px;'));
+echo"</td><td>";
 // Oculta campos e mostra campos de acordo com a escolha
 if($carrega == 1) {
-    echo '<body onload="ocultaLente();" />';
-    echo "<table>";
-    echo"<tr><td>";
-    echo form_label('Categoria');
-    echo"</td><td>";
     echo'<select name=produto onChange="mostra(value);">
        <option value="0"> Outro</option>
        <option value="1"  selected> Armação</option>
     </select>';
-    echo"</td></tr>";
-    echo"<tr><td>";
-    echo"</table>";
 } else {
-    echo '<body onload="ocultaArmacao();ocultaLente();" />';
-    echo "<table>";
-    echo"<tr><td>";
-    echo form_label('Categoria');
-    echo"</td><td>"; 
+    echo '<body onload="ocultaArmacao();" />';
     echo'<select name=produto onChange="mostra(value);">
        <option value="0"> Outro</option>
        <option value="1"> Armação</option>
     </select>';
-    echo"</td></tr>";
-    echo"<tr><td>";
-    echo"</table>";
 }
-
-// div armacao, carrega campos de armacao
-echo'<div id="armacao">';
-echo"<p>";
-echo"<table>";
-echo"<tr><td>";
-echo form_label('Largura da lente');
-echo"</td><td>"; 
-echo form_input(array('name'=>'largura_lente'),  set_value('largura_lente'),'autofocus');
-echo"</td></tr>";
-echo"<tr><td>";
-echo form_label('Largura da ponte');
-echo"</td><td>"; 
-echo form_input(array('name'=>'largura_ponte'),  set_value('largura_ponte'),'autofocus');
-echo"</td></tr>";
-echo"<tr><td>";
-echo form_label('Comprimento da haste');
-echo"</td><td>"; 
-echo form_input(array('name'=>'comprimento_haste'),  set_value('comprimento_haste'),'autofocus');
-echo"</td></tr>";
-echo"<tr><td>";
-echo form_label('Modelo');
-echo"</td><td>"; 
-echo form_input(array('name'=>'modelo'),  set_value('modelo'),'autofocus');
-echo"</td></tr>";
-echo"<tr><td>";
-echo form_label('Grife');
-echo"</td><td>";    
-echo'<select name="grife">';
-if ($todas_grife != NULL) {
-    foreach ($todas_grife as $linha) {
-        echo'<option value="'.$linha -> id.'">'.$linha -> nome.'</option>';
-        
-    }    
-}
-echo'</select>';
-echo"</td></tr>";
-echo"<tr><td>";
-echo form_label('Fornecedor');
-echo"</td><td>";
-echo'<select name="fornecedor">';
-if ($todos_fornecedor != NULL) {
-    foreach ($todos_fornecedor as $linha) {
-        echo'<option value="'.$linha -> id_fornecedor.'">'.$linha -> nome.'</option>';
-   }
-}
-echo'</select>';
-echo"</td></tr>";
-echo"<tr><td>";
-echo"</table>"; 
-echo"</div>";
-
-// Campos da tabela Produto
-echo"<center><table>";
-echo"<tr><td>";
+echo"</td>";
+echo"<td>";
 echo form_label('Referencia');
 echo"</td><td>";
-echo form_input(array('name'=>'referencia'),  set_value('referencia'));
-echo"</td></tr>";
+echo form_input(array('name'=>'referencia'),  set_value('referencia'), 'placeholder="Código do Produto" autocomplete ="off" style="width:150px;"');
 echo"<tr><td>";
 echo form_label('Nome');
 echo"</td><td>";
-echo form_input(array('name'=>'nome'),  set_value('nome'));
-echo"</td></tr>";
-echo"<tr><td>";
+echo form_input(array('name'=>'nome'),  set_value('nome'), 'placeholder="Nome do produto" autocomplete ="off" style="width:250px;"');
+echo"</td>";
+echo"<td>";
 echo form_label('Descricao');
 echo"</td><td>"; 
-echo form_input(array('name'=>'descricao'),  set_value('descricao'));
+echo form_input(array('name'=>'descricao'),  set_value('descricao'), 'placeholder="Descrição do produto" autocomplete ="off" style="width:250px;"');
 echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('Preco de custo');
 echo"</td><td>"; 
-echo form_input(array('name'=>'preco_custo'),  set_value('preco_custo'));
-echo"</td></tr>";
-echo"<tr><td>";
+echo form_input(array('name'=>'preco_custo'),  set_value('preco_custo'), 'placeholder="000,00" autocomplete ="off" style="width:80px;"');
+echo"</td>";
+echo"<td>";
 echo form_label('Preco de venda');
 echo"</td><td>"; 
-echo form_input(array('name'=>'preco_venda'),  set_value('preco_venda'));
+echo form_input(array('name'=>'preco_venda'),  set_value('preco_venda'), 'placeholder="000,00" autocomplete ="off" style="width:80px;"');
 echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('Quantidade');
 echo"</td><td>"; 
-echo form_input(array('name'=>'quantidade'),  set_value('quantidade'));
-echo"</td></tr>";
-echo"<tr><td>";
+echo form_input(array('name'=>'quantidade'),  set_value('quantidade'), 'placeholder="00" autocomplete ="off" style="width:150px;"');
+echo"</td>";
+echo"<td>";
 echo form_label('Status');
 echo"</td><td>"; 
-echo form_input(array('name'=>'status'),  set_value('status'));
+echo'<select name="status">
+    <option value="Disponível"> Disponível</option>
+    <option value="Indisponível"> Indisponível</option>
+    </select>';
+//echo form_input(array('name'=>'status'),  set_value('status'), 'placeholder="" autocomplete ="off" style="width:300px;"');
 echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('Validade');
 echo"</td><td>"; 
-echo form_input(array('name'=>'validade'),  set_value('validade'));
+echo form_input(array('name'=>'validade'),  set_value('validade'), 'placeholder="DD/MM/AAAA" autocomplete ="off" style="width:150px;" OnKeyPress="MascaraData(this)"');
 echo"</td></tr>";
-echo"<tr><td>";
-echo form_label('Data de entrega');
-echo"</td><td>"; 
-echo form_input(array('name'=>'data_entrega'),  set_value('data_entrega'));
-echo"</td></tr>";
-
-echo"</tr><td>"; 
-echo"<td>"; 
-echo form_submit('', 'Cadastrar');
-echo"</td><tr>"; 
 echo"</table>";
+
+    // div armacao, carrega campos de armacao
+    echo'<div id="armacao">';
+        echo"<table>";
+        echo"<tr><td>";
+        echo form_label('Largura da lente');
+        echo"</td><td>"; 
+        echo form_input(array('name'=>'largura_lente'),  set_value('largura_lente'),'placeholder="xx" autocomplete ="off"');
+        echo"</td>";
+        echo"<td>";
+        echo form_label('Largura da ponte');
+        echo"</td><td>"; 
+        echo form_input(array('name'=>'largura_ponte'),  set_value('largura_ponte'),'placeholder="xx" autocomplete ="off"');
+        echo"</td></tr>";
+        echo"<tr><td>";
+        echo form_label('Comprimento da haste');
+        echo"</td><td>";
+        echo form_input(array('name'=>'comprimento_haste'),  set_value('comprimento_haste'),'placeholder="xxx" autocomplete ="off"');
+        echo"<td>";
+        echo form_label('Fornecedor');
+        echo"</td><td>";
+        echo'<select name="fornecedor">';
+        if ($todos_fornecedor != NULL) {
+            foreach ($todos_fornecedor as $linha) {
+                echo'<option value="'.$linha -> id_fornecedor.'">'.$linha -> nome.'</option>';
+           }
+        }
+        echo'</select>';
+        echo"</td></tr>";
+        echo"<tr><td>";
+        echo form_label('Modelo');
+        echo"</td><td>"; 
+        echo form_input(array('name'=>'modelo'),  set_value('modelo'),'placeholder="x.xxx" autocomplete ="off"');
+        echo"</td>";
+        echo"<td>";
+        echo form_label('Grife');
+        echo"</td><td>";    
+        echo'<select name="grife">';
+        if ($todas_grife != NULL) {
+            foreach ($todas_grife as $linha) {
+                echo'<option value="'.$linha -> id.'">'.$linha -> nome.'</option>';
+
+            }    
+        }
+        echo'</select>';
+        echo"</td></tr>";
+        echo"</table>";
+    echo"</div>";
+
+echo"<table>";
+echo"<tr><td>";
+echo form_label('','',array('style' => 'padding-right: 145px;',));
+echo form_submit('', 'Cadastrar');
+echo"</td></tr>"; 
+echo"</table>";
+echo "</div>";
+echo"</fieldset>";
+
+echo validation_errors('<p>','</p>');
 
 echo form_close();
 ?>
