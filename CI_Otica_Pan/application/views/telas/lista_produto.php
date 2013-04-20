@@ -6,7 +6,7 @@ echo $this->session->flashdata('msg');
 echo form_open('produto/pesquisa');
 echo form_label('Pesquisa:');
 //echo '<input type="text" name="pesquisa" value="" placeholder="Produto" autofocus>';
-echo form_input(array('name'=>'pesquisa'),  set_value('pesquisa'),'autofocus');
+echo form_input(array('name'=>'pesquisa'),  set_value('pesquisa'),'autofocus, autocomplete ="off"');
 echo form_submit('', 'Procurar');
 echo form_close();
 

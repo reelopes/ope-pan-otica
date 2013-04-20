@@ -7,7 +7,7 @@ echo form_open('produto/pesquisa');
 echo "</td><td>";
 //Essa linha pode remover
 echo form_label('Pesquisa:');
-echo form_input(array('name' => 'pesquisa'), set_value('pesquisa'));
+echo form_input(array('name'=>'pesquisa'),  set_value('pesquisa'),'autofocus, autocomplete ="off"');
 echo "</td></tr>";
 //Essa linha pode remove
 
@@ -18,9 +18,9 @@ echo "<br><center><table>";
 
 if ($pesquisa != NULL) {
 
-	$this -> table -> set_heading('NOME', 'DESCRIÇÃO', 'PREÇO CUSTO', 'PREÇO VENDA', 'VALIDADE', 'QUANTIDADE', 'STATUS', 'MANTER');
+	$this -> table -> set_heading('REFERENCIA', 'NOME', 'DESCRIÇÃO', 'PREÇO CUSTO', 'PREÇO VENDA', 'VALIDADE', 'QUANTIDADE', 'STATUS', 'MANTER');
         foreach ($pesquisa as $linha) {
-            $this -> table -> add_row($linha -> nome, $linha -> descricao, $linha -> preco_custo, $linha -> preco_venda, $linha -> validade,
+            $this -> table -> add_row($linha ->referencia, $linha -> nome, $linha -> descricao, $linha -> preco_custo, $linha -> preco_venda, $linha -> validade,
                     $linha -> quantidade, $linha -> status,
                     anchor("produto/update/$linha->id_produto",'Editar').'|'.
                     anchor("produto/delete/$linha->id_produto",'Excluir'));

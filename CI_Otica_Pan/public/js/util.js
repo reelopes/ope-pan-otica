@@ -73,7 +73,6 @@ function MascaraTelefone(tel){
 }
 
 //Teste maroto
-
 function FormataReais(fld, milSep, decSep, e) {
 var sep = 0;
 var key = '';
