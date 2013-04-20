@@ -51,7 +51,13 @@
                 Pesquisa de Produtos
             </a>
         </td>
-        <td>&nbsp;</td>
+         <td align="center">
+            <a href="<? echo base_url('agendamento'); ?>" style="text-decoration:none" >
+                <img src="..\public/img/agendamento.png" width="64px" heigth="64px"/>
+                <br />
+                Agendamento
+            </a>
+        </td>
         <td>&nbsp;</td>
     </tr>
     <tr>
