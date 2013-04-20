@@ -24,6 +24,11 @@ footer, header, hgroup, menu, nav, section {
   display: block;
 }
 
+
+.erroLogin{
+    padding: 30px;
+    color:red;
+}
 body {
   line-height: 1;
 }

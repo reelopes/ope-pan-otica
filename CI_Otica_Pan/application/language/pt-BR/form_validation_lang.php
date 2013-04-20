@@ -20,7 +20,7 @@ $lang['is_natural'] = 'O campo %s deve conter apenas números positivos.';
 $lang['is_natural_no_zero'] = 'O campo %s deve conter um número maior que zero.';
 $lang['is_unique'] = 'O campo %s já está cadastrado no sistema';
 $lang['valid_cpf'] = "O campo %s não é um CPF válido. Use o formato 000.000.000-00";
-$lang['valid_date'] = "O campo %s nao e uma data (dd/mm/yyyy) valida.";
-$lang['valid_hour'] = "O campo %s nao e uma hora (hh/mm) valida.";
+$lang['valid_date'] = "O campo %s nao e uma data (DD/MM/AAA) valida.";
+$lang['valid_hour'] = "O campo %s nao e uma hora (HH/MM) valida.";
 $lang['valid_cnpj'] = "O campo %s nao e um CNPJ valido. Use o formato 00.000.000/0000-00";
 ?>
