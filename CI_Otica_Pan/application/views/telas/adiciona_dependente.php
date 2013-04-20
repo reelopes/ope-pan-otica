@@ -38,7 +38,7 @@ if($this->session->flashdata('cadastrook')){
             <td>CPF do Cliente:</td><td><input type="text" id="inputCpfCliente" name="cpfCliente" value="<? echo set_value('cpfCliente'); ?>" readonly /></td></tr><tr>
             <td>Nome do Dependente:</td><td><input type="text" id="inputNomeDependente" name="nomeDependente" value="<? echo set_value('nomeDependente'); ?>" /></td></tr><tr>
             <td>Data Nascimento do Dependente:</td><td><input type="text" id="inputDataNascimentoDependente" name="dataNascimentoDependente" value="<? echo set_value('dataNascimentoDependente'); ?>"/></td></tr><tr>
-            <td>Responsável do Dependente:</td><td><input type="text" id="inputResponsavelDependente" name="responsavelDependente" value="<? echo set_value('responsavelDependente'); ?>" /></td></tr><tr>
+            <td>Parentesco:</td><td><input type="text" id="inputResponsavelDependente" name="responsavelDependente" value="<? echo set_value('responsavelDependente'); ?>" /></td></tr><tr>
             <td></td><td><input type="submit" value="Cadastrar"></td></tr>
         
     </table>
