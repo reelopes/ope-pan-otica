@@ -16,11 +16,10 @@ if($fornecedor==NULL){
 }else{
     echo"<br><center><table>";//Essa linha pode remover
     if ($fornecedor != NULL) {
-        $this -> table -> set_heading('NOME', 'EMAIL', 'CNPJ', 'TELEFONE', 'MANTER');
+        $this -> table -> set_heading('NOME', 'EMAIL', 'CNPJ', 'TELEFONE', 'EDITAR','EXCLUIR');
         foreach ($fornecedor as $linha) {
 
-            $this -> table -> add_row($linha -> nome, $linha -> email, $linha -> cnpj, $linha -> num_telefone, anchor("Fornecedor/update/$linha->id_pessoa/$linha->id_fornecedor",'Editar').'
-                  |  '.anchor("Fornecedor/delete/$linha->id_pessoa",'Excluir'));
+            $this -> table -> add_row($linha -> nome, $linha -> email, $linha -> cnpj, $linha -> num_telefone, anchor("Fornecedor/update/$linha->id_pessoa/$linha->id_fornecedor",'<center>Editar</center>'),anchor("Fornecedor/delete/$linha->id_pessoa",'<center>Excluir</center>','onclick="if (! confirm(\'Tem certeza que deseja excluir o fornecedor abaixo? \n\n Nome: '.$linha->nome.'\n Email: '.$linha->email.'\n CNPJ: '.$linha->cnpj.'\')) { return false; }"'));
         }
         $tmpl = array ( 'table_open'  => '<table border="1" cellpadding="2" width="100%" cellspacing="1" class="mytable">' );
         $this->table->set_template($tmpl);

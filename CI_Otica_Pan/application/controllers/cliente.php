@@ -38,7 +38,7 @@ class Cliente extends CI_Controller {
         $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|max_length[15]|valid_cpf|is_unique[cliente.cpf]');
         $this->form_validation->set_rules('data_nascimento', 'Data Nascimento', 'trim|valid_date');
         $this->form_validation->set_rules('num_telefone1', 'Telefone Residencial', 'trim|min_length[14]|max_length[15]');
-        $this->form_validation->set_rules('num_telefone2', 'Telefone Celular', 'trim|min_length[15]|max_length[15]');
+        $this->form_validation->set_rules('num_telefone2', 'Telefone Celular', 'trim|min_length[14]|max_length[15]');
         $this->form_validation->set_rules('rua', 'RUA', 'trim|max_length[80]');
         $this->form_validation->set_rules('bairro', 'BAIRRO', 'trim|max_length[50]|');
         $this->form_validation->set_rules('cidade', 'CIDADE', 'trim||max_length[50]');
@@ -98,7 +98,7 @@ class Cliente extends CI_Controller {
         $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|max_length[15]|valid_cpf');
         $this->form_validation->set_rules('data_nascimento', 'Data Nascimento', 'trim|valid_date');
         $this->form_validation->set_rules('num_telefone1', 'Telefone Residencial', 'trim|min_length[14]|max_length[15]');
-        $this->form_validation->set_rules('num_telefone2', 'Telefone Celular', 'trim|min_length[15]|max_length[15]');
+        $this->form_validation->set_rules('num_telefone2', 'Telefone Celular', 'trim|min_length[14]|max_length[15]');
         $this->form_validation->set_rules('rua', 'RUA', 'trim|max_length[80]');
         $this->form_validation->set_rules('bairro', 'BAIRRO', 'trim|max_length[50]|');
         $this->form_validation->set_rules('cidade', 'CIDADE', 'trim||max_length[50]');
