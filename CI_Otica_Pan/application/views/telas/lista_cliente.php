@@ -1,6 +1,6 @@
 <?php
 
-
+echo"<div class=formulario>";
 echo"<h2>$titulo</h2>";
 
 $id_cliente = $this->uri->segment(3);
@@ -12,8 +12,9 @@ if ($this->session->flashdata('msg')) {
     echo "<body onLoad=\" alert('$msg');window.opener.location.reload();window.close();\">";
 }
 
-
-echo"<br><center><table>";//Essa linha pode remover
+echo"<fieldset>";
+echo"<legend>Dados Pessoais:</legend>";
+echo"<table>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo "Nome: ";
 echo"</td><td>"; //Essa linha pode remover
@@ -80,8 +81,8 @@ echo"<td>"; //Essa linha pode remover
 
 echo"</td><tr>"; //Essa linha pode remover
 echo"</table>"; //Essa linha pode remover
-echo"</center>";//Essa pode remover
-
+echo"</fieldset>";
+echo"</div>";
 $dependentes = $this->dependente_model->listarDependentes($id_cliente);
 
 
