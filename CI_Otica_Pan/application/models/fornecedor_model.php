@@ -27,7 +27,7 @@ class Fornecedor_model extends CI_Model {
 
 			$this -> session -> set_flashdata('cadastrook', 'Cadastro efetuado com sucesso');
 
-			redirect('fornecedor');
+			redirect('fornecedor/adiciona');
 		}
 	}
 
