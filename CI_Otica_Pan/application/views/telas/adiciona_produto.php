@@ -4,8 +4,11 @@ echo"<div class=formulario>";
 echo"<h2>$titulo</h2>";
 
 if($this->session->flashdata('cadastrook')){
-    echo '<p>'.$this->session->flashdata('cadastrook').'</p>';
+    $msg = $this->session->flashdata('cadastrook');
+    echo "<body onload=\"ocultaArmacao(); alert('$msg');\">";
 }
+
+echo '<body onload="ocultaArmacao();" />';
 
 echo form_open('produto/adiciona');
 
@@ -13,8 +16,6 @@ echo form_open('produto/adiciona');
 $todos_fornecedor = $todos_fornecedor;
 $todas_grife = $todas_grife;
 $carrega = $carrega;
-
-echo '<body onload="ocultaArmacao();" />';
 
 // Campos da tabela Produto
 echo"<fieldset>";
@@ -54,17 +55,17 @@ echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('Preco de custo');
 echo"</td><td>"; 
-echo form_input(array('name'=>'preco_custo'),  set_value('preco_custo'), 'placeholder="000,00" autocomplete ="off" style="width:80px;"');
+echo form_input(array('name'=>'preco_custo'),  set_value('preco_custo'), 'placeholder="0000,00" autocomplete ="off" style="width:80px;" onkeypress="return(FormataReais(this,\'.\',\'.\',event))"');
 echo"</td>";
 echo"<td>";
 echo form_label('Preco de venda');
 echo"</td><td>"; 
-echo form_input(array('name'=>'preco_venda'),  set_value('preco_venda'), 'placeholder="000,00" autocomplete ="off" style="width:80px;"');
+echo form_input(array('name'=>'preco_venda'),  set_value('preco_venda'), 'maxlength="7" placeholder="0000,00" autocomplete ="off" style="width:80px;" onkeypress="return(FormataReais(this,\'.\',\'.\',event))"');
 echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('Quantidade');
 echo"</td><td>"; 
-echo form_input(array('name'=>'quantidade'),  set_value('quantidade'), 'placeholder="00" autocomplete ="off" style="width:150px;"');
+echo form_input(array('name'=>'quantidade'),  set_value('quantidade'), 'maxlength="8"  placeholder="00" autocomplete ="off" style="width:150px;"');
 echo"</td>";
 echo"<td>";
 echo form_label('Status');
@@ -78,7 +79,7 @@ echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('Validade');
 echo"</td><td>"; 
-echo form_input(array('name'=>'validade'),  set_value('validade'), 'placeholder="DD/MM/AAAA" autocomplete ="off" style="width:150px;" OnKeyPress="MascaraData(this)"');
+echo form_input(array('name'=>'validade'),  set_value('validade'), 'maxlength="10" placeholder="DD/MM/AAAA" autocomplete ="off" style="width:150px;" OnKeyPress="MascaraData(this)"');
 echo"</td></tr>";
 echo"</table>";
 

@@ -18,7 +18,7 @@ class produto_model extends CI_Model {
                     'validade' => element('validade', $dados),
                     'quantidade' => element('quantidade', $dados),
                     'status' => element('status', $dados),
-                    'validade' => element('validade', $dados),
+                    'validade' => $this->util->data_user_para_mysql(element('validade', $dados)),
                     'categoria' => element('produto', $dados),
                     );
 		$this -> db -> insert('produto', $produto);
@@ -47,7 +47,7 @@ class produto_model extends CI_Model {
                 $this -> db -> trans_complete();
 		$this -> session -> set_flashdata('cadastrook', 'Cadastro efetuado com sucesso');
 
-		redirect('produto');
+		redirect('produto/adiciona');
             }
 	}
 
