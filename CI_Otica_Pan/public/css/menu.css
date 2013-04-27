@@ -17,6 +17,7 @@ time, mark, audio, video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  
 }
 
 article, aside, details, figcaption, figure,
@@ -30,6 +31,7 @@ body {
 
 ol, ul {
   list-style: none;
+  z-index: 20;
 }
 
 blockquote, q {

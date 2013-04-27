@@ -1,4 +1,5 @@
 <head>
+  <link href="../../CI_otica_pan/favicon.ico" rel="shortcut icon" type="image/ico" />
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>SisGO - Login</title>

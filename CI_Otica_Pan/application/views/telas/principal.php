@@ -4,14 +4,14 @@
     <tr>
         <td align="center">
             <a href="<? echo base_url('cliente'); ?>" style="text-decoration:none" >
-                <img src="..\public/img/cadastro_cliente.png"/>
+                <img src="public/img/cadastro_cliente.png"/>
                 <br />
                 Cadastro de Clientes
             </a>
         </td>
         <td align="center">
             <a href="<? echo base_url('cliente/listarClientes'); ?>" style="text-decoration:none" >
-                <img src="..\public/img/pesquisa_cliente.png"/>
+                <img src="public/img/pesquisa_cliente.png"/>
                 <br />
                 Pesquisa de Clientes  
             </a>
@@ -20,7 +20,7 @@
 
         <td align="center">
             <a href="<? echo base_url('fornecedor/adiciona'); ?>" style="text-decoration:none" >
-                <img src="..\public/img/cadastro_fornecedor.png"/>
+                <img src="public/img/cadastro_fornecedor.png"/>
                 <br />
                 Cadastro de Fornecedores    
             </a>
@@ -29,7 +29,7 @@
 
         <td align="center">
             <a href="<? echo base_url('fornecedor/lista'); ?>" style="text-decoration:none" >
-                <img src="..\public/img/pesquisa_fornecedor.png"/>
+                <img src="public/img/pesquisa_fornecedor.png"/>
                 <br />
                 Pesquisa de Fornecedores    
             </a>
@@ -39,21 +39,21 @@
     <tr>
     <td align="center">
             <a href="<? echo base_url('produto'); ?>" style="text-decoration:none" >
-                <img src="..\public/img/cadastro_produto.png"/>
+                <img src="public/img/cadastro_produto.png"/>
                 <br />
                 Cadastro de Produtos
             </a>
         </td>
         <td align="center">
             <a href="<? echo base_url('produto/lista'); ?>" style="text-decoration:none" >
-                <img src="..\public/img/pesquisa_produto.png"/>
+                <img src="public/img/pesquisa_produto.png"/>
                 <br />
                 Pesquisa de Produtos
             </a>
         </td>
          <td align="center">
             <a href="<? echo base_url('agendamento'); ?>" style="text-decoration:none" >
-                <img src="..\public/img/agendamento.png" width="64px" heigth="64px"/>
+                <img src="public/img/agendamento.png" width="64px" heigth="64px"/>
                 <br />
                 Agendamento
             </a>

@@ -8,31 +8,40 @@ if($this->session->flashdata('msg')){
 }
 
 
-echo form_open('cliente/pesquisaCliente');
-echo form_label('Pesquisa Cliente:');
-echo form_input(array('name'=>'pesquisa'),  set_value('pesquisa'),'autofocus');
-echo form_submit('','Pesquisar');
-echo form_close();
-
 $clientes = $clientes;//Pega a variavel da Controller (boa pratica)
 
-if($clientes==NULL){
-    echo"Sua pesquisa não encontrou nenhum dado correspondente.";
-}else{
 
-echo"<br><br>";
-$this->table->set_heading('NOME','CPF','EMAIL','TELEFONE','VISUALIZAR','EDITAR','EXCLUIR');
+
+$this->table->set_heading('NOME','CPF','EMAIL','TELEFONE','&nbsp; ','&nbsp; ','&nbsp; ');
 foreach ($clientes as $linha) {
 
-    $this->table->add_row($linha->nome, $linha->cpf, $linha->email, $linha->num_telefone,anchor("cliente/listaCliente/$linha->id_cliente", '<center>Visualizar</center>'),anchor("cliente/atualizarCliente/$linha->id_cliente", '<center>Editar</center>'),anchor("cliente/deletarCliente/$linha->id_pessoa/$linha->id_cliente", '<center>Excluir</center>', 'onclick="if (! confirm(\'Tem certeza que deseja excluir o cliente abaixo? \n\n Nome: ' .$linha->nome . '\n CPF: ' .$linha->cpf. '\n Email: ' . $linha->email. '\')) { return false; }"'));
+    $nomeReduzido = (explode(" ",$linha->nome));
+          
+   if(sizeof($nomeReduzido)>3){
+       $nomeReduzido = $nomeReduzido[0].' '.$nomeReduzido[1].' '.$nomeReduzido[sizeof($nomeReduzido)-1];
+   }else{
+       $nomeReduzido = $linha->nome;
+   }
+    
+    $this->table->add_row($nomeReduzido, $linha->cpf, $linha->email, $linha->num_telefone,anchor("cliente/listaCliente/$linha->id_cliente", '<center><img src="..\public/img/search.png" width="23"/></center>'),anchor("cliente/atualizarCliente/$linha->id_cliente", '<center><img src="..\public/img/edit.png" width="23"/></center>'),'<center><p onClick="if (! confirm(\'Tem certeza que deseja excluir o cliente abaixo? \n\n Nome: '.$linha->nome.'\n CPF: '.$linha->cpf.'\n Email: '.$linha->email.'\')) { return false; }">'.anchor('cliente/deletarCliente/'.$linha->id_pessoa.'/'.$linha->id_cliente,'<img src="..\public/img/delete.png" width="23"/>').'</p></center>');
 }
 
-$tmpl = array(
+/**$tmpl = array(
             'table_open' => '<table border="1" cellpadding="2" width="100%" cellspacing="1" class="listholover">',
              'row_start' => '<tr class="alt">',
              'row_alt_start'=> '<tr class="alt">',
+             'cell_start'          => '<td>',
+             'cell_end'            => '</td>',
             );
+ * 
+ * 
+ */
+$tmpl = array(
+    'table_open'=>'<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">',
+      );
+
+echo"<div class='tabela'>";
 $this->table->set_template($tmpl);
 echo $this->table->generate();
-}
+echo"</div>";
 ?>

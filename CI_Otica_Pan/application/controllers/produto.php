@@ -34,8 +34,8 @@ class Produto extends CI_Controller {
             $this -> form_validation -> set_rules('referencia', 'Referencia', 'trim|required');
             $this -> form_validation -> set_rules('nome', 'Nome', 'trim|required');
             $this -> form_validation -> set_rules('descricao', 'Descricao', 'trim|max_length[60]');
-            $this -> form_validation -> set_rules('preco_custo', 'Preço de Custo', 'trim|ucwords|required');
-            $this -> form_validation -> set_rules('preco_venda', 'Preço de Venda', 'trim|ucwords|required');
+            $this -> form_validation -> set_rules('preco_custo', 'Preço de Custo', 'trim|ucwords|required|max_length[10]');
+            $this -> form_validation -> set_rules('preco_venda', 'Preço de Venda', 'trim|ucwords|required|max_length[10]');
             $this -> form_validation -> set_rules('quantidade', 'Quantidade', 'trim');
             $this -> form_validation -> set_rules('status', 'Status', 'trim');
             $this -> form_validation -> set_rules('validade', 'Validade', 'trim');
