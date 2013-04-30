@@ -1,3 +1,18 @@
+<link rel="stylesheet" href="../../../../../../../../../CI_otica_pan/public/jquery/estilo/table_jui.css" />
+<link rel="stylesheet" href="../../../../../../../../../CI_otica_pan/public/jquery/estilo/jquery-ui-1.8.4.custom.css" />
+<script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/jquery/js/jquery.mim.js"></script>
+<script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/jquery/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	oTable = $('#example').dataTable({
+		"bPaginate": true,
+		"bJQueryUI": true,
+		"sPaginationType": "full_numbers"
+	});
+});
+</script>
+
 <?php
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
@@ -26,7 +41,7 @@ class Produto extends CI_Controller {
 		$dados = array('pagina' => 'adiciona_produto', 'titulo' => 'Criar Produto', 'carrega' => 0,
                     'tipo_lente' => $this -> tipo_lente_model -> getAll() -> result(),
                     'todos_fornecedor' => $this -> fornecedor_model -> getAll() -> result(),
-                    'todas_grife' => $this -> grife_model -> getAll() -> result());
+                    'todas_grife' => $this -> grife_model -> getAll() -> result(), 'msgErroP' => '');
 		$this -> load -> view('Principal', $dados);
 	}
         
@@ -49,19 +64,24 @@ class Produto extends CI_Controller {
                 $this -> form_validation -> set_rules('fornecedor', 'Fornecedor', 'required');
                 
             }
+            $msgPM = '';
             
             if ($this -> form_validation -> run()) {
-                $dados = elements(array('referencia', 'nome', 'descricao', 'preco_custo', 'preco_venda', 'quantidade', 'status', 'validade',
+                if ($this -> input -> post('preco_custo') <= $this -> input -> post('preco_venda')) {
+                    $dados = elements(array('referencia', 'nome', 'descricao', 'preco_custo', 'preco_venda', 'quantidade', 'status', 'validade',
                     'largura_lente', 'largura_ponte', 'comprimento_haste', 'modelo', 'grife', 'fornecedor',
                     'produto'), $this -> input -> post());
-                $this -> produto_model -> do_insert($dados);
-                
-            } else {
-                $dados = array('titulo' => 'Criar Produto', 'pagina' => 'adiciona_produto', 'carrega' => $this -> input -> post('produto'),
-                    'todos_fornecedor' => $this -> fornecedor_model -> getAll() -> result(),
-                    'todas_grife' => $this -> grife_model -> getAll() -> result());
-                $this -> load -> view('Principal', $dados);
+                    $this -> produto_model -> do_insert($dados);
+                } else {
+                    $msgPM = 'Preço de custo não pode ser maior que Preço de venda';
+                }
             }
+            
+            $dados = array('titulo' => 'Criar Produto', 'pagina' => 'adiciona_produto', 'carrega' => $this -> input -> post('produto'),
+                'todos_fornecedor' => $this -> fornecedor_model -> getAll() -> result(),
+                'todas_grife' => $this -> grife_model -> getAll() -> result(), 'msgErroP' => $msgPM);
+            
+            $this -> load -> view('Principal', $dados);
 	}
 
 	public function lista() {
@@ -71,18 +91,13 @@ class Produto extends CI_Controller {
 		$this -> load -> view('Principal', $dados);
 	}
 
-	public function pesquisa() {
-		$dados = array('pagina' => 'pesquisa_produto', 'titulo' => 'Manter Produto', 'pesquisa' => '');
+	public function visualiza() {
+            $dados = array('pagina' => 'vizualiza_produto', 'titulo' => 'Visualiza Produto',
+            'todos_fornecedor' => $this -> fornecedor_model -> getAll() -> result(),
+            'produto' => $this -> produto_model -> get_byid($this->uri->segment(3)),
+            'todas_grife' => $this -> grife_model -> getAll() -> result());
 
-		$this -> form_validation -> set_rules('pesquisa', 'NOME', 'trim|required|max_length[100]|ucwords');
-
-		if ($this -> form_validation -> run()) {
-			$pesquisaView = $this -> input -> post('pesquisa');
-			$dados = array('pagina' => 'pesquisa_produto', 'titulo' => 'Manter Produto', 
-			'pesquisa' => $this -> produto_model -> do_select($pesquisaView) -> result());
-		}
-
-		$this -> load -> view('Principal', $dados);
+            $this -> load -> view('Principal', $dados);
 	}
 
 	public function update() {
@@ -129,5 +144,4 @@ class Produto extends CI_Controller {
 		$this -> produto_model -> do_delete($id);
 		$this -> load -> view('Principal', $dados);
 	}
-
 }

@@ -106,8 +106,17 @@ if($min>0 && $min<10)$min = '0'.$min;
 return $hora.":".$min; 
 } 
 
+function pontoParaVirgula($num) {
+    $num = explode(".", $num);
+    $stringNum = $num[0].",".$num[1];
+    return $stringNum;
+}
 
-
+function virgulaParaPonto($num) {
+    $num = explode(",", $num);
+    $stringNum = $num[0].".".$num[1];
+    return $stringNum;
+}
 
 }
 ?>

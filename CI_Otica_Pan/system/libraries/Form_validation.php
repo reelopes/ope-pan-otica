@@ -1499,9 +1499,25 @@ function valid_cpf($cpf){
         return (($str[16] == $digito1) && ($str[17] == $digito2));
     }   
         
-        
-        
-        
+    // --------------------------------------------------------------------
+
+	/**
+	 * Valida Preço
+	 *
+	 * @access	public
+	 * @param	int
+	 * @return	bool
+	 */
+	public function precoM($pc, $pv)
+	{
+		if ($pc > $pv)
+		{
+                    set_message($lang['precoM'], $val = 'Preço de venda não pode ser menor que Preço de custo');
+                    return FALSE;
+		} else {
+                    return TRUE;
+                }
+	}
 }
 // END Form Validation Class
 

@@ -1,5 +1,4 @@
 <?php
-
 $lang['required'] = 'O campo %s é obrigatório.';
 $lang['isset'] = 'O campo %s deve ter algum valor.';
 $lang['valid_email'] = 'O campo %s deve conter um endereço de e-mail válido.';

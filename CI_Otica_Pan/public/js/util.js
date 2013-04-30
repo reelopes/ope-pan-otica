@@ -72,7 +72,7 @@ function MascaraTelefone(tel){
 	return formataCampo(tel, '(00) 0000-0000', event);
 }
 
-//Teste maroto
+//cria mascara para Reais
 function FormataReais(fld, milSep, decSep, e) {
 var sep = 0;
 var key = '';

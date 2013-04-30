@@ -11,8 +11,8 @@ class produto_model extends CI_Model {
                     'referencia' => element('referencia', $dados),
                     'nome' => element('nome', $dados),
                     'descricao' => element('descricao', $dados),
-                    'preco_custo' => element('preco_custo', $dados),
-                    'preco_venda' => element('preco_venda', $dados),
+                    'preco_custo' => $this->util->virgulaParaPonto(element('preco_custo', $dados)),
+                    'preco_venda' => $this->util->virgulaParaPonto(element('preco_venda', $dados)),
                     'quantidade'  => element('quantidade', $dados),
                     'status' => element('status', $dados),
                     'validade' => element('validade', $dados),
@@ -21,6 +21,7 @@ class produto_model extends CI_Model {
                     'validade' => $this->util->data_user_para_mysql(element('validade', $dados)),
                     'categoria' => element('produto', $dados),
                     );
+                
 		$this -> db -> insert('produto', $produto);
 
 		$id_produto = $this -> db -> insert_id();
@@ -36,13 +37,14 @@ class produto_model extends CI_Model {
                         'id_grife' => element('id' ,element('grife', $dados))
                         );
                     $this -> db -> insert('armacao', $tipoProduto);
-                } else if(element('produto', $dados) == 2) {
-                    $tipoProduto = array(
-                        'id_tipo_lente' => element('id', element('lista_tipo_lente', $dados)),
-                        'id_produto' => $id_produto
-                        );
-                    $this -> db -> insert('lente', $tipoProduto);
                 }
+//                else if(element('produto', $dados) == 2) {
+//                    $tipoProduto = array(
+//                        'id_tipo_lente' => element('id', element('lista_tipo_lente', $dados)),
+//                        'id_produto' => $id_produto
+//                        );
+//                    $this -> db -> insert('lente', $tipoProduto);
+//                }
                 
                 $this -> db -> trans_complete();
 		$this -> session -> set_flashdata('cadastrook', 'Cadastro efetuado com sucesso');
@@ -52,39 +54,25 @@ class produto_model extends CI_Model {
 	}
 
 	public function getAll() {
-
+//
+//            echo "TESTE";
+//            break;
 		$this -> db -> select('id as id_produto, referencia, nome, 
                     descricao, preco_custo, preco_venda,
                     quantidade, status, validade, categoria');
 		$this -> db -> from('produto');
+		$produto = $this -> db -> get();
                 
-		return $this -> db -> get();
-		//$produto = $this -> db -> get('produto') -> row();
-                
-//                if ($produto -> categoria == 1) {
-//                    
-//                    $armacao = $this -> db -> get('armacao') -> row();
-//                    
-//                    
-//                    $fornecedorE = $this -> db -> get('fornecedor') -> row();
-//                    
-//                    $dadosForn = $this -> db -> get('pessoa') -> row();
-//                    
-//                    $grife = $this -> db -> get('grife') -> row();
-//                }
-//                
-//                $dados = array('produto' => $produto, 'armacao' => $armacao, 'fornecedor' => $dadosForn, 'fornecedorE' => $fornecedorE, 'grife' => $grife);
-//                
-//		return $dados;
+                return $produto;
 	}
 
 	public function do_select($pesquisa = null) {
 
 		$this -> db -> select
                         ('referencia, nome, descricao, preco_custo, preco_venda,
-                          quantidade, status, validade, id as id_produto');
+                          quantidade, status, validade, categoria, id as id_produto');
 		$this -> db -> from('produto');
-		$this -> db -> like('referencia', $pesquisa);
+		$this -> db -> where('referencia', $pesquisa);
 		$this -> db -> or_like('nome', $pesquisa);
                 $this -> db -> or_like('descricao', $pesquisa);
                 $this -> db -> or_like('preco_custo', $pesquisa);
@@ -101,6 +89,9 @@ class produto_model extends CI_Model {
                 $this -> db -> where('id', $id_produto);
 		$this -> db -> limit(1);
 		$produto = $this -> db -> get('produto') -> row();
+                
+//                $produto->preco_custo = $this->util->pontoParaVirgula($produto->preco_custo);
+//                $produto->preco_venda = $this->util->pontoParaVirgula($produto->preco_venda);
                 
                 if ($produto -> categoria == 1) {
                     $this -> db -> where('id_produto', $id_produto);
@@ -143,7 +134,7 @@ class produto_model extends CI_Model {
                 'validade' => element('validade', $dados),
                 'quantidade' => element('quantidade', $dados),
                 'status' => element('status', $dados),
-                'validade' => element('validade', $dados));
+                'validade' => $this->util->data_user_para_mysql(element('validade', $dados)));
                 
                 $this->db->update('produto', $produto, 'id = '.$condicao);
                 
