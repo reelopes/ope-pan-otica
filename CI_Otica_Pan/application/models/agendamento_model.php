@@ -28,19 +28,20 @@ class Agendamento_model extends CI_Model {
     }
     public function cadastrarAgendamento($agendamento = NULL) {
         if ($agendamento != null) {
-
+        
+            
             $dataAgendamento = explode("/", element('data', $agendamento)); //Captura a data do agendamento sem as /
             //Verifica se a data do agendamento é menor que a data atual
             if ($dataAgendamento[2] . $dataAgendamento[1] . $dataAgendamento[0] < date('Y') . date('m') . date('d')) {
 
                 $this->session->set_flashdata('msg', 'Não é possível agendar um cliente com uma data retroativa'); //Adiciona na sessão temporaria o status do cadastro
-                redirect('agendamento/horarioConsulta/' . $this->util->data_user_para_mysql(element('data', $agendamento)));
+                redirect('agendamento/agendamentoDeCliente/'.$this->util->data_user_para_mysql(element('data', $agendamento)).'/'.element('idCliente', $agendamento));
             }
             //Valida se o cliente digitou algum horario
             if (element('horario', $agendamento)==NULL) {
 
                 $this->session->set_flashdata('msg', 'É necessário escolher um horário de agendamento!'); //Adiciona na sessão temporaria o status do cadastro
-                redirect('agendamento/horarioConsulta/' . $this->util->data_user_para_mysql(element('data', $agendamento)));
+                redirect('agendamento/agendamentoDeCliente/'.$this->util->data_user_para_mysql(element('data', $agendamento)).'/'.element('idCliente', $agendamento));
             }
             
             
@@ -49,7 +50,7 @@ class Agendamento_model extends CI_Model {
 
             if ($validaData == 0 || $validaData == 6) {
                 $this->session->set_flashdata('msg', 'Não é possível agendar um cliente nos finais de semana'); //Adiciona na sessão temporaria o status do cadastro
-                redirect('agendamento/horarioConsulta/' . $this->util->data_user_para_mysql(element('data', $agendamento)));
+                redirect('agendamento/agendamentoDeCliente/'.$this->util->data_user_para_mysql(element('data', $agendamento)).'/'.element('idCliente', $agendamento));
             }
 
             $hora1 = $this->util->subtraiHora(element('horario', $agendamento), '00:29');
@@ -76,12 +77,12 @@ class Agendamento_model extends CI_Model {
                 );
                 $this->db->insert('agendamento', $dadosAgendamento);
 
-                $this->session->set_flashdata('msg', 'Cliente Agendado com Sucesso'); //Adiciona na sessão temporaria o status do cadastro
+                $this->session->set_flashdata('msgOk', 'Cliente Agendado com Sucesso'); //Adiciona na sessão temporaria o status do cadastro
             } else {
 
                 $this->session->set_flashdata('msg', 'Não foi possível agendar o cliente. \nJá existe um cliente agendando próximo a este horário'); //Adiciona na sessão temporaria o status do cadastro
             }
-            redirect('agendamento/horarioConsulta/' . $this->util->data_user_para_mysql(element('data', $agendamento)));
+                redirect('agendamento/agendamentoDeCliente/'.$this->util->data_user_para_mysql(element('data', $agendamento)).'/'.element('idCliente', $agendamento));
         }
     }
 

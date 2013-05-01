@@ -1,15 +1,11 @@
 <?php
 
-echo"<h2>$titulo</h2>";//TITULO
-
-
 //Exime mensagem de agendamento do cliente Javascript
 if ($this->session->flashdata('msg')) {
     $msg = $this->session->flashdata('msg');
     echo "<body onLoad=\" alert('$msg');\">";
 }
 
-$id_cliente = $this->uri->segment(6); //Captura o id do cliente da URL
 $ano = $this->uri->segment(3); //Captura o ano da URL
 $mes = $this->uri->segment(4); //Captura o mês da URL
 $dia = $this->uri->segment(5); //Captura o dia da URL
@@ -25,7 +21,9 @@ if ($mes == null) {
 } else {
     $mesCalendario = $mes; //Captura o mes da URL
 }
-
+if($dia==NULL){
+    $dia= date('d');
+}
 $dados = array();
 for ($i = 1; $i < 32; $i++) {
 
@@ -39,70 +37,56 @@ for ($i = 1; $i < 32; $i++) {
     }
 }
 //Gera o calendario enviando o ano e o mes atual, se ambos forem null é gerado referente ao ano e mês atual
-echo "<div style=float:left;>" . $this->calendar->generate($anoCalendario, $mesCalendario, $dados) . "</div>";
-
+echo "<div style=float:left;>";
+echo"<h2>$titulo</h2>";//TITULO
+echo $this->calendar->generate($anoCalendario, $mesCalendario, $dados);
+echo "</div>";
 $diaCalendario = $this->uri->segment(5); //Captura o dia do mes que o usuario escolheu no calendario
 
-if ($diaCalendario != NULL) {//verifica se o usuário escolheu algum dia no calendario
-    echo "<div style=float:left;>";
+    echo "<div style='float:left; margin-left:80px;'}>";
 
     $diaSemana_url = date("w", mktime(0, 0, 0, $mesCalendario, $dia, $anoCalendario)); //Captura o dia da semana que vem na URL (ex: 0 Domingo, 1 Segunda 2 terça ...
 //Verifica se a data escolhida é menor que a data atual se for não deixa adicionar cliente
     if ($anoCalendario . $mesCalendario . $diaCalendario >= date('Y') . date('m') . date('d') && $diaSemana_url != "0" && $diaSemana_url != "6") {
-        ?>
-        Pesquisa Cliente: <input type="text" name="nome" onKeyDown="ocultaFormAgendamento();" onKeyUp="carregaAjax('pesquisaDinamica', '<? echo base_url('agendamento/pesquisaDinamica') ?>/' + this.value)" autofocus autocomplete="off">
-        
-            <?
     }//Acaba o if de verificação se a data é inferior a data atual
-    echo"</div>";
-
-    echo "<br><br><br><div id='pesquisaDinamica' style='display:none;'>";
-
-    echo "</div>";
-
-    echo "<div id='formAgendamento'  style='display:none;'";
-    echo"<form></form>";
-    //Se vier algum parametro na URL Mostro o Form com os dados do Cliente
-    if ($id_cliente != null) {
-
-        $cliente = $this->cliente_model->retornaCliente($id_cliente); //Captura o cliente no 
-        $dependentes = $this->dependente_model->listarDependentes($id_cliente); //Resgata os dependentes do cliente
-        ?>
-
-
-        <form method="POST" action=<? echo base_url('agendamento/cadastrarAgendamento') ?>/>
-        <input type="hidden" name="idCliente" value='<? echo $cliente['cliente']->id; ?>' />
-        <table><tr>
-                <td>Data:</td><td><input type="text" name="data" value="<? echo $diaCalendario . '/' . $mesCalendario . '/' . $anoCalendario ?>" /></td></tr><tr>
-                <td>Horário:</td><td><input type="text" name="horario" value="" autofocus /></td></tr><tr>
-                <td>Nome:</td><td><input type="text" name="nome" value='<? echo $cliente['pessoa']->nome; ?>' disabled/></td></tr><tr>
-                <td>CPF:</td><td><input type="text" name="cpf" value="<? echo $cliente['cliente']->cpf; ?>" disabled /></td></tr><tr>
-
-
-                <td>Dependente:</td><td>
-
-                    <select name="dependente">
-                        <option value="0">Próprio Cliente</option>
-
+    
+    $clientes = $this->cliente_model->listarClientes('')->result();
+    
+    ?>
+        <br>
+<div class='tabela'>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+<thead>
+<tr>
+<th>NOME</th><th>CPF</th></tr>
+</thead>
+<tbody>
+        
         <?
-        foreach ($dependentes as $linha) {
-            echo "<option value=\"$linha->id_dependente\">$linha->nome</option>";
-        }
-        ?>
+    
+foreach ($clientes as $linha) {
 
-                    </select>
-
-                </td></tr><tr>
-
-                <td></td><td><input type="submit" value="Agendar" /></td>
-            </tr>
-        </table>
-        </form>
-
-        <?
-    }
+    $nomeReduzido = (explode(" ",$linha->nome));
+          
+   if(sizeof($nomeReduzido)>3){
+       $nomeReduzido = $nomeReduzido[0].' '.$nomeReduzido[1].' '.$nomeReduzido[sizeof($nomeReduzido)-1];
+   }else{
+       $nomeReduzido = $linha->nome;
+   }
+   
+   echo "<tr class='alt' OnClick=\"abrirPopUp('".base_url('agendamento/agendamentoDeCliente/'.$ano.'/'.$mes.'/'.$dia.'/'.$linha->id_cliente)."','500','400');\">";
+   echo "<td>".$nomeReduzido."</td>";
+   echo "<td>".$linha->cpf."</td>";
+   echo"</tr>";
+   
+}
+?>
+</tbody>
+    </table>
+</div>
+    <?
+    
     echo"</div>";
-
 
     $horarioAgendamento = $horarioAgendamento; //Boa pratica esse dado vem da controller
 
@@ -143,9 +127,6 @@ if ($diaCalendario != NULL) {//verifica se o usuário escolheu algum dia no cale
     }
 
     echo $this->table->generate();
-}
 
-if ($id_cliente != NULL) {
-    echo"<body onLoad=\"mostraFormAgendamento();\"";
-}
+
 ?>

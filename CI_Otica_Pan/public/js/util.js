@@ -129,6 +129,13 @@ function MascaraCPF(cpf){
 	}	
 	return formataCampo(cpf, '000.000.000-00', event);
 }
+function MascaraHorario(horario){
+	if(mascaraInteiro(horario)==false){
+		event.returnValue = false;
+	}	
+	return formataCampo(horario, '00:00', event);
+}
+
 
 function ValidarCPF(Objcpf){
 	var cpf = Objcpf.value;
@@ -165,7 +172,7 @@ function formataCampo(campo, Mascara, evento) {
 	var boleanoMascara; 
 	
 	var Digitato = evento.keyCode;
-	exp = /\-|\.|\/|\(|\)|\,| /g
+	exp = /\-|\.|\/|\(|\)|\,|\:| /g
 	campoSoNumeros = campo.value.toString().replace( exp, "" ); 
    
 	var posicaoCampo = 0;	 
@@ -193,12 +200,12 @@ function formataCampo(campo, Mascara, evento) {
 	}
 }
 
-function abrirPopUpAlteraDependente(URL) {
-    var width = 500;
-    var height = 250;
-    var left = 99;
-    var top = 99;
+
+function abrirPopUp(url,width,height) {
+
+    var left = (screen.width  - width)/2;
+    var top = (screen.height - height)/2;
     
-   window.open(URL,'janela', 'width='+width+', height='+height+', top='+top+', left='+left+', scrollbars=yes, status=no, toolbar=no, location=yes, directories=no, menubar=no, resizable=no, fullscreen=no'); 
+   window.open(url,'janela', 'left='+left+',width='+width+', height='+height+', top='+top+', scrollbars=yes, status=no, toolbar=no, location=yes, directories=no, menubar=no, resizable=no, fullscreen=no'); 
 
 }

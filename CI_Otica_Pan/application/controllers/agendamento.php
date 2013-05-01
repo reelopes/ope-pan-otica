@@ -1,5 +1,22 @@
 <script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/js/agendamento.js"></script> 
-<?php
+        <link rel="stylesheet" href="../../../../../../../../../CI_otica_pan/public/jquery/agendamento/estilo/table_jui.css" />
+        <link rel="stylesheet" href="../../../../../../../../../CI_otica_pan/public/jquery/agendamento/estilo/jquery-ui-1.8.4.custom.css" />
+        <script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/jquery/agendamento/js/jquery.mim.js"></script>
+        <script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/jquery/agendamento/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                oTable = $('#example').dataTable({
+                    "bPaginate": true,
+                    "bJQueryUI": true,
+                    "sPaginationType": "full_numbers"
+                });
+            });
+        </script>
+
+    
+    
+    
+    <?php
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -30,7 +47,8 @@ class Agendamento extends CI_Controller {
         $this->load->library('calendar', $prefs);
         $this->load->helper('date');
         $this->load->library('table');
-     
+        $this->login_model->logado();//Verifica se o usuário está logado
+
     }
 
     public function index() {
@@ -53,47 +71,13 @@ class Agendamento extends CI_Controller {
         $this->load->view('Principal', $dados);
     }
 
-    public function pesquisaDinamica() {
-
-        $pesquisaCliente = $this->uri->segment(3); //Captura a pesquisa da URL
-        $this->load->model('cliente_model');
-
-        $clientes = $this->cliente_model->listarClientes($pesquisaCliente, '5')->result();
-
-
-        if ($clientes == NULL) {
-            echo"Sua pesquisa não encontrou nenhum dado correspondente.";
-        } else {
-
-            echo"
-          <table border='1' cellpadding='2' cellspacing='1' class = 'pesquisaDinamica'>
-          <tr>
-          <th>Nome</th>
-          <th>Cpf</th>
-          <th>E-mail</th>
-          </tr>
-          
-          ";
-            foreach ($clientes as $linha) {
-
-                echo"
-        <tr class=\"alt\" ONCLICK=\"agendaCliente('$linha->id_cliente','$linha->nome','$linha->cpf');\" style=\"cursor: hand;\">
-        <td>$linha->nome</td>
-        <td>$linha->cpf</td>
-        <td>$linha->email</td>
-        </tr>
-        ";
-            }
-            echo "</table>";
-        }
-    }
-
     public function cadastrarAgendamento() {
 
         if ($this->input->post() != NULL) {
 
             $agendamento = elements(array('idCliente', 'horario', 'data','dependente'), $this->input->post());
             
+          
             $this->agendamento_model->cadastrarAgendamento($agendamento);
         } else {
 
@@ -122,6 +106,17 @@ class Agendamento extends CI_Controller {
             redirect('agendamento/horarioConsulta/' . $this->uri->segment(3) . '/' . $this->uri->segment(4) . '/' . $this->uri->segment(5));
         }
     }
+    
+    public function agendamentoDeCliente(){
 
+            $dados = array(
+            'titulo' => 'Cadastrar Agendamento',
+            'pagina' => 'agendamento_cliente',
+        );
+
+        $this->load->view('principal_popup', $dados);
+        
+        
+    }
 }
 ?>

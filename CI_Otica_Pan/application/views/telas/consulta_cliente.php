@@ -27,33 +27,33 @@ if ($mes == null) {
         $this->table->set_template($tmpl);
     } else {
         
-        $this->table->set_heading('Data', 'Horário', 'Nome', 'CPF', 'E-mail','Dependente','Consultar');
+        $this->table->set_heading('Data', 'Horário', 'Nome','Cliente','Consultar');
         
         foreach ($horarioAgendamento as $linha) {
             
                      
-            if($linha->id_dependente==NULL){
-                $nome = $linha->nome_cliente;
-                $strDependente="N";
-            }else{
+            if($linha->id_dependente!=NULL){
+                
                 $nome = $linha->nome_dependente;
-                $strDependente="S";
+                $strCliente="<img src=../../../../../../../../../CI_otica_pan/public/img/false.png width=18>";
+            }else{
+                $nome = $linha->nome_cliente;
+                $strCliente="<img src=../../../../../../../../../CI_otica_pan/public/img/true.png width=18>";
             }
           
            
-                $this->table->add_row($this->util->data_mysql_para_user($linha->data_consulta), $linha->horario_consulta, $nome, $linha->cpf, $linha->email,$strDependente, "<a href=\"javascript:abrirPopUpConsultarCliente('".base_url('consulta/AtualizarConsulta/'.$linha->id_dependente)."');\"><center>Consultar</center>");
+                $this->table->add_row($this->util->data_mysql_para_user($linha->data_consulta), $linha->horario_consulta, $nome,"<center>".$strCliente."</center>", "<center><img src=../../../../../../../../../CI_otica_pan/public/img/ConsultaMedica.png width=23></center>");
             
             }
           
         }
         $tmpl = array(
-            'table_open' => '<table border="1" cellpadding="2" width="100%" cellspacing="1" class="listholover">',
-            'row_start' => '<tr class="alt">',
-            'row_alt_start' => '<tr class="alt">',
+            'table_open' => '<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">',
         );
-        $this->table->set_template($tmpl);
-    
-    echo $this->table->generate();
-
+        
+echo"<div class='tabela'>";
+$this->table->set_template($tmpl);
+echo $this->table->generate();
+echo"</div>";
 ?>
 
