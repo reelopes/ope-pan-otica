@@ -58,6 +58,7 @@ echo form_input(array('name'=>'validade'),  set_value('validade', $produto['prod
 echo"</td></tr>";
 echo"</table>";
 echo"<p></p>";
+if($produto['produto']->categoria == 1) {
     // div armacao, carrega campos de armacao
     echo'<div id="armacao">';
         echo"<fieldset>";
@@ -65,7 +66,7 @@ echo"<p></p>";
         echo"<table>";
         echo"<tr><td>";
         echo form_label('Largura da lente*');
-        echo"</td><td>"; 
+        echo"</td><td>";
         echo form_input(array('name'=>'largura_lente'),  set_value('largura_lente', $produto['armacao']->largura_lente),'readonly maxlength="11" placeholder="xx" autocomplete ="off" OnKeyPress="mascaraInteiro(this)" onpaste="return false;"');
         echo"</td>";
         echo"<td>";
@@ -108,8 +109,7 @@ echo"<p></p>";
         echo"</table>";
         echo"</fieldset>";
     echo"</div>";
+}
 echo "</div>";
 echo"</fieldset>";
-    
-
 ?>

@@ -76,15 +76,15 @@ echo"</td><td>";
 echo form_input(array('name'=>'validade'),
         set_value('validade', $this->util->data_mysql_para_user($query['produto']->validade)),'maxlength="10" autocomplete ="off" placeholder="DD/MM/AAAA" OnKeyPress="MascaraData(this)" onpaste="return false;"');
 echo"</td></tr>";
-
+echo "</table>";
 // Oculta campos e mostra campos de acordo com a escolha
 if($query['produto']->categoria == 1) {
 // div armacao, carrega campos de armacao
 echo'<div id="armacao">';
-    echo"<fieldset>";
-    echo"<legend>Armação</legend>";
-        echo"<p>";
-        echo"<tr><td>"; 
+        echo"<fieldset>";
+        echo"<legend>Armação</legend>";
+        echo "<table>";
+        echo"<tr><td>";
         echo form_label('Largura da lente');
         echo"</td><td>"; 
         echo form_input(array('name'=>'largura_lente'), set_value('largura_lente', $query['armacao']->largura_lente),'maxlength="11" placeholder="xx" autocomplete ="off" OnKeyPress="mascaraInteiro(this)" onpaste="return false;"');
@@ -132,17 +132,17 @@ echo'<div id="armacao">';
         }
         echo'</select>';
         echo"</td></tr>";
-        echo"<tr><td>";
         echo"</fieldset>";
+        echo"</table>";
 echo"</div>";
 }
 
-
-echo"</tr><td>"; 
-echo"<td>"; 
+echo"<p>";
+echo"<table>";
+echo"<tr><td>";
+echo form_label('','',array('style' => 'padding-right: 75px;',));
 echo form_submit('', 'Alterar');
-echo"</td><tr>"; 
-
+echo"</td></tr>";
 echo"</table>";
 echo"</fieldset>";
 echo "</div>";
