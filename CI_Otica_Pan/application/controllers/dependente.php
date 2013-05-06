@@ -1,4 +1,21 @@
-<script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/js/dependente.js"></script> 
+<link rel="stylesheet" href="../../../../../../../../../CI_otica_pan/public/jquery/estilo/table_jui.css" />
+        <link rel="stylesheet" href="../../../../../../../../../CI_otica_pan/public/jquery/estilo/jquery-ui-1.8.4.custom.css" />
+        <script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/jquery/js/jquery.mim.js"></script>
+        <script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/jquery/js/jquery.dataTables.min.js"></script>
+ <script type="text/javascript">
+            $(document).ready(function() {
+                oTable = $('#example').dataTable({
+                    "bPaginate": true,
+                    "bJQueryUI": true,
+                    "sPaginationType": "full_numbers",
+                    "bSort": false,
+                    "oLanguage": {
+                   "sLengthMenu": "<br>Escolhe um cliente para cadastrar o dependente"
+                  }
+                });
+            });
+        </script>
+
 <?php
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
@@ -10,6 +27,7 @@ class Dependente extends CI_Controller {
         $this->load->helpers('url');
         $this->load->helper('form');
         $this->load->model('dependente_model');
+        $this->load->model('cliente_model');
         $this->load->library('form_validation');
         $this->load->library('table');
 
@@ -125,5 +143,9 @@ class Dependente extends CI_Controller {
         }
     }
 
+    
+    
+    
+    
 }
 ?>

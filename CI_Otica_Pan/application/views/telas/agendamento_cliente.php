@@ -1,4 +1,5 @@
 <?php
+echo"<div class=formulario style='  margin-left: 40px; width: 400px;  padding: 2px 2px 2px;  border-radius: 3px;'>";
 echo"<h2>$titulo</h2>";//TITULO
 //Exime mensagem de agendamento do cliente Javascript
 if ($this->session->flashdata('msg')) {
@@ -34,12 +35,13 @@ if ($id_cliente != null) {
         $dependentes = $this->dependente_model->listarDependentes($id_cliente); //Resgata os dependentes do cliente
         ?>
 
-
+        <fieldset>
+        <legend>Dados Pessoais:</legend>
         <form method="POST" action=<? echo base_url('agendamento/cadastrarAgendamento') ?>/>
         <input type="hidden" name="idCliente" value='<? echo $cliente['cliente']->id; ?>' />
         <table><tr>
-                <td>Data:</td><td><input type="text" name="data" value="<? echo $dia . '/' . $mesCalendario . '/' . $anoCalendario ?>" /></td></tr><tr>
-                <td>Horário:</td><td><input type="text" name="horario" value="" autofocus /></td></tr><tr>
+                <td>Data:</td><td><input type="date" name="data" value="<? echo $anoCalendario . '-' . $mesCalendario . '-' . $dia ?>" min="<? echo date('Y-m-d') ?>" title="É necessário escolher uma data para este agendamento a partir da data atual." required /></td></tr><tr>
+                <td>Horário:</td><td><input type="time" name="horario" value="" autofocus required title="É necessário escolher um horário para este agendamento entre 08:00h e 19:30h." min="08:00" max="19:30" /></td></tr><tr>
                 <td>Nome:</td><td><input type="text" name="nome" value='<? echo $cliente['pessoa']->nome; ?>' disabled/></td></tr><tr>
                 <td>CPF:</td><td><input type="text" name="cpf" value="<? echo $cliente['cliente']->cpf; ?>" disabled /></td></tr><tr>
 
@@ -63,7 +65,9 @@ if ($id_cliente != null) {
             </tr>
         </table>
         </form>
+        </fildset>
 
         <?
+        echo"</div>";
     }
 ?>

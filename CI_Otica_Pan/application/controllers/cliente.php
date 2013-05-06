@@ -39,7 +39,7 @@ class Cliente extends CI_Controller {
 
         $dados = Array(
             'pagina' => 'adiciona_cliente',
-            'titulo' => 'Cadastrar Cliente'
+            'titulo' => 'Cadastro de Cliente'
         );
 
         $this->load->view('Principal', $dados);
@@ -50,7 +50,7 @@ class Cliente extends CI_Controller {
         $this->form_validation->set_rules('nome', 'NOME', 'trim|required|max_length[100]|ucwords');
         $this->form_validation->set_rules('email', 'EMAIL', 'trim|max_length[100]|strtolower|valid_email');
         $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|max_length[15]|valid_cpf|is_unique[cliente.cpf]');
-        $this->form_validation->set_rules('data_nascimento', 'Data Nascimento', 'trim|valid_date');
+        $this->form_validation->set_rules('data_nascimento', 'Data Nascimento', 'trim');
         $this->form_validation->set_rules('num_telefone1', 'Telefone Residencial', 'trim|min_length[14]|max_length[15]');
         $this->form_validation->set_rules('num_telefone2', 'Telefone Celular', 'trim|min_length[14]|max_length[15]');
         $this->form_validation->set_rules('rua', 'RUA', 'trim|max_length[80]');

@@ -27,7 +27,7 @@ if ($mes == null) {
         $this->table->set_template($tmpl);
     } else {
         
-        $this->table->set_heading('Data', 'Horário', 'Nome','Cliente','Consultar');
+        $this->table->set_heading('Data', 'Horário', 'Nome','Cliente','Faltou','Dados da Consulta');
         
         foreach ($horarioAgendamento as $linha) {
             
@@ -41,8 +41,12 @@ if ($mes == null) {
                 $strCliente="<img src=../../../../../../../../../CI_otica_pan/public/img/true.png width=18>";
             }
           
-           
-                $this->table->add_row($this->util->data_mysql_para_user($linha->data_consulta), $linha->horario_consulta, $nome,"<center>".$strCliente."</center>", "<center><img src=../../../../../../../../../CI_otica_pan/public/img/ConsultaMedica.png width=23></center>");
+           if($linha->status=="Faltou"){
+               $faltou = "CHECKED";
+             }else{
+                 $faltou=" ";
+             }
+                $this->table->add_row($this->util->data_mysql_para_user($linha->data_consulta), $linha->horario_consulta, $nome,"<center>".$strCliente."</center>","<center><input type='checkbox' name='a' id=".$linha->id_agendamento." value='ON' ".$faltou." onClick=\"MarcarFalta('".$linha->id_agendamento."','".base_url('consulta/atualizarAgendamento')."');\"/></center>","<center><img src=../../../../../../../../../CI_otica_pan/public/img/ConsultaMedica.png width=23></center>");
             
             }
           
@@ -55,5 +59,8 @@ echo"<div class='tabela'>";
 $this->table->set_template($tmpl);
 echo $this->table->generate();
 echo"</div>";
-?>
 
+
+?>
+<div id="foo"></div>
+</form>

@@ -9,26 +9,35 @@ if($this->session->flashdata('cadastrook')){
     echo "<body onLoad=\" alert('$msg');\">";
 }
 
-?>
-        Pesquisa Cliente: <input type="text" name="nome" onKeyDown="ocultaFormDependente();" onKeyUp="carregaAjax('pesquisaDinamica', '<? echo base_url('dependente/pesquisaDinamica') ?>/' + this.value)" autofocus autocomplete="off">
-        <?
-           echo "<br><br><div id='pesquisaDinamica' style='display:none;'>"; 
+$clientes = $this->cliente_model->listarClientes('')->result();
+
+$this->table->set_heading('NOME','CPF','EMAIL','TELEFONE');
+foreach ($clientes as $linha) {
+
+    $nomeReduzido = (explode(" ",$linha->nome));
+          
+   if(sizeof($nomeReduzido)>3){
+       $nomeReduzido = $nomeReduzido[0].' '.$nomeReduzido[1].' '.$nomeReduzido[sizeof($nomeReduzido)-1];
+   }else{
+       $nomeReduzido = $linha->nome;
+   }
     
+    $this->table->add_row($nomeReduzido, $linha->cpf, $linha->email, $linha->num_telefone);
+}
 
-    echo "</div>";
+$tmpl = array(
+    'table_open'=>'<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">',
+    'row_start' => '<tr class="alt">',
+    'row_alt_start' => '<tr class="alt">',
+      );
 
-    if(validation_errors()==''){
-        
-         echo "<div id='formDependente'  style='display:none;'";
-        
-    }  else {
-        
-         echo "<div id='formDependente'  style='display:block;'";
-    }
-        
-
-
-    ?>
+echo"<div class='tabela'>";
+$this->table->set_template($tmpl);
+echo $this->table->generate();
+echo"</div>";
+?>
+ 
+      
     <form></form>
 
     <form method="POST" action=<? echo base_url('dependente/cadastrarDependente') ?>/>
@@ -44,9 +53,7 @@ if($this->session->flashdata('cadastrook')){
     </table>
     </form>
 
-    <?
- echo"</div>";
-?>
+
 
 
 

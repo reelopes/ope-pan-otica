@@ -25,7 +25,7 @@ class Cliente_model extends CI_Model {
             //Trata os elemenos
             $cliente = array(
                 'cpf' => element('cpf', $dados),
-                'data_nascimento' => $this->util->data_user_para_mysql(element('data_nascimento', $dados)),
+                'data_nascimento' =>element('data_nascimento', $dados),
                 'id_pessoa' => $id_pessoa,
             );
             

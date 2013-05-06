@@ -68,8 +68,17 @@ function MascaraData(data){
 function MascaraTelefone(tel){	
 	if(mascaraInteiro(tel)==false){
 		event.returnValue = false;
-	}	
+	}
+                
+        exp = /\-|\.|\/|\(|\)|\,|\:| /g
+	campoSoNumeros = tel.value.toString().replace( exp, "" ); 
+               
+        
+        if(campoSoNumeros.length===11){
+        return formataCampo(tel, '(00) 00000-0000', event);
+        }else{
 	return formataCampo(tel, '(00) 0000-0000', event);
+        }
 }
 
 //cria mascara para Reais

@@ -9,10 +9,10 @@ legend{
 }
 
 .formulario {
-  margin-left: 40px;
-  width: 800px;
-  padding: 2px 2px 2px;
-  border-radius: 3px;
+margin-left: 40px;
+width: 800px;  
+padding: 2px 2px 2px;  
+border-radius: 3px;
  
 }
 .formulario:before {
@@ -63,22 +63,25 @@ legend{
   text-decoration: underline;
 }
 
-:-moz-placeholder {
+:-moz-placeholder,input[type=date]:out-of-range{
   color: #c9c9c9 !important;
   font-size: 13px;
 }
 
-::-webkit-input-placeholder {
+::-webkit-input-placeholder,input[type=date]:out-of-range {
   color: #ccc;
   font-size: 13px;
 }
+
+
+
 
 input {
   font-family: "Lucida Grande", Tahoma, Verdana, sans-serif;
   font-size: 14px;
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password],input[type=date],input[type=time] {
   margin: 5px;
   padding: 0 10px;
   height: 30px;
@@ -108,7 +111,7 @@ select{
 }
     
 
-input[type=text]:focus, input[type=password]:focus {
+input[type=text]:focus, input[type=password]:focus,input:focus,select:focus {
   border-color: #7dc9e2;
   outline-color: #dceefc;
   outline-offset: 0;

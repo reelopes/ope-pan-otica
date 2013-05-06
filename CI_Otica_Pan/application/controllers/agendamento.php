@@ -1,4 +1,4 @@
-<script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/js/agendamento.js"></script> 
+        <script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/js/agendamento.js"></script> 
         <link rel="stylesheet" href="../../../../../../../../../CI_otica_pan/public/jquery/agendamento/estilo/table_jui.css" />
         <link rel="stylesheet" href="../../../../../../../../../CI_otica_pan/public/jquery/agendamento/estilo/jquery-ui-1.8.4.custom.css" />
         <script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/jquery/agendamento/js/jquery.mim.js"></script>
@@ -8,7 +8,23 @@
                 oTable = $('#example').dataTable({
                     "bPaginate": true,
                     "bJQueryUI": true,
-                    "sPaginationType": "full_numbers"
+                    "sPaginationType": "full_numbers",
+                    "oLanguage": {
+                   "sLengthMenu": "<br>Escolha o cliente a ser agendado"
+                  }
+                });
+            });
+        </script>
+                <script type="text/javascript">
+            $(document).ready(function() {
+                oTable = $('#example1').dataTable({
+                    "bPaginate": true,
+                    "bJQueryUI": true,
+                    "sPaginationType": "full_numbers",
+                                     "oLanguage": {
+                   "sLengthMenu": "<br>Lista de clientes Agendados para a data escolhida"
+                  }
+                   
                 });
             });
         </script>

@@ -91,25 +91,25 @@ foreach ($clientes as $linha) {
     $horarioAgendamento = $horarioAgendamento; //Boa pratica esse dado vem da controller
 
     if ($horarioAgendamento == null) {
-
-        $this->table->add_row('Não há horários agendados para este dia.');
-        $tmpl = array('table_open' => '<table border="0" cellpadding="2" width="100%" cellspacing="1" class="mytable">');
+        $this->table->set_heading('Data', 'Horário', 'Nome', 'CPF', 'E-mail','Cliente');
+        
+        $tmpl = array('table_open' => '<table cellpadding="0" cellspacing="0" border="0" class="display" id="example1">');
         $this->table->set_template($tmpl);
     } else {
         if ($anoCalendario . $mesCalendario . $diaCalendario >= date('Y') . date('m') . date('d')) {
-        $this->table->set_heading('Data', 'Horário', 'Nome', 'CPF', 'E-mail','Dependente','Excluir');
+        $this->table->set_heading('Data', 'Horário', 'Nome', 'CPF', 'E-mail','Cliente','Excluir');
         }else{
-            $this->table->set_heading('Data', 'Horário', 'Nome', 'CPF', 'E-mail','Dependente');
+            $this->table->set_heading('Data', 'Horário', 'Nome', 'CPF', 'E-mail','Cliente');
         }
         foreach ($horarioAgendamento as $linha) {
             
                      
             if($linha->id_dependente==NULL){
                 $nome = $linha->nome_cliente;
-                $strDependente="N";
+                $strDependente="S";
             }else{
                 $nome = $linha->nome_dependente;
-                $strDependente="S";
+                $strDependente="N";
             }
             
             if ($anoCalendario . $mesCalendario . $diaCalendario >= date('Y') . date('m') . date('d')) {
@@ -119,14 +119,16 @@ foreach ($clientes as $linha) {
             }
         }
         $tmpl = array(
-            'table_open' => '<table border="1" cellpadding="2" width="100%" cellspacing="1" class="listholover">',
-            'row_start' => '<tr class="alt">',
-            'row_alt_start' => '<tr class="alt">',
+            'table_open' => '<table cellpadding="0" cellspacing="0" border="0" class="display" id="example1">',
+            'row_start' => '<tr>',
+            'row_alt_start' => '<tr>',
         );
         $this->table->set_template($tmpl);
     }
-
+        
+    echo"<div class='tabela'>";
+    
     echo $this->table->generate();
-
+    echo"</div>";
 
 ?>
