@@ -1,7 +1,7 @@
 <?php
 
 
-echo"<div class=formulario>";
+echo"<div class=formulario style='  margin-left: 40px; width: 700px;  padding: 2px 2px 2px;  border-radius: 3px;'>";
 echo"<h2>$titulo</h2>";
 
 $id_cliente = $this->uri->segment(3);
@@ -66,32 +66,32 @@ echo"<table>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Nome');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'nome'),  set_value('nome',$query['pessoa']->nome),'maxlength="100" autocomplete ="off" placeholder="Nome Completo do Cliete" autofocus style="width:300px;"');
+echo form_input(array('name'=>'nome'),  set_value('nome',$query['pessoa']->nome),'maxlength="100" autocomplete ="off" placeholder="Nome Completo do Cliete" required title="Campo nome é obrigatório" style="width:300px;"');
 echo form_error('nome');
 echo"</td></tr>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Email');
 echo"</td><td>";//Essa linha pode remover
-echo form_input(array('name'=>'email'),set_value('email',$query['pessoa']->email),'maxlength="100" autocomplete ="off" placeholder="exemplo@exemplo.com.br" style="width:300px;"');
+echo form_type(array('name'=>'email'),set_value('email',$query['pessoa']->email),'maxlength="100" autocomplete ="off" placeholder="exemplo@exemplo.com.br" style="width:300px;"','email');
 echo form_error('email');
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('CPF');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'cpf'),  set_value('cpf',$query['cliente']->cpf),'maxlength="14" autocomplete ="off" placeholder="XXX.XXX.XXX-XX" OnKeyPress="MascaraCPF(this)"');
+echo form_input(array('name'=>'cpf'),  set_value('cpf',$query['cliente']->cpf),'maxlength="14" autocomplete ="off" placeholder="XXX.XXX.XXX-XX" OnKeyPress="MascaraCPF(this)" pattern="^(\d{3}\.\d{3}\.\d{3}-\d{2})|(\d{11})$" required title="Campo CPF é obrigatório e deve ser digitado no formato (000.000.000-00)"');
 echo form_error('cpf');
 echo"</td></tr>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Data Nascimento');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'data_nascimento'),  set_value('data_nascimento',$this->util->data_mysql_para_user($query['cliente']->data_nascimento)),'maxlength="10" autocomplete ="off" placeholder="DD/MM/AAAA" OnKeyPress="MascaraData(this)"');
+echo form_type(array('name'=>'data_nascimento'),  set_value('data_nascimento',$query['cliente']->data_nascimento),'maxlength="10" autocomplete ="off" min="1900-01-01" max="'.date('Y-m-d').'"','date');
 echo form_error('data_nascimento');
 echo"</td></tr>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Telefone Residencial');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'num_telefone1'),  set_value('num_telefone1',$query['telefone'][0]->num_telefone),'maxlength="14" autocomplete ="off" placeholder="(XX)XXXX-XXXX" OnKeyPress="MascaraTelefone(this)"');
+echo form_input(array('name'=>'num_telefone1'),  set_value('num_telefone1',$query['telefone'][0]->num_telefone),'maxlength="14" autocomplete ="off" placeholder="(XX) XXXX-XXXX" OnKeyPress="MascaraTelefone(this)" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4}" title="Campo Telefone deve ser digitado no formato (XX) XXXXX-XXXX"');
 echo form_label('Telefone Celular');
-echo form_input(array('name'=>'num_telefone2'),  set_value('num_telefone2',$query['telefone'][1]->num_telefone),'maxlength="15" autocomplete ="off" placeholder="(XX)XXXX-XXXXX" OnKeyPress="MascaraTelefone(this)"');
+echo form_input(array('name'=>'num_telefone2'),  set_value('num_telefone2',$query['telefone'][1]->num_telefone),'maxlength="15" autocomplete ="off" placeholder="(XX) XXXX-XXXXX" OnKeyPress="MascaraTelefone(this)" onChange="MascaraTelefone(this)" pattern="\([0-9]{2}\)[\s][0-9]{4,5}-[0-9]{4}" title="Campo Telefone deve ser digitado no formato (XX) XXXXXX-XXXX"');
 echo"</td></tr>";//Essa linha pode remover
 echo"</table>";
 echo form_error('num_telefone1');
@@ -127,7 +127,7 @@ echo"</td></tr>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('CEP');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'cep'),  set_value('cep',$query['endereco']->cep),'maxlength="9" autocomplete ="off" placeholder="XXXXX-XXX" OnKeyPress="MascaraCep(this)"');
+echo form_input(array('name'=>'cep'),  set_value('cep',$query['endereco']->cep),'maxlength="9" autocomplete ="off" placeholder="XXXXX-XXX" OnKeyPress="MascaraCep(this)"  pattern="\d{5}-?\d{3}" title="Campo CEP deve ser digitado no formato XXXXX-XXX"');
 echo form_error('Cep');
 echo"</td></tr>";//Essa linha pode remover
 

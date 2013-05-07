@@ -81,7 +81,7 @@ input {
   font-size: 14px;
 }
 
-input[type=text], input[type=password],input[type=date],input[type=time] {
+input[type=text], input[type=password],input[type=date],input[type=time],input[type=email] {
   margin: 5px;
   padding: 0 10px;
   height: 30px;
@@ -117,7 +117,7 @@ input[type=text]:focus, input[type=password]:focus,input:focus,select:focus {
   outline-offset: 0;
 }
 
-input[type=submit] {
+input[type=submit],input[type=button] {
   padding: 0 18px;
   height: 29px;
   font-size: 12px;
@@ -139,7 +139,7 @@ input[type=submit] {
   -webkit-box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.15);
 }
-input[type=submit]:active {
+input[type=submit]:active,input[type=button]:active {
   background: #cde5ef;
   border-color: #9eb9c2 #b3c0c8 #b4ccce;
   -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
@@ -181,6 +181,10 @@ input[type=submit]:active {
 .iconesPrincipal a:hover {
 	color:#E00;
 }
+.iconesPrincipal a {
+	text-decoration:none;
+}
+ 
 
     #logo {
 	position: absolute;
@@ -208,3 +212,50 @@ input[type=submit]:active {
 }
 
 
+#icone_desbotado{
+    border-radius:5px;
+    opacity:0.5 ;-moz-transition:0.5s;
+    -ms-transition:0.5s;
+    -o-transition:0.5s;
+    -webkit-transition:0.5s;
+   
+}
+#icone_desbotado a:hover{
+    color:red;
+}
+
+#icone_desbotado:hover{
+    opacity:1;
+    -moz-transition:0.5s;
+    -ms-transition:0.5s;
+    -o-transition:0.5s;
+    -webkit-transition:0.5s;
+     
+}
+#icone_desbotado img{
+    border:0;
+    color:red;
+}
+#icone_desbotado a{
+    border:0;
+    text-decoration:none;
+    
+    
+}
+#icone_desativado{
+    border-radius:5px;
+    opacity:0.5 ;-moz-transition:0.5s;
+    -ms-transition:0.5s;
+    -o-transition:0.5s;
+    -webkit-transition:0.5s;
+    
+}
+
+#icone_desativado img{
+    border:0;
+}
+#icone_desativado a{
+    border:0;
+    text-decoration:none;
+    
+}

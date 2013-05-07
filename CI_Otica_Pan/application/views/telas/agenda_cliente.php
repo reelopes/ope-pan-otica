@@ -43,7 +43,7 @@ echo $this->calendar->generate($anoCalendario, $mesCalendario, $dados);
 echo "</div>";
 $diaCalendario = $this->uri->segment(5); //Captura o dia do mes que o usuario escolheu no calendario
 
-    echo "<div style='float:left; margin-left:80px;'}>";
+    echo "<div style='float:left; margin-left:80px; padding: 30px 20px 0px;'}>";
 
     $diaSemana_url = date("w", mktime(0, 0, 0, $mesCalendario, $dia, $anoCalendario)); //Captura o dia da semana que vem na URL (ex: 0 Domingo, 1 Segunda 2 terça ...
 //Verifica se a data escolhida é menor que a data atual se for não deixa adicionar cliente
@@ -53,7 +53,7 @@ $diaCalendario = $this->uri->segment(5); //Captura o dia do mes que o usuario es
     $clientes = $this->cliente_model->listarClientes('')->result();
     
     ?>
-        <br>
+        
 <div class='tabela'>
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
 <thead>

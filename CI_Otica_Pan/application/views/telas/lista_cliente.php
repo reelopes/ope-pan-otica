@@ -1,7 +1,7 @@
 
 <?php
 
-echo"<div class=formulario>";
+echo"<div class=formulario style='  margin-left: 40px; float:left; width: 650px;  padding: 2px 2px 0px;  border-radius: 3px;'>";
 echo"<h2>$titulo</h2>";
 $id_cliente = $this->uri->segment(3);
 
@@ -120,51 +120,43 @@ echo form_error('cep');
 echo"</td></tr>";//Essa linha pode remover
 echo"</table>"; //Essa linha pode remover
 echo"</fieldset>";
+
+echo'<img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" onClick="history.go(-1)" title="Voltar" />';
 echo"</div>";
+
+
+ echo "<div style='float:left; margin-left:10px; padding: 90px 0px 0px;'}>";
 $dependentes = $this->dependente_model->listarDependentes($id_cliente);
+
     
-echo "<h3>Dependentes</h3>";
+
+
 if($dependentes==NULL){
-
-    echo"Este cliente não possui dependentes!";
-}else {
-    
-
 ?>
-
+            <table border="0" id="icone_desativado">
+        <td align="center">
+            <? echo"<img src='".base_url('public/img/dependente.png')."' title='Não possui Dependentes'>" ?>
+             <p>Não possui Dependentes</p>
+            </a>
+        </td>
+        </tr>
+        </table>
+        
+ <?
+}else {
+    ?>
+        <table border="0"  id="icone_desbotado">
+        <td align="center">
+            <? echo"<a href=\"javascript:abrirPopUp('".base_url('dependente/listarDependentes/'.$id_cliente)."','500','350');\" title='Listar Dependentes'><img src='".base_url('public/img/dependente.png')."' title='Listar Dependentes'>"; ?>
+             <p>Listar Dependentes</p>
+            </a>
+        </td>
+        </tr>
+        </table>
     
-
-<table border="1" width="100%"  class="listholover">
-    <tr class="cabecalhoTabela">
-        <td>NOME</td>
-        <td>DATA DE NASCIMENTO</td>
-        <td>RESPONSÁVEL</td>
-        <td>EDITAR</td>
-        <td>EXCLUIR</td>
-    </tr>
-
-<?
-
-
-
-foreach ($dependentes as $linha) {
-    
-    
-    
-         echo "<tr class='alt'>
-        <td>$linha->nome</td>
-        <td>".$this->util->data_mysql_para_user($linha->data_nascimento)."</td>
-        <td>$linha->responsavel</td>
-        <td><a href=\"javascript:abrirPopUp('".base_url('dependente/atualizarDependente/'.$linha->id_dependente)."','500','300');\"><center>Editar</center></a></td>
-        <td>".anchor('dependente/deletarDependente/'.$id_cliente.'/'.$linha->id_dependente,'<center>Excluir</center>','onclick="if (! confirm(\'Tem certeza que deseja excluir o dependente abaixo? \n\n Nome: '.$linha->nome.'\n Data de Nascimento: '.$this->util->data_mysql_para_user($linha->data_nascimento).'\n Responsável: '.$linha->responsavel.'\')) { return false; }"')."</td>
-            
-</tr>";
+    <?
     
     
-} 
 }
-
-
-
-
+echo"</div>";
 ?>

@@ -12,17 +12,21 @@ class Dependente_model extends CI_Model {
             //Trata os elementos de Dependente
             $dependente = array(
                 'nome' => element('nomeDependente', $dados),
-                'data_nascimento' => $this->util->data_user_para_mysql(element('dataNascimentoDependente', $dados)),
+                'data_nascimento' => element('dataNascimentoDependente', $dados),
                 'responsavel' => element('responsavelDependente', $dados),
                 'id_cliente' => element('idCliente', $dados),
             );
             $this->db->insert('dependente', $dependente); //insere no BD
 
-            $this->db->trans_complete();
+            if($this->db->trans_complete())
 
-            $this->session->set_flashdata('cadastrook', 'Cadastro efetuado com sucesso'); //Adiciona na sessão temporaria o status do cadastro
-            redirect('dependente');
-        }
+            $this->session->set_flashdata('msgOk', 'Cadastro efetuado com sucesso'); //Adiciona na sessão temporaria o status do cadastro
+            }else{
+            $this->session->set_flashdata('msg', 'Erro ao cadastrar dependente'); //Adiciona na sessão temporaria o status do cadastro
+
+            }
+            redirect(current_url());
+        
     }
 
     public function listarDependentes($id_cliente=NULL) {

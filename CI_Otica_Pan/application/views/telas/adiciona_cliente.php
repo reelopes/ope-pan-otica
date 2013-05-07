@@ -60,7 +60,7 @@ echo"</td></tr>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Email');
 echo"</td><td>";//Essa linha pode remover
-echo form_input(array('name'=>'email'),set_value('email'),'maxlength="100" autocomplete ="off" placeholder="exemplo@exemplo.com.br" style="width:300px;"');
+echo form_type(array('name'=>'email'),set_value('email'),'maxlength="100" autocomplete ="off" placeholder="exemplo@exemplo.com.br" style="width:300px;"','email');
 echo form_error('email');
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('CPF');

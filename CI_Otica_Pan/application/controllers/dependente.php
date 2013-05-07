@@ -15,6 +15,15 @@
                 });
             });
         </script>
+         <script type="text/javascript">
+            $(document).ready(function() {
+                oTable = $('#lista_dependentes_table1').dataTable({
+                    "bPaginate": true,
+                    "bJQueryUI": true,
+                    "sPaginationType": "full_numbers",
+                });
+            });
+        </script>
 
 <?php
 if (!defined('BASEPATH'))
@@ -37,8 +46,8 @@ class Dependente extends CI_Controller {
     public function index() {
 
         $dados = Array(
-            'pagina' => 'adiciona_dependente',
-            'titulo' => 'Cadastrar Dependente'
+            'pagina' => 'lista_responsavel',
+            'titulo' => 'Cadastro de Dependente',
         );
 
         $this->load->view('Principal', $dados);
@@ -62,7 +71,7 @@ class Dependente extends CI_Controller {
         }
 
         $dados = array(
-            'titulo' => 'Altera dados do dependente',
+            'titulo' => 'Alterar dados do dependente',
             'pagina' => 'altera_dependente',
         );
 
@@ -104,47 +113,22 @@ class Dependente extends CI_Controller {
                 'pagina' => 'adiciona_dependente',
             );
 
-            $this->load->view('Principal', $dados);
+            $this->load->view('Principal_popup', $dados);
         }
     }
 
-    public function pesquisaDinamica() {
+   public function listarDependentes() {
 
-        $pesquisaCliente = $this->uri->segment(3); //Captura o ano da URL
-        $this->load->model('cliente_model');
+        $dados = Array(
+            'pagina' => 'lista_dependentes',
+            'titulo' => 'Lista de Dependentes',
+        );
 
-        $clientes = $this->cliente_model->listarClientes($pesquisaCliente, '3')->result();
 
 
-        if ($clientes == NULL) {
-            echo"Sua pesquisa não encontrou nenhum dado correspondente.";
-        } else {
 
-            echo"
-          <table border='1' cellpadding='2' cellspacing='1' class = 'pesquisaDinamica'>
-          <tr>
-          <th>Nome</th>
-          <th>Cpf</th>
-          <th>E-mail</th>
-          </tr>
-          
-          ";
-            foreach ($clientes as $linha) {
-
-                echo"
-        <tr class=\"alt\" ONCLICK=\"populaResponsavel('$linha->id_cliente','$linha->nome','$linha->cpf');\" style=\"cursor: hand;\">
-        <td>$linha->nome</td>
-        <td>$linha->cpf</td>
-        <td>$linha->email</td>
-        </tr>
-        ";
-            }
-            echo "</table>";
-        }
-    }
-
-    
-    
+        $this->load->view('Principal_popup', $dados);
+    }   
     
     
 }
