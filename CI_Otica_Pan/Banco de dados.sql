@@ -28,18 +28,43 @@ CREATE TABLE `agendamento` (
   KEY `id_dependente` (`id_dependente`),
   CONSTRAINT `agendamento_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`),
   CONSTRAINT `agendamento_ibfk_2` FOREIGN KEY (`id_dependente`) REFERENCES `dependente` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 /*
 Table data for otica_pan.agendamento
 */
 
 INSERT INTO `agendamento` VALUES 
-('2013-04-24','08:00',1,8,NULL,'Pendente'),
-('2013-04-24','08:30',3,8,1,'Pendente'),
-('2013-04-30','08:00',4,8,NULL,'Pendente'),
-('2013-04-29','10:00',6,8,1,'Pendente'),
-('2013-04-30','09:00',8,200,NULL,'Pendente');
+('2013-04-24','08:00',1,8,NULL,'Faltou'),
+('2013-04-24','08:30',3,8,1,'Faltou'),
+('2013-04-30','08:00',4,8,NULL,'Faltou'),
+('2013-04-29','10:00',6,8,1,'Faltou'),
+('2013-04-30','09:00',8,200,NULL,'Faltou'),
+('2013-04-30','18:00',9,200,NULL,'Faltou'),
+('2013-04-29','08:00',10,204,NULL,'Faltou'),
+('2013-04-29','18:00',11,212,NULL,'Faltou'),
+('2013-04-29','09:00',12,203,NULL,'Faltou'),
+('2013-05-24','08:00',13,203,NULL,'Pendente'),
+('2013-05-24','18:00',14,207,NULL,'Pendente'),
+('2013-05-02','08:00',15,8,2,'Faltou'),
+('2013-05-01','16:00',16,8,NULL,'Faltou'),
+('2013-05-09','08:00',17,8,2,'Pendente'),
+('2013-05-09','09:00',18,8,NULL,'Pendente'),
+('2013-05-06','13:00',20,8,2,'Faltou'),
+('2013-05-05','20:00',21,603,NULL,'Faltou'),
+('2013-05-20','08:00',22,603,NULL,'Pendente'),
+('2013-05-20','17:31',23,204,NULL,'Pendente'),
+('2013-05-25','08:00',24,200,NULL,'Pendente'),
+('2013-05-31','08:00',25,200,NULL,'Pendente'),
+('2013-05-31','19:30',26,200,NULL,'Pendente'),
+('2013-05-06','11:00',27,204,NULL,'Faltou'),
+('2013-05-06','14:00',28,204,NULL,'Faltou'),
+('2013-05-06','10:20',29,282,NULL,'Faltou'),
+('2013-05-06','16:00',30,212,NULL,'Faltou'),
+('2013-05-06','17:30',31,512,NULL,'Pendente'),
+('2013-05-07','08:00',32,8,NULL,'Pendente'),
+('2013-05-07','09:00',33,8,1,'Pendente'),
+('2013-05-07','08:30',34,200,NULL,'Pendente');
 
 /*
 Table structure for armacao
@@ -101,7 +126,7 @@ CREATE TABLE `cliente` (
   PRIMARY KEY (`id`),
   KEY `id_pessoa` (`id_pessoa`),
   CONSTRAINT `cliente_ibfk_2` FOREIGN KEY (`id_pessoa`) REFERENCES `pessoa` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=600 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=605 DEFAULT CHARSET=utf8;
 
 /*
 Table data for otica_pan.cliente
@@ -112,7 +137,7 @@ INSERT INTO `cliente` VALUES
 ('391.505.488-75','1993-06-28',9,11),
 ('406.762.338-05','1992-01-06',10,18),
 ('125.602.153-90','2013-04-21',11,19),
-('990.000.711-51','1959-03-21',200,24262),
+('990.000.711-51','1960-03-22',200,24262),
 ('990.001.831-11','1959-05-14',203,24265),
 ('990.000.384-56','1959-06-01',204,24266),
 ('990.001.393-09','1959-07-25',207,24269),
@@ -121,7 +146,6 @@ INSERT INTO `cliente` VALUES
 ('990.001.328-00','1960-05-08',223,24285),
 ('990.001.432-41','1960-07-01',226,24288),
 ('990.000.302-00','1960-09-11',230,24292),
-('990.000.683-63','1961-01-15',237,24299),
 ('990.000.109-50','1961-02-02',238,24300),
 ('990.000.685-25','1961-07-14',247,24309),
 ('990.000.952-55','1961-08-01',248,24310),
@@ -314,7 +338,11 @@ INSERT INTO `cliente` VALUES
 ('990.000.978-94','1978-09-25',596,24658),
 ('990.000.801-42','1978-10-13',597,24659),
 ('990.000.190-79','1978-10-31',598,24660),
-('990.002.055-30','1978-11-18',599,24661);
+('990.002.055-30','1978-11-18',599,24661),
+('848.681.715-34','1950-10-10',600,24663),
+('275.451.554-24','2013-04-28',601,24664),
+('710.263.843-46','1900-10-10',602,24665),
+('657.028.283-21','1992-05-18',603,24666);
 
 /*
 Table structure for consulta
@@ -350,7 +378,7 @@ CREATE TABLE `dependente` (
   KEY `id` (`id`),
   KEY `dependente_ibfk_1` (`id_cliente`),
   CONSTRAINT `dependente_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 /*
 Table data for otica_pan.dependente
@@ -358,9 +386,11 @@ Table data for otica_pan.dependente
 
 INSERT INTO `dependente` VALUES 
 ('2000-01-01','Ana Júlia Nascimento','Sobrinha',1,8),
-('1990-01-01','Bruno','0',2,8),
+('1991-01-01','Bruno','teste',2,8),
 ('2000-01-22','Julia','Irmã',3,11),
-(NULL,'Teste','0',4,8);
+('1990-01-01','Teste','teste',4,8),
+('1992-01-06','Pedro','Filho',5,8),
+('2000-01-01','Kauane','Noiva',7,8);
 
 /*
 Table structure for diagnostico
@@ -393,7 +423,7 @@ CREATE TABLE `endereco` (
   PRIMARY KEY (`id`),
   KEY `id_cliente` (`id_cliente`),
   CONSTRAINT `endereco_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=502 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=507 DEFAULT CHARSET=utf8;
 
 /*
 Table data for otica_pan.endereco
@@ -404,8 +434,8 @@ INSERT INTO `endereco` VALUES
 ('Perdizes','04110-000','Taboão da Serra','Casa','SP',8,'Rua da Lavoura, 999',9),
 ('Vila da Saúde','04183-444','São Paulo','Ap. 17','SP',9,'Rua Fiação da Saúde, 580',10),
 ('0','0','0','0','SP',10,'0',11),
-(NULL,NULL,NULL,NULL,NULL,161,'',200),
-(NULL,NULL,NULL,NULL,NULL,163,'',203),
+('','','','','SP',161,'',200),
+('','','','','SP',163,'',203),
 (NULL,NULL,NULL,NULL,NULL,164,'',204),
 (NULL,NULL,NULL,NULL,NULL,167,'',207),
 (NULL,NULL,NULL,NULL,NULL,170,'',212),
@@ -413,8 +443,7 @@ INSERT INTO `endereco` VALUES
 (NULL,NULL,NULL,NULL,NULL,177,'',223),
 (NULL,NULL,NULL,NULL,NULL,180,'',226),
 (NULL,NULL,NULL,NULL,NULL,184,'',230),
-(NULL,NULL,NULL,NULL,NULL,188,'',237),
-(NULL,NULL,NULL,NULL,NULL,189,'',238),
+('','','','','AC',189,'',238),
 (NULL,NULL,NULL,NULL,NULL,196,'',247),
 (NULL,NULL,NULL,NULL,NULL,197,'',248),
 (NULL,NULL,NULL,NULL,NULL,198,'',249),
@@ -606,7 +635,11 @@ INSERT INTO `endereco` VALUES
 (NULL,NULL,NULL,NULL,NULL,498,'',596),
 (NULL,NULL,NULL,NULL,NULL,499,'',597),
 (NULL,NULL,NULL,NULL,NULL,500,'',598),
-(NULL,NULL,NULL,NULL,NULL,501,'',599);
+(NULL,NULL,NULL,NULL,NULL,501,'',599),
+('Vila Carmela','07859-180','São Paulo','Ap11','SP',502,'Av Paulista, 200',600),
+('Vila Carmela','07859-180','Franco da Rocha','Casa','SP',503,'Rua Guaratinguetá, 70',601),
+('Alencar','2','Campinas','Casa','SP',504,'Rua da Margarita, 300',602),
+('Vila Clemente','33333-333','Francisco Morato','2b','SP',505,'Rua da Lavoura, 200',603);
 
 /*
 Table structure for fornecedor
@@ -772,7 +805,7 @@ CREATE TABLE `pessoa` (
   `nome` varchar(100) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24662 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24668 DEFAULT CHARSET=utf8;
 
 /*
 Table data for otica_pan.pessoa
@@ -789,7 +822,7 @@ INSERT INTO `pessoa` VALUES
 ('ree@gmail.com','Renan Lopes',18),
 ('eduardo.pereira@gmail.com','Eduardo Pereira',19),
 ('lindo@ema.com','Eduardo Lindo',20),
-('andrehenrique_psicologia@hotmail.com','Andre Henrique Ribeiro Pinto',24262),
+('andre.henrique.ribeiro@gmail.com','Andre Henrique Ribeiro Pinto',24262),
 ('andrea_benetton@hotmail.it','Andrea Benetton',24265),
 ('agloriajuris@hotmail.com','Andrea da Gloria Fonseca',24266),
 ('ambiental@hotmail.com','Andrea Melo',24269),
@@ -798,7 +831,6 @@ INSERT INTO `pessoa` VALUES
 ('andreza.fpassos@gmail.com','Andreza ',24285),
 ('anneti.mota@hotmail.com','Aneti Mota Fran',24288),
 ('angela_grober@hotmail.com','Angela Cristina Grober',24292),
-('angraalmeida@gmail.com','Angra de Brito Almeida',24299),
 ('anizio.lf58@hotmail.com','Anizio Lima Flix',24300),
 ('dpmjobras@hotmail.com','Antonio Carlos Ribeiro',24309),
 ('ac.silvestre@gmail.com','Antonio Carlos Silvestre Villar',24310),
@@ -991,7 +1023,11 @@ INSERT INTO `pessoa` VALUES
 ('emassao@odebrecht.com','Eduardo Massao',24658),
 ('eduardomunhoz.castro@gmail.com','Eduardo Munhoz',24659),
 ('eng_nascimento@hotmail.com','Eduardo Nascimento ',24660),
-('eduardolpeixoto@hotmail.com','Eduardo Peixoto',24661);
+('eduardolpeixoto@hotmail.com','Eduardo Peixoto',24661),
+('rosinha@gmail.com','Rosarinha Dias Das Neves',24663),
+('eli.souza@gmail.com','Elisangela Roberta Ferreira De Souza',24664),
+('paolo@gmail.com','Paolo Guerrero',24665),
+('joao@gmail.com','João Pedro',24666);
 
 /*
 Table structure for produto
@@ -1056,7 +1092,7 @@ CREATE TABLE `telefone` (
   KEY `id_pessoa` (`id_pessoa`),
   CONSTRAINT `telefone_ibfk_1` FOREIGN KEY (`id_tipo_telefone`) REFERENCES `tipo_telefone` (`id`),
   CONSTRAINT `telefone_ibfk_2` FOREIGN KEY (`id_pessoa`) REFERENCES `pessoa` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2689 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2699 DEFAULT CHARSET=utf8;
 
 /*
 Table data for otica_pan.telefone
@@ -1092,7 +1128,6 @@ INSERT INTO `telefone` VALUES
 (247,'(11) 4444-8342',1,24285),
 (250,'(11) 4444-8360',1,24288),
 (254,'(11) 4444-8384',1,24292),
-(261,'(11) 4444-8426',1,24299),
 (262,'(11) 4444-8432',1,24300),
 (271,'(11) 4444-8486',1,24309),
 (272,'(11) 4444-8492',1,24310),
@@ -1295,7 +1330,6 @@ INSERT INTO `telefone` VALUES
 (2312,'(11) 99543-0838',2,24285),
 (2315,'(11) 99543-0850',2,24288),
 (2319,'(11) 99543-0866',2,24292),
-(2326,'(11) 99543-0894',2,24299),
 (2327,'(11) 99543-0898',2,24300),
 (2336,'(11) 99543-0934',2,24309),
 (2337,'(11) 99543-0938',2,24310),
@@ -1488,7 +1522,15 @@ INSERT INTO `telefone` VALUES
 (2685,'(11) 99543-2330',2,24658),
 (2686,'(11) 99543-2334',2,24659),
 (2687,'(11) 99543-2338',2,24660),
-(2688,'(11) 99543-2342',2,24661);
+(2688,'(11) 99543-2342',2,24661),
+(2689,'(11) 4444-7088',1,24663),
+(2690,'(11) 99880-4302',2,24663),
+(2691,'(11) 4444-7088',1,24664),
+(2692,'(11) 94200-7890',2,24664),
+(2693,'(11) 5907-2727',1,24665),
+(2694,'(11) 96453-8888',2,24665),
+(2695,'(11) 4749-8373',1,24666),
+(2696,'(11) 98373-6363',2,24666);
 
 /*
 Table structure for tipo_lente

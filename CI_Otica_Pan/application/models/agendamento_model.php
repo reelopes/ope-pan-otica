@@ -7,7 +7,7 @@ class Agendamento_model extends CI_Model {
 
     public function listarConsultasDia($data) {
 
-        $this->db->select('agendamento.id as id_agendamento,pessoa.nome as nome_cliente,dependente.nome as nome_dependente,cpf,email,data_consulta,horario_consulta,id_dependente,agendamento.status');
+        $this->db->select('agendamento.id as id_agendamento,pessoa.nome as nome_cliente,dependente.nome as nome_dependente,cpf,email,data_consulta,horario_consulta,agendamento.id_cliente,id_dependente,agendamento.status');
         $this->db->join('cliente', 'cliente.id = agendamento.id_cliente');
         $this->db->join('pessoa', 'pessoa.id = cliente.id_pessoa');
         $this->db->join('dependente', 'agendamento.id_dependente = dependente.id','left');
@@ -18,7 +18,7 @@ class Agendamento_model extends CI_Model {
     public function listarConsultas($where = null) {
                     
                        
-        $this->db->select('agendamento.id as id_agendamento,pessoa.nome as nome_cliente,dependente.nome as nome_dependente,cpf,email,data_consulta,horario_consulta,id_dependente,agendamento.status');
+        $this->db->select('agendamento.id as id_agendamento,pessoa.nome as nome_cliente,dependente.nome as nome_dependente,cpf,email,data_consulta,horario_consulta,agendamento.id_cliente,id_dependente,agendamento.status');
         $this->db->join('cliente', 'cliente.id = agendamento.id_cliente');
         $this->db->join('pessoa', 'pessoa.id = cliente.id_pessoa');
         $this->db->join('dependente', 'agendamento.id_dependente = dependente.id','left');

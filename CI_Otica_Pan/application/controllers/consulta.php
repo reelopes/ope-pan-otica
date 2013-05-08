@@ -29,8 +29,10 @@ class Consulta extends CI_Controller {
         $this->load->model('dependente_model');
         $this->load->model('cliente_model');
         $this->load->library('table');
+        $this->load->library('form_validation');
         $this->load->library('uri');
         $this->load->helper('date');
+        
                  $this->login_model->logado();//Verifica se o usuário está logado
     
     }
@@ -60,6 +62,39 @@ class Consulta extends CI_Controller {
      $this->agendamento_model->AtualizaAgendamento($idCliente,$status);
      
  }
+ 
+ public function cadastrarConsulta() {
+     
+        $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|max_length[15]|valid_cpf|is_unique[cliente.cpf]');
+        $this->form_validation->set_rules('data_nascimento', 'Data Nascimento', 'trim');
+        $this->form_validation->set_rules('cep', 'CEP', 'trim|max_length[10]');
+        
+               
+        if ($this->form_validation->run() == true) {
+
+            $dados = elements(array('nome', 'email', 'cpf', 'data_nascimento', 'num_telefone1',
+                'num_telefone2', 'rua', 'bairro', 'cidade', 'complemento', 'estado', 'cep'), $this->input->post());
+            $this->cliente_model->cadastrarCliente($dados);
+        } else {
+            
+            $id_agendamento=$this->uri->segment(3);
+            //Resgata as informações do banco.
+            
+
+            
+            $dados = array(
+                'titulo' => 'Dados da Consulta Oftalmológica',
+                'pagina' => 'adiciona_consulta',
+                'agendamento' => $this->agendamento_model->listarConsultas('agendamento.id ='.$id_agendamento),
+            );
+
+            $this->load->view('Principal_popup', $dados);
+        }
+     
+     
+ }
+ 
+ 
     }
 
 

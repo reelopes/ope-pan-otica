@@ -22,7 +22,14 @@ class Login extends CI_Controller {
 
 
         if ($this->form_validation->run() == FALSE) {
+                
+        $logado = $this->session->userdata('logado');
+
+        if (!isset($logado) || $logado == true) {
             
+            redirect('principal');
+            
+        }            
             $this->load->view('login_view');
             
         } else {

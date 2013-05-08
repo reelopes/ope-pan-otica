@@ -106,22 +106,24 @@ foreach ($clientes as $linha) {
                      
             if($linha->id_dependente==NULL){
                 $nome = $linha->nome_cliente;
-                $strDependente="S";
+                $strDependente="<center><img src=".base_url('/public/img/true.png')." width='18' title='Cliente'></center>";
             }else{
                 $nome = $linha->nome_dependente;
-                $strDependente="N";
+                $strDependente="<center><img src=".base_url('/public/img/false.png')." width='18' title='Dependente'></center>";
             }
             
             if ($anoCalendario . $mesCalendario . $diaCalendario >= date('Y') . date('m') . date('d')) {
-                $this->table->add_row($this->util->data_mysql_para_user($linha->data_consulta), $linha->horario_consulta, $nome, $linha->cpf, $linha->email,$strDependente, anchor('agendamento/deletarAgendamento/' . $anoCalendario . '/' . $mesCalendario . '/' . $diaCalendario . '/' . $linha->id_agendamento, '<center>Excluir</center>', 'onclick="if (! confirm(\'Tem certeza que deseja excluir o agendamento abaixo? \n\n Nome: ' . $nome . '\n Data do agendamento: ' . $this->util->data_mysql_para_user($linha->data_consulta) . '\n Horário: ' . $linha->horario_consulta . '\')) { return false; }"'));
+                $this->table->add_row($this->util->data_mysql_para_user($linha->data_consulta), $linha->horario_consulta, anchor('cliente/listaCliente/'.$linha->id_cliente,$nome), $linha->cpf, $linha->email,$strDependente, anchor('agendamento/deletarAgendamento/' . $anoCalendario . '/' . $mesCalendario . '/' . $diaCalendario . '/' . $linha->id_agendamento, '<center><img src='.base_url('public/img/delete.png').' width="20" title="Excluir"></center>', 'onclick="if (! confirm(\'Tem certeza que deseja excluir o agendamento abaixo? \n\n Nome: ' . $nome . '\n Data do agendamento: ' . $this->util->data_mysql_para_user($linha->data_consulta) . '\n Horário: ' . $linha->horario_consulta . '\')) { return false; }"'));
             } else {
                 $this->table->add_row($this->util->data_mysql_para_user($linha->data_consulta), $linha->horario_consulta, $nome, $linha->cpf, $linha->email,$strDependente);
             }
         }
         $tmpl = array(
             'table_open' => '<table cellpadding="0" cellspacing="0" border="0" class="display" id="example1">',
-            'row_start' => '<tr>',
-            'row_alt_start' => '<tr>',
+    'cell_start' => '<td valign="middle">',
+    'cell_end' => '</td">',
+    'cell_alt_start' => '<td valign="middle">',
+    'cell_alt_end' => '</td>',
         );
         $this->table->set_template($tmpl);
     }

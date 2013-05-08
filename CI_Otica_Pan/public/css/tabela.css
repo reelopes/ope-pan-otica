@@ -73,3 +73,11 @@ input[type=submit]:active {
 .lt-ie9 input[type=text], .lt-ie9 input[type=password] {
   line-height: 34px;
 }
+.tabela a{
+  text-decoration:none;
+  color:#413e3e;
+ }
+ .tabela a:hover{
+  text-decoration:underline;
+  color:red;
+ }
