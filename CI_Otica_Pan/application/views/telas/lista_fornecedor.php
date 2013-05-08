@@ -1,30 +1,28 @@
 <?php
 echo "<h2>$titulo</h2>";
 
-echo $this->session->flashdata('msg');
-
-echo form_open('fornecedor/pesquisa');
-echo form_label('Pesquisa Fornecedor:');
-echo form_input(array('name'=>'pesquisa'),  set_value('pesquisa'),'autofocus');
-echo form_submit('', 'Procurar');
-echo form_close();
+if($this->session->flashdata('msg')){
+    $msg = $this->session->flashdata('msg');
+    echo "<body onLoad=\" alert('$msg');\">";
+}
 
 $fornecedor = $fornecedor;//Pega a variavel da Controller (boa pratica)
 
-if($fornecedor==NULL){
-    echo"Sua pesquisa não encontrou nenhum dado correspondente.";
-}else{
-    echo"<br><center><table>";//Essa linha pode remover
-    if ($fornecedor != NULL) {
-        $this -> table -> set_heading('NOME', 'EMAIL', 'CNPJ', 'TELEFONE', 'EDITAR','EXCLUIR');
-        foreach ($fornecedor as $linha) {
+$this->table->set_heading('NOME', 'EMAIL', 'CNPJ', 'TELEFONE', '&nbsp; ');
 
-            $this -> table -> add_row($linha -> nome, $linha -> email, $linha -> cnpj, $linha -> num_telefone, anchor("Fornecedor/update/$linha->id_pessoa/$linha->id_fornecedor",'<center>Editar</center>'),anchor("Fornecedor/delete/$linha->id_pessoa",'<center>Excluir</center>','onclick="if (! confirm(\'Tem certeza que deseja excluir o fornecedor abaixo? \n\n Nome: '.$linha->nome.'\n Email: '.$linha->email.'\n CNPJ: '.$linha->cnpj.'\')) { return false; }"'));
-        }
-        $tmpl = array ( 'table_open'  => '<table border="1" cellpadding="2" width="100%" cellspacing="1" class="mytable">' );
-        $this->table->set_template($tmpl);
-        echo $this -> table -> generate();
-    }
-    echo"</br></table>"; //Essa linha pode remover
+foreach ($fornecedor as $linha) {
+    
+    $this -> table -> add_row($linha -> nome, $linha -> email, $linha -> cnpj, $linha -> num_telefone, anchor("Fornecedor/update/$linha->id_pessoa/$linha->id_fornecedor",'<center>Editar</center>'));
+
 }
+
+$tmpl = array(
+    'table_open'=>'<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">',
+      );
+
+echo"<div class='tabela'>";
+$this->table->set_template($tmpl);
+echo $this->table->generate();
+echo"</div>";
+
 ?>

@@ -14,6 +14,20 @@ $todas_grife = $todas_grife;
 $carrega = $carrega;
 $msgErroP = $msgErroP;
 
+//if($msgErroP != null) {
+//        echo $msgErroP;
+//            break;
+//            function disp_confirm() {
+//                var r = confirm($msgErroP." Deseja Continuar?")
+//                if (r == true) {
+//                  alert("You pressed OK!")
+//                }
+//                else {
+//                  alert("You pressed Cancel!")
+//                }
+//            }';
+//}
+
 if($carrega == 1) {
     echo '<body onload="mostraArmacao();" />';
 } else {
@@ -21,6 +35,11 @@ if($carrega == 1) {
 }
 
 echo form_open('produto/adiciona');
+
+//echo '<input type="number" pattern="(\d{3})([\.])(\d{2})">';
+
+//echo form_type(array('name'=>'data_nascimento'),  set_value('data_nascimento'),'maxlength="10" autocomplete ="off" min="1900-01-01" max="'.date('Y-m-d').'"','date');
+
 
 // Campos da tabela Produto
 echo"<fieldset>";
@@ -43,6 +62,10 @@ if($carrega == 1) {
        <option value="1"> Armação</option>
     </select>';
 }
+
+//echo form_type(array('name'=>'data_nascimento'),  set_value('data_nascimento'),'maxlength="10" autocomplete ="off" min="1900-01-01" max="'.date('Y-m-d').'"','date');
+
+
 echo"</td>";
 echo"<td>";
 echo form_label('Referência*');

@@ -385,9 +385,9 @@ Table data for otica_pan.dependente
 */
 
 INSERT INTO `dependente` VALUES 
-('2000-01-01','Ana Júlia Nascimento','Sobrinha',1,8),
+('2000-01-01','Ana Jï¿½lia Nascimento','Sobrinha',1,8),
 ('1991-01-01','Bruno','teste',2,8),
-('2000-01-22','Julia','Irmã',3,11),
+('2000-01-22','Julia','Irmï¿½',3,11),
 ('1990-01-01','Teste','teste',4,8),
 ('1992-01-06','Pedro','Filho',5,8),
 ('2000-01-01','Kauane','Noiva',7,8);
@@ -398,10 +398,10 @@ Table structure for diagnostico
 
 drop table if exists `diagnostico`;
 CREATE TABLE `diagnostico` (
-  `cilindrico` int(11) DEFAULT NULL,
-  `dp` int(11) DEFAULT NULL,
-  `eixo` int(11) DEFAULT NULL,
-  `esferico` int(11) DEFAULT NULL,
+  `cilindrico` varchar(10) DEFAULT NULL,
+  `dp` varchar(10) DEFAULT NULL,
+  `eixo` varchar(10) DEFAULT NULL,
+  `esferico` varchar(10) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -430,9 +430,9 @@ Table data for otica_pan.endereco
 */
 
 INSERT INTO `endereco` VALUES 
-('Vila Carmela','07859-180','Franco da Rocha','Casa','SP',7,'Rua Guaratinguetá, 70',8),
-('Perdizes','04110-000','Taboão da Serra','Casa','SP',8,'Rua da Lavoura, 999',9),
-('Vila da Saúde','04183-444','São Paulo','Ap. 17','SP',9,'Rua Fiação da Saúde, 580',10),
+('Vila Carmela','07859-180','Franco da Rocha','Casa','SP',7,'Rua Guaratinguetï¿½, 70',8),
+('Perdizes','04110-000','Taboï¿½o da Serra','Casa','SP',8,'Rua da Lavoura, 999',9),
+('Vila da Saï¿½de','04183-444','Sï¿½o Paulo','Ap. 17','SP',9,'Rua Fiaï¿½ï¿½o da Saï¿½de, 580',10),
 ('0','0','0','0','SP',10,'0',11),
 ('','','','','SP',161,'',200),
 ('','','','','SP',163,'',203),
@@ -636,8 +636,8 @@ INSERT INTO `endereco` VALUES
 (NULL,NULL,NULL,NULL,NULL,499,'',597),
 (NULL,NULL,NULL,NULL,NULL,500,'',598),
 (NULL,NULL,NULL,NULL,NULL,501,'',599),
-('Vila Carmela','07859-180','São Paulo','Ap11','SP',502,'Av Paulista, 200',600),
-('Vila Carmela','07859-180','Franco da Rocha','Casa','SP',503,'Rua Guaratinguetá, 70',601),
+('Vila Carmela','07859-180','Sï¿½o Paulo','Ap11','SP',502,'Av Paulista, 200',600),
+('Vila Carmela','07859-180','Franco da Rocha','Casa','SP',503,'Rua Guaratinguetï¿½, 70',601),
 ('Alencar','2','Campinas','Casa','SP',504,'Rua da Margarita, 300',602),
 ('Vila Clemente','33333-333','Francisco Morato','2b','SP',505,'Rua da Lavoura, 200',603);
 
@@ -693,7 +693,9 @@ Table structure for informacoes_olho
 drop table if exists `informacoes_olho`;
 CREATE TABLE `informacoes_olho` (
   `distancia` varchar(20) DEFAULT NULL,
+  `lado` varchar(10) DEFAULT NULL,
   `id_diagnostico` int(11) DEFAULT NULL,
+
   KEY `id_diagnostico` (`id_diagnostico`),
   CONSTRAINT `informacoes_olho_ibfk_1` FOREIGN KEY (`id_diagnostico`) REFERENCES `diagnostico` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -814,7 +816,7 @@ Table data for otica_pan.pessoa
 INSERT INTO `pessoa` VALUES 
 ('fdias.d.neves@gmail.com','Fernando Dias Das Neves',10),
 ('eduardo@gmail.com','Eduardo Pereira',11),
-('jose@gmail.com','José Mendes (Zé)',12),
+('jose@gmail.com','Josï¿½ Mendes (Zï¿½)',12),
 ('pablo.cunha@gmail.com','Pablo Cunha',13),
 ('eli@aguero.com.br','Eli Aguero',15),
 ('kauane@lucena.com.br','Kauane Lucena',16),
@@ -1027,7 +1029,7 @@ INSERT INTO `pessoa` VALUES
 ('rosinha@gmail.com','Rosarinha Dias Das Neves',24663),
 ('eli.souza@gmail.com','Elisangela Roberta Ferreira De Souza',24664),
 ('paolo@gmail.com','Paolo Guerrero',24665),
-('joao@gmail.com','João Pedro',24666);
+('joao@gmail.com','Joï¿½o Pedro',24666);
 
 /*
 Table structure for produto
@@ -1053,13 +1055,13 @@ Table data for otica_pan.produto
 */
 
 INSERT INTO `produto` VALUES 
-('0001','Lente TS5610',0,'Lente TS5610 2GA7',1,10,20,30,'Disponível','2014-10-20'),
-('00002','HB DS2509',1,'HB DS2509',2,50,100,10,'Disponível',NULL),
-('00004','Armação HB',1,'Flexível, Preta',3,50,100,10,'Disponível',NULL),
-('32143','4324234',0,'0',4,2.22,2.22,222,'Disponível',NULL),
-('111','111',1,'0',5,1.11,11.11,0,'Disponível',NULL),
-('000004','122',0,'0',6,222.22,444.44,0,'Disponível',NULL),
-('00004','11133',1,'0',7,111.11,222.22,0,'Disponível',NULL);
+('0001','Lente TS5610',0,'Lente TS5610 2GA7',1,10,20,30,'Disponivel','2014-10-20'),
+('00002','HB DS2509',1,'HB DS2509',2,50,100,10,'Disponivel',NULL),
+('00004','Armacao HB',1,'Flexevel, Preta',3,50,100,10,'Disponivel',NULL),
+('32143','4324234',0,'0',4,2.22,2.22,222,'Disponivel',NULL),
+('111','111',1,'0',5,1.11,11.11,0,'Disponivel',NULL),
+('000004','122',0,'0',6,222.22,444.44,0,'Disponivel',NULL),
+('00004','11133',1,'0',7,111.11,222.22,0,'Disponivel',NULL);
 
 /*
 Table structure for receita
@@ -1069,6 +1071,7 @@ drop table if exists `receita`;
 CREATE TABLE `receita` (
   `crm` varchar(20) DEFAULT NULL,
   `data` date DEFAULT NULL,
+  `observacao` text DEFAULT NULL,
   `id_diagnostico` int(11) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `medico` varchar(100) DEFAULT NULL,
@@ -1569,6 +1572,7 @@ Table structure for usuario
 drop table if exists `usuario`;
 CREATE TABLE `usuario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) DEFAULT NULL,
   `login` varchar(20) DEFAULT NULL,
   `senha` varchar(20) DEFAULT NULL,
   `lembrete_senha` varchar(200) DEFAULT NULL,

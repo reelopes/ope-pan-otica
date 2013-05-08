@@ -54,14 +54,31 @@ class produto_model extends CI_Model {
 	}
 
 	public function getAll() {
-//
-//            echo "TESTE";
-//            break;
 		$this -> db -> select('id as id_produto, referencia, nome, 
                     descricao, preco_custo, preco_venda,
                     quantidade, status, validade, categoria');
 		$this -> db -> from('produto');
 		$produto = $this -> db -> get();
+                
+//                $precos = array();
+//                
+//                foreach ($produto as $linha) {
+//                    
+////                    echo " INICIO ";
+////                    echo "Referencia: ";
+////                    echo $linha -> referencia;
+////                    echo "Nome:  ";
+////                    echo element("nome", $linha);
+////                    echo "Preco_custo: ";
+////                    echo element("preco_custo", $linha);
+////                    echo "Preco_venda: ";
+////                    echo element("preco_venda", $linha);
+////                    echo " FIM";
+//                    
+////                    $precos = array(
+////                        'preco_custo' => $this->util->pontoParaVirgula($linha->preco_custo),
+////                        'preco_venda' => $this->util->pontoParaVirgula($linha->preco_venda));
+//                }
                 
                 return $produto;
 	}

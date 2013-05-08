@@ -108,11 +108,24 @@ return $hora.":".$min;
 
 function pontoParaVirgula($num) {
     $num = explode(".", $num);
-    $stringNum = $num[0].",".$num[1];
+    
+    if (strlen($num[1]) >= 1) {
+        if (strlen($num[1]) == 1) {
+            $stringNum = $num[0].",".$num[1]."0";
+        } else {
+            $stringNum = $num[0].",".$num[1];
+        }
+    } else {
+        $stringNum = $num[0].",00";
+    }
+    
     return $stringNum;
 }
 
 function virgulaParaPonto($num) {
+    if ($num) {
+        
+    }
     $num = explode(",", $num);
     $stringNum = $num[0].".".$num[1];
     return $stringNum;

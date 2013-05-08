@@ -76,6 +76,9 @@ class Produto extends CI_Controller {
                     $msgPM = 'Preço de custo não pode ser maior que Preço de venda';
                 }
             }
+           if ($this -> input -> post('preco_custo') > $this -> input -> post('preco_venda')) {
+               $msgPM = 'Preço de custo não pode ser maior que Preço de venda';
+           }
             
             $dados = array('titulo' => 'Criar Produto', 'pagina' => 'adiciona_produto', 'carrega' => $this -> input -> post('produto'),
                 'todos_fornecedor' => $this -> fornecedor_model -> getAll() -> result(),
@@ -85,7 +88,7 @@ class Produto extends CI_Controller {
 	}
 
 	public function lista() {
-		$dados = array('pagina' => 'lista_produto', 'titulo' => 'Manter Produto', 
+		$dados = array('pagina' => 'lista_produto', 'titulo' => 'Pesquisa Produto', 
 		'produto' => $this -> produto_model -> getAll() -> result());
 
 		$this -> load -> view('Principal', $dados);
