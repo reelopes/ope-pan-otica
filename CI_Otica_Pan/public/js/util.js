@@ -212,9 +212,14 @@ function formataCampo(campo, Mascara, evento) {
 
 function abrirPopUp(url,width,height) {
 
+    if(height>600){
+        var left = (screen.width  - width)/2;
+        var top = 0;
+    }else{
+
     var left = (screen.width  - width)/2;
     var top = (screen.height - height)/2;
-    
+    }
    window.open(url,'janela', 'left='+left+',width='+width+', height='+height+', top='+top+', scrollbars=yes, status=no, toolbar=no, location=yes, directories=no, menubar=no, resizable=no, fullscreen=no'); 
 
 }

@@ -61,53 +61,77 @@ echo"<table border='0' width='100%'>";
 echo"<tr  align='center'>";
 echo"<td colspan='2'></td>";
 echo"<td>Esférica</td>";
-echo"<td>Cilindrica</td>";
+echo"<td>Cilíndrico</td>";
 echo"<td>Eixo</td>";
-echo"<td>DP</td>";
+echo"<td>DNP</td>";
 echo"</tr>";
 
 echo"<tr style='border: 1px solid #666666;'>";
-echo"<td rowspan='2' align='right' valign='middle'>Longe</td>";
+echo"<td rowspan='2' align='right' valign='middvalle'>Longe</td>";
 echo"<td align='right' style='border-left:1px solid #666666;'>OD</td>";
-echo"<td align='center'><input type='text' name='longe_od_esferico' style='width:100px;'></td>";
-echo"<td align='center'><input type='text' name='longe_od_esferico' style='width:100px;'></td>";
-echo"<td align='center'><input type='text' name='longe_od_esferico' style='width:100px;'></td>";
-echo"<td align='center'><input type='text' name='longe_od_esferico' style='width:100px;'></td>";
+echo"<td align='center'><input type='text' name='longe_od_esferico' style='width:105px;' placeholder='Ex: X.XX'></td>";
+echo"<td align='center'><input type='text' name='longe_od_cilindrico' style='width:105px;' placeholder='Ex: -X.XX'></td>";
+echo"<td align='center'><input type='text' name='longe_od_eixo' style='width:105px;'placeholder='Eixo em graus'></td>";
+echo"<td align='center'><input type='text' name='longe_od_dnp' style='width:105px;' placeholder='DNP em mm'></td>";
 echo"</tr>";
 
 echo"<tr style='border: 1px solid #666666;'>";
 echo"<td align='right' style='border-left:1px solid #666666;'>OE</td>";
-echo"<td align='center'><input type='text' name='longe_od_esferico' style='width:100px;'></td>";
-echo"<td align='center'><input type='text' name='longe_od_esferico' style='width:100px;'></td>";
-echo"<td align='center'><input type='text' name='longe_od_esferico' style='width:100px;'></td>";
-echo"<td align='center'><input type='text' name='longe_od_esferico' style='width:100px;'></td>";
+echo"<td align='center'><input type='text' name='longe_oe_esferico' style='width:105px;' placeholder='Ex: -X.XX'></td>";
+echo"<td align='center'><input type='text' name='longe_oe_cilindrico' style='width:105px;' placeholder='Ex: X.XX'></td>";
+echo"<td align='center'><input type='text' name='longe_oe_eixo' style='width:105px;' placeholder='Eixo em graus'></td>";
+echo"<td align='center'><input type='text' name='longe_oe_dnp' style='width:105px;' placeholder='DNP em mm'></td>";
 echo"</tr>";
 
 echo"<tr>";
-echo"<td colspan='6'>&nbsp;</td>";
+echo"<td colspan='6'><font size='1'>&nbsp;</font></td>";
 echo"</tr>";
 
 echo"<tr style='border: 1px solid #666666;'>";
-echo"<td rowspan='2' align='right' valign='middle'>Longe</td>";
+echo"<td rowspan='2' align='right' valign='middle'>Perto</td>";
 echo"<td align='right' style='border-left:1px solid #666666;'>OD</td>";
-echo"<td align='center'><input type='text' name='longe_od_esferico' style='width:100px;'></td>";
-echo"<td align='center'><input type='text' name='longe_od_esferico' style='width:100px;'></td>";
-echo"<td align='center'><input type='text' name='longe_od_esferico' style='width:100px;'></td>";
-echo"<td align='center'><input type='text' name='longe_od_esferico' style='width:100px;'></td>";
+echo"<td align='center'><input type='text' name='longe_od_esferico' style='width:105px;' placeholder='Ex: X.XX'></td>";
+echo"<td align='center'><input type='text' name='longe_od_cilindrico' style='width:105px;' placeholder='Ex: -X.XX'></td>";
+echo"<td align='center'><input type='text' name='longe_od_eixo' style='width:105px;' placeholder='Eixo em graus'></td>";
+echo"<td align='center'><input type='text' name='longe_od_dnp' style='width:105px;' placeholder='DNP em mm'></td>";
 echo"</tr>";
 
 echo"<tr style='border: 1px solid #666666;'>";
 echo"<td align='right' style='border-left:1px solid #666666;'>OE</td>";
-echo"<td align='center'><input type='text' name='longe_od_esferico' style='width:100px;'></td>";
-echo"<td align='center'><input type='text' name='longe_od_esferico' style='width:100px;'></td>";
-echo"<td align='center'><input type='text' name='longe_od_esferico' style='width:100px;'></td>";
-echo"<td align='center'><input type='text' name='longe_od_esferico' style='width:100px;'></td>";
+echo"<td align='center'><input type='text' name='longe_oe_esferico' style='width:105px;' placeholder='Ex: -X.XX'></td>";
+echo"<td align='center'><input type='text' name='longe_oe_cilindrico' style='width:105px;' placeholder='Ex: X.XX'></td>";
+echo"<td align='center'><input type='text' name='longe_oe_eixo' style='width:105px;' placeholder='Eixo em graus'></td>";
+echo"<td align='center'><input type='text' name='longe_oe_dnp' style='width:105px;' placeholder='DNP em mm'></td>";
 echo"</tr>";
+
+
+echo"<tr>";
+echo"<td align='left' valign='bottom'>Observações:</td>";
+echo"<td align='right' colspan='4'>".form_label('DP')."</td>";
+echo "<td align='center'>".form_input(array('name'=>'dp'),'','placeholder="DP em mm" style="width:105px;" readonly')."</td>";
+echo"</tr>";
+
+echo"<tr>";
+echo"<td align='left' colspan='6'><textarea name=obervacoes cols=67 rows=4 placeholder='Digite aqui suas observações'></textarea></td>";
+echo"</tr>";
+
+echo"<tr>";
+echo"<td align='center' colspan='6'>".form_submit(array('name'=>'Salvar'),'Salvar')."</td>";
+echo"</tr>";
+
+
+
+
+
+
 
 echo"</table>"; //Essa linha pode remover
 echo"</fieldset>";
 
+
 echo form_close();
+
+
 
 echo "</div>";
 

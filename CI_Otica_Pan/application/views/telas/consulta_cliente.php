@@ -46,7 +46,7 @@ if ($mes == null) {
              }else{
                  $faltou=" ";
              }
-                $this->table->add_row($this->util->data_mysql_para_user($linha->data_consulta), $linha->horario_consulta, anchor('cliente/listaCliente/'.$linha->id_cliente,$nome),"<center>".$strCliente."</center>","<center><input type='checkbox' name='a' id=".$linha->id_agendamento." value='ON' ".$faltou." onClick=\"MarcarFalta('".$linha->id_agendamento."','".base_url('consulta/atualizarAgendamento')."');\"/></center>","<center><a href=\"javascript:abrirPopUp('" . base_url('consulta/cadastrarConsulta/' . $linha->id_agendamento) . "','780','580');\"><img src=../../../../../../../../../CI_otica_pan/public/img/ConsultaMedica.png width=23></a></center>");
+                $this->table->add_row($this->util->data_mysql_para_user($linha->data_consulta), $linha->horario_consulta, anchor('cliente/listaCliente/'.$linha->id_cliente,$nome),"<center>".$strCliente."</center>","<center><input type='checkbox' name='a' id=".$linha->id_agendamento." value='ON' ".$faltou." onClick=\"MarcarFalta('".$linha->id_agendamento."','".base_url('consulta/atualizarAgendamento')."');\"/></center>","<center><a href=\"javascript:abrirPopUp('" . base_url('consulta/cadastrarConsulta/' . $linha->id_agendamento) . "','700','700');\"><img src=../../../../../../../../../CI_otica_pan/public/img/ConsultaMedica.png width=23></a></center>");
             
             }
           

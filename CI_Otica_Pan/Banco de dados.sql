@@ -385,9 +385,9 @@ Table data for otica_pan.dependente
 */
 
 INSERT INTO `dependente` VALUES 
-('2000-01-01','Ana J�lia Nascimento','Sobrinha',1,8),
+('2000-01-01','Ana J?lia Nascimento','Sobrinha',1,8),
 ('1991-01-01','Bruno','teste',2,8),
-('2000-01-22','Julia','Irm�',3,11),
+('2000-01-22','Julia','Irm?',3,11),
 ('1990-01-01','Teste','teste',4,8),
 ('1992-01-06','Pedro','Filho',5,8),
 ('2000-01-01','Kauane','Noiva',7,8);
@@ -398,10 +398,10 @@ Table structure for diagnostico
 
 drop table if exists `diagnostico`;
 CREATE TABLE `diagnostico` (
-  `cilindrico` varchar(10) DEFAULT NULL,
-  `dp` varchar(10) DEFAULT NULL,
-  `eixo` varchar(10) DEFAULT NULL,
-  `esferico` varchar(10) DEFAULT NULL,
+  `cilindrico` double DEFAULT NULL,
+  `dnp` double DEFAULT NULL,
+  `eixo` double DEFAULT NULL,
+  `esferico` double DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -430,9 +430,9 @@ Table data for otica_pan.endereco
 */
 
 INSERT INTO `endereco` VALUES 
-('Vila Carmela','07859-180','Franco da Rocha','Casa','SP',7,'Rua Guaratinguet�, 70',8),
-('Perdizes','04110-000','Tabo�o da Serra','Casa','SP',8,'Rua da Lavoura, 999',9),
-('Vila da Sa�de','04183-444','S�o Paulo','Ap. 17','SP',9,'Rua Fia��o da Sa�de, 580',10),
+('Vila Carmela','07859-180','Franco da Rocha','Casa','SP',7,'Rua Guaratinguet?, 70',8),
+('Perdizes','04110-000','Tabo?o da Serra','Casa','SP',8,'Rua da Lavoura, 999',9),
+('Vila da Sa?de','04183-444','S?o Paulo','Ap. 17','SP',9,'Rua Fia??o da Sa?de, 580',10),
 ('0','0','0','0','SP',10,'0',11),
 ('','','','','SP',161,'',200),
 ('','','','','SP',163,'',203),
@@ -636,8 +636,8 @@ INSERT INTO `endereco` VALUES
 (NULL,NULL,NULL,NULL,NULL,499,'',597),
 (NULL,NULL,NULL,NULL,NULL,500,'',598),
 (NULL,NULL,NULL,NULL,NULL,501,'',599),
-('Vila Carmela','07859-180','S�o Paulo','Ap11','SP',502,'Av Paulista, 200',600),
-('Vila Carmela','07859-180','Franco da Rocha','Casa','SP',503,'Rua Guaratinguet�, 70',601),
+('Vila Carmela','07859-180','S?o Paulo','Ap11','SP',502,'Av Paulista, 200',600),
+('Vila Carmela','07859-180','Franco da Rocha','Casa','SP',503,'Rua Guaratinguet?, 70',601),
 ('Alencar','2','Campinas','Casa','SP',504,'Rua da Margarita, 300',602),
 ('Vila Clemente','33333-333','Francisco Morato','2b','SP',505,'Rua da Lavoura, 200',603);
 
@@ -816,7 +816,7 @@ Table data for otica_pan.pessoa
 INSERT INTO `pessoa` VALUES 
 ('fdias.d.neves@gmail.com','Fernando Dias Das Neves',10),
 ('eduardo@gmail.com','Eduardo Pereira',11),
-('jose@gmail.com','Jos� Mendes (Z�)',12),
+('jose@gmail.com','Jos? Mendes (Z?)',12),
 ('pablo.cunha@gmail.com','Pablo Cunha',13),
 ('eli@aguero.com.br','Eli Aguero',15),
 ('kauane@lucena.com.br','Kauane Lucena',16),
@@ -1029,7 +1029,7 @@ INSERT INTO `pessoa` VALUES
 ('rosinha@gmail.com','Rosarinha Dias Das Neves',24663),
 ('eli.souza@gmail.com','Elisangela Roberta Ferreira De Souza',24664),
 ('paolo@gmail.com','Paolo Guerrero',24665),
-('joao@gmail.com','Jo�o Pedro',24666);
+('joao@gmail.com','Jo?o Pedro',24666);
 
 /*
 Table structure for produto
@@ -1072,6 +1072,7 @@ CREATE TABLE `receita` (
   `crm` varchar(20) DEFAULT NULL,
   `data` date DEFAULT NULL,
   `observacao` text DEFAULT NULL,
+  `dp` double DEFAULT NULL,
   `id_diagnostico` int(11) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `medico` varchar(100) DEFAULT NULL,
@@ -1588,13 +1589,13 @@ Table data for otica_pan.usuario
 */
 
 INSERT INTO `usuario` VALUES 
-(1,'admin','admin','admin','grupoabdfr@gmail.com',1),
-(2,'eduardo','eduardo','eduardo','eduardo.pereira2806@gmail.com',1),
-(3,'renan','renan','renan','reee.lopes@gmail.com',1),
-(4,'atendente','atendente','atendente','atendente@gmail.com',2),
-(5,'caixa','caixa','caixa','caixa@gmail.com',3),
-(6,'oftalmologista','oftalmologista','oftalmologista','oftalmologista@gmail.com',4),
-(7,'fernando','fernado','fernando','fdias.d.neves@gmail.com',1);
+(1,'Administrador','admin','admin','admin','grupoabdfr@gmail.com',1),
+(2,'Eduardo Pereira','eduardo','eduardo','eduardo','eduardo.pereira2806@gmail.com',1),
+(3,'Renan Lopes','renan','renan','renan','reee.lopes@gmail.com',1),
+(4,'Atendente Geral','atendente','atendente','atendente','atendente@gmail.com',2),
+(5,'Caixa Geral','caixa','caixa','caixa','caixa@gmail.com',3),
+(6,'Maria da Silva','oftalmologista','oftalmologista','oftalmologista','oftalmologista@gmail.com',4),
+(7,'Fernando Neves','fernando','fernado','fernando','fdias.d.neves@gmail.com',1);
 
 SET FOREIGN_KEY_CHECKS=1;
 
