@@ -123,11 +123,12 @@ function pontoParaVirgula($num) {
 }
 
 function virgulaParaPonto($num) {
-    if ($num) {
-        
-    }
-    $num = explode(",", $num);
-    $stringNum = $num[0].".".$num[1];
+    $num1 = explode(",", $num);
+    $stringNum1 = explode(".", $num1[0]);
+    $num2 = explode(".", $num2);
+    $stringNum2 = ".".$num2[1];
+    
+    $stringNum;
     return $stringNum;
 }
 

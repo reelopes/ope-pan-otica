@@ -1037,7 +1037,7 @@ Table structure for produto
 
 drop table if exists `produto`;
 CREATE TABLE `produto` (
-  `referencia` varchar(20) DEFAULT NULL,
+  `cod_barra` varchar(20) DEFAULT NULL,
   `nome` varchar(50) NOT NULL,
   `categoria` int(2) NOT NULL,
   `descricao` text,
@@ -1045,7 +1045,7 @@ CREATE TABLE `produto` (
   `preco_custo` double DEFAULT NULL,
   `preco_venda` double DEFAULT NULL,
   `quantidade` int(11) DEFAULT NULL,
-  `status` varchar(20) DEFAULT NULL,
+  `status` boolean DEFAULT 1,
   `validade` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
@@ -1055,13 +1055,10 @@ Table data for otica_pan.produto
 */
 
 INSERT INTO `produto` VALUES 
-('0001','Lente TS5610',0,'Lente TS5610 2GA7',1,10,20,30,'Disponivel','2014-10-20'),
-('00002','HB DS2509',1,'HB DS2509',2,50,100,10,'Disponivel',NULL),
-('00004','Armacao HB',1,'Flexevel, Preta',3,50,100,10,'Disponivel',NULL),
-('32143','4324234',0,'0',4,2.22,2.22,222,'Disponivel',NULL),
-('111','111',1,'0',5,1.11,11.11,0,'Disponivel',NULL),
-('000004','122',0,'0',6,222.22,444.44,0,'Disponivel',NULL),
-('00004','11133',1,'0',7,111.11,222.22,0,'Disponivel',NULL);
+('00001','Lente TS5610',0,'Lente TS5610 2GA7',1,10,20,30,'1','2014-10-20'),
+('00002','HB DS2509',1,'HB DS2509',2,50,100,10,'0',NULL),
+('00004','Armacao HB',1,'Flexevel, Preta',3,50,100,10,'1',NULL),
+('00005','TESTE APARECE',1,'0',7,111.11,222.22,0,'0',NULL);
 
 /*
 Table structure for receita

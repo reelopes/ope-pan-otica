@@ -7,20 +7,16 @@ class produto_model extends CI_Model {
             if ($dados != null) {
 		$this -> db -> trans_start();
                 
-		$produto = array(
-                    'referencia' => element('referencia', $dados),
-                    'nome' => element('nome', $dados),
-                    'descricao' => element('descricao', $dados),
-                    'preco_custo' => $this->util->virgulaParaPonto(element('preco_custo', $dados)),
-                    'preco_venda' => $this->util->virgulaParaPonto(element('preco_venda', $dados)),
-                    'quantidade'  => element('quantidade', $dados),
-                    'status' => element('status', $dados),
-                    'validade' => element('validade', $dados),
-                    'quantidade' => element('quantidade', $dados),
-                    'status' => element('status', $dados),
-                    'validade' => $this->util->data_user_para_mysql(element('validade', $dados)),
-                    'categoria' => element('produto', $dados),
-                    );
+                $produto = array(
+                'cod_barra' => element('cod_barra', $dados),
+                'nome' => element('nome', $dados),
+                'descricao' => element('descricao', $dados),
+                'preco_custo' => element('preco_custo', $dados),
+                'preco_venda' => element('preco_venda', $dados),
+                'quantidade'  => element('quantidade', $dados),
+                'validade' => $this->util->data_user_para_mysql(element('validade', $dados)),
+                'categoria' => element('produto', $dados),
+                );
                 
 		$this -> db -> insert('produto', $produto);
 
@@ -38,13 +34,6 @@ class produto_model extends CI_Model {
                         );
                     $this -> db -> insert('armacao', $tipoProduto);
                 }
-//                else if(element('produto', $dados) == 2) {
-//                    $tipoProduto = array(
-//                        'id_tipo_lente' => element('id', element('lista_tipo_lente', $dados)),
-//                        'id_produto' => $id_produto
-//                        );
-//                    $this -> db -> insert('lente', $tipoProduto);
-//                }
                 
                 $this -> db -> trans_complete();
 		$this -> session -> set_flashdata('cadastrook', 'Cadastro efetuado com sucesso');
@@ -54,31 +43,11 @@ class produto_model extends CI_Model {
 	}
 
 	public function getAll() {
-		$this -> db -> select('id as id_produto, referencia, nome, 
+		$this -> db -> select('id as id_produto, cod_barra, nome, 
                     descricao, preco_custo, preco_venda,
                     quantidade, status, validade, categoria');
 		$this -> db -> from('produto');
 		$produto = $this -> db -> get();
-                
-//                $precos = array();
-//                
-//                foreach ($produto as $linha) {
-//                    
-////                    echo " INICIO ";
-////                    echo "Referencia: ";
-////                    echo $linha -> referencia;
-////                    echo "Nome:  ";
-////                    echo element("nome", $linha);
-////                    echo "Preco_custo: ";
-////                    echo element("preco_custo", $linha);
-////                    echo "Preco_venda: ";
-////                    echo element("preco_venda", $linha);
-////                    echo " FIM";
-//                    
-////                    $precos = array(
-////                        'preco_custo' => $this->util->pontoParaVirgula($linha->preco_custo),
-////                        'preco_venda' => $this->util->pontoParaVirgula($linha->preco_venda));
-//                }
                 
                 return $produto;
 	}
@@ -86,10 +55,10 @@ class produto_model extends CI_Model {
 	public function do_select($pesquisa = null) {
 
 		$this -> db -> select
-                        ('referencia, nome, descricao, preco_custo, preco_venda,
+                        ('cod_barra, nome, descricao, preco_custo, preco_venda,
                           quantidade, status, validade, categoria, id as id_produto');
 		$this -> db -> from('produto');
-		$this -> db -> where('referencia', $pesquisa);
+		$this -> db -> where('cod_barra', $pesquisa);
 		$this -> db -> or_like('nome', $pesquisa);
                 $this -> db -> or_like('descricao', $pesquisa);
                 $this -> db -> or_like('preco_custo', $pesquisa);
@@ -106,9 +75,6 @@ class produto_model extends CI_Model {
                 $this -> db -> where('id', $id_produto);
 		$this -> db -> limit(1);
 		$produto = $this -> db -> get('produto') -> row();
-                
-//                $produto->preco_custo = $this->util->pontoParaVirgula($produto->preco_custo);
-//                $produto->preco_venda = $this->util->pontoParaVirgula($produto->preco_venda);
                 
                 if ($produto -> categoria == 1) {
                     $this -> db -> where('id_produto', $id_produto);
@@ -140,17 +106,21 @@ class produto_model extends CI_Model {
             if ($dados != null || $condicao != null) {
                 $this -> db -> trans_start();
                 
+                $ativo = 0;
+                if(element('status', $dados) == 'on') {
+                    $ativo = 1;
+                }
+      
                 $produto = array(
-                'referencia' => element('referencia', $dados),
+                'cod_barra' => element('cod_barra', $dados),
                 'nome' => element('nome', $dados),
                 'descricao' => element('descricao', $dados),
                 'preco_custo' => element('preco_custo', $dados),
                 'preco_venda' => element('preco_venda', $dados),
                 'quantidade'  => element('quantidade', $dados),
-                'status' => element('status', $dados),
+                'status' => $ativo,
                 'validade' => element('validade', $dados),
                 'quantidade' => element('quantidade', $dados),
-                'status' => element('status', $dados),
                 'validade' => $this->util->data_user_para_mysql(element('validade', $dados)));
                 
                 $this->db->update('produto', $produto, 'id = '.$condicao);

@@ -8,11 +8,11 @@ if($this->session->flashdata('msg')){
 
 $produto = $produto;//Pega a variavel da Controller (boa pratica)
 
-$this->table->set_heading('REFERÊNCIA','NOME','PREÇO DE CUSTO','PREÇO DE VENDA','QUANTIDADE','STATUS', '&nbsp; ','&nbsp; ');
+$this->table->set_heading('COD. PRODUTO','NOME','PREÇO DE CUSTO','PREÇO DE VENDA','QTD', '&nbsp; ','&nbsp; ');
 
 foreach ($produto as $linha) {
     
-    $this->table->add_row($linha->referencia, $linha->nome, $this->util->pontoParaVirgula($linha->preco_custo), $this->util->pontoParaVirgula($linha->preco_venda), $linha->quantidade, $linha->status, anchor("produto/visualiza/$linha->id_produto", '<center><img src="..\public/img/search.png" width="23"/></center>'),anchor("produto/update/$linha->id_produto", '<center><img src="..\public/img/edit.png" width="23"/></center>')); //anchor('produto/delete/'.$linha->id_produto,'<img src="..\public/img/delete.png" width="23"/>').'<center><p onClick="if (! confirm(\'Tem certeza que deseja excluir o produto abaixo? \n\n Referência: '.$linha->referencia.'\n Nome: '.$linha->nome.'\n Quantidade: '.$linha->quantidade.'\')) { return false; }">'.'</p></center>'
+    $this->table->add_row($linha->cod_barra.$linha->id_produto, $linha->nome, '<p><center>'.$this->util->pontoParaVirgula($linha->preco_custo), '<p><center>'.$this->util->pontoParaVirgula($linha->preco_venda), '<p><center>'.$linha->quantidade, anchor("produto/visualiza/$linha->id_produto", '<center><img src="..\public/img/search.png" width="23"/></center>'),anchor("produto/update/$linha->id_produto", '<center><img src="..\public/img/edit.png" width="23"/></center>')); //anchor('produto/delete/'.$linha->id_produto,'<img src="..\public/img/delete.png" width="23"/>').'<center><p onClick="if (! confirm(\'Tem certeza que deseja excluir o produto abaixo? \n\n Referência: '.$linha->referencia.'\n Nome: '.$linha->nome.'\n Quantidade: '.$linha->quantidade.'\')) { return false; }">'.'</p></center>'
 
 }
 

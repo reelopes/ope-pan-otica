@@ -27,9 +27,9 @@ echo"<table>";
 // Campos da tabela Produto
 //echo"<center><table>";
 echo"<tr><td>";
-echo form_label('Referencia');
+echo form_label('Código de Barras');
 echo"</td><td>";
-echo form_input(array('name'=>'referencia'), set_value('referencia', $query['produto']->referencia), 'maxlength="8" placeholder="Código do Produto" autocomplete ="off" style="width:150px;" onpaste="return false;"');
+echo form_input(array('name'=>'cod_barra'), set_value('cod_barra', $query['produto']->cod_barra), 'maxlength="8" placeholder="Código do Produto" autocomplete ="off" style="width:150px;" onpaste="return false;"');
 echo"</td><td>";
 echo form_label('Nome');
 echo"</td><td>";
@@ -56,19 +56,17 @@ echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('Quantidade');
 echo"</td><td>"; 
-echo form_input(array('name'=>'quantidade'),
-        set_value('quantidade', $query['produto']->quantidade), 'maxlength="8"  placeholder="00" autocomplete ="off" style="width:150px;" onpaste="return false;"');
+echo '<input name="quantidade" type="number" value='.$query['produto']->quantidade.' maxlenght="2" autocomplete="off" style="width:100px;" OnKeyPress="mascaraInteiro(this)" onpaste="return false;" required title="Campo quantidade é obrigatório">';
+//echo form_input(array('name'=>'quantidade'),
+//        set_value('quantidade', $query['produto']->quantidade), 'maxlength="8"  placeholder="00" autocomplete ="off" style="width:150px;" onpaste="return false;"');
 echo"</td><td>";
-echo form_label('Status');
-echo"</td><td>"; 
-echo'<select name="status">';
-        if($query['produto']->status == "Disponível") {
-            echo '<option value="Disponível"> Disponível</option>';
-            echo '<option value="Indisponível"> Indisponível</option></select>';
-        } else {
-            echo '<option value="Disponível"> Disponível</option>';
-            echo '<option selected value="Indisponível"> Indisponível</option></select>';
-        }
+echo form_label('Ativo');
+echo"</td><td>";
+if($query['produto']->status == 1) {
+    echo '<input name="status" type="checkbox" id = "ativo" checked/>';
+} else {
+    echo '<input name="status" type="checkbox" id = "ativo"/>';
+}
 echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('Validade');

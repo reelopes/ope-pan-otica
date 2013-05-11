@@ -46,13 +46,12 @@ class Produto extends CI_Controller {
 	}
         
         public function adiciona() {
-            $this -> form_validation -> set_rules('referencia', 'Referencia', 'trim|required');
+            $this -> form_validation -> set_rules('cod_barra', 'Código de Barras', 'trim');
             $this -> form_validation -> set_rules('nome', 'Nome', 'trim|required');
             $this -> form_validation -> set_rules('descricao', 'Descricao', 'trim|max_length[60]');
             $this -> form_validation -> set_rules('preco_custo', 'Preço de Custo', 'trim|ucwords|required|max_length[10]');
             $this -> form_validation -> set_rules('preco_venda', 'Preço de Venda', 'trim|ucwords|required|max_length[10]');
             $this -> form_validation -> set_rules('quantidade', 'Quantidade', 'trim');
-            $this -> form_validation -> set_rules('status', 'Status', 'trim');
             $this -> form_validation -> set_rules('validade', 'Validade', 'trim');
             
             if($this -> input -> post('produto') == 1) {
@@ -68,16 +67,16 @@ class Produto extends CI_Controller {
             
             if ($this -> form_validation -> run()) {
                 if ($this -> input -> post('preco_custo') <= $this -> input -> post('preco_venda')) {
-                    $dados = elements(array('referencia', 'nome', 'descricao', 'preco_custo', 'preco_venda', 'quantidade', 'status', 'validade',
+                    $dados = elements(array('cod_barra', 'nome', 'descricao', 'preco_custo', 'preco_venda', 'quantidade', 'validade',
                     'largura_lente', 'largura_ponte', 'comprimento_haste', 'modelo', 'grife', 'fornecedor',
                     'produto'), $this -> input -> post());
                     $this -> produto_model -> do_insert($dados);
                 } else {
-                    $msgPM = 'Preço de custo não pode ser maior que Preço de venda';
+                    $msgPM = 'Preço de custo é maior que Preço de venda';
                 }
             }
            if ($this -> input -> post('preco_custo') > $this -> input -> post('preco_venda')) {
-               $msgPM = 'Preço de custo não pode ser maior que Preço de venda';
+               $msgPM = 'Preço de custo é maior que Preço de venda';
            }
             
             $dados = array('titulo' => 'Criar Produto', 'pagina' => 'adiciona_produto', 'carrega' => $this -> input -> post('produto'),
@@ -104,7 +103,7 @@ class Produto extends CI_Controller {
 	}
 
 	public function update() {
-            $this -> form_validation -> set_rules('referencia', 'Referencia', 'trim|required');
+            $this -> form_validation -> set_rules('cod_barra', 'cod_barra', 'trim|required');
             $this -> form_validation -> set_rules('nome', 'Nome', 'trim|required');
             $this -> form_validation -> set_rules('descricao', 'Descricao', 'trim|max_length[60]|');
             $this -> form_validation -> set_rules('preco_custo', 'Preço de Custo', 'trim|numeric|ucwords|required');
@@ -124,7 +123,7 @@ class Produto extends CI_Controller {
             }
             
             if ($this -> form_validation -> run()) {
-                $dados = elements(array('referencia', 'nome', 'descricao', 'preco_custo', 'preco_venda', 'quantidade', 'status', 'validade', 'data_entrega',
+                $dados = elements(array('cod_barra', 'nome', 'descricao', 'preco_custo', 'preco_venda', 'quantidade', 'status', 'validade', 'data_entrega',
                     'largura_lente', 'largura_ponte', 'comprimento_haste', 'modelo', 'grife', 'fornecedor',
                     'produto'), $this -> input -> post());
                 
