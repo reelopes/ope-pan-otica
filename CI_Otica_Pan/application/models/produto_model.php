@@ -14,7 +14,7 @@ class produto_model extends CI_Model {
                 'preco_custo' => $this->util->virgulaParaPonto(element('preco_custo', $dados)),
                 'preco_venda' => $this->util->virgulaParaPonto(element('preco_venda', $dados)),
                 'quantidade'  => ''.element('quantidade', $dados),
-                'validade' => $this->util->data_user_para_mysql(element('validade', $dados)),
+                'validade' => element('validade', $dados),
                 'categoria' => ''.element('produto', $dados),
                 );
                 
@@ -115,13 +115,12 @@ class produto_model extends CI_Model {
                 'cod_barra' => ''.element('cod_barra', $dados),
                 'nome' => ''.element('nome', $dados),
                 'descricao' => ''.element('descricao', $dados),
-                'preco_custo' => ''.element('preco_custo', $dados),
-                'preco_venda' => ''.element('preco_venda', $dados),
+                'preco_custo' => $this->util->virgulaParaPonto(element('preco_custo', $dados)),
+                'preco_venda' => $this->util->virgulaParaPonto(element('preco_venda', $dados)),
                 'quantidade'  => ''.element('quantidade', $dados),
                 'status' => $ativo,
-                'validade' => ''.element('validade', $dados),
-                'quantidade' => ''.element('quantidade', $dados),
-                'validade' => $this->util->data_user_para_mysql(element('validade', $dados)));
+                'validade' => element('validade', $dados),
+                'quantidade' => ''.element('quantidade', $dados));
                 
                 $this->db->update('produto', $produto, 'id = '.$condicao);
                 
@@ -159,7 +158,6 @@ class produto_model extends CI_Model {
                 
                 $this -> session -> set_flashdata('deleteok', 'Dados deletados com sucesso');
                 redirect('produto/delete');
-                
             }
             return false;
 	}

@@ -12,7 +12,6 @@ if($this->session->flashdata('cadastrook')){
 $todos_fornecedor = $todos_fornecedor;
 $todas_grife = $todas_grife;
 $carrega = $carrega;
-$msgErroP = $msgErroP;
 
 if($carrega == 1) {
     echo '<body onload="mostraArmacao();" />';
@@ -21,6 +20,8 @@ if($carrega == 1) {
 }
 
 echo form_open('produto/adiciona');
+
+echo  '<p onClick="if (! confirm(\'Preço de custo é maior que Preço de venda.\n Deseja Cadastrar mesmo assim?\')) { return false; }">';
 
 
 // Campos da tabela Produto
@@ -63,22 +64,22 @@ echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('Preço de custo');
 echo"</td><td>"; 
-echo form_input(array('name'=>'preco_custo'),  set_value('preco_custo'), 'maxlength="3" placeholder="0.000,00" autocomplete ="off" onkeypress="return(FormataReais(this,\'.\',\',\',event));" style="width:80px;" onpaste="return false;" required title="Campo preço é obrigatório"');
+echo form_input(array('name'=>'preco_custo'),  set_value('preco_custo'), 'id="precoCusto" maxlength="3" placeholder="0.000,00" autocomplete ="off" onkeypress="return(FormataReais(this,\'.\',\',\',event));" style="width:80px;" onpaste="return false;" required title="Campo preço é obrigatório"');
 echo"</td>";
 echo"<td>";
 echo form_label('Preço de venda');
 echo"</td><td>"; 
-echo form_input(array('name'=>'preco_venda'),  set_value('preco_venda'), 'maxlength="3" max="9" placeholder="0.000,00" autocomplete ="off" onkeypress="return(FormataReais(this,\'.\',\',\',event));" style="width:80px;" onpaste="return false;" required title="Campo preço é obrigatório"');
+echo form_input(array('name'=>'preco_venda'),  set_value('preco_venda'), 'id="precoVenda" maxlength="3" placeholder="0.000,00" autocomplete ="off" onkeypress="return(FormataReais(this,\'.\',\',\',event));" style="width:80px;" onpaste="return false;" required title="Campo preço é obrigatório"');
 echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('Quantidade');
 echo"</td><td>"; 
-//echo '<input type="number" value="1" maxlenght="2" min="0" autocomplete="off" style="width:100px;" OnKeyPress="mascaraInteiro(this)" onpaste="return false;" required title="Campo quantidade é obrigatório">'; LINDO :)
 echo form_type(array('name'=>'quantidade'), '1', ' maxlenght="2" min="0" autocomplete="off" style="width:100px;" OnKeyPress="mascaraInteiro(this)" onpaste="return false;" required title="Campo quantidade é obrigatório"', 'number');
 echo"</td><td>";
 echo form_label('Validade');
 echo"</td><td>"; 
-echo form_input(array('name'=>'validade'),  set_value('validade'), 'maxlength="10" placeholder="DD/MM/AAAA" autocomplete ="off" style="width:150px;" OnKeyPress="MascaraData(this)" onpaste="return false;"');
+echo form_type(array('name'=>'validade'),  set_value('validade'),'maxlength="10" autocomplete ="off" min="'.date('Y-m-d').'"','date');
+echo form_error('validade');
 echo"</td></tr>";
 echo"</table>";
 echo"<p></p>";
@@ -136,14 +137,13 @@ echo"<p></p>";
 echo"<table>";
 echo"<tr><td>";
 echo form_label('','',array('style' => 'padding-right:80px;',));
-echo form_submit('', 'Cadastrar');
+echo form_submit('', 'Cadastrar','onClick="if (precoCusto.value > precoVenda.value) { if (! confirm(\'Preço de custo é maior que Preço de venda.\n\nDeseja Cadastrar mesmo assim?\')) { return false;} }"');
 echo"</td></tr>"; 
 echo"</table>";
 echo "</div>";
 echo"</fieldset>";
 
 echo validation_errors('<p>','</p>');
-echo $msgErroP;
 
 echo form_close();
 ?>

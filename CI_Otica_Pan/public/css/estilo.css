@@ -81,6 +81,20 @@ input {
   font-size: 14px;
 }
 
+input[type=checkbox] {
+  margin: 5px;
+  padding: 0 10px;
+  color: #404040;
+  background: white;
+  border: 1px solid;
+  border-color: #c4c4c4 #d1d1d1 #d4d4d4;
+  border-radius: 0px;
+  outline: 5px solid #eff4f7;
+  -moz-outline-radius: 3px;
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
 input[type=text], input[type=password],input[type=date],input[type=time],input[type=email], input[type=number] {
   margin: 5px;
   padding: 0 10px;
@@ -111,7 +125,7 @@ select{
 }
     
 
-input[type=text]:focus, input[type=number]:focus, input[type=password]:focus,input:focus,select:focus {
+input[type=text]:focus, input[type=number]:focus, input[type=checkbox]:focus, input[type=password]:focus,input:focus,select:focus {
   border-color: #7dc9e2;
   outline-color: #dceefc;
   outline-offset: 0;
@@ -146,7 +160,7 @@ input[type=submit]:active,input[type=button]:active {
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
 }
 
-.lt-ie9 input[type=text], .lt-ie9 input[type=number], .lt-ie9 input[type=password] {
+.lt-ie9 input[type=text], .lt-ie9 input[type=number], .lt-ie9 input[type=checkbox], .lt-ie9 input[type=password] {
   line-height: 34px;
 }
 

@@ -66,22 +66,15 @@ class Produto extends CI_Controller {
             $msgPM = '';
             
             if ($this -> form_validation -> run()) {
-                if ($this -> input -> post('preco_custo') <= $this -> input -> post('preco_venda')) {
                     $dados = elements(array('cod_barra', 'nome', 'descricao', 'preco_custo', 'preco_venda', 'quantidade', 'validade',
                     'largura_lente', 'largura_ponte', 'comprimento_haste', 'modelo', 'grife', 'fornecedor',
                     'produto'), $this -> input -> post());
                     $this -> produto_model -> do_insert($dados);
-                } else {
-                    $msgPM = 'Preço de custo é maior que Preço de venda';
-                }
             }
-           if ($this -> input -> post('preco_custo') > $this -> input -> post('preco_venda')) {
-               $msgPM = 'Preço de custo é maior que Preço de venda';
-           }
             
             $dados = array('titulo' => 'Criar Produto', 'pagina' => 'adiciona_produto', 'carrega' => $this -> input -> post('produto'),
                 'todos_fornecedor' => $this -> fornecedor_model -> getAll() -> result(),
-                'todas_grife' => $this -> grife_model -> getAll() -> result(), 'msgErroP' => $msgPM);
+                'todas_grife' => $this -> grife_model -> getAll() -> result());
             
             $this -> load -> view('Principal', $dados);
 	}
@@ -103,23 +96,23 @@ class Produto extends CI_Controller {
 	}
 
 	public function update() {
-            $this -> form_validation -> set_rules('cod_barra', 'cod_barra', 'trim|required');
+            
+            $this -> form_validation -> set_rules('cod_barra', 'cod_barra', 'trim');
             $this -> form_validation -> set_rules('nome', 'Nome', 'trim|required');
             $this -> form_validation -> set_rules('descricao', 'Descricao', 'trim|max_length[60]|');
-            $this -> form_validation -> set_rules('preco_custo', 'Preço de Custo', 'trim|numeric|ucwords|required');
-            $this -> form_validation -> set_rules('preco_venda', 'Preço de Venda', 'trim|numeric|ucwords|required');
+            $this -> form_validation -> set_rules('preco_custo', 'Preço de Custo', 'trim|required');
+            $this -> form_validation -> set_rules('preco_venda', 'Preço de Venda', 'trim|required');
             $this -> form_validation -> set_rules('quantidade', 'Quantidade', 'trim');
             $this -> form_validation -> set_rules('status', 'Status', 'trim');
             $this -> form_validation -> set_rules('validade', 'Validade', 'trim');
             
             if($this -> input -> post('produto') == 1) {
-                $this -> form_validation -> set_rules('largura_lente', 'Largura da lente', 'required');
-                $this -> form_validation -> set_rules('largura_ponte', 'Largura da Ponte', 'required');
-                $this -> form_validation -> set_rules('comprimento_haste', 'Comprimento da haste', 'required');
+                $this -> form_validation -> set_rules('largura_lente', 'Largura da lente', 'trim');
+                $this -> form_validation -> set_rules('largura_ponte', 'Largura da Ponte', 'trim');
+                $this -> form_validation -> set_rules('comprimento_haste', 'Comprimento da haste', 'trim');
                 $this -> form_validation -> set_rules('modelo', 'modelo', 'trim');
-                $this -> form_validation -> set_rules('grife', 'Grife', 'required');
-                $this -> form_validation -> set_rules('fornecedor', 'Fornecedor', 'required');
-                
+                $this -> form_validation -> set_rules('grife', 'Grife', 'trim');
+                $this -> form_validation -> set_rules('fornecedor', 'Fornecedor', 'trim');
             }
             
             if ($this -> form_validation -> run()) {
@@ -132,7 +125,7 @@ class Produto extends CI_Controller {
             }
             
             $dados = array('titulo' => 'Atualiza Produto', 'pagina' => 'atualiza_produto');
-            $this -> load -> view('Principal', $dados);
+            $this -> load -> view('Principal_popup', $dados);
         }
         
 	public function delete() {

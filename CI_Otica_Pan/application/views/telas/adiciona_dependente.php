@@ -1,5 +1,5 @@
 <?php
-echo"<div class=formulario style='  margin-left: 40px; width: 400px;  padding: 2px 2px 2px;  border-radius: 3px;'>";
+echo"<div class=formulario style='margin-left: 40px; width: 400px;  padding: 2px 2px 2px;  border-radius: 3px;'>";
 echo"<h2>$titulo</h2>";//TITULO
 //Exime mensagem de agendamento do cliente Javascript
 if ($this->session->flashdata('msg')) {

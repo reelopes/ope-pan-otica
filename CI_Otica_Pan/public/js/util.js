@@ -223,3 +223,14 @@ function abrirPopUp(url,width,height) {
    window.open(url,'janela', 'left='+left+',width='+width+', height='+height+', top='+top+', scrollbars=yes, status=no, toolbar=no, location=yes, directories=no, menubar=no, resizable=no, fullscreen=no'); 
 
 }
+
+function validaPreco(precoCusto, precoVenda) {
+
+    alert("OI");
+
+    if (document.getElementById(precoCusto.value) > document.getElementById(precoVenda.value)) {
+        if (! confirm('Preço de custo é maior que Preço de venda.\n\nDeseja Cadastrar mesmo assim?')) {
+            return false;
+        }
+    }
+}

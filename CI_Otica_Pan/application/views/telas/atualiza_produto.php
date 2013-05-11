@@ -1,6 +1,6 @@
 <?php
 
-echo"<div class=formulario>";
+echo"<div class=formulario style='  margin-left: 40px; width: 700px;  padding: 2px 2px 2px;  border-radius: 3px;'>";
 echo"<h2>$titulo</h2>";
 $id_produto = $this->uri->segment(3);
 
@@ -10,12 +10,10 @@ if($id_produto == NULL){
 
 if($this->session->flashdata('statusUpdate')){
     $msg = $this->session->flashdata('statusUpdate');
-    echo "<body onLoad=\" alert('$msg');\">";
+    echo "<body onLoad=\" alert('$msg');window.opener.location.reload();window.close();\">";
 }
 
 $query = $this->produto_model->get_byid($id_produto);
-echo validation_errors('<p>','</p>');
-echo '<p>'.$this->session->flashdata('statusUpdate').'</p>';
 echo form_open("Produto/update/$id_produto");
 
 $todos_fornecedor = $this -> fornecedor_model -> getAll() -> result();
@@ -30,36 +28,41 @@ echo"<tr><td>";
 echo form_label('Código de Barras');
 echo"</td><td>";
 echo form_input(array('name'=>'cod_barra'), set_value('cod_barra', $query['produto']->cod_barra), 'maxlength="8" placeholder="Código do Produto" autocomplete ="off" style="width:150px;" onpaste="return false;"');
-echo"</td><td>";
+echo"</td><td align='right'>";
 echo form_label('Nome');
 echo"</td><td>";
 echo form_input(array('name'=>'nome'),
-        set_value('nome', $query['produto']->nome), 'maxlength="20" placeholder="Nome do produto" autocomplete ="off" style="width:250px;"');
+        set_value('nome', $query['produto']->nome), 'maxlength="20" placeholder="Nome do produto" autocomplete ="off" style="width:260px;" required title="Campo nome é obrigatório"');
 echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('Descricao');
-echo"</td><td colspan='3'>"; 
+echo"</td><td colspan='4'>"; 
 echo form_input(array('name'=>'descricao'),
-        set_value('descricao', $query['produto']->descricao), 'maxlength="200" placeholder="Descrição do produto" autocomplete ="off" style="width:525px;"');
+        set_value('descricao', $query['produto']->descricao), 'maxlength="200" placeholder="Descrição do produto" autocomplete ="off" style="width:520px;"');
 echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('Preco de custo');
 echo"</td><td>"; 
 echo form_input(array('name'=>'preco_custo'),
-        set_value('preco_custo', $query['produto']->preco_custo), 'maxlength="7" placeholder="0000,00" autocomplete ="off" onkeypress="return(FormataReais(this,\'.\',\'.\',event))" style="width:80px;" onpaste="return false;"');
+        set_value('preco_custo', $this->util->pontoParaVirgula($query['produto']->preco_custo)), 'maxlength="3" placeholder="0.000,00" autocomplete ="off" onkeypress="return(FormataReais(this,\'.\',\',\',event));" style="width:80px;" onpaste="return false;" required title="Campo preço é obrigatório"');
 echo"</td><td>";
 echo form_label('Preco de venda');
 echo"</td><td>"; 
 echo form_input(array('name'=>'preco_venda'),
-        set_value('preco_venda', $query['produto']->preco_venda), 'placeholder="0000,00" autocomplete ="off" onkeypress="return(FormataReais(this,\'.\',\'.\',event)); maxlength="7"" style="width:80px;" onpaste="return false;"');
+        set_value('preco_venda', $this->util->pontoParaVirgula($query['produto']->preco_venda)), 'maxlength="3" placeholder="0.000,00" autocomplete ="off" onkeypress="return(FormataReais(this,\'.\',\',\',event));" style="width:80px;" onpaste="return false;" required title="Campo preço é obrigatório"');
 echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('Quantidade');
 echo"</td><td>"; 
-echo '<input name="quantidade" type="number" value='.$query['produto']->quantidade.' maxlenght="2" autocomplete="off" style="width:100px;" OnKeyPress="mascaraInteiro(this)" onpaste="return false;" required title="Campo quantidade é obrigatório">';
-//echo form_input(array('name'=>'quantidade'),
-//        set_value('quantidade', $query['produto']->quantidade), 'maxlength="8"  placeholder="00" autocomplete ="off" style="width:150px;" onpaste="return false;"');
+echo form_type(array('name'=>'quantidade'),
+        set_value('quantidade', $query['produto']->quantidade), ' maxlenght="2" min="0" autocomplete="off" style="width:80px;" OnKeyPress="mascaraInteiro(this)" onpaste="return false;" required title="Campo quantidade é obrigatório"', 'number');
 echo"</td><td>";
+echo form_label('Validade');
+echo"</td><td>"; 
+echo form_type(array('name'=>'validade'),  set_value('validade', $query['produto']->validade),'maxlength="10" autocomplete ="off" min="'.date('Y-m-d').'"','date');
+echo form_error('validade');
+echo"</td></tr>";
+echo"<tr><td>";
 echo form_label('Ativo');
 echo"</td><td>";
 if($query['produto']->status == 1) {
@@ -68,13 +71,8 @@ if($query['produto']->status == 1) {
     echo '<input name="status" type="checkbox" id = "ativo"/>';
 }
 echo"</td></tr>";
-echo"<tr><td>";
-echo form_label('Validade');
-echo"</td><td>"; 
-echo form_input(array('name'=>'validade'),
-        set_value('validade', $this->util->data_mysql_para_user($query['produto']->validade)),'maxlength="10" autocomplete ="off" placeholder="DD/MM/AAAA" OnKeyPress="MascaraData(this)" onpaste="return false;"');
-echo"</td></tr>";
 echo "</table>";
+echo "<br>";
 // Oculta campos e mostra campos de acordo com a escolha
 if($query['produto']->categoria == 1) {
 // div armacao, carrega campos de armacao

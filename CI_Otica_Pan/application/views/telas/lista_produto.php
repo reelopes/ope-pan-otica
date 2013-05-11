@@ -12,13 +12,27 @@ $this->table->set_heading('COD. PRODUTO','NOME','PREÇO DE CUSTO','PREÇO DE VEN
 
 foreach ($produto as $linha) {
     
-    $this->table->add_row($linha->cod_barra.$linha->id_produto, $linha->nome, '<p><center>'.$this->util->pontoParaVirgula($linha->preco_custo), '<p><center>'.$this->util->pontoParaVirgula($linha->preco_venda), '<p><center>'.$linha->quantidade, anchor("produto/visualiza/$linha->id_produto", '<center><img src="..\public/img/search.png" width="23"/></center>'),anchor("produto/update/$linha->id_produto", '<center><img src="..\public/img/edit.png" width="23"/></center>')); //anchor('produto/delete/'.$linha->id_produto,'<img src="..\public/img/delete.png" width="23"/>').'<center><p onClick="if (! confirm(\'Tem certeza que deseja excluir o produto abaixo? \n\n Referência: '.$linha->referencia.'\n Nome: '.$linha->nome.'\n Quantidade: '.$linha->quantidade.'\')) { return false; }">'.'</p></center>'
-
+    if($linha->categoria=="0"){
+        $lenPopUp = "'780','400'";
+    } else {
+        $lenPopUp = "'780','550'";
+    }
+  
+    if ($linha->status == "0") {
+        continue;
+    }
+    
+    $this->table->add_row($linha->cod_barra.$linha->id_produto, $linha->nome, '<p><center>'.$this->util->pontoParaVirgula($linha->preco_custo), '<p><center>'.$this->util->pontoParaVirgula($linha->preco_venda), '<p><center>'.$linha->quantidade, anchor("produto/visualiza/$linha->id_produto", '<center><img src="..\public/img/search.png" width="23"/></center>'),"<a href=\"javascript:abrirPopUp('" . base_url('produto/update/' . $linha->id_produto) . "',".$lenPopUp.");\"> <center><img src='..\public/img/edit.png' width='23'/></center></a>");
+    
 }
 
 $tmpl = array(
     'table_open'=>'<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">',
-      );
+    'cell_start' => '<td valign="middle">',
+    'cell_end' => '</td">',
+    'cell_alt_start' => '<td valign="middle">',
+    'cell_alt_end' => '</td>',
+);
 
 echo"<div class='tabela'>";
 $this->table->set_template($tmpl);

@@ -16,7 +16,7 @@ $query = $this->cliente_model->retornaCliente($id_cliente);
 
 if($this->session->flashdata('statusUpdate')){
     $msg = $this->session->flashdata('statusUpdate');
-    echo "<body onLoad=\" alert('$msg');\">";
+    echo "<body onLoad=\" alert('$msg');window.opener.location.reload();window.close();\">";
 }
 
 
