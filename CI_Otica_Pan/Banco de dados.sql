@@ -816,7 +816,7 @@ Table data for otica_pan.pessoa
 INSERT INTO `pessoa` VALUES 
 ('fdias.d.neves@gmail.com','Fernando Dias Das Neves',10),
 ('eduardo@gmail.com','Eduardo Pereira',11),
-('jose@gmail.com','Jos? Mendes (Z?)',12),
+('jose@gmail.com','José Mendes',12),
 ('pablo.cunha@gmail.com','Pablo Cunha',13),
 ('eli@aguero.com.br','Eli Aguero',15),
 ('kauane@lucena.com.br','Kauane Lucena',16),
