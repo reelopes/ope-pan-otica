@@ -1,127 +1,113 @@
 <?php
+
 if (!defined('BASEPATH'))
-	exit('No direct script access allowed');
+    exit('No direct script access allowed');
 
 class Fornecedor_model extends CI_Model {
 
-	public function do_insert($dados = null) {
-		if ($dados != null) {
+    public function do_insert($dados = null) {
+        if ($dados != null) {
 
-			$this -> db -> trans_start();
-			$pessoa = array('nome' => element('nome', $dados), 'email' => element('email', $dados), );
-			$this -> db -> insert('pessoa', $pessoa);
+            $this->db->trans_start();
+            $pessoa = array('nome' => ''.element('nome', $dados), 'email' => ''.element('email', $dados),);
+            $this->db->insert('pessoa', $pessoa);
 
-			$id_pessoa = $this -> db -> insert_id();
+            $id_pessoa = $this->db->insert_id();
 
-			$fornecedor = array('cnpj' => element('cnpj', $dados), 'id_pessoa' => $id_pessoa, );
-			$this -> db -> insert('fornecedor', $fornecedor);
+            $fornecedor = array('cnpj' => ''.element('cnpj', $dados), 'id_pessoa' => $id_pessoa,);
+            $this->db->insert('fornecedor', $fornecedor);
 
-			$telefone_fixo = array('num_telefone' => element('num_telefone1', $dados), 'id_tipo_telefone' => '1', 'id_pessoa' => $id_pessoa, );
+            $telefone_fixo = array('num_telefone' => ''.element('num_telefone1', $dados), 'id_tipo_telefone' => '1', 'id_pessoa' => $id_pessoa,);
 
-			$this -> db -> insert('telefone', $telefone_fixo);
+            $this->db->insert('telefone', $telefone_fixo);
 
-			$telefone_celular = array('num_telefone' => element('num_telefone2', $dados), 'id_tipo_telefone' => '2', 'id_pessoa' => $id_pessoa, );
-			$this -> db -> insert('telefone', $telefone_celular);
+            $telefone_celular = array('num_telefone' => ''.element('num_telefone2', $dados), 'id_tipo_telefone' => '2', 'id_pessoa' => $id_pessoa,);
+            $this->db->insert('telefone', $telefone_celular);
 
-			$this -> db -> trans_complete();
+            $this->db->trans_complete();
 
-			$this -> session -> set_flashdata('cadastrook', 'Cadastro efetuado com sucesso');
+            $this->session->set_flashdata('cadastrook', 'Cadastro efetuado com sucesso');
 
-			redirect('fornecedor/adiciona');
-		}
-	}
+            redirect('fornecedor/adiciona');
+        }
+    }
 
-	public function getAll() {
+    public function getAll() {
 
-		$this -> db -> select('pessoa.id as id_pessoa, pessoa.nome, pessoa.email, fornecedor.id as id_fornecedor, fornecedor.cnpj, telefone.num_telefone');
-		$this -> db -> from('pessoa');
-		$this -> db -> join('fornecedor', 'fornecedor.id_pessoa = pessoa.id');
-		$this -> db -> join('telefone', 'pessoa.id = telefone.id_pessoa');
-		$this -> db -> group_by('pessoa.id');
+        $this->db->select('pessoa.id as id_pessoa, pessoa.nome, pessoa.email, fornecedor.id as id_fornecedor, fornecedor.cnpj, telefone.num_telefone');
+        $this->db->from('pessoa');
+        $this->db->join('fornecedor', 'fornecedor.id_pessoa = pessoa.id');
+        $this->db->join('telefone', 'pessoa.id = telefone.id_pessoa and telefone.num_telefone != ""');
+        $this->db->group_by('pessoa.id');
 
-		return $this -> db -> get();
-	}
+        return $this->db->get();
+    }
 
-	public function do_select($pesquisa = null) {
-                
-		$this -> db -> select('pessoa.id as id_pessoa, pessoa.nome, pessoa.email, fornecedor.id as id_fornecedor, fornecedor.cnpj, telefone.num_telefone');
-		$this -> db -> from('pessoa');
-		$this -> db -> join('fornecedor', 'fornecedor.id_pessoa = pessoa.id');
-		$this -> db -> join('telefone', 'pessoa.id = telefone.id_pessoa');
-		$this -> db -> like('pessoa.nome', $pesquisa);
-		$this -> db -> or_like('pessoa.email', $pesquisa);
-		$this -> db -> or_like('fornecedor.cnpj', $pesquisa);
-		$this -> db -> or_like('telefone.num_telefone', $pesquisa);
-		$this -> db -> group_by('pessoa.id');
+    public function get_byid($id_pessoa = NULL, $id_fornecedor = NULL) {
 
-		return $this -> db -> get();
-	}
+        if ($id_fornecedor != NULL || $id_pessoa != NULL) {
 
-	public function get_byid($id_pessoa = NULL, $id_fornecedor = NULL) {
+            $this->db->where('id', $id_pessoa);
+            $this->db->limit(1);
+            $pessoa = $this->db->get('pessoa')->row();
 
-		if ($id_fornecedor != NULL || $id_pessoa != NULL) {
+            $this->db->where('id', $id_fornecedor);
+            $this->db->limit(1);
+            $cliente = $this->db->get('fornecedor')->row();
 
-			$this -> db -> where('id', $id_pessoa);
-			$this -> db -> limit(1);
-			$pessoa = $this -> db -> get('pessoa') -> row();
+            $this->db->where('id_pessoa', $id_pessoa);
+            $telefone = $this->db->get('telefone')->result();
 
-			$this -> db -> where('id', $id_fornecedor);
-			$this -> db -> limit(1);
-			$cliente = $this -> db -> get('fornecedor') -> row();
+            $dados = array('pessoa' => $pessoa, 'fornecedor' => $cliente, 'telefone' => $telefone,);
+            return $dados;
+        }
+    }
 
-			$this -> db -> where('id_pessoa', $id_pessoa);
-			$telefone = $this -> db -> get('telefone') -> result();
+    public function do_update($dados = NULL, $condicao = NULL) {
 
-			$dados = array('pessoa' => $pessoa, 'fornecedor' => $cliente, 'telefone' => $telefone, );
-			return $dados;
-		}
-	}
+        if ($dados != null || $condicao != null) {
 
-	public function do_update($dados = NULL, $condicao = NULL) {
+            $this->db->trans_start();
 
-		if ($dados != null || $condicao != null) {
+            $pessoa = array('nome' => ''.element('nome', $dados), 'email' => ''.element('email', $dados),);
 
-			$this -> db -> trans_start();
+            $condicao_pessoa = array('id' => $condicao['id_pessoa'],);
+            $this->db->update('pessoa', $pessoa, $condicao_pessoa);
 
-			$pessoa = array('nome' => element('nome', $dados), 'email' => element('email', $dados), );
+            $fornecedor = array('cnpj' => ''.element('cnpj', $dados));
 
-			$condicao_pessoa = array('id' => $condicao['id_pessoa'], );
-			$this -> db -> update('pessoa', $pessoa, $condicao_pessoa);
+            $condicao_fornecedor = array('id_pessoa' => $condicao['id_pessoa'],);
+            $this->db->update('fornecedor', $fornecedor, $condicao_fornecedor);
 
-			$fornecedor = array('cnpj' => element('cnpj', $dados));
+            $telefone_fixo = array('num_telefone' => ''.element('num_telefone1', $dados),);
+            $condicao_telefone_fixo = array('id_pessoa' => $condicao['id_pessoa'], 'id_tipo_telefone' => 1,);
+            $this->db->update('telefone', $telefone_fixo, $condicao_telefone_fixo);
 
-			$condicao_fornecedor = array('id_pessoa' => $condicao['id_pessoa'], );
-			$this -> db -> update('fornecedor', $fornecedor, $condicao_fornecedor);
+            $telefone_celular = array('num_telefone' => ''.element('num_telefone2', $dados),);
+            $condicao_telefone_celular = array('id_pessoa' => $condicao['id_pessoa'], 'id_tipo_telefone' => 2,);
+            $this->db->update('telefone', $telefone_celular, $condicao_telefone_celular);
 
-			$telefone_fixo = array('num_telefone' => element('num_telefone1', $dados), );
-			$condicao_telefone_fixo = array('id_pessoa' => $condicao['id_pessoa'], 'id_tipo_telefone' => 1, );
-			$this -> db -> update('telefone', $telefone_fixo, $condicao_telefone_fixo);
+            if ($this->db->trans_complete()) {
+                $this->session->set_flashdata('statusUpdate', 'Alterado com sucesso');
+            } else {
+                $this->session->set_flashdata('statusUpdate', 'Não foi possível alterar o fornecedor');
+            }
 
-			$telefone_celular = array('num_telefone' => element('num_telefone2', $dados), );
-			$condicao_telefone_celular = array('id_pessoa' => $condicao['id_pessoa'], 'id_tipo_telefone' => 2, );
-			$this -> db -> update('telefone', $telefone_celular, $condicao_telefone_celular);
+            redirect(current_url());
+        }
+        redirect('fornecedor/lista');
+    }
 
-			if ($this -> db -> trans_complete()) {
-				$this -> session -> set_flashdata('statusUpdate', 'Alterado com sucesso');
-			} else {
-				$this -> session -> set_flashdata('statusUpdate', 'Não foi possível alterar o fornecedor');
-			}
-
-			redirect(current_url());
-		}
-		redirect('fornecedor/lista');
-	}
-
-	public function do_delete($id = null) {
-
-		if ($id != null) {
-
-			$this -> db -> where('id', $id);
-			$this -> db -> delete('pessoa');
-			$this -> session -> set_flashdata('deleteok', 'Dados deletados com sucesso');
-			redirect('fornecedor/delete');
-		}
-		return false;
-	}
+//    public function do_delete($id = null) {
+//
+//        if ($id != null) {
+//
+//            $this->db->where('id', $id);
+//            $this->db->delete('pessoa');
+//            $this->session->set_flashdata('deleteok', 'Dados deletados com sucesso');
+//            redirect('fornecedor/delete');
+//        }
+//        return false;
+//    }
 
 }

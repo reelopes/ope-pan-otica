@@ -123,17 +123,16 @@ class Produto extends CI_Controller {
         $dados = array('titulo' => 'Atualiza Produto', 'pagina' => 'atualiza_produto');
         $this->load->view('Principal_popup', $dados);
     }
-
-    public function delete() {
-        $dados = array('titulo' => 'CRUD &raquo; Delete', 'tela' => 'Delete',);
-        $id = $this->uri->segment(3);
-
-        if ($id == NULL) {
-            redirect('produto/lista');
-        }
-
-        $this->produto_model->do_delete($id);
-        $this->load->view('Principal', $dados);
-    }
-
+    
+//    public function delete() {
+//        $dados = array('titulo' => 'CRUD &raquo; Delete', 'tela' => 'Delete',);
+//        $id = $this->uri->segment(3);
+//
+//        if ($id == NULL) {
+//            redirect('produto/lista');
+//        }
+//
+//        $this->produto_model->do_delete($id);
+//        $this->load->view('Principal', $dados);
+//    }
 }

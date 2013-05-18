@@ -17,33 +17,29 @@ echo"<table>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Nome');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'nome'),  set_value('nome'),'maxlength="100" autocomplete ="off" placeholder="Nome Completo do Fornecedor" autofocus style="width:300px;"');
-echo form_error('nome');
+echo form_input(array('name'=>'nome'),  set_value('nome'),'maxlength="100" autocomplete ="off" placeholder="Nome Completo do Fornecedor" autofocus style="width:300px;" required title="Campo Nome é obrigatório"');
 echo"</td></tr>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Email');
 echo"</td><td>";//Essa linha pode remover
-echo form_input(array('name'=>'email'),set_value('email'),'maxlength="100" autocomplete ="off" placeholder="exemplo@exemplo.com.br" style="width:300px;"');
+echo form_type(array('name'=>'email'),set_value('email'),'maxlength="100" autocomplete ="off" placeholder="exemplo@exemplo.com.br" style="width:300px;"','email');
 echo form_error('email');
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('CNPJ');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'cnpj'),  set_value('cnpj'),'maxlength="18" autocomplete ="off" placeholder="XX.XXX.XXX/XXXX-XX" OnKeyPress="MascaraCNPJ(this)"');
+echo form_input(array('name'=>'cnpj'),  set_value('cnpj'),'maxlength="18" autocomplete ="off" placeholder="XX.XXX.XXX/XXXX-XX" OnKeyPress="MascaraCNPJ(this)" onpaste="return false" required title="Campo CNPJ é obrigatório"');
 echo form_error('cnpj');
 echo"</td></tr>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Telefone Fixo');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'num_telefone1'),  set_value('num_telefone1'),'maxlength="14" autocomplete ="off" placeholder="(XX)XXXX-XXXX" OnKeyPress="MascaraTelefone(this)"');
-echo form_error('num_telefone1');
+echo form_input(array('name'=>'num_telefone1'),  set_value('num_telefone1'),'maxlength="14" autocomplete ="off" placeholder="(XX)XXXX-XXXX" OnKeyPress="MascaraTelefone(this)" onpaste="return false"');
 echo"</td></tr>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Telefone Celular');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'num_telefone2'),  set_value('num_telefone2'),'maxlength="15" autocomplete ="off" placeholder="(XX)XXXX-XXXXX" OnKeyPress="MascaraTelefone(this)"');
-echo form_error('num_telefone2');
+echo form_input(array('name'=>'num_telefone2'),  set_value('num_telefone2'),'maxlength="15" autocomplete ="off" placeholder="(XX) XXXXX-XXXX" OnKeyPress="MascaraTelefone(this)" onChange="MascaraTelefone(this)" pattern="\([0-9]{2}\)[\s][0-9]{4,5}-[0-9]{4}" title="Campo Telefone deve ser digitado no formato (XX) XXXXXX-XXXX" onpaste="return false"');
 echo"</td></tr>";//Essa linha pode remove
-
 echo"</tr><td>"; //Essa linha pode remover
 echo"<td>"; //Essa linha pode remover
 echo form_submit(array('name'=>'Cadastrar'),'Cadastrar');

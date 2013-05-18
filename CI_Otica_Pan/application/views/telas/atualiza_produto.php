@@ -137,7 +137,7 @@ echo"<p>";
 echo"<table>";
 echo"<tr><td>";
 echo form_label('','',array('style' => 'padding-right: 75px;',));
-echo form_submit('', 'Alterar');
+echo form_submit('', 'Alterar','onClick="if(! document.getElementById(\'ativo\').checked) {if (! confirm(\'Deseja desativar esse produto?\')){ return false; }}"');
 echo"</td></tr>";
 echo"</table>";
 echo"</fieldset>";
