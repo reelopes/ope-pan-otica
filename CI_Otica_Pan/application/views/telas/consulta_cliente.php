@@ -18,18 +18,14 @@ if ($mes == null) {
     $mesCalendario = $mes; //Captura o mes da URL
 }
 
-    $horarioAgendamento = $horarioAgendamento; //Boa pratica esse dado vem da controller
+        $horarioAgendamento = $horarioAgendamento; //Boa pratica esse dado vem da controller
 
-    if ($horarioAgendamento == null) {
-        
-        $this->table->add_row('Não há horários agendados para este dia.');
-        $tmpl = array('table_open' => '<table border="0" cellpadding="2" width="100%" cellspacing="1" class="mytable">');
-        $this->table->set_template($tmpl);
-    } else {
-        
+  
+            
         $this->table->set_heading('Data', 'Horário', 'Nome','Cliente','Faltou','Dados da Consulta');
         
         foreach ($horarioAgendamento as $linha) {
+            
             
                      
             if($linha->id_dependente!=NULL){
@@ -50,7 +46,7 @@ if ($mes == null) {
             
             }
           
-        }
+        
         $tmpl = array(
             'table_open' => '<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">',
         );

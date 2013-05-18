@@ -87,7 +87,7 @@ class Dependente extends CI_Controller {
 
             if ($this->dependente_model->deletaDependente($id_dependente)) {
                 $this->session->set_flashdata('msg', 'Dependente deletado com sucesso');
-                redirect(base_url('cliente/listaCliente/' . $id_pessoa . '/' . $id_cliente));
+                redirect(base_url('dependente/listarDependentes/'. $id_cliente));
             }
         } else {
             redirect(current_url());

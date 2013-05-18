@@ -2,8 +2,13 @@
 echo"<h2>$titulo</h2>";
 $id_cliente = $this->uri->segment(3);
 $dependentes = $this->dependente_model->listarDependentes($id_cliente);
-?>
 
+if ($this->session->flashdata('msg')) {
+    $msg = $this->session->flashdata('msg');
+    echo "<body onLoad=\" alert('$msg');\">";
+}
+
+?>
 
 <div class='tabela'>
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="lista_dependentes_table1">

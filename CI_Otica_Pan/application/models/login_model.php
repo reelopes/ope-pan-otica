@@ -13,14 +13,22 @@ class Login_model extends CI_Model {
 
         $this->db->where('login', $login);
         $this->db->where('senha', $senha);
-        $query = $this->db->get('usuario');
+        $query = $this->db->get('usuario')->result();
 
-        if ($query->num_rows == 1) {
+        
+        
+        
+        
+        if ($query != NULL) {
             
             $logadoSistema = array(
                 'logado' => TRUE,
                 'login' => $login,
-            );
+                'id' => $query[0]->id,
+                'nome' => $query[0]->nome,
+                'email' => $query[0]->email,
+                'id_nivel' => $query[0]->id_nivel,
+               );
             $this->session->set_userdata($logadoSistema);//Atribui na sessão que o usuario está logado
             return TRUE;//Se achar um o login com usuario e senha retorna true
             

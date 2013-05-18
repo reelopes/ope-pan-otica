@@ -111,8 +111,13 @@ class Util {
     }
 
     function virgulaParaPonto($num) {
+        if($num==null){
+            return null;
+        }  else {
+        
         $num = str_replace('.', '', $num);
         return str_replace(',', '.', $num);
+        }
     }
 }
 ?>

@@ -1,5 +1,4 @@
 <?php
-
 echo"<div class=formulario>";
 echo"<h2>$titulo</h2>";
 
@@ -54,7 +53,7 @@ echo"<table>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Nome');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'nome'),  set_value('nome'),'maxlength="100" autocomplete ="off"  placeholder="Nome Completo do Cliete" autofocus style="width:300px;" required title="Campo nome é obrigatório"');
+echo form_input(array('name'=>'nome'),  set_value('nome'),'maxlength="100" autocomplete ="off"  placeholder="Nome Completo do Cliete" autofocus style="width:300px;" required title="Campo nome é obrigatório" onkeypress="return SomenteLetras(event);"');
 echo form_error('nome');
 echo"</td></tr>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
@@ -121,8 +120,6 @@ echo"</td><td>"; //Essa linha pode remover
 echo form_input(array('name'=>'cep'),  set_value('cep'),'maxlength="9" autocomplete ="off" placeholder="XXXXX-XXX" OnKeyPress="MascaraCep(this)"  pattern="\d{5}-?\d{3}" title="Campo CEP deve ser digitado no formato XXXXX-XXX"');
 echo form_error('cep');
 echo"</td></tr>";//Essa linha pode remover
-
-
 echo"</tr><td>"; //Essa linha pode remover
 echo"<td>"; //Essa linha pode remover
 echo form_submit(array('name'=>'Cadastrar'),'Cadastrar');

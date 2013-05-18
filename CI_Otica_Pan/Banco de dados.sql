@@ -403,7 +403,10 @@ CREATE TABLE `diagnostico` (
   `eixo` double DEFAULT NULL,
   `esferico` double DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`)
+  `id_receita` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_receita` (`id_receita`),
+  CONSTRAINT `diagnostico_ibfk_1` FOREIGN KEY (`id_receita`) REFERENCES `receita` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*
@@ -695,7 +698,6 @@ CREATE TABLE `informacoes_olho` (
   `distancia` varchar(20) DEFAULT NULL,
   `lado` varchar(10) DEFAULT NULL,
   `id_diagnostico` int(11) DEFAULT NULL,
-
   KEY `id_diagnostico` (`id_diagnostico`),
   CONSTRAINT `informacoes_olho_ibfk_1` FOREIGN KEY (`id_diagnostico`) REFERENCES `diagnostico` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -723,8 +725,19 @@ CREATE TABLE `medico` (
   `crm` varchar(20) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id_usuario` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_usuario` (`id_usuario`),
+  CONSTRAINT `medico_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*
+Table data for otica_pan.medico
+*/
+
+INSERT INTO `medico` VALUES 
+('112492',1,'Adriana Vanella D Agostinho',1),
+('738543',2,'Daniela Lima de Souza',6);
 
 /*
 Table structure for nivel
@@ -1045,7 +1058,7 @@ CREATE TABLE `produto` (
   `preco_custo` double DEFAULT NULL,
   `preco_venda` double DEFAULT NULL,
   `quantidade` int(11) DEFAULT NULL,
-  `status` boolean DEFAULT 1,
+  `status` tinyint(1) DEFAULT '1',
   `validade` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
@@ -1055,10 +1068,10 @@ Table data for otica_pan.produto
 */
 
 INSERT INTO `produto` VALUES 
-('00001','Lente TS5610',0,'Lente TS5610 2GA7',1,10,20,30,'1','2014-10-20'),
-('00002','HB DS2509',1,'HB DS2509',2,50,100,10,'0',NULL),
-('00004','Armacao HB',1,'Flexevel, Preta',3,50,100,10,'1',NULL),
-('00005','TESTE APARECE',1,'0',7,111.11,222.22,0,'0',NULL);
+('00001','Lente TS5610',0,'Lente TS5610 2GA7',1,10,20,30,1,'2014-10-20'),
+('00002','HB DS2509',1,'HB DS2509',2,50,100,10,0,NULL),
+('00004','Armacao HB',1,'Flexevel, Preta',3,50,100,10,1,NULL),
+('00005','TESTE APARECE',1,'0',7,111.11,222.22,0,0,NULL);
 
 /*
 Table structure for receita
@@ -1068,14 +1081,17 @@ drop table if exists `receita`;
 CREATE TABLE `receita` (
   `crm` varchar(20) DEFAULT NULL,
   `data` date DEFAULT NULL,
-  `observacao` text DEFAULT NULL,
+  `observacao` text,
   `dp` double DEFAULT NULL,
-  `id_diagnostico` int(11) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_cliente` int(11) NOT NULL,
+  `id_dependente` int(11) DEFAULT NULL,
   `medico` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `id_diagnostico` (`id_diagnostico`),
-  CONSTRAINT `receita_ibfk_1` FOREIGN KEY (`id_diagnostico`) REFERENCES `diagnostico` (`id`)
+  KEY `id_cliente` (`id_cliente`),
+  KEY `id_dependente` (`id_dependente`),
+  CONSTRAINT `receita_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`),
+  CONSTRAINT `receita_ibfk_2` FOREIGN KEY (`id_dependente`) REFERENCES `dependente` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*
