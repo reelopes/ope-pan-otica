@@ -35,14 +35,14 @@ class Fornecedor extends CI_Controller {
     }
 
     public function index() {
-        $dados = array('pagina' => 'lista_fornecedor', 'titulo' => 'Manter Fornecedor',
+        $dados = array('pagina' => 'lista_fornecedor', 'titulo' => 'Pesquisa Fornecedor',
             'fornecedor' => $this->fornecedor_model->getAll()->result());
 
         $this->load->view('Principal', $dados);
     }
 
     public function adiciona() {
-        $dados = array('pagina' => 'adiciona_fornecedor', 'titulo' => 'Cadastrar Fornecedor');
+        $dados = array('pagina' => 'adiciona_fornecedor', 'titulo' => 'Cadastro de Fornecedor');
 
         $this->form_validation->set_rules('nome', 'NOME', 'trim|required|max_length[100]|ucwords');
         $this->form_validation->set_rules('email', 'EMAIL', 'trim|max_length[100]|strtolower|valid_email');
@@ -54,15 +54,13 @@ class Fornecedor extends CI_Controller {
             $dados = elements(array('nome', 'email', 'cnpj', 'num_telefone1', 'num_telefone2'), $this->input->post());
             $this->fornecedor_model->do_insert($dados);
         } else {
-
-            $dados = array('titulo' => 'Cadastro Fornecedor', 'pagina' => 'adiciona_fornecedor',);
-
+            $dados = array('titulo' => 'Cadastro de Fornecedor', 'pagina' => 'adiciona_fornecedor',);
             $this->load->view('Principal', $dados);
         }
     }
 
     public function lista() {
-        $dados = array('pagina' => 'lista_fornecedor', 'titulo' => 'Manter Fornecedor',
+        $dados = array('pagina' => 'lista_fornecedor', 'titulo' => 'Pesquisa Fornecedor',
             'fornecedor' => $this->fornecedor_model->getAll()->result());
 
         $this->load->view('Principal', $dados);

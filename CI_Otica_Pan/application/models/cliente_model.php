@@ -198,21 +198,11 @@ class Cliente_model extends CI_Model {
                      $this->session->set_flashdata('msg','Não foi possível deletar o cliente, informe este erro ao administrador do sistema:\n\n'.$this->db->_error_message());
                      }
                      
-            
-                     
-                     
                      redirect('cliente/listarClientes');
-            
-                     
-                     
-                     
-                     
                      
                      return true;
                  }
-                 
                  return false;
-            
         }
     
     

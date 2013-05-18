@@ -37,7 +37,7 @@ class Produto extends CI_Controller {
     }
 
     public function index() {
-        $dados = array('pagina' => 'adiciona_produto', 'titulo' => 'Criar Produto', 'carrega' => 0,
+        $dados = array('pagina' => 'adiciona_produto', 'titulo' => 'Cadastro de Produto', 'carrega' => 0,
             'tipo_lente' => $this->tipo_lente_model->getAll()->result(),
             'todos_fornecedor' => $this->fornecedor_model->getAll()->result(),
             'todas_grife' => $this->grife_model->getAll()->result());
@@ -69,7 +69,7 @@ class Produto extends CI_Controller {
             $this->produto_model->do_insert($dados);
         }
 
-        $dados = array('titulo' => 'Criar Produto', 'pagina' => 'adiciona_produto', 'carrega' => $this->input->post('produto'),
+        $dados = array('titulo' => 'Cadastro de Produto', 'pagina' => 'adiciona_produto', 'carrega' => $this->input->post('produto'),
             'todos_fornecedor' => $this->fornecedor_model->getAll()->result(),
             'todas_grife' => $this->grife_model->getAll()->result());
 
@@ -124,15 +124,15 @@ class Produto extends CI_Controller {
         $this->load->view('Principal_popup', $dados);
     }
     
-//    public function delete() {
-//        $dados = array('titulo' => 'CRUD &raquo; Delete', 'tela' => 'Delete',);
-//        $id = $this->uri->segment(3);
-//
-//        if ($id == NULL) {
-//            redirect('produto/lista');
-//        }
-//
-//        $this->produto_model->do_delete($id);
-//        $this->load->view('Principal', $dados);
-//    }
+    public function delete() {
+        $dados = array('titulo' => 'CRUD &raquo; Delete', 'tela' => 'Delete',);
+        $id = $this->uri->segment(3);
+
+        if ($id == NULL) {
+            redirect('produto/lista');
+        }
+
+        $this->produto_model->do_delete($id);
+        $this->load->view('Principal', $dados);
+    }
 }

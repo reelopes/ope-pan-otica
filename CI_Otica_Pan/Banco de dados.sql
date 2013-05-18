@@ -385,9 +385,9 @@ Table data for otica_pan.dependente
 */
 
 INSERT INTO `dependente` VALUES 
-('2000-01-01','Ana J?lia Nascimento','Sobrinha',1,8),
+('2000-01-01','Analia Nascimento','Sobrinha',1,8),
 ('1991-01-01','Bruno','teste',2,8),
-('2000-01-22','Julia','Irm?',3,11),
+('2000-01-22','Julia','Irma',3,11),
 ('1990-01-01','Teste','teste',4,8),
 ('1992-01-06','Pedro','Filho',5,8),
 ('2000-01-01','Kauane','Noiva',7,8);
@@ -433,7 +433,7 @@ Table data for otica_pan.endereco
 */
 
 INSERT INTO `endereco` VALUES 
-('Vila Carmela','07859-180','Franco da Rocha','Casa','SP',7,'Rua Guaratinguet?, 70',8),
+('Vila Carmela','07859-180','Franco da Rocha','Casa','SP',7,'Rua Guaratingueta, 70',8),
 ('Perdizes','04110-000','Tabo?o da Serra','Casa','SP',8,'Rua da Lavoura, 999',9),
 ('Vila da Sa?de','04183-444','S?o Paulo','Ap. 17','SP',9,'Rua Fia??o da Sa?de, 580',10),
 ('0','0','0','0','SP',10,'0',11),
