@@ -188,6 +188,26 @@ class Cliente_model extends CI_Model {
                      
                      $this->db->where('id',$id);
                      $this->db->delete('pessoa');
+                     
+                     if($this->db->_error_number()=='0'){
+                     $this->session->set_flashdata('msg','Cliente deletado com sucesso');
+                         
+                     } else if($this->db->_error_number()=='1451'){
+                     $this->session->set_flashdata('msg','Não foi possível deletar o cliente porque \njá está associado a outro evento');
+                     }else{
+                     $this->session->set_flashdata('msg','Não foi possível deletar o cliente, informe este erro ao administrador do sistema:\n\n'.$this->db->_error_message());
+                     }
+                     
+            
+                     
+                     
+                     redirect('cliente/listarClientes');
+            
+                     
+                     
+                     
+                     
+                     
                      return true;
                  }
                  

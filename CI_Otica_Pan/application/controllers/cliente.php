@@ -143,14 +143,9 @@ class Cliente extends CI_Controller {
         if ($this->uri->segment(3) != NULL) {
 
             $id_pessoa = $this->uri->segment(3);
-            
-            if($this->cliente_model->deleteCliente($id_pessoa)){
-            $this->session->set_flashdata('msg','Cliente deletado com sucesso');
-            redirect('cliente/listarClientes');
-            }
-            
-        } else {
-            redirect('cliente/listarClientes');
+       
+            $this->cliente_model->deleteCliente($id_pessoa);
+              
         }
     }
     
