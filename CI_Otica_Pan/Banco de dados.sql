@@ -1,3 +1,5 @@
+drop database `otica_pan`;
+
 /* 
 SQLyog v4.0
 Host - localhost : Database - otica_pan
@@ -434,8 +436,8 @@ Table data for otica_pan.endereco
 
 INSERT INTO `endereco` VALUES 
 ('Vila Carmela','07859-180','Franco da Rocha','Casa','SP',7,'Rua Guaratingueta, 70',8),
-('Perdizes','04110-000','Tabo?o da Serra','Casa','SP',8,'Rua da Lavoura, 999',9),
-('Vila da Sa?de','04183-444','S?o Paulo','Ap. 17','SP',9,'Rua Fia??o da Sa?de, 580',10),
+('Perdizes','04110-000','Taboão da Serra','Casa','SP',8,'Rua da Lavoura, 999',9),
+('Vila da Saúde','04183-444','São Paulo','Ap. 17','SP',9,'Rua Fiação da Saúde, 580',10),
 ('0','0','0','0','SP',10,'0',11),
 ('','','','','SP',161,'',200),
 ('','','','','SP',163,'',203),
@@ -639,8 +641,8 @@ INSERT INTO `endereco` VALUES
 (NULL,NULL,NULL,NULL,NULL,499,'',597),
 (NULL,NULL,NULL,NULL,NULL,500,'',598),
 (NULL,NULL,NULL,NULL,NULL,501,'',599),
-('Vila Carmela','07859-180','S?o Paulo','Ap11','SP',502,'Av Paulista, 200',600),
-('Vila Carmela','07859-180','Franco da Rocha','Casa','SP',503,'Rua Guaratinguet?, 70',601),
+('Vila Carmela','07859-180','São Paulo','Ap11','SP',502,'Av Paulista, 200',600),
+('Vila Carmela','07859-180','Franco da Rocha','Casa','SP',503,'Rua Guaratinguetá, 70',601),
 ('Alencar','2','Campinas','Casa','SP',504,'Rua da Margarita, 300',602),
 ('Vila Clemente','33333-333','Francisco Morato','2b','SP',505,'Rua da Lavoura, 200',603);
 
@@ -759,7 +761,7 @@ INSERT INTO `nivel` VALUES
 (1,'Administrador','Administrador do Sistema.'),
 (2,'Atentende','Realiza o atendimento para a venda de produtos.'),
 (3,'Caixa','Finaliza a venda de produtos.'),
-(4,'Oftalmologista','M?dica que realiza as consultas nos clientes.');
+(4,'Oftalmologista','Médica que realiza as consultas nos clientes.');
 
 /*
 Table structure for orcamento
@@ -768,9 +770,10 @@ Table structure for orcamento
 drop table if exists `orcamento`;
 CREATE TABLE `orcamento` (
   `data` date DEFAULT NULL,
-  `forma_pgto` varchar(20) DEFAULT NULL,
+  `forma_pgto` varchar(20) NOT NULL,
+  `vendedor` varchar(100) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `preco_final` double DEFAULT NULL,
+  `desconto` double NOT NULL,
   `status` varchar(20) DEFAULT NULL,
   `id_cliente` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -782,15 +785,52 @@ CREATE TABLE `orcamento` (
 Table structure for orcamento_produto
 */
 
-drop table if exists `orcamento_produto`;
-CREATE TABLE `orcamento_produto` (
-  `id_orcamento` int(11) DEFAULT NULL,
-  `id_produto` int(11) DEFAULT NULL,
+drop table if exists `itens`;
+CREATE TABLE `itens` (
+  `id_orcamento` int(11) NOT NULL,
+  `nome` varchar(50) NOT NULL,
+  `id_produto` int(11) NOT NULL,
+  `preco_unitario` double NOT NULL,
+  `quantidade` int(11) NOT NULL,
   KEY `id_orcamento` (`id_orcamento`),
   KEY `id_produto` (`id_produto`),
-  CONSTRAINT `orcamento_produto_ibfk_1` FOREIGN KEY (`id_orcamento`) REFERENCES `orcamento` (`id`),
-  CONSTRAINT `orcamento_produto_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id`)
+  CONSTRAINT `itens_ibfk_1` FOREIGN KEY (`id_orcamento`) REFERENCES `orcamento` (`id`),
+  CONSTRAINT `itens_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+/*
+Table structure for venda
+*/
+
+drop table if exists `venda`;
+CREATE TABLE `venda` (
+  `data` date NOT NULL,
+  `horario` varchar(5) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_orcamento` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_orcamento` (`id_orcamento`),
+  CONSTRAINT `venda_ibfk_1` FOREIGN KEY (`id_orcamento`) REFERENCES `orcamento` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+/*
+Table structure for venda
+*/
+
+drop table if exists `cheque`;
+CREATE TABLE `cheque` (
+  `data` date NOT NULL,
+  `valor` double NOT NULL,
+  `id_venda` int(11) NOT NULL,
+  `descricao` text,
+  KEY `id_venda` (`id_venda`),
+  CONSTRAINT `cheque_ibfk_1` FOREIGN KEY (`id_venda`) REFERENCES `venda` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 
 /*
 Table structure for ordem_servico
@@ -802,13 +842,19 @@ CREATE TABLE `ordem_servico` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `prazo_entrega` date DEFAULT NULL,
   `id_receita` int(11) DEFAULT NULL,
-  `id_orcamento` int(11) DEFAULT NULL,
+  `id_venda` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_receita` (`id_receita`),
-  KEY `id_orcamento` (`id_orcamento`),
+  KEY `id_venda` (`id_venda`),
   CONSTRAINT `ordem_servico_ibfk_1` FOREIGN KEY (`id_receita`) REFERENCES `receita` (`id`),
-  CONSTRAINT `ordem_servico_ibfk_2` FOREIGN KEY (`id_orcamento`) REFERENCES `orcamento` (`id`)
+  CONSTRAINT `ordem_servico_ibfk_2` FOREIGN KEY (`id_venda`) REFERENCES `venda` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*
+Table structure for ordem_servico
+*/
+
+
 
 /*
 Table structure for pessoa
@@ -1042,7 +1088,7 @@ INSERT INTO `pessoa` VALUES
 ('rosinha@gmail.com','Rosarinha Dias Das Neves',24663),
 ('eli.souza@gmail.com','Elisangela Roberta Ferreira De Souza',24664),
 ('paolo@gmail.com','Paolo Guerrero',24665),
-('joao@gmail.com','Jo?o Pedro',24666);
+('joao@gmail.com','João Pedro',24666);
 
 /*
 Table structure for produto
@@ -1594,7 +1640,7 @@ CREATE TABLE `usuario` (
   `id_nivel` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_nivel` (`id_nivel`),
-  CONSTRAINT `nivel_ibfk_1` FOREIGN KEY (`id_nivel`) REFERENCES `nivel` (`id`)
+  CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`id_nivel`) REFERENCES `nivel` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 /*

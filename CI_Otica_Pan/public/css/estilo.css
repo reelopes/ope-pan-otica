@@ -266,3 +266,8 @@ input[type=submit]:active,input[type=button]:active {
 display: none;
 }
 }
+
+
+input[readonly] {
+background-color: #E0E2FF;
+}

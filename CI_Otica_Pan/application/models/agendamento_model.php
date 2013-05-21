@@ -94,10 +94,12 @@ class Agendamento_model extends CI_Model {
 
             $this->db->where('id', $id);
             $this->db->delete('agendamento');
-            return true;
+            return $this->db->_error_number();
         }
 
-        return false;
+            return false;
+            
+            
     }
     
         public function AtualizaAgendamento($id = null,$status = null) {

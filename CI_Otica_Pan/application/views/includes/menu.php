@@ -33,6 +33,7 @@ echo"<hr>"
         </li>
         <li><a href="<? echo base_url('agendamento'); ?>">Agendamento</a></li>
         <li><a href="<? echo base_url('consulta'); ?>">Consulta Oftalm.</a></li>
+        <li><a href="<? echo base_url('venda'); ?>">Venda</a></li>
         
       </ul>
     </nav>

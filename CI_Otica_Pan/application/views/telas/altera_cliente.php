@@ -77,7 +77,7 @@ echo form_error('email');
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('CPF');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'cpf'),  set_value('cpf',$query['cliente']->cpf),'maxlength="14" autocomplete ="off" placeholder="XXX.XXX.XXX-XX" OnKeyPress="MascaraCPF(this)" pattern="^(\d{3}\.\d{3}\.\d{3}-\d{2})|(\d{11})$" required title="Campo CPF é obrigatório e deve ser digitado no formato (000.000.000-00)"');
+echo form_input(array('name'=>'cpf'),  set_value('cpf',$query['cliente']->cpf),'maxlength="14" autocomplete ="off" placeholder="XXX.XXX.XXX-XX" OnKeyPress="MascaraCPF(this)" pattern="^(\d{3}\.\d{3}\.\d{3}-\d{2})|(\d{11})$" readonly ');
 echo form_error('cpf');
 echo"</td></tr>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
