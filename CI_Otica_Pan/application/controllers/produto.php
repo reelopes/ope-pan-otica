@@ -25,9 +25,9 @@ class Produto extends CI_Controller {
         $this->load->helper('form');
         $this->load->helper('array');
         $this->load->model('produto_model');
-        $this->load->model('tipo_lente_model');
         $this->load->model('fornecedor_model');
         $this->load->model('grife_model');
+        $this->load->model('util_model');
         $this->load->library('uri');
         $this->load->library('form_validation');
         $this->load->library('session');
@@ -38,7 +38,6 @@ class Produto extends CI_Controller {
 
     public function index() {
         $dados = array('pagina' => 'adiciona_produto', 'titulo' => 'Cadastro de Produto', 'carrega' => 0,
-            'tipo_lente' => $this->tipo_lente_model->getAll()->result(),
             'todos_fornecedor' => $this->fornecedor_model->getAll()->result(),
             'todas_grife' => $this->grife_model->getAll()->result());
         $this->load->view('Principal', $dados);
@@ -84,7 +83,7 @@ class Produto extends CI_Controller {
     }
 
     public function visualiza() {
-        $dados = array('pagina' => 'vizualiza_produto', 'titulo' => 'Visualiza Produto',
+        $dados = array('pagina' => 'visualiza_produto', 'titulo' => 'Visualiza Produto',
             'todos_fornecedor' => $this->fornecedor_model->getAll()->result(),
             'produto' => $this->produto_model->get_byid($this->uri->segment(3)),
             'todas_grife' => $this->grife_model->getAll()->result());
@@ -128,11 +127,8 @@ class Produto extends CI_Controller {
         $dados = array('titulo' => 'CRUD &raquo; Delete', 'tela' => 'Delete',);
         $id = $this->uri->segment(3);
 
-        if ($id == NULL) {
-            redirect('produto/lista');
+        if (! $id == NULL) {
+            $this->util_model->deletarComEvento($this->produto_model->do_delete($id), 'o', 'Produto', 'produto/lista');
         }
-
-        $this->produto_model->do_delete($id);
-        $this->load->view('Principal', $dados);
     }
 }

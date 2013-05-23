@@ -24,6 +24,7 @@ class Cliente extends CI_Controller {
         $this->load->helpers('url');
         $this->load->helper('form');
         $this->load->model('cliente_model');
+        $this->load->model('receita_model');
         $this->load->model('dependente_model');
         $this->load->library('form_validation');
         $this->load->library('table');
@@ -81,7 +82,7 @@ class Cliente extends CI_Controller {
 
         $dados = Array(
             'pagina' => 'listar_clientes',
-            'titulo' => 'Pesquisa Clientes',
+            'titulo' => 'Pesquisa Cliente',
             'clientes' => $this->cliente_model->listarClientes('')->result(),
         );
 
@@ -98,10 +99,7 @@ class Cliente extends CI_Controller {
             'titulo' => 'Visualiza Cliente',
             'cliente' => $this->cliente_model->retornaCliente($this->uri->segment(3)),
         );
-
-
-
-
+        
         $this->load->view('Principal', $dados);
     }
 
@@ -149,21 +147,17 @@ class Cliente extends CI_Controller {
         }
     }
     
-    public function pesquisaCliente(){
-            
-        $this->form_validation->set_rules('pesquisa');
-        $this->form_validation->run();
-            $dados = Array(
-            'pagina' => 'listar_clientes',
-            'titulo' => 'Lista Todos os Clientes',
-            'clientes' => $this->cliente_model->listarClientes($this->input->post('pesquisa'))->result(),
-        );
-
-
-
-
-        $this->load->view('Principal', $dados);
-    }
+//    public function pesquisaCliente(){
+//            
+//        $this->form_validation->set_rules('pesquisa');
+//        $this->form_validation->run();
+//            $dados = Array(
+//            'pagina' => 'listar_clientes',
+//            'titulo' => 'Lista Todos os Clientes',
+//            'clientes' => $this->cliente_model->listarClientes($this->input->post('pesquisa'))->result(),
+//        );
+//        $this->load->view('Principal', $dados);
+//    }
     
     public function cadastrarDependente() {
         

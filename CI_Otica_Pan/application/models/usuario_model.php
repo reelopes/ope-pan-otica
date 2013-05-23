@@ -57,47 +57,12 @@ class Usuario_model extends CI_Model {
 
 		if ($dados != null || $condicao != null) {
 
-			$this -> db -> trans_start();
-
-			$pessoa = array('nome' => element('nome', $dados), 'email' => element('email', $dados), );
-
-			$condicao_pessoa = array('id' => $condicao['id_pessoa'], );
-			$this -> db -> update('pessoa', $pessoa, $condicao_pessoa);
-
-			$fornecedor = array('cnpj' => element('cnpj', $dados));
-
-			$condicao_fornecedor = array('id_pessoa' => $condicao['id_pessoa'], );
-			$this -> db -> update('fornecedor', $fornecedor, $condicao_fornecedor);
-
-			$telefone_fixo = array('num_telefone' => element('num_telefone1', $dados), );
-			$condicao_telefone_fixo = array('id_pessoa' => $condicao['id_pessoa'], 'id_tipo_telefone' => 1, );
-			$this -> db -> update('telefone', $telefone_fixo, $condicao_telefone_fixo);
-
-			$telefone_celular = array('num_telefone' => element('num_telefone2', $dados), );
-			$condicao_telefone_celular = array('id_pessoa' => $condicao['id_pessoa'], 'id_tipo_telefone' => 2, );
-			$this -> db -> update('telefone', $telefone_celular, $condicao_telefone_celular);
-
-			if ($this -> db -> trans_complete()) {
-				$this -> session -> set_flashdata('statusUpdate', 'Alterado com sucesso');
-			} else {
-				$this -> session -> set_flashdata('statusUpdate', 'Não foi possível alterar o fornecedor');
-			}
-
-			redirect(current_url());
+                    $this -> db -> trans_start();
+                    $this -> db -> update('usuario', $dados, $condicao);
+                    $this -> db -> trans_complete();
 		}
-		redirect('fornecedor/lista');
-	}
-
-	public function do_delete($id = null) {
-
-		if ($id != null) {
-
-			$this -> db -> where('id', $id);
-			$this -> db -> delete('pessoa');
-			$this -> session -> set_flashdata('deleteok', 'Dados deletados com sucesso');
-			redirect('fornecedor/delete');
-		}
-		return false;
+                
+		redirect('usuario/lista');
 	}
 
 }

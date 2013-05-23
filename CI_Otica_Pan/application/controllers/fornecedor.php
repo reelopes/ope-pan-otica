@@ -87,6 +87,13 @@ class Fornecedor extends CI_Controller {
         $this->load->view('Principal_popup', $dados);
     }
 
+    public function visualiza() {
+        $dados = array('pagina' => 'visualiza_fornecedor', 'titulo' => 'Visualiza Fornecedor',
+            'fornecedor' => $this->fornecedor_model->get_byid($this->uri->segment(3)));
+
+        $this->load->view('Principal', $dados);
+    }
+    
 //    public function delete() {
 //        $dados = array('titulo' => 'CRUD &raquo; Delete', 'tela' => 'Delete',);
 //        $iduser = $this->uri->segment(3);

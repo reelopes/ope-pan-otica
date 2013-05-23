@@ -32,20 +32,22 @@ echo"<table>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Nome do Dependente');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'nome'),  set_value('nome',$query->nome),'autofocus');
+echo form_input(array('name'=>'nome'), set_value('nome',$query->nome),'maxlength="100" autocomplete ="off"  placeholder="Nome do Dependente" autofocus style="width:150px;" required title="Campo nome é obrigatório" onkeypress="return SomenteLetras(event);"');
 echo"</td></tr>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Data de Nascimento');
 echo"</td><td>";//Essa linha pode remover
-echo form_input(array('name'=>'data_nascimento'),set_value('data_nascimento',$this->util->data_mysql_para_user($query->data_nascimento)));
+//echo form_input(array('name'=>'data_nascimento'),set_value('data_nascimento',$this->util->data_mysql_para_user($query->data_nascimento)));
+echo form_type(array('name'=>'data_nascimento'), set_value('data_nascimento', $query->data_nascimento),'maxlength="10" autocomplete ="off" min="1900-01-01" max="'.date('Y-m-d').'"','date');
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Responsável');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'responsavel'),  set_value('responsavel',$query->responsavel));
+echo form_input(array('name'=>'responsavel'), set_value('responsavel',$query->responsavel),'maxlength="100" autocomplete ="off" autofocus style="width:150px;" placeholder="Grau de Parentesco"');
 echo"</td></tr>";//Essa linha pode remover
 echo"<tr><td valign='middle'>";//Essa linha pode remover
 echo'<img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" onClick="history.go(-1)" title="Voltar" />';
 echo"</td><td>";//Essa linha pode remover
+
 echo form_submit(array('name'=>'Alterar'),'Alterar');
 echo"</td><tr>"; //Essa linha pode remover
 echo"</table>"; //Essa linha pode remover

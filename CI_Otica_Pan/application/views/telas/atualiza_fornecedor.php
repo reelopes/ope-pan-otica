@@ -1,5 +1,5 @@
 <?php
-echo"<div class=formulario style='  margin-left: 40px; width: 700px;  padding: 2px 2px 2px;  border-radius: 3px;'>";
+echo"<div class=formulario style='  margin-left: 40px; width: 770px;  padding: 2px 2px 2px;  border-radius: 3px;'>";
 echo"<h2>$titulo</h2>";
 
 
@@ -12,14 +12,10 @@ if($id_pessoa == NULL || $id_fornecedor == NULL){
 
 $query = $this->fornecedor_model->get_byid($id_pessoa,$id_fornecedor);
 
-echo validation_errors('<p>','</p>');
-
-
 if($this->session->flashdata('statusUpdate')){
     $msg = $this->session->flashdata('statusUpdate');
     echo "<body onLoad=\" alert('$msg');window.opener.location.reload();window.close();\">";
 }
-
 
 echo form_open("Fornecedor/update/$id_pessoa/$id_fornecedor");
 

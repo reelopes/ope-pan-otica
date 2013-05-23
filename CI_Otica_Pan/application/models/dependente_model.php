@@ -59,7 +59,7 @@ class Dependente_model extends CI_Model {
             //Inicio de Update Dependente
             $dependente = array(
                 'nome' => element('nome', $dados),
-                'data_nascimento' => $this->util->data_user_para_mysql(element('data_nascimento', $dados)),
+                'data_nascimento' => element('data_nascimento', $dados),
                 'responsavel' => element('responsavel', $dados),
             );
 
@@ -72,7 +72,7 @@ class Dependente_model extends CI_Model {
             if ($this->db->trans_complete()) {
                 $this->session->set_flashdata('statusUpdate', 'Alterado com sucesso');
             } else {
-                $this->session->set_flashdata('statusUpdate', 'Não foi possível alterar o cliente');
+                $this->session->set_flashdata('statusUpdate', 'Não foi possível alterar o dependente');
             }
 
             //retorna para a pagina que chamou a função

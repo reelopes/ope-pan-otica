@@ -25,7 +25,7 @@ class produto_model extends CI_Model {
             $id_produto = $this->db->insert_id();
 
             if (element('produto', $dados) == 1) {
-                $tipoProduto = array(
+                $armacao = array(
                     'largura_lente' => '' . element('largura_lente', $dados),
                     'largura_ponte' => '' . element('largura_ponte', $dados),
                     'comprimento_haste' => '' . element('comprimento_haste', $dados),
@@ -34,11 +34,11 @@ class produto_model extends CI_Model {
                     'id_produto' => $id_produto,
                     'id_grife' => '' . element('id', element('grife', $dados))
                 );
-                $this->db->insert('armacao', $tipoProduto);
+                $this->db->insert('armacao', $armacao);
             }
 
             $this->db->trans_complete();
-            $this->session->set_flashdata('cadastrook', 'Cadastro efetuado com sucesso');
+            $this->session->set_flashdata('cadastrook', 'Cadastro efetuado com sucesso\n\nO código do produto é: '.$id_produto);
 
             redirect('produto/adiciona');
         }
@@ -158,14 +158,7 @@ class produto_model extends CI_Model {
             $this->db->where('id', $id);
             $this->db->delete('produto');
 
-            if ($this->db->_error_number() == '0') {
-                $this->session->set_flashdata('msg', 'Produto deletado com sucesso');
-                redirect('produto/delete');
-            } else if ($this->db->_error_number() == '1451') {
-                $this->session->set_flashdata('msg', 'Não foi possível deletar o produto porque \njá está associado a outro evento');
-            } else {
-                $this->session->set_flashdata('msg', 'Não foi possível deletar o produto\ninforme este erro ao administrador do sistema:\n\n' . $this->db->_error_message());
-            }
+            return $this->db->_error_number();
         }
         return false;
     }

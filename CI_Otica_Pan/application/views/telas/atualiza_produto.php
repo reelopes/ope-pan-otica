@@ -146,7 +146,5 @@ echo "</div>";
 echo form_hidden('id_produto',$id_produto);
 echo form_hidden('produto',$query['produto']->categoria);
 
-echo validation_errors('<p>','</p>');
-
 echo form_close();
 ?>

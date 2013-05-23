@@ -71,15 +71,11 @@ class grife_model extends CI_Model {
 	}
 
 	public function do_delete($id = null) {
-
-		if ($id != null) {
-
-			$this -> db -> where('id', $id);
-			$this -> db -> delete('grife');
-			$this -> session -> set_flashdata('deleteok', 'Dados deletados com sucesso');
-			redirect('grife/delete');
-		}
-		return false;
+            if ($id != null) {
+                $this->db->where('id', $id);
+                $this->db->delete('grife');
+                return $this->db->_error_number();
+            }
 	}
 
 }

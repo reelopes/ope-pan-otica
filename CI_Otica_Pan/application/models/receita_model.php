@@ -6,8 +6,6 @@ if (!defined('BASEPATH'))
 class Receita_model extends CI_Model {
 
     public function retornaReceita($id_receita = NULL) {
-
-
         if ($id_receita != NULL) {
 
             //Captura a receita
@@ -58,7 +56,24 @@ class Receita_model extends CI_Model {
             return $dados;//Retorna um array com todos os dados
         }
     }
-
+    
+    public function receitasCliente($id_cliente = NULL) {
+        if ($id_cliente != NULL) {
+            //Captura a receita
+            $this->db->where('id_cliente', $id_cliente);
+            $this->db->from('receita');
+            return $this->db->get()->result();
+        }
+    }
+    
+    public function diagnosticoReceita($id_receita = null) {
+        //Captura o diagnostico e informações do olho
+        $this->db->select('cilindrico,eixo,esferico,dnp,distancia,lado');
+        $this->db->from('diagnostico');
+        $this->db->join('informacoes_olho', 'informacoes_olho.id_diagnostico = diagnostico.id');
+        $this->db->where("id_receita = ".$id_receita);
+        return $this->db->get()->result();
+    }
 }
 
 ?>

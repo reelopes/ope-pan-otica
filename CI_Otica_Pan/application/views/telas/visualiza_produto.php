@@ -22,7 +22,7 @@ echo"<table>";
 echo"<tr><td>";
 echo form_label('Código de Barras');
 echo"</td><td>";
-echo form_input(array('name'=>'cod_barra'), set_value('cod_barra', $query['produto']->cod_barra), 'maxlength="8" placeholder="Código do Produto" autocomplete ="off" style="width:150px;" onpaste="return false;" readonly');
+echo form_input(array('name'=>'cod_barra'), set_value('cod_barra', $query['produto']->cod_barra), 'placeholder="Código do Produto" autocomplete ="off" style="width:150px;" onpaste="return false;" readonly');
 echo"</td><td align='right'>";
 echo form_label('Nome');
 echo"</td><td>";
@@ -88,13 +88,10 @@ echo'<div id="armacao">';
         echo"<tr><td>";
         echo form_label('Grife');
         echo"</td><td>";    
-        echo'<select name="grife">';
         if ($todas_grife != NULL) {
             foreach ($todas_grife as $linha) {
-                if($query['grife']-> id == $linha -> id) {
-                    echo'<option selected value="'.$linha -> id.'">'.$linha -> nome.'</option>';
-                } else {
-                    echo'<option value="'.$linha -> id.'">'.$linha -> nome.'</option>';
+                if($query['grife']->id == $linha->id) {
+                    echo form_input(array('name'=>'grife'), set_value('grife', $query['grife']->nome),'readonly');
                 }
             }
         }
@@ -102,13 +99,10 @@ echo'<div id="armacao">';
         echo"</td><td>";
         echo form_label('Fornecedor');
         echo"</td><td>";
-        echo'<select name="fornecedor">';
         if ($todos_fornecedor != NULL) {
             foreach ($todos_fornecedor as $linha) {
                 if($query['fornecedorE']-> id == $linha -> id_fornecedor) {
-                    echo'<option selected value="'.$linha -> id_fornecedor.'">'.$linha -> nome.'</option>';
-                } else {
-                    echo'<option value="'.$linha -> id_fornecedor.'">'.$linha -> nome.'</option>';
+                    echo form_input(array('name'=>'fornecedor'), set_value('grife', $linha->nome),'readonly');
                 }
            }
         }

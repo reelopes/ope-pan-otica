@@ -124,19 +124,51 @@ echo"</fieldset>";
 echo'<img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" onClick="history.go(-1)" title="Voltar" />';
 echo"</div>";
 
+echo "<div style='float:left; margin-left:10px; padding: 90px 0px 0px;'}>";
 
- echo "<div style='float:left; margin-left:10px; padding: 90px 0px 0px;'}>";
 $dependentes = $this->dependente_model->listarDependentes($id_cliente);
-
-    
-
 
 if($dependentes==NULL){
 ?>
-            <table border="0" id="icone_desativado">
+            <table border="0">
+                <tr id="icone_desativado">
         <td align="center">
             <? echo"<img src='".base_url('public/img/dependente.png')."' title='Não possui Dependentes'>" ?>
              <p>Não possui Dependentes</p>
+            </a>
+        </td>
+        </tr>
+
+        
+ <?
+}else {
+    ?>
+        <table border="0">
+            <tr id="icone_desbotado">
+        <td align="center">
+            <? echo"<a href=\"javascript:abrirPopUp('".base_url('dependente/listarDependentes/'.$id_cliente)."','500','350');\" title='Listar Dependentes'><img src='".base_url('public/img/dependente.png')."' title='Listar Dependentes'>"; ?>
+             <p>Listar Dependentes</p>
+            </a>
+        </td>
+        </tr>
+    
+    <?
+    
+    
+}
+
+echo "<tr><td>&nbsp;</td></tr>";
+
+$receitas = $this->receita_model->receitasCliente($id_cliente);
+
+if($receitas==NULL){
+?>
+        
+        
+        <tr id="icone_desativado">
+        <td align="center">
+            <? echo"<img src='".base_url('public/img/check_list.png')."' title='Não possui Receita' width='64'>" ?>
+             <p>Não possui Receita</p>
             </a>
         </td>
         </tr>
@@ -145,10 +177,11 @@ if($dependentes==NULL){
  <?
 }else {
     ?>
-        <table border="0"  id="icone_desbotado">
+        
+        <tr id="icone_desbotado">
         <td align="center">
-            <? echo"<a href=\"javascript:abrirPopUp('".base_url('dependente/listarDependentes/'.$id_cliente)."','500','350');\" title='Listar Dependentes'><img src='".base_url('public/img/dependente.png')."' title='Listar Dependentes'>"; ?>
-             <p>Listar Dependentes</p>
+            <? echo"<a href=\"javascript:abrirPopUp('".base_url('receita/listaReceita/'.$id_cliente)."','700','350');\" title='Listar Receitas'><img src='".base_url('public/img/check_list.png')."' title='Listar Receitas' width='64'>"; ?>
+             <p>Listar Receitas</p>
             </a>
         </td>
         </tr>
