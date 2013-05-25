@@ -53,7 +53,7 @@ echo"<table>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Nome');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'nome'),  set_value('nome'),'maxlength="100" autocomplete ="off"  placeholder="Nome Completo do Cliete" autofocus style="width:300px;" required title="Campo nome é obrigatório" onkeypress="return SomenteLetras(event);"');
+echo form_input(array('name'=>'nome'),  set_value('nome'),'maxlength="100" autocomplete ="off"  placeholder="Nome Completo do Cliente" autofocus style="width:300px;" required title="Campo nome é obrigatório" onkeypress="return SomenteLetras(event);"');
 echo form_error('nome');
 echo"</td></tr>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover

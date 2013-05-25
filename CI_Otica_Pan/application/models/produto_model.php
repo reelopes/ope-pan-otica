@@ -54,20 +54,14 @@ class produto_model extends CI_Model {
         return $produto;
     }
 
-    public function do_select($pesquisa = null) {
+    public function do_select($campo,$parametro) {
 
         $this->db->select
                 ('cod_barra, nome, descricao, preco_custo, preco_venda,
                           quantidade, status, validade, categoria, id as id_produto');
         $this->db->from('produto');
-        $this->db->where('cod_barra', $pesquisa);
-        $this->db->or_like('nome', $pesquisa);
-        $this->db->or_like('descricao', $pesquisa);
-        $this->db->or_like('preco_custo', $pesquisa);
-        $this->db->or_like('preco_venda', $pesquisa);
-        $this->db->or_like('quantidade', $pesquisa);
-        $this->db->or_like('status', $pesquisa);
-        $this->db->or_like('validade', $pesquisa);
+        $this->db->where($campo,$parametro);
+        $this->db->where('status','1');
 
         return $this->db->get();
     }

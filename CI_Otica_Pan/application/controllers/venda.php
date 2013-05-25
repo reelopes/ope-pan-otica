@@ -33,6 +33,7 @@ class Venda extends CI_Controller {
         $this->load->library('uri');
         $this->load->helper('date');
         $this->load->model('cliente_model');
+        $this->load->model('produto_model');
 
 
         $this->login_model->logado(); //Verifica se o usuário está logado
@@ -64,18 +65,84 @@ class Venda extends CI_Controller {
             $this->load->view('Principal', $dados);
         }
     }
-    
-     public function listarClientes() {
 
-    
+    public function listarClientes() {
 
-            $dados = array(
-                'titulo' => 'Listar Clientes',
-                'pagina' => 'listar_clientes_venda',
-            );
 
-            $this->load->view('Principal_popup', $dados);
-        
+
+        $dados = array(
+            'titulo' => 'Listar Clientes',
+            'pagina' => 'listar_clientes_venda',
+        );
+
+        $this->load->view('Principal_popup', $dados);
     }
+
+    public function listarProdutos() {
+
+
+        $dados = array(
+            'titulo' => 'Listar Produtos',
+            'pagina' => 'listar_produtos_venda',
+        );
+
+        $this->load->view('Principal_popup', $dados);
+    }
+
+    public function listarProdutosURL() {
+        $produtos = $this->produto_model->do_select($this->uri->segment(4), $this->uri->segment(3))->result();
+
+        if ($produtos != null) {
+
+            $this->session->set_flashdata('autoFocusQuantidade', 'autofocus');
+            $this->session->set_userdata('nome_produto_temp', $produtos[0]->nome);
+            $this->session->set_userdata('codigo_produto_temp', $produtos[0]->id_produto);
+            $this->session->set_userdata('codigo_barras_temp', $produtos[0]->cod_barra);
+            $this->session->set_userdata('preco_venda_temp', $this->util->pontoParaVirgula($produtos[0]->preco_venda));
+            $this->session->set_userdata('quantidade_temp', '1');
+            $this->session->set_userdata('id_produto_temp', $produtos[0]->id_produto);
+        
+            
+        }else{
+            $this->session->set_flashdata('msg','Produto não encontrado');
+           
+            $this->session->set_userdata('nome_produto_temp', NULL);
+            $this->session->set_userdata('codigo_produto_temp', NULL);
+            $this->session->set_userdata('codigo_barras_temp', NULL);
+            $this->session->set_userdata('preco_venda_temp', NULL);
+            $this->session->set_userdata('quantidade_temp', NULL);
+            $this->session->set_userdata('id_produto_temp', NULL);
+        }
+        
+
+        redirect(base_url('venda/cadastrarVenda'));
+    }
+
+    public function adicionaProduto() {
+
+        $id_produto = $_GET['id_produto'];
+        $nome_produto = $_GET['nome_produto'];
+        $preco_venda = $_GET['preco_venda'];
+        $quantidade_produto = $_GET['quantidade_produto'];
+
+
+        if ($this->session->userdata('itens') == null) {
+
+            $itens = array($produtos = array('idProduto' => $id_produto, 'nomeProduto' => $nome_produto, 'precoVenda' => $preco_venda, 'quantidadeProduto' => $quantidade_produto));
+            $this->session->set_userdata('itens', $itens);
+        } else {
+            $itens = $this->session->userdata('itens');
+            array_push($itens, $produtos = array('idProduto' => $id_produto, 'nomeProduto' => $nome_produto, 'precoVenda' => $preco_venda, 'quantidadeProduto' => $quantidade_produto));
+            $this->session->set_userdata('itens', $itens);
+        }
+        $this->session->set_userdata('codigo_barras_temp', null);
+        $this->session->set_userdata('codigo_produto_temp', null);
+        $this->session->set_userdata('quantidade_temp', null);
+        $this->session->set_userdata('nome_produto_temp', null);
+        $this->session->set_userdata('preco_venda_temp', null);
+     
+        redirect(base_url('venda/cadastrarVenda'));
+    }
+
 }
 ?>

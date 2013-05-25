@@ -140,18 +140,18 @@ echo"</tr>";
 echo"<tr style='border: 1px solid #666666;'>";
 echo"<td rowspan='2' align='center' valign='middle'>Longe</td>";
 echo"<td align='right' style='border-left:1px solid #666666;'>OD</td>";
-echo"<td align='center'><input type='text' value='".$longe_od_esferico."' style='width:105px;'  readonly ></td>";
-echo"<td align='center'><input type='text' value='".$longe_od_cilindrico."' style='width:105px;'  readonly ></td>";
-echo"<td align='center'><input type='text' value='".$longe_od_eixo."' style='width:105px;'  readonly ></td>";
-echo"<td align='center'><input type='text' value='".$longe_od_dnp."' style='width:105px;'  readonly ></td>";
+echo"<td align='center'><input type='text' value='".$longe_od_esferico."' style='width:105px;'  disable ></td>";
+echo"<td align='center'><input type='text' value='".$longe_od_cilindrico."' style='width:105px;'  disable ></td>";
+echo"<td align='center'><input type='text' value='".$longe_od_eixo."' style='width:105px;'  disable ></td>";
+echo"<td align='center'><input type='text' value='".$longe_od_dnp."' style='width:105px;'  disable ></td>";
 echo"</tr>";
 
 echo"<tr style='border: 1px solid #666666;'>";
 echo"<td align='right' style='border-left:1px solid #666666;'>OE</td>";
-echo"<td align='center'><input type='text' value='".$longe_oe_esferico."' style='width:105px;'  readonly ></td>";
-echo"<td align='center'><input type='text' value='".$longe_oe_cilindrico."' style='width:105px;'  readonly ></td>";
-echo"<td align='center'><input type='text' value='".$longe_oe_eixo."' style='width:105px;'  readonly ></td>";
-echo"<td align='center'><input type='text' value='".$longe_oe_dnp."' style='width:105px;'  readonly ></td>";
+echo"<td align='center'><input type='text' value='".$longe_oe_esferico."' style='width:105px;'  disable ></td>";
+echo"<td align='center'><input type='text' value='".$longe_oe_cilindrico."' style='width:105px;'  disable ></td>";
+echo"<td align='center'><input type='text' value='".$longe_oe_eixo."' style='width:105px;'  disable ></td>";
+echo"<td align='center'><input type='text' value='".$longe_oe_dnp."' style='width:105px;'  disable ></td>";
 echo"</tr>";
 
 echo"<tr>";
@@ -161,25 +161,25 @@ echo"</tr>";
 echo"<tr style='border: 1px solid #666666;'>";
 echo"<td rowspan='2' align='center' valign='middle'>Perto</td>";
 echo"<td align='right' style='border-left:1px solid #666666;'>OD</td>";
-echo"<td align='center'><input type='text' value='".$perto_od_esferico."' style='width:105px;'  readonly ></td>";
-echo"<td align='center'><input type='text' value='".$perto_od_cilindrico."' style='width:105px;'  readonly ></td>";
-echo"<td align='center'><input type='text' value='".$perto_od_eixo."' style='width:105px;'  readonly ></td>";
-echo"<td align='center'><input type='text' value='".$perto_od_dnp."' style='width:105px;'  readonly ></td>";
+echo"<td align='center'><input type='text' value='".$perto_od_esferico."' style='width:105px;'  disable ></td>";
+echo"<td align='center'><input type='text' value='".$perto_od_cilindrico."' style='width:105px;'  disable ></td>";
+echo"<td align='center'><input type='text' value='".$perto_od_eixo."' style='width:105px;'  disable ></td>";
+echo"<td align='center'><input type='text' value='".$perto_od_dnp."' style='width:105px;'  disable ></td>";
 echo"</tr>";
 
 echo"<tr style='border: 1px solid #666666;'>";
 echo"<td align='right' style='border-left:1px solid #666666;'>OE</td>";
-echo"<td align='center'><input type='text' value='".$perto_oe_esferico."' style='width:105px;'  readonly ></td>";
-echo"<td align='center'><input type='text' value='".$perto_oe_cilindrico."' style='width:105px;'  readonly ></td>";
-echo"<td align='center'><input type='text' value='".$perto_oe_eixo."' style='width:105px;'  readonly ></td>";
-echo"<td align='center'><input type='text' value='".$perto_oe_dnp."' style='width:105px;'  readonly ></td>";
+echo"<td align='center'><input type='text' value='".$perto_oe_esferico."' style='width:105px;'  disable ></td>";
+echo"<td align='center'><input type='text' value='".$perto_oe_cilindrico."' style='width:105px;'  disable ></td>";
+echo"<td align='center'><input type='text' value='".$perto_oe_eixo."' style='width:105px;'  disable ></td>";
+echo"<td align='center'><input type='text' value='".$perto_oe_dnp."' style='width:105px;'  disable ></td>";
 echo"</tr>";
 
 
 echo"<tr>";
 
 echo"<td align='right' colspan='5'>DP</td>";
-echo "<td align='center'>".form_input('',$dados_receita['receita']->dp.'mm','style="width:105px; " readonly ')."</td>";
+echo "<td align='center'>".form_input('',$dados_receita['receita']->dp.'mm','style="width:105px; " disable ')."</td>";
 echo"</tr>";
 echo"</table>";
 echo"</fieldset>";

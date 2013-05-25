@@ -12,8 +12,8 @@
     <div class="login">
       <h1>SisGO</h1>
       <form method="post" action="<? echo base_url('login'); ?>">
-        <p><input type="text" name="usuario" value="" placeholder="Usuário" autofocus required title="O campo usuário é obrigatório"></p>
-        <p><input type="password" name="senha" value="" placeholder="Senha" required title="O campo senha é obrigatório"></p>
+          <p><input type="text" name="usuario" value="" autocomplete="off" placeholder="Usuário" autofocus required title="O campo usuário é obrigatório"></p>
+        <p><input type="password" name="senha" value="" autocomplete="off" placeholder="Senha" required title="O campo senha é obrigatório"></p>
         <p class="remember_me"><img src="..\..\..\../CI_Otica_Pan/public/img/Oculos.png" width="63" height="63" >
 
         <p class="submit"><input type="submit" name="commit" value="Login"></p>

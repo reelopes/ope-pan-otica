@@ -5,13 +5,12 @@
 
         <script language="Javascript" type="text/javascript"> 
 
-function putData(campoPai,valor,close) {  
-   var codigo = valor;
-     window.opener.document.getElementById(campoPai).value = codigo; 
+function putData(nomeCliente,idCliente,cpfCliente,url) {  
+        
+     window.opener.location.href = url+'?idCliente='+idCliente+'&nomeCliente='+nomeCliente+'&cpfCliente='+cpfCliente;
+       window.close();   
      
-     if(close==true){
-        window.close();   
-     }
+      window.opener.document.getElementById('codigoBarras').focus();
 }  
 </script>
                
@@ -19,12 +18,6 @@ function putData(campoPai,valor,close) {
         
 
 <?php
-
-//Exime mensagem de agendamento do cliente Javascript
-if ($this->session->flashdata('msg')) {
-    $msg = $this->session->flashdata('msg');
-    echo "<body onLoad=\" alert('$msg');\">";
-}
 
     $clientes = $this->cliente_model->listarClientes('')->result();
 
@@ -39,7 +32,7 @@ if ($this->session->flashdata('msg')) {
 <tbody>
         
         <?
-   echo "<tr class='alt' OnClick=\"putData('nomeCliente','Cliente não definido');putData('idCliente','0'); putData('cpfCliente','000.000.000-00',true);\">";
+   echo "<tr class='alt' OnClick=\"putData('Cliente não definido','0','000.000.000-00','".base_url('venda/cadastrarVenda/')."');\">";
    echo "<td>Cliente não definido</td>";
    echo "<td>000.000.000-00</td>";
    echo"</tr>";
@@ -54,7 +47,7 @@ foreach ($clientes as $linha) {
        $nomeReduzido = $linha->nome;
    }
    
-   echo "<tr class='alt' OnClick=\"putData('nomeCliente','".$linha->nome."');putData('idCliente','".$linha->id_cliente."'); putData('cpfCliente','".$linha->cpf."',true);\">";
+   echo "<tr class='alt' OnClick=\"putData('".$linha->nome."','".$linha->id_cliente."','".$linha->cpf."','".base_url('venda/cadastrarVenda/')."');\">";
    echo "<td>".$nomeReduzido."</td>";
    echo "<td>".$linha->cpf."</td>";
    echo"</tr>";
