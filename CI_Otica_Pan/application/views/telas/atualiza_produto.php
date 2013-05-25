@@ -27,18 +27,18 @@ echo"<table>";
 echo"<tr><td>";
 echo form_label('Código de Barras');
 echo"</td><td>";
-echo form_input(array('name'=>'cod_barra'), set_value('cod_barra', $query['produto']->cod_barra), 'maxlength="8" placeholder="Código do Produto" autocomplete ="off" style="width:150px;" onpaste="return false;"');
+echo form_input(array('name'=>'cod_barra'), set_value('cod_barra', $query['produto']->cod_barra), 'maxlength="20" placeholder="Código do Produto" autocomplete ="off" style="width:150px;" onpaste="return false;"');
 echo"</td><td align='right'>";
 echo form_label('Nome');
 echo"</td><td>";
 echo form_input(array('name'=>'nome'),
-        set_value('nome', $query['produto']->nome), 'maxlength="20" placeholder="Nome do produto" autocomplete ="off" style="width:260px;" required title="Campo nome é obrigatório"');
+        set_value('nome', $query['produto']->nome), 'maxlength="50" placeholder="Nome do produto" autocomplete ="off" style="width:260px;" required title="Campo nome é obrigatório"');
 echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('Descricao');
 echo"</td><td colspan='4'>"; 
 echo form_input(array('name'=>'descricao'),
-        set_value('descricao', $query['produto']->descricao), 'maxlength="60" placeholder="Descrição do produto" autocomplete ="off" style="width:520px;"');
+        set_value('descricao', $query['produto']->descricao), 'placeholder="Descrição do produto" autocomplete ="off" style="width:520px;"');
 echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('Preco de custo');
@@ -55,7 +55,7 @@ echo"<tr><td>";
 echo form_label('Quantidade');
 echo"</td><td>"; 
 echo form_type(array('name'=>'quantidade'),
-        set_value('quantidade', $query['produto']->quantidade), ' maxlenght="2" min="0" autocomplete="off" style="width:80px;" OnKeyPress="mascaraInteiro(this)" onpaste="return false;" required title="Campo quantidade é obrigatório"', 'number');
+        set_value('quantidade', $query['produto']->quantidade), 'maxlenght="11" min="0" autocomplete="off" style="width:80px;" OnKeyPress="mascaraInteiro(this)" onpaste="return false;" required title="Campo quantidade é obrigatório"', 'number');
 echo"</td><td>";
 echo form_label('Validade');
 echo"</td><td>"; 

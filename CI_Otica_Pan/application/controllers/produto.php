@@ -124,11 +124,13 @@ class Produto extends CI_Controller {
     }
     
     public function delete() {
-        $dados = array('titulo' => 'CRUD &raquo; Delete', 'tela' => 'Delete',);
+        $dados = array('titulo' => 'CRUD &raquo; Delete', 'tela' => 'Delete');
         $id = $this->uri->segment(3);
 
         if (! $id == NULL) {
             $this->util_model->deletarComEvento($this->produto_model->do_delete($id), 'o', 'Produto', 'produto/lista');
         }
+        
+        $this->load->view('Principal', $dados);
     }
 }

@@ -21,7 +21,7 @@ if($carrega == 1) {
 
 echo form_open('produto/adiciona');
 
-echo  '<p onClick="if (! confirm(\'Preço de custo é maior que Preço de venda.\n Deseja Cadastrar mesmo assim?\')) { return false; }">';
+//echo  '<p onClick="if (! confirm(\'Preço de custo é maior que Preço de venda.\n Deseja Cadastrar mesmo assim?\')) { return false; }">';
 
 
 // Campos da tabela Produto
@@ -74,11 +74,11 @@ echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('Quantidade');
 echo"</td><td>"; 
-echo form_type(array('name'=>'quantidade'), '1', ' maxlenght="11" min="0" autocomplete="off" style="width:100px;" OnKeyPress="mascaraInteiro(this)" onpaste="return false;" required title="Campo quantidade é obrigatório"', 'number');
+echo form_type(array('name'=>'quantidade'), '1', ' max="99999999999" min="0" autocomplete="off" style="width:100px;" OnKeyPress="mascaraInteiro(this)" onpaste="return false;" required title="Campo quantidade é obrigatório"', 'number');
 echo"</td><td>";
 echo form_label('Validade');
 echo"</td><td>"; 
-echo form_type(array('name'=>'validade'),  set_value('validade'),'maxlength="10" autocomplete ="off" min="'.date('Y-m-d').'"','date');
+echo form_type(array('name'=>'validade'),  set_value('validade'),'maxlength="10" autocomplete ="off" max="9999-12-31" min="'.date('Y-m-d').'"','date');
 echo form_error('validade');
 echo"</td></tr>";
 echo"</table>";

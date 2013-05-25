@@ -18,22 +18,9 @@ class Usuario_model extends CI_Model {
 
 	public function getAll() {
 
-		$this -> db -> select('usuario.id, usuario.login, usuario.senha, usuario.lembrete_senha, usuario.email, usuario.id_nivel, nivel.id, nivel.nome, nivel.descricao');
+		$this -> db -> select('usuario.id as id_usuario, usuario.nome as nome_usuario, usuario.login, usuario.senha, usuario.lembrete_senha, usuario.email, usuario.id_nivel, nivel.id, nivel.nome as nome_nivel, nivel.descricao');
 		$this -> db -> from('usuario');
                 $this -> db -> join('nivel', 'nivel.id = usuario.id_nivel');
-                $this -> db -> group_by('nivel.id');
-		return $this -> db -> get();
-	}
-
-	public function do_select($pesquisa = null) {
-                
-		$this -> db -> select('id, login, senha, lembrete_senha, email, id_nivel');
-		$this -> db -> from('usuario');
-		$this -> db -> like('login', $pesquisa);
-		$this -> db -> or_like('email', $pesquisa);
-		$this -> db -> or_like('id_nivel', $pesquisa);
-		$this -> db -> group_by('id');
-
 		return $this -> db -> get();
 	}
 

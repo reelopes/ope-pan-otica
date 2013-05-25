@@ -20,6 +20,7 @@ echo"<hr>"
             <li><a href="<? echo base_url('fornecedor/adiciona'); ?>">Fornecedor</a></li>
             <li><a href="<? echo base_url('produto'); ?>">Produto</a></li>
             <li><a href="<? echo base_url('grife'); ?>">Grife</a></li>
+            <li><a href="<? echo base_url('usuario'); ?>">Usuário</a></li>
             </ul>
         </li>
         <li class="dropdown">

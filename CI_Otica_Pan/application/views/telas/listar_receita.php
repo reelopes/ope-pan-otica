@@ -38,7 +38,7 @@ foreach ($receitas as $linha) {
         <td valign='middle'>".$nome."</td>
         <td valign='middle'>".$this->util->data_mysql_para_user($linha->data)."</td>
         <td valign='middle'>$linha->medico</td>
-        <td valign='middle'><a onClick=\"window.close();window.open('".base_url('receita/visualizaReceita/'.$linha->id)."','40000','40000');\"/><center><img src=".base_url('public/img/pesquisar.png')." width='23' title='Visualizar'></center></a></td>
+        <td valign='middle'><a onClick=\"window.close();window.open('".base_url('receita/exibeReceita/'.$linha->id)."','','width=900,height=800');\"/><center><img src=".base_url('public/img/pesquisar.png')." width='23' title='Visualizar'></center></a></td>
         </tr>";
 }
 

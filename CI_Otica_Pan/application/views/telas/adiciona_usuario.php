@@ -1,44 +1,33 @@
 <?php
-
+echo"<div class=formulario>";
 echo"<h2>$titulo</h2>";
 
-echo validation_errors('<p>','</p>');
-
 if($this->session->flashdata('cadastrook')){
-    
-    echo '<p>'.$this->session->flashdata('cadastrook').'</p>';
+    $msg = $this->session->flashdata('cadastrook');
+    echo "<body onload=\"alert('$msg');\">";
 }
 
 echo form_open('usuario/adiciona');
 
 $nivel = $this->nivel_model->getAll()->result();
 
-echo"<br><center><table>";//Essa linha pode remover
-echo"<tr><td>";//Essa linha pode remover
-echo form_label('Login');
-echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'login'),  set_value('login'),'autofocus');
-echo"</td></tr>";//Essa linha pode remover
-echo"<tr><td>";//Essa linha pode remover
+echo"<fieldset>";
+echo"<legend>Dados do Usuário</legend>";
+echo"<table>";
+echo"<tr><td>";
+echo form_label('Nome');
+echo"</td><td>"; 
+echo form_input(array('name'=>'nome'),  set_value('nome'), 'maxlength="100" placeholder="Nome do Usuário" autocomplete ="off" style="width:180px;" autofocus');
+echo"</td><td>";
 echo form_label('Email');
-echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'email'),  set_value('email'),'autofocus');
-echo"</td></tr>";//Essa linha pode remover
-echo"<tr><td>";//Essa linha pode remover
-echo form_label('Senha');
-echo"</td><td>"; //Essa linha pode remover
-echo form_password(array('name'=>'senha'),  set_value('senha'));
-echo"</td></tr>";//Essa linha pode remover
-echo"<tr><td>";//Essa linha pode remover
-echo form_label('Confirme a Senha');
-echo"</td><td>"; //Essa linha pode remover
-echo form_password(array('name'=>'senha_confirma'), set_value('senha_confirma'));
-echo"</td></tr>";//Essa linha pode remover
-echo"<tr><td>";//Essa linha pode remover
-echo form_label('Lembrete da senha');
-echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'lembrete_senha'),  set_value('lembrete_senha'));
-echo"<tr><td>";//Essa linha pode remover
+echo"</td><td>"; 
+echo form_input(array('name'=>'email'),  set_value('email'), 'maxlength="100" placeholder="exemplo@email.com" autocomplete ="off" style="width:180px;"');
+echo"</td></tr>";
+echo"<tr><td>";
+echo form_label('Login');
+echo"</td><td>"; 
+echo form_input(array('name'=>'login'),  set_value('login'),'maxlength="20" placeholder="Login" autocomplete ="off" style="width:180px;" required title="Campo Login é obrigatório"');
+echo"</td><td>";
 echo form_label('Nivel');
 echo"</td><td>";
 echo'<select name="id_nivel">';
@@ -49,13 +38,27 @@ if ($nivel != NULL) {
 }
 echo'</select>';
 echo"</td></tr>";
-echo"</td></tr>";//Essa linha pode remove
+echo"<tr><td>";
+echo form_label('Senha');
+echo"</td><td>"; 
+echo form_password(array('name'=>'senha'),  set_value('senha'), 'maxlength="20" placeholder="Senha" autocomplete ="off" style="width:180px;" required title="Campo Senha é obrigatório"');
+echo"</td><td>";
+echo form_label('Confirme a Senha');
+echo"</td><td>"; 
+echo form_password(array('name'=>'senha_confirma'), set_value('senha_confirma'), 'maxlength="20" placeholder="Confirme a Senha" autocomplete ="off" style="width:180px;" required title="Confirme sua senha"');
+echo"</td></tr>";
+echo"</table><table>";
+echo"<tr><td>";
+echo form_label('Lembrete da senha');
+echo"</td><td>"; 
+echo form_input(array('name'=>'lembrete_senha'),  set_value('lembrete_senha'), 'maxlength="200" placeholder="Use uma palavra chave para lembrar sua senha" autocomplete ="off" style="width:405px;"');
+echo"</td></tr>";
 
-echo"</tr><td>"; //Essa linha pode remover
-echo"<td>"; //Essa linha pode remover
-echo form_submit(array('name'=>'Cadastrar'),'Cadastrar');
-echo"</td><tr>"; //Essa linha pode remover
-echo"</table>"; //Essa linha pode remover
+echo"<tr><td>"; 
+echo form_submit('', 'Cadastrar','onClick="if (senha.value != senha_confirma.value) { alert(\'As senhas informadas não conferem!\'); return false;}"');
+echo"</tr></td>"; 
+echo"</table>"; 
+echo"</fieldset>";
 echo form_close();
-
+echo"</div>";
 ?>

@@ -14,7 +14,6 @@ class util_model extends CI_Model {
 
         redirect($redirect);
     }
-
 }
 
 ?>

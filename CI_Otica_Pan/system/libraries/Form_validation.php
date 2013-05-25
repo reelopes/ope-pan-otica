@@ -1508,16 +1508,26 @@ function valid_cpf($cpf){
 	 * @param	int
 	 * @return	bool
 	 */
-	public function precoM($pc, $pv)
-	{
-		if ($pc > $pv)
-		{
-                    set_message($lang['precoM'], $val = 'Preço de venda não pode ser menor que Preço de custo');
-                    return FALSE;
-		} else {
-                    return TRUE;
-                }
-	}
+//	public function precoM($pc, $pv)
+//	{
+//		if ($pc > $pv)
+//		{
+//                    set_message($lang['precoM'], $val = 'Preço de venda não pode ser menor que Preço de custo');
+//                    return FALSE;
+//		} else {
+//                    return TRUE;
+//                }
+//	}
+//        
+//        public function valid_password($pwd1 = null,$pwd2= null) {
+//            if($pwd1!=null && $pwd2 !=null)
+//            if($pwd1==$pwd2){
+//                return true;
+//            }else{
+//                return false;
+//            }
+//            return false;
+//        }
 }
 // END Form Validation Class
 
