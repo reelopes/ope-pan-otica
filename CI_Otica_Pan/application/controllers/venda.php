@@ -90,6 +90,15 @@ class Venda extends CI_Controller {
     }
 
     public function listarProdutosURL() {
+        
+        if($this->uri->segment(4)==NULL || $this->uri->segment(3)==NULL){
+
+            $this->session->set_flashdata('msg','Produto não encontrado');
+                    redirect(base_url('venda/cadastrarVenda'));
+
+        }
+        
+        
         $produtos = $this->produto_model->do_select($this->uri->segment(4), $this->uri->segment(3))->result();
 
         if ($produtos != null) {
@@ -124,7 +133,13 @@ class Venda extends CI_Controller {
         $nome_produto = $_GET['nome_produto'];
         $preco_venda = $_GET['preco_venda'];
         $quantidade_produto = $_GET['quantidade_produto'];
+        
+        if($id_produto ==null || $nome_produto ==null || $preco_venda ==null || $quantidade_produto ==null){
+       $this->session->set_flashdata('msg','Não foi possível adicionar o produto tente novamente.');
+        redirect(base_url('venda/cadastrarVenda'));
 
+        }
+        
 
         if ($this->session->userdata('itens') == null) {
 

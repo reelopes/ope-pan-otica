@@ -23,6 +23,14 @@ window.location.href = url+'?id_produto='+document.getElementById('idProduto').v
          }
 }  
    }  
+function ativaOnClickProduto(url) {  
+          if(document.getElementById('quantidadeProduto').value>9999){
+           }else{
+  
+        document.forms['formularioVenda'].onsubmit = function(){return false;}
+window.location.href = url+'?id_produto='+document.getElementById('idProduto').value+'&nome_produto='+document.getElementById('nomeProduto').value+'&preco_venda='+document.getElementById('precoVenda').value+'&quantidade_produto='+document.getElementById('quantidadeProduto').value;
+         }
+}  
      
    
 </script>  
@@ -88,14 +96,18 @@ echo"<td>".form_label('Cod.')."</td>";
 echo"<td>".form_input(array('name'=>'codigo_produto'),$this->session->userdata('codigo_produto_temp'),'autocomplete ="off" id="codigoProduto" style="width:123px; height:25px;" onkeypress=ativaEnter(event,"codigoProduto","'.base_url('venda/listarProdutosURL').'")')."</td>";
 echo"<td>".form_label('Qtd.')."</td>";
 echo"<td>".form_type(array('name'=>'quantidade'),$this->session->userdata('quantidade_temp'),'autocomplete ="off" id="quantidadeProduto" min="1" max ="9999" style="width:75px; height:25px;" onkeypress=ativaEnterProduto(event,"quantidadeProduto","'.base_url('venda/adicionaProduto').'") '.$autoFocusQuantidade.' ','number')."</td>";
-echo"<td><img src='".base_url("public/img/list.png")."' width='33px' title='Pesquisar Produto' style='vertical-align: middle; cursor: hand;' OnClick=\"abrirPopUp('".base_url('venda/listarProdutos')."','600','445');\"></td>";
+echo"<td><img src='".base_url("public/img/list.png")."' width='33px' title='Pesquisar Produto' style='vertical-align: middle; cursor: hand;' OnClick=\"abrirPopUp('".base_url('venda/listarProdutos')."','750','445');\"></td>";
+echo"<td>&nbsp;</td>";
+echo"<td><img src='".base_url("public/img/lente.png")."' width='33px' title='Adiciona Lente' style='vertical-align: middle; cursor: hand;' OnClick=\"abrirPopUp('".base_url('venda/listarProdutos')."','600','445');\"></td>";
 echo"</tr>";
+
 
 echo"<tr>";
 echo"<td>".form_label('Produto')."</td>";
 echo"<td>".form_input(array('name'=>'nome_produto'),$this->session->userdata('nome_produto_temp'),'id="nomeProduto" style="width:210px; height:25px;" readonly')."</td>";
 echo"<td>".form_label('Preço Uni.')."</td>";
 echo"<td>".form_input(array('name'=>'preco_venda'),$this->session->userdata('preco_venda_temp'),'id="precoVenda" style="width:123px; height:25px;" readonly')."</td>";
+echo"<td><a href='javascript:ativaOnClickProduto(\"".  base_url("venda/adicionaProduto")."\");' ><img src='".base_url("public/img/add_carrinho.png")."' width='33px' title='Adicionar Produto na Lista' style='vertical-align: middle; cursor: hand;' ></a></td>";
 
 echo"</tr>";
 
