@@ -19,7 +19,7 @@
     <body>
         <header>
             <nav>
-                <div id="logo"><img src="../../../../../../../../../CI_otica_pan/public/img/logo.png" width="150" height="70"></div>
+                <div id="logo"><img src="../../../../../../../../../CI_otica_pan/public/img/logo.png" width="250" height="70"></div>
                 <div class="headerInfo">
 
                     <?

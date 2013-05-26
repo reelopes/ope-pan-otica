@@ -53,12 +53,18 @@
         </td>
          <td align="center">
             <a href="<? echo base_url('agendamento'); ?>">
-                <img src="public/img/agendamento.png" width="64px" heigth="64px"/>
+                <img src="public/img/agendamento.png" width="72px" heigth="72px"/>
                 <br />
                 Agendamento
             </a>
         </td>
-        <td>&nbsp;</td>
+        <td align="center">
+            <a href="<? echo base_url('venda'); ?>">
+                <img src="public/img/venda.png" width="74px" heigth="74px"/>
+                <br />
+                Venda de Produtos/Serviço
+            </a>
+        </td>
     </tr>
     <tr>
         <td>&nbsp;</td>
