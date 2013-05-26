@@ -32,11 +32,12 @@ function putData(nomeCliente,idCliente,cpfCliente,url) {
 <tbody>
         
         <?
+        if($this->session->userdata('lente')==NULL){
    echo "<tr class='alt' OnClick=\"putData('Cliente não definido','0','000.000.000-00','".base_url('venda/cadastrarVenda/')."');\">";
    echo "<td>Cliente não definido</td>";
    echo "<td>000.000.000-00</td>";
    echo"</tr>";
-   
+        }
 foreach ($clientes as $linha) {
 
     $nomeReduzido = (explode(" ",$linha->nome));

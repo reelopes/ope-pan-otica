@@ -159,5 +159,86 @@ class Venda extends CI_Controller {
         redirect(base_url('venda/cadastrarVenda'));
     }
 
+    public function adicionaLente() {
+        //Sem cliente não pode adicionar lente
+        if($this->session->userdata('id_cliente')== '0'){
+        echo"<script>alert('Para adicionar uma lente é necessário associar um cliente!');window.close();</script>";
+
+        }
+        
+        
+        
+        $this->form_validation->set_rules('referencia', 'referencia', 'trim|required');
+        $this->form_validation->set_rules('nome_lente', 'nome_lente', 'trim|required');
+        $this->form_validation->set_rules('preco_venda', 'preco_venda', 'trim|required');
+         if ($this->form_validation->run() == true) {
+          if ($this->session->userdata('lente') == null) {
+            
+              $array_lente = array($lente = array(
+                  'referencia' => $this->input->post('referencia'), 
+                  'nome_lente' => $this->input->post('nome_lente'),
+                  'preco_venda' => $this->input->post('preco_venda'), 
+                  'quantidade_lente' => '1'));
+              $this->session->set_userdata('lente', $array_lente);
+              
+        } else {
+            $array_lente = $this->session->userdata('lente');
+            array_push($array_lente, $lente = array(
+                  'referencia' => $this->input->post('referencia'), 
+                  'nome_lente' => $this->input->post('nome_lente'),
+                  'preco_venda' => $this->input->post('preco_venda'), 
+                  'quantidade_lente' => '1'));
+            $this->session->set_userdata('lente', $array_lente);
+        }
+            echo"<script>window.close();window.opener.location.reload();</script>";
+    }
+            $dados = array(
+                'titulo' => 'Cadastro de Lente',
+                'pagina' => 'adiciona_lente_venda',
+            );
+
+            $this->load->view('Principal_popup', $dados);
+    
+    
+    }
+    
+    public function adicionaServico() {
+      
+        
+        $this->form_validation->set_rules('nome', 'nome', 'trim|required');
+        $this->form_validation->set_rules('preco', 'preco', 'trim|required');
+        $this->form_validation->set_rules('descricao', 'descricao', 'trim|required');
+         if ($this->form_validation->run() == true) {
+          if ($this->session->userdata('servico') == null) {
+            
+              $array_servico = array($servico = array(
+                  'nome' => $this->input->post('nome'), 
+                  'preco' => $this->input->post('preco'),
+                  'descricao' => $this->input->post('descricao'), 
+                  'quantidade_servico' => '1'));
+              $this->session->set_userdata('servico', $array_servico);
+              
+        } else {
+            $array_servico = $this->session->userdata('servico');
+            array_push($array_servico, $lente = array(
+                  'nome' => $this->input->post('nome'), 
+                  'preco' => $this->input->post('preco'),
+                  'descricao' => $this->input->post('descricao'), 
+                  'quantidade_servico' => '1'));
+            $this->session->set_userdata('servico', $array_servico);
+        }
+            echo"<script>window.close();window.opener.location.reload();</script>";
+    }
+            $dados = array(
+                'titulo' => 'Cadastro de Serviço',
+                'pagina' => 'adiciona_servico_venda',
+            );
+
+            $this->load->view('Principal_popup', $dados);
+    
+    
+    }
+    
+    
 }
 ?>

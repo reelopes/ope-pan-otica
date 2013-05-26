@@ -710,13 +710,28 @@ Table structure for lente
 
 drop table if exists `lente`;
 CREATE TABLE `lente` (
-  `id_tipo_lente` int(11) DEFAULT NULL,
-  `id_produto` int(11) DEFAULT NULL,
-  KEY `id_tipo_lente` (`id_tipo_lente`),
-  KEY `id_produto` (`id_produto`),
-  CONSTRAINT `lente_ibfk_1` FOREIGN KEY (`id_tipo_lente`) REFERENCES `tipo_lente` (`id`),
-  CONSTRAINT `lente_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id`)
+`id_orcamento` int(11) DEFAULT NULL,
+`referencia` varchar(20) NOT NULL,
+`nome` varchar(50) NOT NULL,
+`preco_venda` double NOT NULL,
+  KEY `id_orcamento` (`id_orcamento`),
+  CONSTRAINT `lente_ibfk_1` FOREIGN KEY (`id_orcamento`) REFERENCES `orcamento` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*
+Table structure for servico
+*/
+
+drop table if exists `servico`;
+CREATE TABLE `servico` (
+`id_orcamento` int(11) DEFAULT NULL,
+`nome` varchar(50) NOT NULL,
+`preco_venda` double NOT NULL,
+  `descricao` text,
+  KEY `id_orcamento` (`id_orcamento`),
+  CONSTRAINT `servico_ibfk_1` FOREIGN KEY (`id_orcamento`) REFERENCES `orcamento` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 /*
 Table structure for medico
@@ -1595,16 +1610,6 @@ INSERT INTO `telefone` VALUES
 (2695,'(11) 4749-8373',1,24666),
 (2696,'(11) 98373-6363',2,24666);
 
-/*
-Table structure for tipo_lente
-*/
-
-drop table if exists `tipo_lente`;
-CREATE TABLE `tipo_lente` (
-  `tipo` varchar(20) NOT NULL,
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*
 Table structure for tipo_telefone

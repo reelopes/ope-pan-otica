@@ -211,6 +211,8 @@ nav {
 }
 .dropdown:hover ul {
   display: block;
+  font-weight:bold;
+  font-size: 0.9em;
 }
 .dropdown ul {
   display: none;

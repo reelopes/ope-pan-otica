@@ -98,8 +98,14 @@ echo"<td>".form_label('Qtd.')."</td>";
 echo"<td>".form_type(array('name'=>'quantidade'),$this->session->userdata('quantidade_temp'),'autocomplete ="off" id="quantidadeProduto" min="1" max ="9999" style="width:75px; height:25px;" onkeypress=ativaEnterProduto(event,"quantidadeProduto","'.base_url('venda/adicionaProduto').'") '.$autoFocusQuantidade.' ','number')."</td>";
 echo"<td><img src='".base_url("public/img/list.png")."' width='33px' title='Pesquisar Produto' style='vertical-align: middle; cursor: hand;' OnClick=\"abrirPopUp('".base_url('venda/listarProdutos')."','750','445');\"></td>";
 echo"<td>&nbsp;</td>";
-echo"<td><img src='".base_url("public/img/lente.png")."' width='33px' title='Adiciona Lente' style='vertical-align: middle; cursor: hand;' OnClick=\"abrirPopUp('".base_url('venda/listarProdutos')."','600','445');\"></td>";
+echo"<td>&nbsp;</td>";
+echo"<td><img src='".base_url("public/img/lente.png")."' width='40px' title='Adicionar Lente' style='vertical-align: middle; cursor: hand;' OnClick=\"abrirPopUp('".base_url('venda/adicionaLente')."','490','300');\"></td>";
+echo"<td>&nbsp;</td>";
+echo"<td>&nbsp;</td>";
+echo"<td><img src='".base_url("public/img/servico.png")."' width='40px' title='Adicionar Serviço' style='vertical-align: middle; cursor: hand;' OnClick=\"abrirPopUp('".base_url('venda/adicionaServico')."','490','400');\"></td>";
+
 echo"</tr>";
+
 
 
 echo"<tr>";
@@ -124,12 +130,24 @@ echo'<div id="data-grid-local"></div>';
             data: {"rows":[
                     
                     <? 
-                foreach ($this->session->userdata('itens') as $linha){
+                foreach ($this->session->userdata('itens') as $itens){
                     
-                    echo '{"Cod":"'.$linha["idProduto"].'","nome":"'.$linha["nomeProduto"].'","Qtd":"'.$linha["quantidadeProduto"].'","valor_unitario":" R$ '.$linha["precoVenda"].'","sub_total":"R$ '.$subTotal_aux = $this->util->pontoParaVirgula($linha["precoVenda"]*$linha["quantidadeProduto"]).'"},';
+                    echo '{"Cod":"'.$itens["idProduto"].'","nome":"'.$itens["nomeProduto"].'","Qtd":"'.$itens["quantidadeProduto"].'","valor_unitario":" R$ '.$itens["precoVenda"].'","sub_total":"R$ '.$subTotal_aux = $this->util->pontoParaVirgula($itens["precoVenda"]*$itens["quantidadeProduto"]).'"},';
                     $subTotal = $subTotal_aux +$subTotal;
                 }
-
+                foreach ($this->session->userdata('lente') as $lentes){
+                    
+                    echo '{"Cod":"'.$lentes["referencia"].'","nome":"'.$lentes["nome_lente"].'","Qtd":"'.$lentes["quantidade_lente"].'","valor_unitario":" R$ '.$lentes["preco_venda"].'","sub_total":"R$ '.$subTotal_aux = $this->util->pontoParaVirgula($lentes["preco_venda"]*$lentes["quantidade_lente"]).'"},';
+                    $subTotal = $subTotal_aux +$subTotal;
+                }
+                foreach ($this->session->userdata('servico') as $servicos){
+                    
+                    echo '{"Cod":"000","nome":"'.$servicos["nome"].'","Qtd":"'.$servicos["quantidade_servico"].'","valor_unitario":" R$ '.$servicos["preco"].'","sub_total":"R$ '.$subTotal_aux = $this->util->pontoParaVirgula($servicos["preco"]*$servicos["quantidade_servico"]).'"},';
+                    $subTotal = $subTotal_aux + $subTotal;
+                }
+                
+                
+                
                     ?>
                         
             ]}
