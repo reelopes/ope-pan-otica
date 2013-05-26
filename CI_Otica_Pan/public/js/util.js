@@ -12,7 +12,6 @@ function openAjax() {
     }
     return Ajax;
 } 
-
 function carregaAjax(div, getURL) {
 
     document.getElementById(div).style.display = "block";
@@ -39,7 +38,6 @@ function carregaAjax(div, getURL) {
     Ajax.send(null); // submete
     }
 }
-
 //adiciona mascara de cnpj
 function MascaraCNPJ(cnpj){
 	if(mascaraInteiro(cnpj)==false){
@@ -47,7 +45,6 @@ function MascaraCNPJ(cnpj){
 	}	
         return formataCampo(cnpj, '00.000.000/0000-00', event);
 }
-
 //adiciona mascara de cep
 function MascaraCep(cep){
 	if(mascaraInteiro(cep)==false){
@@ -55,7 +52,6 @@ function MascaraCep(cep){
 	}	
 	return formataCampo(cep, '00000-000', event);
 }
-
 //adiciona mascara de data
 function MascaraData(data){
 	if(mascaraInteiro(data)==false){
@@ -63,9 +59,11 @@ function MascaraData(data){
 	}	
 	return formataCampo(data, '00/00/0000', event);
 }
-
 //adiciona mascara ao telefone
-function MascaraTelefone(tel){	
+function MascaraTelefone(tel){
+        if(tel.value==''){
+            return false;
+        }
 	if(mascaraInteiro(tel)==false){
 		event.returnValue = false;
 	}
@@ -80,7 +78,6 @@ function MascaraTelefone(tel){
 	return formataCampo(tel, '(00) 0000-0000', event);
         }
 }
-
 //cria mascara para Reais
 function FormataReais(fld, milSep, decSep, e) {
 var sep = 0;
@@ -122,7 +119,6 @@ fld.value += decSep + aux.substr(len - 2, len);
 }
 return false;
 }
-
 //adiciona mascara ao preco
 function MascaraPreco(preco){	
 	if(mascaraInteiro(preco)==false){
@@ -130,7 +126,6 @@ function MascaraPreco(preco){
 	}
 	return formataCampo(preco, '0000.00', event);
 }
-
 //adiciona mascara ao CPF
 function MascaraCPF(cpf){
 	if(mascaraInteiro(cpf)==false){
@@ -144,8 +139,6 @@ function MascaraHorario(horario){
 	}	
 	return formataCampo(horario, '00:00', event);
 }
-
-
 function ValidarCPF(Objcpf){
 	var cpf = Objcpf.value;
 	exp = /\.|\-/g
@@ -166,7 +159,6 @@ function ValidarCPF(Objcpf){
 	if(digitoGerado!=digitoDigitado)	
 		alert('CPF Invalido!');		
 }
-
 //valida numero inteiro com mascara
 function mascaraInteiro(){
 	if (event.keyCode < 48 || event.keyCode > 57){
@@ -175,7 +167,6 @@ function mascaraInteiro(){
 	}
 	return true;
 }
-
 //formata de forma generica os campos
 function formataCampo(campo, Mascara, evento) { 
 	var boleanoMascara; 
@@ -208,8 +199,6 @@ function formataCampo(campo, Mascara, evento) {
 		return true; 
 	}
 }
-
-
 function abrirPopUp(url,width,height) {
 
     if(height>600){
@@ -223,7 +212,6 @@ function abrirPopUp(url,width,height) {
    window.open(url,'janela', 'left='+left+',width='+width+', height='+height+', top='+top+', scrollbars=yes, status=no, toolbar=no, location=yes, directories=no, menubar=no, resizable=no, fullscreen=no'); 
 
 }
-
 function validaPreco(precoCusto, precoVenda) {
 
     alert("OI");
@@ -234,10 +222,7 @@ function validaPreco(precoCusto, precoVenda) {
         }
     }
 }
-
-
-function SomenteNumeros(e)
-{
+function SomenteNumeros(e){
     
 	var tecla=new Number();
 	if(window.event) {
@@ -253,9 +238,7 @@ function SomenteNumeros(e)
 		return false;
 	}
 }
-
-function SomenteLetras(e)
-{
+function SomenteLetras(e){
 	var tecla=new Number();
 	if(window.event) {
 		tecla = e.keyCode;
@@ -270,8 +253,6 @@ function SomenteLetras(e)
 		return false;
 	}
 }
-
-
 function Mascara_double(obj){
   valida_num(obj)
   if (obj.value.match("-")){
@@ -286,7 +267,6 @@ function Mascara_double(obj){
   }
   obj.value = mod+valor;
 }
-
 function poe_ponto_num(valor){
   valor = valor.replace(/\./g,"");
   if (valor.length > 3){
