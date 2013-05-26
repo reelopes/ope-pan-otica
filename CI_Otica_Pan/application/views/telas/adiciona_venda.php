@@ -31,7 +31,19 @@ function ativaOnClickProduto(url) {
 window.location.href = url+'?id_produto='+document.getElementById('idProduto').value+'&nome_produto='+document.getElementById('nomeProduto').value+'&preco_venda='+document.getElementById('precoVenda').value+'&quantidade_produto='+document.getElementById('quantidadeProduto').value;
          }
 }  
-     
+function desconto(subtotal,desconto) {  
+        
+        document.getElementById()
+        
+        
+        
+        if(document.getElementById('quantidadeProduto').value>9999){
+           }else{
+  
+        document.forms['formularioVenda'].onsubmit = function(){return false;}
+window.location.href = url+'?id_produto='+document.getElementById('idProduto').value+'&nome_produto='+document.getElementById('nomeProduto').value+'&preco_venda='+document.getElementById('precoVenda').value+'&quantidade_produto='+document.getElementById('quantidadeProduto').value;
+         }
+}       
    
 </script>  
 
@@ -194,7 +206,7 @@ echo"<td align='left'>
      <div align='right' style='float:left; width:100px;'><input type='submit' value='Cancelar'></div>
 </td>";
 echo"<td>".form_label('<b>Total</b>')."</td>";
-echo"<td>".form_input(array('name'=>'total'),'R$ '.$this->util->pontoParaVirgula($subTotal-$desconto),'style="width:125px; height:23px;" readonly')."</td>";
+echo"<td>".form_input(array('name'=>'total'),'R$ '.$this->util->pontoParaVirgula($subTotal),'style="width:125px; height:23px;" readonly')."</td>";
 echo"</tr>";
 echo"</table>";
 

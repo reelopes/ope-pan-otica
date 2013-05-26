@@ -195,7 +195,7 @@ input[type=submit]:active,input[type=button]:active {
     #logo {
 	position: absolute;
 	width: 149px;
-	height: 81px;
+	height: 60px;
 	z-index: 2;
 	left: 1%;
 	top: 1%;

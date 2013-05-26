@@ -235,10 +235,21 @@ class Venda extends CI_Controller {
             );
 
             $this->load->view('Principal_popup', $dados);
-    
-    
     }
-    
+        public function adicionaDesconto() {
+      
+            $valor_desconto_venda = $_GET['$valor_desconto_venda'];
+            $subtotal_venda = $_GET['subtotal_venda'];
+
+       
+  if($valor_desconto_venda > $subtotal_venda){
+       $this->session->set_flashdata('msg','O desconto é maior que o valor da compra.');
+        redirect(base_url('venda/cadastrarVenda'));
+        }else{
+            $this->session->set_userdata('$valor_total_venda',$subtotal_venda-$valor_desconto_venda);
+        redirect(base_url('venda/cadastrarVenda'));
+        }
+    }
     
 }
 ?>
