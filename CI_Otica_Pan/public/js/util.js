@@ -265,6 +265,21 @@ function Mascara_double(obj){
   obj.value = mod+valor;
 }
 
+function mostraCampo(id_campo, id) {
+//    var elem = document.getElementById(id_campo);
+//    elem.style.display = "block";
+var $this = $('#'+id);
+$this.attr("required", "true");
+$("#"+id_campo).show();
+}
+
+function ocultaCampo(id_campo, id) {
+//    var elem = document.getElementById(id_campo);
+//    elem.style.display = "none";
+var $this = $('#'+id);
+$this.removeAttr('required');
+$("#"+id_campo).hide();
+}
 
 function number_format( number, decimals, dec_point, thousands_sep ) {
     // %        nota 1: Para 1000.55 retorna com precisão 1 no FF/Opera é 1,000.5, mas no IE é 1,000.6
@@ -305,4 +320,4 @@ function number_format( number, decimals, dec_point, thousands_sep ) {
     }
  
     return s;
-}   
+}

@@ -41,6 +41,7 @@ class usuario extends CI_Controller {
     }
 
     public function adiciona() {
+        //Dados do usuário
         $this->form_validation->set_rules('nome', 'Nome', 'trim');
         $this->form_validation->set_rules('login', 'Login', 'trim|required');
         $this->form_validation->set_rules('senha', 'Senha', 'trim|required');
@@ -49,9 +50,19 @@ class usuario extends CI_Controller {
         $this->form_validation->set_rules('email', 'Email', 'trim');
         $this->form_validation->set_rules('id_nivel', 'Nivel de Acesso', 'trim|required');
         
+        //Dados do médico
+        $this->form_validation->set_rules('crm', 'CRM', 'trim');
+        
         if ($this->form_validation->run()) {
-            $dados = elements(array('nome', 'login', 'senha', 'lembrete_senha', 'email', 'id_nivel'), $this->input->post());
-            $this->usuario_model->do_insert($dados);
+            if ($this->input->post('id_nivel') == "4") {
+                $crm = $this->input->post('crm');
+            }
+            if ($this->input->post('id_nivel') != "0") {
+                $dados = elements(array('nome', 'login', 'senha', 'lembrete_senha', 'email', 'id_nivel'), $this->input->post());
+                $this->usuario_model->do_insert($dados, $crm);
+            } else {
+                $dados = array('titulo' => 'Cadastro de Usuário', 'pagina' => 'adiciona_usuario');
+            }
         } else {
             $dados = array('titulo' => 'Cadastro de Usuário', 'pagina' => 'adiciona_usuario');
         }
@@ -67,6 +78,7 @@ class usuario extends CI_Controller {
     }
 
     public function update() {
+        //Dados do usuário
         $this->form_validation->set_rules('nome', 'Nome', 'trim');
         $this->form_validation->set_rules('login', 'Login', 'trim|required');
         $this->form_validation->set_rules('senha', 'Senha', 'trim|required');
@@ -74,11 +86,16 @@ class usuario extends CI_Controller {
         $this->form_validation->set_rules('lembrete_senha', 'Lembrete de Senha', 'trim');
         $this->form_validation->set_rules('email', 'Email', 'trim');
         $this->form_validation->set_rules('id_nivel', 'Nivel de Acesso', 'trim|required');
+        
+        //Dados do médico
+        $this->form_validation->set_rules('crm', 'CRM', 'trim');
 
         if ($this->form_validation->run()) {
+             if ($this->input->post('id_nivel') == "4") {
+                $crm = $this->input->post('crm');
+            }
             $dados = elements(array('nome', 'login', 'senha', 'lembrete_senha', 'email', 'id_nivel'), $this->input->post());
-            $this->usuario_model->do_update(
-                    $dados, $this->input->post('id'));
+            $this->usuario_model->do_update($dados, $crm, $this->input->post('id'));
         }
 
         $dados = array('titulo' => 'Altera dados do usuario', 'pagina' => 'atualiza_usuario');
@@ -92,9 +109,8 @@ class usuario extends CI_Controller {
         if ($iduser == NULL) {
             redirect('usuario/lista');
         } else {
-            $this->util_model->deletarComEvento('usuario', $iduser, 'o Usuário', 'usuario/lista');
+            $this->util_model->deletarComEvento($this->usuario_model->do_delete($iduser), 'o', 'Usuário', 'usuario/lista');
         }
-
         $this->load->view('Principal', $dados);
     }
 

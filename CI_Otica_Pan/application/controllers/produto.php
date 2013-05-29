@@ -1,7 +1,10 @@
 <link rel="stylesheet" href="../../../../../../../../../CI_otica_pan/public/jquery/estilo/table_jui.css" />
 <link rel="stylesheet" href="../../../../../../../../../CI_otica_pan/public/jquery/estilo/jquery-ui-1.8.4.custom.css" />
 <script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/jquery/js/jquery.mim.js"></script>
-<script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/jquery/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/jquery/js/jquery.dataTables.min.js">
+</script>
+<script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/js/util.js"></script>
+<script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/js/produto.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function() {
@@ -53,9 +56,9 @@ class Produto extends CI_Controller {
         $this->form_validation->set_rules('validade', 'Validade', 'trim');
 
         if ($this->input->post('produto') == 1) {
-            $this->form_validation->set_rules('largura_lente', 'Largura da lente', 'required');
-            $this->form_validation->set_rules('largura_ponte', 'Largura da Ponte', 'required');
-            $this->form_validation->set_rules('comprimento_haste', 'Comprimento da haste', 'required');
+            $this->form_validation->set_rules('largura_lente', 'Largura da lente');
+            $this->form_validation->set_rules('largura_ponte', 'Largura da Ponte');
+            $this->form_validation->set_rules('comprimento_haste', 'Comprimento da haste');
             $this->form_validation->set_rules('modelo', 'modelo', 'trim');
             $this->form_validation->set_rules('grife', 'Grife', 'required');
             $this->form_validation->set_rules('fornecedor', 'Fornecedor', 'required');
@@ -65,6 +68,8 @@ class Produto extends CI_Controller {
             $dados = elements(array('cod_barra', 'nome', 'descricao', 'preco_custo', 'preco_venda', 'quantidade', 'validade',
                 'largura_lente', 'largura_ponte', 'comprimento_haste', 'modelo', 'grife', 'fornecedor',
                 'produto'), $this->input->post());
+            echo element('fornecedor', $dados);
+            break;
             $this->produto_model->do_insert($dados);
         }
 

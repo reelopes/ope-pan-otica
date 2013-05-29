@@ -94,7 +94,7 @@ echo form_label('Telefone Residencial');
 echo"</td><td>"; //Essa linha pode remover
 echo form_input(array('name'=>'num_telefone1'),  set_value('num_telefone1',$query['telefone'][0]->num_telefone),'maxlength="14" autocomplete ="off" placeholder="(XX) XXXX-XXXX" OnKeyPress="MascaraTelefone(this)" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4}" title="Campo Telefone deve ser digitado no formato (XX) XXXXX-XXXX"');
 echo form_label('Telefone Celular');
-echo form_input(array('name'=>'num_telefone2'),  set_value('num_telefone2',$query['telefone'][1]->num_telefone),'maxlength="15" autocomplete ="off" placeholder="(XX) XXXX-XXXXX" OnKeyPress="MascaraTelefone(this)" onChange="MascaraTelefone(this)" pattern="\([0-9]{2}\)[\s][0-9]{4,5}-[0-9]{4}" title="Campo Telefone deve ser digitado no formato (XX) XXXXXX-XXXX"');
+echo form_input(array('name'=>'num_telefone2'),  set_value('num_telefone2',$query['telefone'][1]->num_telefone),'maxlength="15" autocomplete ="off" placeholder="(XX) XXXX-XXXXX" OnKeyPress="MascaraTelefone(this)" onBlur="MascaraTelefone(this)" pattern="\([0-9]{2}\)[\s][0-9]{4,5}-[0-9]{4}" title="Campo Telefone deve ser digitado no formato (XX) XXXXXX-XXXX"');
 echo"</td></tr>";//Essa linha pode remover
 echo"</table>";
 echo form_error('num_telefone1');

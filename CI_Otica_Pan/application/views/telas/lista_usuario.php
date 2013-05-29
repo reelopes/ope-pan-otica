@@ -11,7 +11,7 @@ $usuario = $usuario;
 $this->table->set_heading('NOME', 'LOGIN','EMAIL','&nbsp; ','&nbsp; ');
 
 foreach ($usuario as $linha) {
-    $this->table->add_row($linha->nome_usuario, $linha->login, $linha->email, "<a href=\"javascript:abrirPopUp('" . base_url('usuario/update/'.$linha->id_usuario)."','450','400');\"> <center><img src='..\public/img/edit.png' width='23'/></center></a>", '<center><p onClick="if (! confirm(\'Tem certeza que deseja excluir o usuário abaixo? \n\n Nome: ' . $linha->nome_usuario.'\n Login: '.$linha->login.'\n Email: '.$linha->email.'\')) { return false; }">'.anchor('usuario/delete/'.$linha->id_usuario, '<img src="..\public/img/delete.png" width="23"/>').'</p></center>');
+        $this->table->add_row($linha->nome_usuario, $linha->login, $linha->email, "<a href=\"javascript:abrirPopUp('" . base_url('usuario/update/'.$linha->id_usuario)."','700','360');\"> <center><img src='..\public/img/edit.png' width='23'/></center></a>", '<center><p onClick="if (! confirm(\'Tem certeza que deseja excluir o usuário abaixo? \n\n Nome: ' . $linha->nome_usuario.'\n Login: '.$linha->login.'\n Email: '.$linha->email.'\')) { return false; }">'.anchor('usuario/delete/'.$linha->id_usuario, '<img src="..\public/img/delete.png" width="23"/>').'</p></center>');
 }
 
 $tmpl = array(

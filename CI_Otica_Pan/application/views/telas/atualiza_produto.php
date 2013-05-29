@@ -117,6 +117,7 @@ echo'<div id="armacao">';
         echo form_label('Fornecedor');
         echo"</td><td>";
         echo'<select name="fornecedor">';
+        echo'<option value="0">Selecione...</option>';
         if ($todos_fornecedor != NULL) {
             foreach ($todos_fornecedor as $linha) {
                 if($query['fornecedorE']-> id == $linha -> id_fornecedor) {
