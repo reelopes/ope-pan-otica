@@ -28,7 +28,7 @@
                     echo "</p>";
                     echo"<br>";
                     echo "<p>";
-                    echo 'Usuário: ' . $this->session->userdata('login').' (' . anchor('login/logoff', 'sair') . ')';
+                    echo 'Usuário: ' . $this->session->userdata('nome').' (' . anchor('login/logoff', 'sair') . ')';
                     echo "</p>";
                     ?>
                 </div>

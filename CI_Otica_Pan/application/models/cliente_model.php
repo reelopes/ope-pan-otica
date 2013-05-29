@@ -130,7 +130,7 @@ class Cliente_model extends CI_Model {
             //Inicio de Update cliente
             $cliente = array(
                 'cpf' => '' . element('cpf', $dados),
-                'data_nascimento' => '' . element('data_nascimento', $dados),
+                'data_nascimento' => element('data_nascimento', $dados),
             );
 
             $condicao_cliente = array(
@@ -174,7 +174,7 @@ class Cliente_model extends CI_Model {
             $this->db->update('telefone', $telefone_celular, $condicao_telefone_celular);
             //Final de Update Telefone
             if ($this->db->trans_complete()) {
-                $this->session->set_flashdata('statusUpdate', 'Alterado com sucesso');
+                $this->session->set_flashdata('statusUpdateOK', 'Alterado com sucesso');
             } else {
                 $this->session->set_flashdata('statusUpdate', 'Não foi possível alterar o cliente');
             }

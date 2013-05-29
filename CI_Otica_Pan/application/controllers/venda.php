@@ -1,11 +1,7 @@
-
 <link rel="stylesheet" href="../../../../../../../../../CI_otica_pan/public/jquery/datagrid/jquery-ui.css" />
 <script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/jquery/datagrid/jquery.min.js"></script>
 <script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/jquery/datagrid/jquery-ui.min.js"></script>
 <script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/jquery/datagrid/jquery.ui.datagrid.min.js"></script>
-
-
-
 <script type="text/javascript">
     $(document).ready(function() {
         oTable = $('#example').dataTable({
@@ -16,8 +12,6 @@
         });
     });
 </script>
-
-
 <?php
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
@@ -163,11 +157,8 @@ class Venda extends CI_Controller {
         //Sem cliente não pode adicionar lente
         if($this->session->userdata('id_cliente')== '0'){
         echo"<script>alert('Para adicionar uma lente é necessário associar um cliente!');window.close();</script>";
-
         }
-        
-        
-        
+     
         $this->form_validation->set_rules('referencia', 'referencia', 'trim|required');
         $this->form_validation->set_rules('nome_lente', 'nome_lente', 'trim|required');
         $this->form_validation->set_rules('preco_venda', 'preco_venda', 'trim|required');
@@ -203,8 +194,7 @@ class Venda extends CI_Controller {
     }
     
     public function adicionaServico() {
-      
-        
+             
         $this->form_validation->set_rules('nome', 'nome', 'trim|required');
         $this->form_validation->set_rules('preco', 'preco', 'trim|required');
         $this->form_validation->set_rules('descricao', 'descricao', 'trim|required');
@@ -238,18 +228,32 @@ class Venda extends CI_Controller {
     }
         public function adicionaDesconto() {
       
-            $valor_desconto_venda = $_GET['$valor_desconto_venda'];
-            $subtotal_venda = $_GET['subtotal_venda'];
-
-       
-  if($valor_desconto_venda > $subtotal_venda){
+            $valor_desconto_venda = $this->util->virgulaParaPonto($_GET['valor_desconto_venda']);
+            $subtotal_venda = $this->util->virgulaParaPonto($_GET['subtotal_venda']);
+            
+  if($valor_desconto_venda >= $subtotal_venda){
        $this->session->set_flashdata('msg','O desconto é maior que o valor da compra.');
         redirect(base_url('venda/cadastrarVenda'));
         }else{
-            $this->session->set_userdata('$valor_total_venda',$subtotal_venda-$valor_desconto_venda);
+
+       $this->session->set_userdata('valor_desconto_venda',$valor_desconto_venda);
         redirect(base_url('venda/cadastrarVenda'));
         }
     }
+    
+       public function adicionarCheques() {
+         
+           $dados = array(
+                'titulo' => 'Cadastro de Cheques',
+                'pagina' => 'adiciona_cheque_venda',
+            );
+
+            $this->load->view('Principal_popup', $dados);
+    }
+    
+    
+    
+    
     
 }
 ?>

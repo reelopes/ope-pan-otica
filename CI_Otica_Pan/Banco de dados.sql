@@ -19,12 +19,12 @@ Table structure for agendamento
 
 drop table if exists `agendamento`;
 CREATE TABLE `agendamento` (
-  `data_consulta` date DEFAULT NULL,
-  `horario_consulta` varchar(5) DEFAULT NULL,
+  `data_consulta` date NOT NULL,
+  `horario_consulta` varchar(5) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_cliente` int(11) NOT NULL,
   `id_dependente` int(11) DEFAULT NULL,
-  `status` varchar(20) DEFAULT NULL,
+  `status` varchar(20) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_cliente` (`id_cliente`),
   KEY `id_dependente` (`id_dependente`),
@@ -121,7 +121,7 @@ Table structure for cliente
 
 drop table if exists `cliente`;
 CREATE TABLE `cliente` (
-  `cpf` varchar(15) DEFAULT NULL,
+  `cpf` varchar(15) NOT NULL,
   `data_nascimento` date DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_pessoa` int(11) NOT NULL,
@@ -424,7 +424,7 @@ CREATE TABLE `endereco` (
   `estado` varchar(2) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `logradouro` varchar(80) NOT NULL,
-  `id_cliente` int(11) DEFAULT NULL,
+  `id_cliente` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_cliente` (`id_cliente`),
   CONSTRAINT `endereco_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE
@@ -678,7 +678,7 @@ Table structure for grife
 
 drop table if exists `grife`;
 CREATE TABLE `grife` (
-  `nome` varchar(50) DEFAULT NULL,
+  `nome` varchar(50) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
@@ -697,9 +697,9 @@ Table structure for informacoes_olho
 
 drop table if exists `informacoes_olho`;
 CREATE TABLE `informacoes_olho` (
-  `distancia` varchar(20) DEFAULT NULL,
-  `lado` varchar(10) DEFAULT NULL,
-  `id_diagnostico` int(11) DEFAULT NULL,
+  `distancia` varchar(20) NOT NULL,
+  `lado` varchar(10) NOT NULL,
+  `id_diagnostico` int(11) NOT NULL,
   KEY `id_diagnostico` (`id_diagnostico`),
   CONSTRAINT `informacoes_olho_ibfk_1` FOREIGN KEY (`id_diagnostico`) REFERENCES `diagnostico` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -710,7 +710,7 @@ Table structure for lente
 
 drop table if exists `lente`;
 CREATE TABLE `lente` (
-`id_orcamento` int(11) DEFAULT NULL,
+`id_orcamento` int(11) NOT NULL,
 `referencia` varchar(20) NOT NULL,
 `nome` varchar(50) NOT NULL,
 `preco_venda` double NOT NULL,
@@ -724,7 +724,7 @@ Table structure for servico
 
 drop table if exists `servico`;
 CREATE TABLE `servico` (
-`id_orcamento` int(11) DEFAULT NULL,
+`id_orcamento` int(11) NOT NULL,
 `nome` varchar(50) NOT NULL,
 `preco_venda` double NOT NULL,
   `descricao` text,
@@ -742,7 +742,7 @@ CREATE TABLE `medico` (
   `crm` varchar(20) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_usuario` (`id_usuario`),
   CONSTRAINT `medico_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`)
@@ -784,12 +784,12 @@ Table structure for orcamento
 
 drop table if exists `orcamento`;
 CREATE TABLE `orcamento` (
-  `data` date DEFAULT NULL,
+  `data` date NOT NULL,
   `forma_pgto` varchar(20) NOT NULL,
-  `vendedor` varchar(100) DEFAULT NULL,
+  `vendedor` varchar(100) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `desconto` double NOT NULL,
-  `status` varchar(20) DEFAULT NULL,
+  `status` varchar(20) NOT NULL,
   `id_cliente` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_cliente` (`id_cliente`),
@@ -853,11 +853,11 @@ Table structure for ordem_servico
 
 drop table if exists `ordem_servico`;
 CREATE TABLE `ordem_servico` (
-  `data` date DEFAULT NULL,
+  `data` date NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `prazo_entrega` date DEFAULT NULL,
-  `id_receita` int(11) DEFAULT NULL,
-  `id_venda` int(11) DEFAULT NULL,
+  `id_receita` int(11) NOT NULL,
+  `id_venda` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_receita` (`id_receita`),
   KEY `id_venda` (`id_venda`),
@@ -878,7 +878,7 @@ Table structure for pessoa
 drop table if exists `pessoa`;
 CREATE TABLE `pessoa` (
   `email` varchar(100) DEFAULT NULL,
-  `nome` varchar(100) DEFAULT NULL,
+  `nome` varchar(100) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24668 DEFAULT CHARSET=utf8;
@@ -1163,7 +1163,7 @@ drop table if exists `telefone`;
 CREATE TABLE `telefone` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `num_telefone` varchar(15) NOT NULL,
-  `id_tipo_telefone` int(11) DEFAULT NULL,
+  `id_tipo_telefone` int(11) NOT NULL,
   `id_pessoa` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_tipo_telefone` (`id_tipo_telefone`),
@@ -1637,9 +1637,9 @@ Table structure for usuario
 drop table if exists `usuario`;
 CREATE TABLE `usuario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(100) DEFAULT NULL,
-  `login` varchar(20) DEFAULT NULL,
-  `senha` varchar(20) DEFAULT NULL,
+  `nome` varchar(100) NOT NULL,
+  `login` varchar(20) NOT NULL,
+  `senha` varchar(20) NOT NULL,
   `lembrete_senha` varchar(200) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `id_nivel` int(11) NOT NULL,

@@ -31,20 +31,24 @@ function ativaOnClickProduto(url) {
 window.location.href = url+'?id_produto='+document.getElementById('idProduto').value+'&nome_produto='+document.getElementById('nomeProduto').value+'&preco_venda='+document.getElementById('precoVenda').value+'&quantidade_produto='+document.getElementById('quantidadeProduto').value;
          }
 }  
-function desconto(subtotal,desconto) {  
-        
-        document.getElementById()
-        
-        
-        
-        if(document.getElementById('quantidadeProduto').value>9999){
-           }else{
-  
-        document.forms['formularioVenda'].onsubmit = function(){return false;}
-window.location.href = url+'?id_produto='+document.getElementById('idProduto').value+'&nome_produto='+document.getElementById('nomeProduto').value+'&preco_venda='+document.getElementById('precoVenda').value+'&quantidade_produto='+document.getElementById('quantidadeProduto').value;
-         }
-}       
-   
+function descontoVenda() {  
+    
+    var subtotal = parseFloat(document.getElementById('subtotal').value.replace(",","."));
+    desconto = parseFloat(document.getElementById('desconto').value.replace(",","."));
+    var total = document.getElementById('total');
+    if(document.getElementById('desconto').value === '')desconto=0;
+    
+        if(desconto <= subtotal){
+    total.value = number_format(subtotal-desconto, 2, ',', '');
+}else{
+    alert('O valor do desconto não pode ser maior que o valor da venda!');
+    document.getElementById('desconto').value = number_format(0, 2, ',', '');
+    total.value = number_format(subtotal, 2, ',', '');
+    return false;
+}
+
+ }
+
 </script>  
 
 <?php
@@ -87,7 +91,7 @@ echo "<img src='".base_url("public/img/list.png")."' width='33px' title='Pesquis
 echo"</fieldset>";
 
 echo"<fieldset>";
-echo"<legend>Produtos:</legend>";
+echo"<legend>Produtos e Pagamento:</legend>";
 
 if($this->session->flashdata('autoFocusQuantidade')=='autofocus'){
     $autoFocusQuantidade='autofocus';
@@ -111,7 +115,7 @@ echo"<td>".form_type(array('name'=>'quantidade'),$this->session->userdata('quant
 echo"<td><img src='".base_url("public/img/list.png")."' width='33px' title='Pesquisar Produto' style='vertical-align: middle; cursor: hand;' OnClick=\"abrirPopUp('".base_url('venda/listarProdutos')."','750','445');\"></td>";
 echo"<td>&nbsp;</td>";
 echo"<td>&nbsp;</td>";
-echo"<td><img src='".base_url("public/img/lente.png")."' width='40px' title='Adicionar Lente' style='vertical-align: middle; cursor: hand;' OnClick=\"abrirPopUp('".base_url('venda/adicionaLente')."','490','300');\"></td>";
+echo"<td><img src='".base_url("public/img/lente.png")."' width='40px' title='Adicionar Lente' style='vertical-align: middle; cursor: hand;' OnClick=\" abrirPopUp('".base_url('venda/adicionaLente')."','490','300');\"></td>";
 echo"<td>&nbsp;</td>";
 echo"<td>&nbsp;</td>";
 echo"<td><img src='".base_url("public/img/servico.png")."' width='40px' title='Adicionar Serviço' style='vertical-align: middle; cursor: hand;' OnClick=\"abrirPopUp('".base_url('venda/adicionaServico')."','490','400');\"></td>";
@@ -144,18 +148,18 @@ echo'<div id="data-grid-local"></div>';
                     <? 
                 foreach ($this->session->userdata('itens') as $itens){
                     
-                    echo '{"Cod":"'.$itens["idProduto"].'","nome":"'.$itens["nomeProduto"].'","Qtd":"'.$itens["quantidadeProduto"].'","valor_unitario":" R$ '.$itens["precoVenda"].'","sub_total":"R$ '.$subTotal_aux = $this->util->pontoParaVirgula($itens["precoVenda"]*$itens["quantidadeProduto"]).'"},';
-                    $subTotal = $subTotal_aux +$subTotal;
+                    echo '{"Cod":"'.$itens["idProduto"].'","nome":"'.$itens["nomeProduto"].'","Qtd":"'.$itens["quantidadeProduto"].'","valor_unitario":" R$ '.$itens["precoVenda"].'","sub_total":"R$ '.$subTotal_aux = $this->util->pontoParaVirgula($this->util->virgulaParaPonto($itens["precoVenda"])*$itens["quantidadeProduto"]).'"},';
+                    $subTotal = $this->util->virgulaParaPonto($subTotal_aux) + $subTotal;
                 }
                 foreach ($this->session->userdata('lente') as $lentes){
                     
-                    echo '{"Cod":"'.$lentes["referencia"].'","nome":"'.$lentes["nome_lente"].'","Qtd":"'.$lentes["quantidade_lente"].'","valor_unitario":" R$ '.$lentes["preco_venda"].'","sub_total":"R$ '.$subTotal_aux = $this->util->pontoParaVirgula($lentes["preco_venda"]*$lentes["quantidade_lente"]).'"},';
-                    $subTotal = $subTotal_aux +$subTotal;
+                    echo '{"Cod":"'.$lentes["referencia"].'","nome":"'.$lentes["nome_lente"].'","Qtd":"'.$lentes["quantidade_lente"].'","valor_unitario":" R$ '.$lentes["preco_venda"].'","sub_total":"R$ '.$subTotal_aux = $this->util->pontoParaVirgula($this->util->virgulaParaPonto($lentes["preco_venda"])*$lentes["quantidade_lente"]).'"},';
+                    $subTotal = $this->util->virgulaParaPonto($subTotal_aux) + $subTotal;
                 }
                 foreach ($this->session->userdata('servico') as $servicos){
                     
-                    echo '{"Cod":"000","nome":"'.$servicos["nome"].'","Qtd":"'.$servicos["quantidade_servico"].'","valor_unitario":" R$ '.$servicos["preco"].'","sub_total":"R$ '.$subTotal_aux = $this->util->pontoParaVirgula($servicos["preco"]*$servicos["quantidade_servico"]).'"},';
-                    $subTotal = $subTotal_aux + $subTotal;
+                    echo '{"Cod":"000","nome":"'.$servicos["nome"].'","Qtd":"'.$servicos["quantidade_servico"].'","valor_unitario":" R$ '.$servicos["preco"].'","sub_total":"R$ '.$subTotal_aux = $this->util->pontoParaVirgula($this->util->virgulaParaPonto($servicos["preco"])*$servicos["quantidade_servico"]).'"},';
+                    $subTotal = $this->util->virgulaParaPonto($subTotal_aux) + $subTotal;
                 }
                 
                 
@@ -187,26 +191,34 @@ echo'<div id="data-grid-local"></div>';
 
 </script>
 <?
+//Se não foi preenchido o valor de desconto adicionar o valor subtotal para o total
+    $total = $subTotal-$this->session->userdata('valor_desconto_venda');
+
 echo"<table width='100%' align='right'>";
 echo"<tr align='right'>";
-echo"<td width='70%'></td>";
+echo"<td align ='left' colspan='2' width='70%'>";
+echo form_label('Forma de Pagamento');
+echo form_dropdown('forma_pagamento', array('0'=>'Á Vista','1'=>'Cartão de Crédito','2'=>'Cheque'),'0',"Onchange=\" if(this.value == '2'){ if(confirm('Desejá cadastrar os cheques agora?')){}else{return false;}abrirPopUp('".base_url('venda/adicionarCheques')."','645','700');}\"")."<a href=javascript:abrirPopUp('".base_url('venda/adicionarCheques')."','645','700'); ><img src='".base_url("public/img/cheque.png")."' width='50px' title='Adicionar Cheques' style='vertical-align: middle; cursor: hand;' ></a></td>";
+
 echo"<td>".form_label('Sub. Total')."</td>";
-echo"<td>".form_input(array('name'=>'sub_total'),'R$ '.$this->util->pontoParaVirgula($subTotal),'style="width:125px; height:23px;" readonly')."</td>";
+echo"<td>".form_input(array('name'=>'sub_total'),  number_format($subTotal,'2',',',''),'id="subtotal" style="width:125px; height:23px;" readonly')."</td>";
 echo"<td width='18px'> </td>";
 echo"</tr>";
 echo"<tr align='right'>";
-echo"<td width='70%'></td>";
+echo"<td align ='left'></td>";
+echo"<td width='40%'></td>";
 echo"<td>".form_label('Desconto')."</td>";
-echo"<td>".form_input(array('name'=>'desconto'),'','style="width:125px; height:23px;"')."</td>";
+echo"<td>".form_input(array('name'=>'desconto'),number_format($this->session->userdata('valor_desconto_venda'),'2',',',''),'id="desconto" autocomplete="off" style="width:125px; height:23px;" onkeyup="descontoVenda(event);" onkeypress="return(FormataReais(this,\'.\',\',\',event));" onkepress="descontoVenda(event);" ')."</td>";
 echo"</tr>";
 echo"<tr align='right'>";
-echo"<td align='left'>
+echo"<td align ='left'></td>";
+echo"<td align='left' width='70%'>
      <div align='left' style='float:left; width:100px;'><input type='submit' value='Vender'></div>
      <div align='center' style='float:left; width:100px;'><input type='submit' value='Salvar'></div>
      <div align='right' style='float:left; width:100px;'><input type='submit' value='Cancelar'></div>
 </td>";
 echo"<td>".form_label('<b>Total</b>')."</td>";
-echo"<td>".form_input(array('name'=>'total'),'R$ '.$this->util->pontoParaVirgula($subTotal),'style="width:125px; height:23px;" readonly')."</td>";
+echo"<td>".form_input(array('name'=>'total'),number_format($total,'2',',',''),'id="total" style="width:125px; height:23px;" readonly')."</td>";
 echo"</tr>";
 echo"</table>";
 

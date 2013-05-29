@@ -1,5 +1,5 @@
 //Funções que pesqusam diretamente na pagina
-
+//Carrega paginas ajax pela URL
 function openAjax() {
     var Ajax;
     try {Ajax = new XMLHttpRequest(); // XMLHttpRequest para browsers mais populares, como: Firefox, Safari, dentre outros.
@@ -116,6 +116,7 @@ len2 = aux2.length;
 for (i = len2 - 1; i >= 0; i--)
 fld.value += aux2.charAt(i);
 fld.value += decSep + aux.substr(len - 2, len);
+fld.value = fld.value.replace(".","");
 }
 return false;
 }
@@ -133,12 +134,14 @@ function MascaraCPF(cpf){
 	}	
 	return formataCampo(cpf, '000.000.000-00', event);
 }
+//Adiciona Mascara Horario
 function MascaraHorario(horario){
 	if(mascaraInteiro(horario)==false){
 		event.returnValue = false;
 	}	
 	return formataCampo(horario, '00:00', event);
 }
+//Valida Se Cpf é valido
 function ValidarCPF(Objcpf){
 	var cpf = Objcpf.value;
 	exp = /\.|\-/g
@@ -199,6 +202,7 @@ function formataCampo(campo, Mascara, evento) {
 		return true; 
 	}
 }
+//Abri um popUp com o tamanho informado
 function abrirPopUp(url,width,height) {
 
     if(height>600){
@@ -212,16 +216,7 @@ function abrirPopUp(url,width,height) {
    window.open(url,'janela', 'left='+left+',width='+width+', height='+height+', top='+top+', scrollbars=yes, status=no, toolbar=no, location=yes, directories=no, menubar=no, resizable=no, fullscreen=no'); 
 
 }
-function validaPreco(precoCusto, precoVenda) {
-
-    alert("OI");
-
-    if (document.getElementById(precoCusto.value) > document.getElementById(precoVenda.value)) {
-        if (! confirm('Preço de custo é maior que Preço de venda.\n\nDeseja Cadastrar mesmo assim?')) {
-            return false;
-        }
-    }
-}
+//Função que aceita somente numeros
 function SomenteNumeros(e){
     
 	var tecla=new Number();
@@ -238,6 +233,7 @@ function SomenteNumeros(e){
 		return false;
 	}
 }
+//função que aceita somente letras
 function SomenteLetras(e){
 	var tecla=new Number();
 	if(window.event) {
@@ -253,6 +249,7 @@ function SomenteLetras(e){
 		return false;
 	}
 }
+//Mascara que adiciona , no campo double e aceita valor negativo
 function Mascara_double(obj){
   valida_num(obj)
   if (obj.value.match("-")){
@@ -267,31 +264,45 @@ function Mascara_double(obj){
   }
   obj.value = mod+valor;
 }
-function poe_ponto_num(valor){
-  valor = valor.replace(/\./g,"");
-  if (valor.length > 3){
-    valores = "";
-    while (valor.length > 3){
-      valores = "."+valor.substring(valor.length-3,valor.length)+""+valores;
-      valor = valor.substring(0,valor.length-3);
-    }
-    return valor+""+valores;
-  }else{
-    return valor;
-  }
-}
-function valida_num(obj){
-  numeros = new RegExp("[0-9]");
-  while (!obj.value.charAt(obj.value.length-1).match(numeros)){
-    if(obj.value.length == 1 && obj.value == "-"){
-      return true;
-    }
-    if(obj.value.length >= 1){
-      obj.value = obj.value.substring(0,obj.value.length-1)
-    }else{
-      return false;
-    }
-  }
-}
 
 
+function number_format( number, decimals, dec_point, thousands_sep ) {
+    // %        nota 1: Para 1000.55 retorna com precisão 1 no FF/Opera é 1,000.5, mas no IE é 1,000.6
+    // *     exemplo 1: number_format(1234.56);
+    // *     retorno 1: '1,235'
+    // *     exemplo 2: number_format(1234.56, 2, ',', ' ');
+    // *     retorno 2: '1 234,56'
+    // *     exemplo 3: number_format(1234.5678, 2, '.', '');
+    // *     retorno 3: '1234.57'
+    // *     exemplo 4: number_format(67, 2, ',', '.');
+    // *     retorno 4: '67,00'
+    // *     exemplo 5: number_format(1000);
+    // *     retorno 5: '1,000'
+    // *     exemplo 6: number_format(67.311, 2);
+    // *     retorno 6: '67.31'
+ 
+    var n = number, prec = decimals;
+    n = !isFinite(+n) ? 0 : +n;
+    prec = !isFinite(+prec) ? 0 : Math.abs(prec);
+    var sep = (typeof thousands_sep == "undefined") ? ',' : thousands_sep;
+    var dec = (typeof dec_point == "undefined") ? '.' : dec_point;
+ 
+    var s = (prec > 0) ? n.toFixed(prec) : Math.round(n).toFixed(prec); //fix for IE parseFloat(0.55).toFixed(0) = 0;
+ 
+    var abs = Math.abs(n).toFixed(prec);
+    var _, i;
+ 
+    if (abs >= 1000) {
+        _ = abs.split(/\D/);
+        i = _[0].length % 3 || 3;
+ 
+        _[0] = s.slice(0,i + (n < 0)) +
+              _[0].slice(i).replace(/(\d{3})/g, sep+'$1');
+ 
+        s = _.join(dec);
+    } else {
+        s = s.replace('.', dec);
+    }
+ 
+    return s;
+}   

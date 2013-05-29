@@ -16,9 +16,12 @@ $query = $this->cliente_model->retornaCliente($id_cliente);
 
 if($this->session->flashdata('statusUpdate')){
     $msg = $this->session->flashdata('statusUpdate');
+    echo "<body onLoad=\" alert('$msg');\">";
+}
+if($this->session->flashdata('statusUpdateOK')){
+    $msg = $this->session->flashdata('statusUpdateOK');
     echo "<body onLoad=\" alert('$msg');window.opener.location.reload();window.close();\">";
 }
-
 
 echo form_open("cliente/atualizarCliente/$id_cliente");
 

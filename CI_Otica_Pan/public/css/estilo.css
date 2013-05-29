@@ -172,9 +172,9 @@ input[type=submit]:active,input[type=button]:active {
 	height: 0px;
 	z-index: 1;
 	left: 75%;
-	top: 40px;
-	font-family:"Lucida Console", Monaco, monospace;
-	font-size:12px;
+	top: 25px;
+	font-family:"calibri", Monaco, monospace;
+	font-size:13px;
 	color:#EEE;
 }
 .headerInfo a {
