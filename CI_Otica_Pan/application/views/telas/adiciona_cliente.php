@@ -70,7 +70,7 @@ echo"</td></tr>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Data de Nascimento');
 echo"</td><td>"; //Essa linha pode remover
-echo form_type(array('name'=>'data_nascimento'),  set_value('data_nascimento'),'maxlength="10" autocomplete ="off" min="1900-01-01" max="'.date('Y-m-d').'"','date');
+echo form_type(array('name'=>'data_nascimento'),  set_value('data_nascimento'),'maxlength="10" autocomplete ="off" min="1900-01-01" max="'.date('Y-m-d').'" title="testehduwahduhawd"','date');
 echo form_error('data_nascimento');
 echo"</td></tr>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover

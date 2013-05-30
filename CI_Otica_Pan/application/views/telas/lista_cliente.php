@@ -10,42 +10,6 @@ if ($this->session->flashdata('msg')) {
     echo "<body onLoad=\" alert('$msg');window.opener.location.reload();window.close();\">";
 }
 
-//Tratamento do Select de estado
-$options = array(
-'AC' => 'AC',
-'AL' => 'AL',
-'AP' => 'AP',
-'AM' => 'AM',
-'BA' => 'BA',
-'CE' => 'CE',
-'DF' => 'DF',
-'ES' => 'ES',
-'GO' => 'GO',
-'MA' => 'MA',
-'MT' => 'MT',
-'MS' => 'MS',
-'MG' => 'MG',
-'PA' => 'PA',
-'PB' => 'PB',
-'PR' => 'PR',
-'PE' => 'PE',
-'PI' => 'PI',
-'RJ' => 'RJ',
-'RN' => 'RN',
-'RS' => 'RS',
-'RO' => 'RO',
-'RR' => 'RR',
-'SC' => 'SC',
-'SP' => 'SP',
-'SE' => 'SE',
-'TO' => 'TO',
-    );
-if(set_value('estado')==NULL){
-    $setValueEstado='SP';
-}else{
-    $setValueEstado=set_value('estado');
-}
-
 
 echo"<fieldset>";
 echo"<legend>Dados Pessoais:</legend>";
@@ -110,7 +74,7 @@ echo"</td><td>"; //Essa linha pode remover
 echo form_input(array('name'=>'cidade'),$cliente['endereco']->cidade,'readonly maxlength="50" autocomplete ="off" placeholder="Exemplo: São Paulo"');
 echo form_error('cidade');
 echo form_label('Estado','',array('style' => 'padding-right: 45px;',));
-echo form_dropdown('estado', $options, $setValueEstado);
+echo form_dropdown('estado', array($cliente['endereco']->estado));
 echo"</td></tr>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('CEP');

@@ -76,7 +76,7 @@ class Cliente_model extends CI_Model {
         $this->db->where("nome like '%$pesquisa%' or email like '%$pesquisa%' or cpf like '%$pesquisa%' ");
         if ($limite != NULL)
             $this->db->limit($limite);
-        $this->db->group_by('pessoa.nome');
+        $this->db->group_by('pessoa.id');
         return $this->db->get();
     }
 

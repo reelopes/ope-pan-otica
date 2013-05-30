@@ -79,7 +79,7 @@ CREATE TABLE `armacao` (
   `comprimento_haste` int(11) DEFAULT NULL,
   `modelo` varchar(20) DEFAULT NULL,
   `id_fornecedor` int(11) DEFAULT NULL,
-  `id_produto` int(11) DEFAULT NULL,
+  `id_produto` int(11) NOT NULL,
   `id_grife` int(11) DEFAULT NULL,
   KEY `id_produto` (`id_produto`),
   KEY `id_fornecedor` (`id_fornecedor`),

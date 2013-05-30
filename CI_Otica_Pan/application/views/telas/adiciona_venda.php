@@ -57,8 +57,6 @@ if ($this->session->flashdata('msg')) {
     $msg = $this->session->flashdata('msg');
     echo "<body onLoad=\" alert('$msg');\">";
 }
-echo $this->session->userdata('produtos');
-
 
 $nome_cliente = $_GET['nomeCliente'];
 $cpf_cliente = $_GET['cpfCliente'];
@@ -111,7 +109,7 @@ echo"<td>".form_input(array('name'=>'codigo_barras'),$this->session->userdata('c
 echo"<td>".form_label('Cod.')."</td>";
 echo"<td>".form_input(array('name'=>'codigo_produto'),$this->session->userdata('codigo_produto_temp'),'autocomplete ="off" id="codigoProduto" style="width:123px; height:25px;" onkeypress=ativaEnter(event,"codigoProduto","'.base_url('venda/listarProdutosURL').'")')."</td>";
 echo"<td>".form_label('Qtd.')."</td>";
-echo"<td>".form_type(array('name'=>'quantidade'),$this->session->userdata('quantidade_temp'),'autocomplete ="off" id="quantidadeProduto" min="1" max ="9999" style="width:75px; height:25px;" onkeypress=ativaEnterProduto(event,"quantidadeProduto","'.base_url('venda/adicionaProduto').'") '.$autoFocusQuantidade.' ','number')."</td>";
+echo"<td>".form_type(array('name'=>'quantidade'),$this->session->userdata('quantidade_temp'),'autocomplete ="off" id="quantidadeProduto" min="1" max ="'.$this->session->userdata('quantidade_max').'" style="width:75px; height:25px;" onkeypress=ativaEnterProduto(event,"quantidadeProduto","'.base_url('venda/adicionaProduto').'") '.$autoFocusQuantidade.' ','number')."</td>";
 echo"<td><img src='".base_url("public/img/list.png")."' width='33px' title='Pesquisar Produto' style='vertical-align: middle; cursor: hand;' OnClick=\"abrirPopUp('".base_url('venda/listarProdutos')."','750','445');\"></td>";
 echo"<td>&nbsp;</td>";
 echo"<td>&nbsp;</td>";
@@ -213,9 +211,9 @@ echo"</tr>";
 echo"<tr align='right'>";
 echo"<td align ='left'></td>";
 echo"<td align='left' width='70%'>
-     <div align='left' style='float:left; width:100px;'><input type='submit' value='Vender'></div>
-     <div align='center' style='float:left; width:100px;'><input type='submit' value='Salvar'></div>
-     <div align='right' style='float:left; width:100px;'><input type='submit' value='Cancelar'></div>
+     <div align='left' style='float:left; width:100px;'>".anchor("venda/limparVenda","<input type='button' value='Finalizar'>")."</div>
+     <div align='center' style='float:left;'>".anchor("venda/gerarOrcamento","<input type='button' value='Orçamento'>")."</div>
+     <div align='right' style='float:left; width:100px;'>".anchor("venda/limparVenda","<input type='button' value='Cancelar'>")."</div>
 </td>";
 echo"<td>".form_label('<b>Total</b>')."</td>";
 echo"<td>".form_input(array('name'=>'total'),number_format($total,'2',',',''),'id="total" style="width:125px; height:23px;" readonly')."</td>";
@@ -225,7 +223,7 @@ echo"</table>";
 
 
 echo '<input type="hidden" value="'.$this->session->userdata('id_cliente').'" name="id_cliente" id="idCliente" />';
-echo '<input type="hidden" value="'.$this->session->userdata('id_produto_temp').'" name="id_roduto" id="idProduto" />';
+echo '<input type="hidden" value="'.$this->session->userdata('id_produto_temp').'" name="id_produto" id="idProduto" />';
 
 
 

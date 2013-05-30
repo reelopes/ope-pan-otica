@@ -103,6 +103,7 @@ class Venda extends CI_Controller {
             $this->session->set_userdata('codigo_barras_temp', $produtos[0]->cod_barra);
             $this->session->set_userdata('preco_venda_temp', $this->util->pontoParaVirgula($produtos[0]->preco_venda));
             $this->session->set_userdata('quantidade_temp', '1');
+            $this->session->set_userdata('quantidade_max', $produtos[0]->quantidade);
             $this->session->set_userdata('id_produto_temp', $produtos[0]->id_produto);
         
             
@@ -127,7 +128,7 @@ class Venda extends CI_Controller {
         $nome_produto = $_GET['nome_produto'];
         $preco_venda = $_GET['preco_venda'];
         $quantidade_produto = $_GET['quantidade_produto'];
-        
+
         if($id_produto ==null || $nome_produto ==null || $preco_venda ==null || $quantidade_produto ==null){
        $this->session->set_flashdata('msg','Não foi possível adicionar o produto tente novamente.');
         redirect(base_url('venda/cadastrarVenda'));
@@ -251,8 +252,52 @@ class Venda extends CI_Controller {
             $this->load->view('Principal_popup', $dados);
     }
     
+     public function limparVenda() {
+         
+        $this->session->unset_userdata('produtos');
+        $this->session->unset_userdata('nome_cliente');
+        $this->session->unset_userdata('cpf_cliente');
+        $this->session->unset_userdata('id_cliente');
+        $this->session->unset_userdata('autoFocusQuantidade');
+        $this->session->unset_userdata('codigo_barras_temp');
+        $this->session->unset_userdata('codigo_produto_temp');
+        $this->session->unset_userdata('quantidade_temp');
+        $this->session->unset_userdata('quantidade_max');
+        $this->session->unset_userdata('nome_produto_temp');
+        $this->session->unset_userdata('preco_venda_temp');
+        $this->session->unset_userdata('itens');
+        $this->session->unset_userdata('lente');
+        $this->session->unset_userdata('servico');
+        $this->session->unset_userdata('valor_desconto_venda');
+        $this->session->unset_userdata('id_cliente');
+        $this->session->unset_userdata('id_produto_temp');
+        
+        redirect('venda/cadastrarVenda');
+    }
     
-    
+         public function gerarOrcamento() {
+             
+             $this->input->post('forma_pagamento');
+             
+             
+        $dados = array(
+            'data' =>date('Y-m-d'),
+            'vendedor'=>$this->session->userdata('nome'),
+            'forma_pagamento'
+          );  
+          
+        $this->session->userdata('produtos');//Lista de produtos
+        $this->session->userdata('nome_cliente');//nome do cliente
+        $this->session->userdata('cpf_cliente');//cpf do cliente
+        $this->session->userdata('id_cliente');//id do cliente
+        $this->session->userdata('itens');//array de itens
+        $this->session->userdata('lente');//array de lentes
+        $this->session->userdata('servico');//array de serviços
+        $this->session->userdata('valor_desconto_venda');//valor de disconto
+        $this->session->userdata('id_cliente');
+        $this->session->userdata('id_produto_temp');
+        
+    }
     
     
 }

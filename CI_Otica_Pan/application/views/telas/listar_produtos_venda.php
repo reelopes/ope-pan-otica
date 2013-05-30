@@ -45,7 +45,8 @@ foreach ($produtos as $linha) {
        putData('codigoBarras','".$linha->cod_barra."');
        putData('codigoProduto','".$linha->id_produto."');
        putData('nomeProduto','".$linha->nome."');   
-       putData('quantidadeProduto','1');putData('nomeProduto','".$linha->nome."');
+       putData('quantidadeProduto','1');
+       putData('idProduto','".$linha->id_produto."');   
        putData('precoVenda','".$this->util->pontoParaVirgula($linha->preco_venda)."',true);
 
 \">";
