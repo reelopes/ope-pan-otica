@@ -11,15 +11,15 @@ class Cliente_model extends CI_Model {
             $this->db->trans_start(); //Começa uma transação em diversas tabelas
             //Trata os elementos de Pesspa
             $pessoa = array(
-                'nome' => '' . element('nome', $dados),
-                'email' => '' . element('email', $dados),
+                'nome' => element('nome', $dados, null),
+                'email' => element('email', $dados, null)
             );
             $this->db->insert('pessoa', $pessoa); //insere no BD
             $id_pessoa = $this->db->insert_id(); //Pega o ultimo ID inserido no BD
             //Trata os elemenos
             $cliente = array(
-                'cpf' => '' . element('cpf', $dados),
-                'data_nascimento' => element('data_nascimento', $dados),
+                'cpf' => element('cpf', $dados, null),
+                'data_nascimento' => element('data_nascimento', $dados, null),
                 'id_pessoa' => $id_pessoa,
             );
 
@@ -27,19 +27,19 @@ class Cliente_model extends CI_Model {
             $id_cliente = $this->db->insert_id(); //Pega o ultimo ID inserido no BD
             //trata os elementos de endereço
             $endereco = array(
-                'logradouro' => '' . element('rua', $dados),
-                'bairro' => '' . element('bairro', $dados),
-                'cidade' => '' . element('cidade', $dados),
-                'complemento' => '' . element('complemento', $dados),
-                'estado' => '' . element('estado', $dados),
-                'cep' => '' . element('cep', $dados),
+                'logradouro' => element('rua', $dados, null),
+                'bairro' => element('bairro', $dados, null),
+                'cidade' => element('cidade', $dados, null),
+                'complemento' => element('complemento', $dados, null),
+                'estado' => element('estado', $dados, null),
+                'cep' => element('cep', $dados, null),
                 'id_cliente' => $id_cliente,
             );
             $this->db->insert('endereco', $endereco); //insere no BD
 
 
             $telefone_fixo = array(
-                'num_telefone' => '' . element('num_telefone1', $dados),
+                'num_telefone' => element('num_telefone1', $dados, null),
                 'id_tipo_telefone' => '1',
                 'id_pessoa' => $id_pessoa,
             );
@@ -47,7 +47,7 @@ class Cliente_model extends CI_Model {
             $this->db->insert('telefone', $telefone_fixo); //insere no BD
 
             $telefone_celular = array(
-                'num_telefone' => '' . element('num_telefone2', $dados),
+                'num_telefone' => element('num_telefone2', $dados, null),
                 'id_tipo_telefone' => '2',
                 'id_pessoa' => $id_pessoa,
             );
@@ -118,8 +118,8 @@ class Cliente_model extends CI_Model {
 
             //Inicio de Update Pessoa
             $pessoa = array(
-                'nome' => '' . element('nome', $dados),
-                'email' => '' . element('email', $dados),
+                'nome' => element('nome', $dados, null),
+                'email' => element('email', $dados, null)
             );
 
             $condicao_pessoa = array(
@@ -129,8 +129,8 @@ class Cliente_model extends CI_Model {
             //Final de Update pessoa
             //Inicio de Update cliente
             $cliente = array(
-                'cpf' => '' . element('cpf', $dados),
-                'data_nascimento' => element('data_nascimento', $dados),
+                'cpf' => element('cpf', $dados, null),
+                'data_nascimento' => element('data_nascimento', $dados, null),
             );
 
             $condicao_cliente = array(
@@ -140,12 +140,12 @@ class Cliente_model extends CI_Model {
             //Final de Update Cliente
             //Inicio de Update Endereço
             $endereco = array(
-                'bairro' => '' . element('bairro', $dados),
-                'cep' => '' . element('cep', $dados),
-                'cidade' => '' . element('cidade', $dados),
-                'complemento' => '' . element('complemento', $dados),
-                'estado' => '' . element('estado', $dados),
-                'logradouro' => '' . element('rua', $dados),
+                'bairro' => element('bairro', $dados, null),
+                'cep' => element('cep', $dados, null),
+                'cidade' => element('cidade', $dados, null),
+                'complemento' => element('complemento', $dados, null),
+                'estado' => element('estado', $dados, null),
+                'logradouro' => element('rua', $dados, null)
             );
 
             $condicao_endereco = array(
@@ -155,7 +155,7 @@ class Cliente_model extends CI_Model {
             //Final de Update Endereco
             //Inicio de Update Telefone
             $telefone_fixo = array(
-                'num_telefone' => '' . element('num_telefone1', $dados),
+                'num_telefone' => element('num_telefone1', $dados, null)
             );
             $condicao_telefone_fixo = array(
                 'id_pessoa' => $condicao['id_pessoa'],
@@ -165,7 +165,7 @@ class Cliente_model extends CI_Model {
             //Final de Update Telefone
             //Inicio de Update Telefone
             $telefone_celular = array(
-                'num_telefone' => '' . element('num_telefone2', $dados),
+                'num_telefone' => element('num_telefone2', $dados, null)
             );
             $condicao_telefone_celular = array(
                 'id_pessoa' => $condicao['id_pessoa'],

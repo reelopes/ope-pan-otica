@@ -39,7 +39,7 @@ echo form_input(array('name'=>'login'),  set_value('login', $query['usuario']->l
 echo"</td><td>";
 echo form_label('Nivel');
 echo"</td><td>"; 
-echo form_input(array('name'=>'id_nivel'), set_value('id_nivel', $query['nivel']->nome), 'autocomplete ="off" style="width:150px;" onpaste="return false;" readonly');
+echo form_input(array('name'=>'nivel'), set_value('nivel', $query['nivel']->nome), 'autocomplete ="off" style="width:150px;" onpaste="return false;" readonly');
 echo"</td></tr>";
 echo"<tr id=\"crm\"><td>";
 echo'<div>';
@@ -71,6 +71,7 @@ echo"</table>";
 echo"</fieldset>";
 
 echo form_hidden('id',  $id,'');
+echo form_hidden('id_nivel',  $query['usuario']->id_nivel,'');
 
 echo form_close();
 echo"</div>";
