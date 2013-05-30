@@ -82,7 +82,7 @@ class Cliente extends CI_Controller {
 
         $dados = Array(
             'pagina' => 'listar_clientes',
-            'titulo' => 'Pesquisa Cliente',
+            'titulo' => 'Pesquisa de Cliente',
             'clientes' => $this->cliente_model->listarClientes('')->result(),
         );
 

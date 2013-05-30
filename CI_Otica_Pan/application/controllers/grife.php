@@ -49,13 +49,13 @@ class grife extends CI_Controller {
                 $this -> grife_model -> do_insert($dados);
                 
             } else {
-                $dados = array('titulo' => 'Criar Grife', 'pagina' => 'adiciona_grife');
+                $dados = array('titulo' => 'Cadastro de Grife', 'pagina' => 'adiciona_grife');
                 $this -> load -> view('Principal', $dados);
             }
 	}
 
 	public function lista() {
-		$dados = array('pagina' => 'lista_grife', 'titulo' => 'Pesquisar Grife', 
+		$dados = array('pagina' => 'lista_grife', 'titulo' => 'Pesquisa de Grife', 
 		'grife' => $this -> grife_model -> getAll() -> result());
 
 		$this -> load -> view('Principal', $dados);
@@ -84,7 +84,7 @@ class grife extends CI_Controller {
                     $dados, array('id_grife' => $this->input->post('id_grife')));
             
             }
-		$dados = array('titulo' => 'Atualiza Grife', 'pagina' => 'atualiza_grife');
+		$dados = array('titulo' => 'Alterar Grife', 'pagina' => 'atualiza_grife');
 		$this -> load -> view('Principal', $dados);
             }
 

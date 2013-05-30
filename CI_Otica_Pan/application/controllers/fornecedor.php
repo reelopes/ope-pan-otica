@@ -61,7 +61,7 @@ class Fornecedor extends CI_Controller {
     }
 
     public function lista() {
-        $dados = array('pagina' => 'lista_fornecedor', 'titulo' => 'Pesquisa Fornecedor',
+        $dados = array('pagina' => 'lista_fornecedor', 'titulo' => 'Pesquisa de Fornecedor',
             'fornecedor' => $this->fornecedor_model->getAll()->result());
 
         $this->load->view('Principal', $dados);
@@ -84,7 +84,7 @@ class Fornecedor extends CI_Controller {
                 'id_fornecedor' => $this->input->post('id_fornecedor')));
         }
         
-        $dados = array('titulo' => 'Atualiza Fornecedor', 'pagina' => 'atualiza_fornecedor');
+        $dados = array('titulo' => 'Alterar dados do Fornecedor', 'pagina' => 'atualiza_fornecedor');
         $this->load->view('Principal_popup', $dados);
     }
 

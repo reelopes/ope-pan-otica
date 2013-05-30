@@ -82,7 +82,7 @@ class Produto extends CI_Controller {
     }
 
     public function lista() {
-        $dados = array('pagina' => 'lista_produto', 'titulo' => 'Pesquisa Produto',
+        $dados = array('pagina' => 'lista_produto', 'titulo' => 'Pesquisa de Produto',
             'produto' => $this->produto_model->getAll()->result());
 
         $this->load->view('Principal', $dados);
@@ -127,7 +127,7 @@ class Produto extends CI_Controller {
             $dados, $this->input->post('id_produto'));
         }
 
-        $dados = array('titulo' => 'Atualiza Produto', 'pagina' => 'atualiza_produto');
+        $dados = array('titulo' => 'Alterar dados do Produto', 'pagina' => 'atualiza_produto');
         $this->load->view('Principal_popup', $dados);
     }
     

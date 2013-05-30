@@ -37,7 +37,6 @@ class Dependente extends CI_Controller {
         $this->load->helper('form');
         $this->load->model('dependente_model');
         $this->load->model('cliente_model');
-        $this->load->model('util_model');
         $this->load->library('form_validation');
         $this->load->library('table');
 
@@ -84,23 +83,20 @@ class Dependente extends CI_Controller {
         $id_cliente = $this->uri->segment(3);
         $id_dependente = $this->uri->segment(4);
         
-        if ($id_dependente == NULL) {
-            redirect('produto/lista');
+        if ($id_dependente != NULL) {
+
+            $retorno = $this->dependente_model->deletaDependente($id_dependente);
+            
+            if ($retorno == '0') {
+                $this->session->set_flashdata('msg', 'Dependente deletado com sucesso');
+                redirect(base_url('dependente/listarDependentes/'. $id_cliente));
+            } else if ($retorno == '1451') {
+                $this->session->set_flashdata('msg', 'Não foi possível deletar o dependente porque \njá está associado a outro evento');
+                redirect(base_url('dependente/listarDependentes/'. $id_cliente));
+            }
         } else {
-            $this->util_model->deletarComEvento('dependente', $id_dependente, 'o Dependente', 'dependente/listarDependentes/'. $id_cliente);
+            redirect(current_url());
         }
-        
-//        $id_cliente = $this->uri->segment(3);
-//        $id_dependente = $this->uri->segment(4);
-//        if ($id_dependente != NULL) {
-//
-//            if ($this->dependente_model->deletaDependente($id_dependente)) {
-//                $this->session->set_flashdata('msg', 'Dependente deletado com sucesso');
-//                redirect(base_url('dependente/listarDependentes/'. $id_cliente));
-//            }
-//        } else {
-//            redirect(current_url());
-//        }
     }
 
     public function cadastrarDependente() {

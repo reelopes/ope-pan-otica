@@ -36,6 +36,10 @@ echo"<tr><td>";
 echo form_label('Login');
 echo"</td><td>"; 
 echo form_input(array('name'=>'login'),  set_value('login', $query['usuario']->login),'maxlength="20" placeholder="Login" autocomplete ="off" style="width:180px;" required title="Campo Login é obrigatório"');
+echo"</td><td>";
+echo form_label('Nivel');
+echo"</td><td>"; 
+echo form_input(array('name'=>'id_nivel'), set_value('id_nivel', $query['nivel']->nome), 'autocomplete ="off" style="width:150px;" onpaste="return false;" readonly');
 echo"</td></tr>";
 echo"<tr id=\"crm\"><td>";
 echo'<div>';
@@ -66,7 +70,6 @@ echo"</tr></td>";
 echo"</table>"; 
 echo"</fieldset>";
 
-echo form_hidden('id_nivel',  $query['usuario']->id_nivel,'');
 echo form_hidden('id',  $id,'');
 
 echo form_close();

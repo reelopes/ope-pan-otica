@@ -73,7 +73,7 @@ class usuario extends CI_Controller {
     }
 
     public function lista() {
-        $dados = array('pagina' => 'lista_usuario', 'titulo' => 'Pesquisa Usuário',
+        $dados = array('pagina' => 'lista_usuario', 'titulo' => 'Pesquisa de Usuário',
             'usuario' => $this->usuario_model->getAll()->result());
 
         $this->load->view('Principal', $dados);

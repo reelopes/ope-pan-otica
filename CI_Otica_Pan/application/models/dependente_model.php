@@ -87,7 +87,7 @@ class Dependente_model extends CI_Model {
 
             $this->db->where('id', $id);
             $this->db->delete('dependente');
-            return true;
+            return $this->db->_error_number();
         }
 
         return false;
