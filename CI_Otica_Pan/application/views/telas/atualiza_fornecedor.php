@@ -36,7 +36,7 @@ echo"</tr></td>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Cnpj');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'cnpj'),  set_value('cnpj',$query['fornecedor']->cnpj),'maxlength="18" autocomplete ="off" placeholder="XX.XXX.XXX/XXXX-XX" OnKeyPress="MascaraCNPJ(this)" onpaste="return false" required title="Campo CNPJ é obrigatório"');
+echo form_input(array('name'=>'cnpj'),  set_value('cnpj',$query['fornecedor']->cnpj),'maxlength="18" autocomplete ="off" placeholder="XX.XXX.XXX/XXXX-XX" OnKeyPress="MascaraCNPJ(this)" required title="Campo CNPJ é obrigatório"');
 echo form_error('cnpj');
 echo"</tr></td>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover

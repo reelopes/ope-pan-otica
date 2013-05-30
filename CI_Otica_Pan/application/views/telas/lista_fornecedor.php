@@ -8,11 +8,11 @@ if($this->session->flashdata('msg')){
 
 $fornecedor = $fornecedor;//Pega a variavel da Controller (boa pratica)
 
-$this->table->set_heading('NOME', 'EMAIL', 'CNPJ', 'TELEFONE', '&nbsp; ','&nbsp; ');
+$this->table->set_heading('NOME', 'EMAIL', 'CNPJ', 'TELEFONE', '&nbsp; ','&nbsp; ','&nbsp; ');
 
 foreach ($fornecedor as $linha) {
     
-    $this -> table -> add_row($linha->nome, $linha->email, $linha->cnpj, $linha->num_telefone, anchor("fornecedor/visualiza/".$linha->id_pessoa."/".$linha->id_fornecedor, '<center><img src="..\public/img/search.png" width="23"/></center>'), "<a href=\"javascript:abrirPopUp('".base_url('fornecedor/update/'.$linha->id_pessoa.'/'.$linha->id_fornecedor). "','820','400');\"> <center><img src='..\public/img/edit.png' width='23'/></center></a>");
+    $this -> table -> add_row($linha->nome, $linha->email, $linha->cnpj, $linha->num_telefone, anchor("fornecedor/visualiza/".$linha->id_pessoa."/".$linha->id_fornecedor, '<center><img src="..\public/img/search.png" width="23"/></center>'), "<a href=\"javascript:abrirPopUp('".base_url('fornecedor/update/'.$linha->id_pessoa.'/'.$linha->id_fornecedor). "','820','400');\"> <center><img src='..\public/img/edit.png' width='23'/></center></a>", '<center><p onClick="if (! confirm(\'Tem certeza que deseja excluir o fornecedor abaixo? \n\n Nome: ' . $linha->nome.'\n CNPJ: '.$linha->cnpj.'\')) { return false; }">' . anchor('fornecedor/delete/'.$linha->id_pessoa, '<img src="..\public/img/delete.png" width="23"/>') . '</p></center>');
 
 }
 

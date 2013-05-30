@@ -117,7 +117,7 @@ echo"</td></tr>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('CEP');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'cep'),  set_value('cep'),'maxlength="9" autocomplete ="off" placeholder="XXXXX-XXX" OnKeyPress="MascaraCep(this)"  pattern="\d{5}-?\d{3}" title="Campo CEP deve ser digitado no formato XXXXX-XXX"');
+echo form_input(array('name'=>'cep'),  set_value('cep'),'maxlength="9" autocomplete ="off" placeholder="XXXXX-XXX" OnKeyPress="MascaraCep(this)" pattern="\d{5}-?\d{3}" title="Campo CEP deve ser digitado no formato XXXXX-XXX"');
 echo form_error('cep');
 echo"</td></tr>";//Essa linha pode remover
 echo"</tr><td>"; //Essa linha pode remover

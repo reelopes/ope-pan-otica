@@ -47,6 +47,7 @@ class Produto extends CI_Controller {
     }
 
     public function adiciona() {
+        //Dados da tabela produto
         $this->form_validation->set_rules('cod_barra', 'Código de Barras', 'trim|max_length[20]');
         $this->form_validation->set_rules('nome', 'Nome', 'trim|required|max_length[50]');
         $this->form_validation->set_rules('descricao', 'Descricao', 'trim');
@@ -55,7 +56,9 @@ class Produto extends CI_Controller {
         $this->form_validation->set_rules('quantidade', 'Quantidade', 'trim|max_length[11]');
         $this->form_validation->set_rules('validade', 'Validade', 'trim');
 
+        //Verifica se e uma armação
         if ($this->input->post('produto') == 1) {
+            //Dados da tabela amracao
             $this->form_validation->set_rules('largura_lente', 'Largura da lente');
             $this->form_validation->set_rules('largura_ponte', 'Largura da Ponte');
             $this->form_validation->set_rules('comprimento_haste', 'Comprimento da haste');
@@ -95,7 +98,7 @@ class Produto extends CI_Controller {
     }
 
     public function update() {
-
+        //Dados da tabela produto
         $this->form_validation->set_rules('cod_barra', 'Código de Barras', 'trim|max_length[20]');
         $this->form_validation->set_rules('nome', 'Nome', 'trim|required|max_length[50]');
         $this->form_validation->set_rules('descricao', 'Descricao', 'trim');
@@ -104,7 +107,9 @@ class Produto extends CI_Controller {
         $this->form_validation->set_rules('quantidade', 'Quantidade', 'trim|max_length[11]');
         $this->form_validation->set_rules('validade', 'Validade', 'trim');
 
+        //Verifica se e uma armação
         if ($this->input->post('produto') == 1) {
+            //Dados da tabela amracao
             $this->form_validation->set_rules('largura_lente', 'Largura da lente', 'trim');
             $this->form_validation->set_rules('largura_ponte', 'Largura da Ponte', 'trim');
             $this->form_validation->set_rules('comprimento_haste', 'Comprimento da haste', 'trim');
@@ -119,7 +124,7 @@ class Produto extends CI_Controller {
                 'produto'), $this->input->post());
 
             $this->produto_model->do_update(
-                    $dados, $this->input->post('id_produto'));
+            $dados, $this->input->post('id_produto'));
         }
 
         $dados = array('titulo' => 'Atualiza Produto', 'pagina' => 'atualiza_produto');

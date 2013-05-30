@@ -11,10 +11,10 @@ class Dependente_model extends CI_Model {
             $this->db->trans_start(); //Começa uma transação no banco de dados
             //Trata os elementos de Dependente
             $dependente = array(
-                'nome' => element('nomeDependente', $dados),
-                'data_nascimento' => element('dataNascimentoDependente', $dados),
-                'responsavel' => element('responsavelDependente', $dados),
-                'id_cliente' => element('idCliente', $dados),
+                'nome' => element('nomeDependente', $dados, null),
+                'data_nascimento' => element('dataNascimentoDependente', $dados, null),
+                'responsavel' => element('responsavelDependente', $dados, null),
+                'id_cliente' => element('idCliente', $dados, null),
             );
             $this->db->insert('dependente', $dependente); //insere no BD
 
@@ -58,9 +58,9 @@ class Dependente_model extends CI_Model {
 
             //Inicio de Update Dependente
             $dependente = array(
-                'nome' => element('nome', $dados),
-                'data_nascimento' => element('data_nascimento', $dados),
-                'responsavel' => element('responsavel', $dados),
+                'nome' => element('nome', $dados, null),
+                'data_nascimento' => element('data_nascimento', $dados, null),
+                'responsavel' => element('responsavel', $dados, null),
             );
 
             $condicao_dependente = array(

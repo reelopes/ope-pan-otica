@@ -37,7 +37,7 @@ class Fornecedor_model extends CI_Model {
         $this->db->select('pessoa.id as id_pessoa, pessoa.nome, pessoa.email, fornecedor.id as id_fornecedor, fornecedor.cnpj, telefone.num_telefone');
         $this->db->from('pessoa');
         $this->db->join('fornecedor', 'fornecedor.id_pessoa = pessoa.id');
-        $this->db->join('telefone', 'pessoa.id = telefone.id_pessoa and telefone.num_telefone != ""');
+        $this->db->join('telefone', 'pessoa.id = telefone.id_pessoa');
         $this->db->group_by('pessoa.id');
 
         return $this->db->get();
@@ -98,16 +98,18 @@ class Fornecedor_model extends CI_Model {
         redirect('fornecedor/lista');
     }
 
-//    public function do_delete($id = null) {
-//
-//        if ($id != null) {
-//
-//            $this->db->where('id', $id);
-//            $this->db->delete('pessoa');
-//            $this->session->set_flashdata('deleteok', 'Dados deletados com sucesso');
-//            redirect('fornecedor/delete');
-//        }
-//        return false;
-//    }
+    public function do_delete($id = null) {
+
+        if ($id != null) {
+
+            $this->db->where('id_pessoa', $id);
+            $this->db->delete('fornecedor');
+            $this->db->where('id', $id);
+            $this->db->delete('pessoa');
+            
+            return $this->db->_error_number();
+        }
+        return false;
+    }
 
 }

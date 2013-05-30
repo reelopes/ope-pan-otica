@@ -90,16 +90,6 @@ CREATE TABLE `armacao` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*
-Table data for otica_pan.armacao
-*/
-
-INSERT INTO `armacao` VALUES 
-(52,19,110,'HB C220',2,2,1),
-(52,20,130,'C.145',3,3,1),
-(111,111,111,'111',2,5,2),
-(111,222,123,'1213',2,7,2);
-
-/*
 Table structure for catalogo_de_lentes
 */
 
@@ -1123,16 +1113,6 @@ CREATE TABLE `produto` (
   `validade` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-
-/*
-Table data for otica_pan.produto
-*/
-
-INSERT INTO `produto` VALUES 
-('00001','Lente TS5610',0,'Lente TS5610 2GA7',1,10,20,30,1,'2014-10-20'),
-('00002','HB DS2509',1,'HB DS2509',2,50,100,10,0,NULL),
-('00004','Armacao HB',1,'Flexevel, Preta',3,50,100,10,1,NULL),
-('00005','TESTE APARECE',1,'0',7,111.11,222.22,0,0,NULL);
 
 /*
 Table structure for receita

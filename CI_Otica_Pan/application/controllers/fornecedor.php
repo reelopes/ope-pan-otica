@@ -26,6 +26,7 @@ class Fornecedor extends CI_Controller {
         $this->load->helper('form');
         $this->load->helper('array');
         $this->load->model('fornecedor_model');
+        $this->load->model('util_model');
         $this->load->library('form_validation');
         $this->load->library('session');
         $this->load->library('table');
@@ -94,15 +95,16 @@ class Fornecedor extends CI_Controller {
         $this->load->view('Principal', $dados);
     }
     
-//    public function delete() {
-//        $dados = array('titulo' => 'CRUD &raquo; Delete', 'tela' => 'Delete',);
-//        $iduser = $this->uri->segment(3);
-//
-//        if ($iduser == NULL)
-//            redirect('fornecedor/lista');
-//
-//        $this->fornecedor_model->do_delete($iduser);
-//
-//        $this->load->view('Principal', $dados);
-//    }
+    public function delete() {
+        $dados = array('titulo' => 'CRUD &raquo; Delete', 'tela' => 'Delete',);
+        $iduser = $this->uri->segment(3);
+        
+        if ($iduser == NULL) {
+            redirect('fornecedor/lista');
+        }
+
+        $this->util_model->deletarComEvento($this->fornecedor_model->do_delete($iduser), 'o', 'Fornecedor', 'fornecedor/lista');
+
+        $this->load->view('Principal', $dados);
+    }
 }

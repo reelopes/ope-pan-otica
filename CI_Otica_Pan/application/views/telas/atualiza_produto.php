@@ -103,6 +103,7 @@ echo'<div id="armacao">';
         echo form_label('Grife');
         echo"</td><td>";    
         echo'<select name="grife">';
+        echo'<option value="">Selecione...</option>';
         if ($todas_grife != NULL) {
             foreach ($todas_grife as $linha) {
                 if($query['grife']-> id == $linha -> id) {
@@ -117,7 +118,7 @@ echo'<div id="armacao">';
         echo form_label('Fornecedor');
         echo"</td><td>";
         echo'<select name="fornecedor">';
-        echo'<option value="0">Selecione...</option>';
+        echo'<option value="">Selecione...</option>';
         if ($todos_fornecedor != NULL) {
             foreach ($todos_fornecedor as $linha) {
                 if($query['fornecedorE']-> id == $linha -> id_fornecedor) {

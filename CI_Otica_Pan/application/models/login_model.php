@@ -14,10 +14,6 @@ class Login_model extends CI_Model {
         $this->db->where('login', $login);
         $this->db->where('senha like binary', $senha);
         $query = $this->db->get('usuario')->result();
-
-        
-        
-        
         
         if ($query != NULL) {
             
@@ -37,7 +33,7 @@ class Login_model extends CI_Model {
             
         }
     }
-
+    
     # VERIFICA SE O USUÁRIO ESTÁ LOGADO
 
     function logado() {

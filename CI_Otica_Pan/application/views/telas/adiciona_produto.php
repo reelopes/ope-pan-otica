@@ -139,7 +139,7 @@ echo"<p></p>";
 echo"<table>";
 echo"<tr><td>";
 echo form_label('','',array('style' => 'padding-right:80px;',));
-echo form_submit('', 'Cadastrar','onClick="if (precoCusto.value > precoVenda.value) { if (! confirm(\'Preço de custo é maior que Preço de venda.\n\nDeseja Cadastrar mesmo assim?\')) { return false;} }"');
+echo form_submit('', 'Cadastrar','');
 echo"</td></tr>"; 
 echo"</table>";
 echo "</div>";

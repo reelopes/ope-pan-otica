@@ -348,3 +348,15 @@ function number_format( number, decimals, dec_point, thousands_sep ) {
  
     return s;
 }
+
+//function precoMaior(prCusto, prVenda) {
+//        prCusto.replace(',', '.');
+//        prVenda.replace(',', '.');
+//    
+//    if (prCusto > prVenda) {
+//        if (! confirm('Preço de custo é maior que Preço de venda.\n\nDeseja Cadastrar mesmo assim?')) { 
+//            return false;
+//        }
+//    }
+//    return true;
+//}

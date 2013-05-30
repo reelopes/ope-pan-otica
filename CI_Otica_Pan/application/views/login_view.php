@@ -23,7 +23,7 @@
       echo validation_errors('<p>','</p>');
       if($this->session->flashdata('erroLogin')){
       echo '<p>'.$this->session->flashdata('erroLogin').'</p>';
-    }
+      }
     echo"</div>";
             ?>
     </div>

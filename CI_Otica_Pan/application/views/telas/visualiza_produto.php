@@ -85,29 +85,34 @@ echo'<div id="armacao">';
         echo"</td><td>"; 
         echo form_input(array('name'=>'modelo'), set_value('modelo', $query['armacao']->modelo),'maxlength="11" placeholder="XX-xxx" autocomplete ="off" readonly');
         echo"</td></tr>";
-        echo"<tr><td>";
-        echo form_label('Grife');
-        echo"</td><td>";    
-        if ($todas_grife != NULL) {
-            foreach ($todas_grife as $linha) {
-                if($query['grife']->id == $linha->id) {
-                    echo form_input(array('name'=>'grife'), set_value('grife', $query['grife']->nome),'readonly');
+        if ($query['grife']->id != null) {
+            echo"<tr><td>";
+            echo form_label('Grife');
+            echo"</td><td>";    
+            if ($todas_grife != NULL) {
+                foreach ($todas_grife as $linha) {
+                    if($query['grife']->id == $linha->id) {
+                        echo form_input(array('name'=>'grife'), set_value('grife', $query['grife']->nome),'readonly');
+                    }
                 }
             }
+            echo'</select>';
+            echo"</td>";
         }
-        echo'</select>';
-        echo"</td><td>";
-        echo form_label('Fornecedor');
-        echo"</td><td>";
-        if ($todos_fornecedor != NULL) {
-            foreach ($todos_fornecedor as $linha) {
-                if($query['fornecedorE']-> id == $linha -> id_fornecedor) {
-                    echo form_input(array('name'=>'fornecedor'), set_value('grife', $linha->nome),'readonly');
-                }
-           }
+        if ($query['fornecedorE']->id != null) {
+            echo"<td>";
+            echo form_label('Fornecedor');
+            echo"</td><td>";
+            if ($todos_fornecedor != NULL) {
+                foreach ($todos_fornecedor as $linha) {
+                    if($query['fornecedorE']->id == $linha -> id_fornecedor) {
+                        echo form_input(array('name'=>'fornecedor'), set_value('grife', $linha->nome),'readonly');
+                    }
+               }
+               echo'</select>';
+               echo"</td></tr>";
+            }
         }
-        echo'</select>';
-        echo"</td></tr>";
         echo"</fieldset>";
         echo"</table>";
 echo"</div>";

@@ -38,7 +38,7 @@ class Login extends CI_Controller {
                 'usuario' => $this->input->post('usuario'),
                 'senha' => $this->input->post('senha'),
             );
-
+            
             if ($this->login_model->login($dados) == TRUE) {
              
                 redirect('principal');
