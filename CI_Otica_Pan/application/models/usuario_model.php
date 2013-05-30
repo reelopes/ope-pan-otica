@@ -9,11 +9,12 @@ class Usuario_model extends CI_Model {
             if ($dados != null) {
                 $this -> db -> trans_start();
                 $this -> db -> insert('usuario', $dados);
+                $id = $this->db->insert_id();
                 
                 if (element('id_nivel', $dados) == "4") {
-                    $medico = array('nome' => ''.element('nome', $dados),
+                    $medico = array('nome' => element('nome', $dados, null),
                                     'crm' => $crm,
-                                    'id_usuario' => ''.element('id', $dados));
+                                    'id_usuario' => $id);
                     $this -> db -> insert('medico', $medico);
                 }
                 
@@ -57,30 +58,35 @@ class Usuario_model extends CI_Model {
 	public function do_update($dados = NULL, $crm = NULL, $condicao = NULL) {
             
 		if ($dados != null || $condicao != null) {
-                    $this->db->trans_start();
-                    $this->db->update('usuario', $dados, $condicao);
-                    if (element('id_nivel', $dados) == "4") {
-                        $medico = array('nome' => ''.element('nome', $dados),
-                                        'crm' => $crm,
-                                        'id_usuario' => ''.element('id', $dados));
-                        $this->db->update('medico', $medico, $condicao);
-                    }
                     
-                    $this->db->trans_complete();
+                    $this->db->trans_start();
+                    $this->db->update('usuario', $dados, 'id = '.$condicao);
+                    if (element('id_nivel', $dados) == 4) {
+                        $medico = array('nome' => element('nome', $dados, null),
+                                        'crm' => $crm);
+                        $this->db->update('medico', $medico, 'id_usuario = '.$condicao);
+                    }
 		}
-		redirect('usuario/lista');
+                
+                if ($this->db->_error_number() == 0) {
+                    $this -> session -> set_flashdata('msgOk', 'Usuário alterado com sucesso');
+                } else {
+                    $this -> session -> set_flashdata('msg', 'Ocorreu um erro ao alterar o usuário!');
+                }
+                $this->db->trans_complete();
+                redirect(current_url());
 	}
 
         public function do_delete($id = null) {
             if ($id != null) {               
-//                $this->db->trans_start();
-//                $medico = array('id_usuario' => "");
-//                $this->db->update('medico', $medico, "id_usuario=".$id);
-//                $this->db->trans_complete();
+                $this->db->where('id_usuario', $id);
+                $this->db->delete('medico');
+                $medico = array('id_usuario' => null);
+                $this->db->update('medico', $medico, 'id_usuario = ' . $id);
                 
                 $this->db->where('id', $id);
                 $this->db->delete('usuario');
-
+                
                 return $this->db->_error_number();
             }
             return false;

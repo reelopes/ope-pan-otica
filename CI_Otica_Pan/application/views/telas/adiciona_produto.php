@@ -105,8 +105,8 @@ echo"<p></p>";
         echo"<td>";
         echo form_label('Fornecedor');
         echo"</td><td>";
-        echo'<select name="fornecedor" id="fornecedorLista">';
-        echo'<option value="0">Selecione...</option>';
+        echo'<select name="fornecedor">';
+        echo'<option value="">Selecione...</option>';
         if ($todos_fornecedor != NULL) {
             foreach ($todos_fornecedor as $linha) {
                 echo'<option value="'.$linha -> id_fornecedor.'">'.$linha -> nome.'</option>';
@@ -122,8 +122,8 @@ echo"<p></p>";
         echo"<td>";
         echo form_label('Grife');
         echo"</td><td>";    
-        echo'<select name="grife" required title="Selecione uma grife">';
-        echo'<option>Selecione...</option>';
+        echo'<select name="grife">';
+        echo'<option value="">Selecione...</option>';
         if ($todas_grife != NULL) {
             foreach ($todas_grife as $linha) {
                 echo'<option value="'.$linha -> id.'">'.$linha -> nome.'</option>';
@@ -139,7 +139,7 @@ echo"<p></p>";
 echo"<table>";
 echo"<tr><td>";
 echo form_label('','',array('style' => 'padding-right:80px;',));
-echo form_submit('', 'Cadastrar','onClick="if (precoCusto.value > precoVenda.value) { if (! confirm(\'Preço de custo é maior que Preço de venda.\n\nDeseja Cadastrar mesmo assim?\')) { return false;} } if (fornecedorLista.value == 0) { if (! confirm(\'Nenhum fornecedor está associado.\n\nDeseja Cadastrar mesmo assim?\')) { return false;} }"');
+echo form_submit('', 'Cadastrar','onClick="if (precoCusto.value > precoVenda.value) { if (! confirm(\'Preço de custo é maior que Preço de venda.\n\nDeseja Cadastrar mesmo assim?\')) { return false;} }"');
 echo"</td></tr>"; 
 echo"</table>";
 echo "</div>";

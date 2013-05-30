@@ -265,7 +265,34 @@ function Mascara_double(obj){
   obj.value = mod+valor;
 }
 
-function mostraCampo(id_campo, id) {
+function poe_ponto_num(valor){
+  valor = valor.replace(/\./g,"");
+  if (valor.length > 3){
+    valores = "";
+    while (valor.length > 3){
+      valores = "."+valor.substring(valor.length-3,valor.length)+""+valores;
+      valor = valor.substring(0,valor.length-3);
+    }
+    return valor+""+valores;
+  }else{
+    return valor;
+  }
+}
+function valida_num(obj){
+  numeros = new RegExp("[0-9]");
+  while (!obj.value.charAt(obj.value.length-1).match(numeros)){
+    if(obj.value.length == 1 && obj.value == "-"){
+      return true;
+    }
+    if(obj.value.length >= 1){
+      obj.value = obj.value.substring(0,obj.value.length-1)
+    }else{
+      return false;
+    }
+  }
+}
+
+function mostraCampo(id_campo) {
 //    var elem = document.getElementById(id_campo);
 //    elem.style.display = "block";
 var $this = $('#'+id);

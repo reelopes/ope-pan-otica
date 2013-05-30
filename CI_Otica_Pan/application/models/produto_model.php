@@ -10,14 +10,14 @@ class produto_model extends CI_Model {
             $this->db->trans_start();
 
             $produto = array(
-                'cod_barra' => '' . element('cod_barra', $dados),
-                'nome' => '' . element('nome', $dados),
-                'descricao' => '' . element('descricao', $dados),
-                'preco_custo' => $this->util->virgulaParaPonto(element('preco_custo', $dados)),
-                'preco_venda' => $this->util->virgulaParaPonto(element('preco_venda', $dados)),
-                'quantidade' => '' . element('quantidade', $dados),
-                'validade' => element('validade', $dados),
-                'categoria' => '' . element('produto', $dados),
+                'cod_barra' => element('cod_barra', $dados, null),
+                'nome' => element('nome', $dados, null),
+                'descricao' => element('descricao', $dados, null),
+                'preco_custo' => $this->util->virgulaParaPonto(element('preco_custo', $dados, null)),
+                'preco_venda' => $this->util->virgulaParaPonto(element('preco_venda', $dados, null)),
+                'quantidade' => element('quantidade', $dados, null),
+                'validade' => element('validade', $dados, null),
+                'categoria' => element('produto', $dados, null),
             );
 
             $this->db->insert('produto', $produto);
@@ -26,19 +26,18 @@ class produto_model extends CI_Model {
 
             if (element('produto', $dados) == 1) {
                 $armacao = array(
-                    'largura_lente' => '' . element('largura_lente', $dados),
-                    'largura_ponte' => '' . element('largura_ponte', $dados),
-                    'comprimento_haste' => '' . element('comprimento_haste', $dados),
-                    'modelo' => '' . element('modelo', $dados),
-                    'id_fornecedor' => '' . element('id_fornecedor', element('fornecedor', $dados)),
-                    'id_produto' => $id_produto,
-                    'id_grife' => '' . element('id', element('grife', $dados))
-                );
+                    'largura_lente' => element('largura_lente', $dados, null),
+                    'largura_ponte' => element('largura_ponte', $dados, null),
+                    'comprimento_haste' => element('comprimento_haste', $dados, null),
+                    'modelo' => element('modelo', $dados, null),
+                    'id_fornecedor' => element('fornecedor', $dados, null),
+                    'id_grife' => element('grife', $dados, null),
+                    'id_produto' => $id_produto);
                 $this->db->insert('armacao', $armacao);
             }
 
             $this->db->trans_complete();
-            $this->session->set_flashdata('cadastrook', 'Cadastro efetuado com sucesso\n\nO código do produto é: '.$id_produto);
+            $this->session->set_flashdata('cadastrook', 'Cadastro efetuado com sucesso\n\nO código do produto é: ' . $id_produto);
 
             redirect('produto/adiciona');
         }
@@ -54,14 +53,14 @@ class produto_model extends CI_Model {
         return $produto;
     }
 
-    public function do_select($campo,$parametro) {
+    public function do_select($campo, $parametro) {
 
         $this->db->select
                 ('cod_barra, nome, descricao, preco_custo, preco_venda,
                           quantidade, status, validade, categoria, id as id_produto');
         $this->db->from('produto');
-        $this->db->where($campo,$parametro);
-        $this->db->where('status','1');
+        $this->db->where($campo, $parametro);
+        $this->db->where('status', '1');
 
         return $this->db->get();
     }
@@ -108,27 +107,27 @@ class produto_model extends CI_Model {
             }
 
             $produto = array(
-                'cod_barra' => '' . element('cod_barra', $dados),
-                'nome' => '' . element('nome', $dados),
-                'descricao' => '' . element('descricao', $dados),
-                'preco_custo' => $this->util->virgulaParaPonto(element('preco_custo', $dados)),
-                'preco_venda' => $this->util->virgulaParaPonto(element('preco_venda', $dados)),
-                'quantidade' => '' . element('quantidade', $dados),
+                'cod_barra' => element('cod_barra', $dados, null),
+                'nome' => element('nome', $dados, null),
+                'descricao' => element('descricao', $dados, null),
+                'preco_custo' => $this->util->virgulaParaPonto(element('preco_custo', $dados, null)),
+                'preco_venda' => $this->util->virgulaParaPonto(element('preco_venda', $dados, null)),
+                'quantidade' => element('quantidade', $dados, null),
                 'status' => $ativo,
-                'validade' => element('validade', $dados),
-                'quantidade' => '' . element('quantidade', $dados));
+                'validade' => element('validade', $dados, null),
+                'quantidade' => element('quantidade', $dados));
 
             $this->db->update('produto', $produto, 'id = ' . $condicao);
 
             if (element('produto', $dados) == 1) {
                 $tipoProduto = array(
-                    'largura_lente' => '' . element('largura_lente', $dados),
-                    'largura_ponte' => '' . element('largura_ponte', $dados),
-                    'comprimento_haste' => '' . element('comprimento_haste', $dados),
-                    'modelo' => '' . element('modelo', $dados),
-                    'id_fornecedor' => '' . element('id_fornecedor', element('fornecedor', $dados)),
+                    'largura_lente' => element('largura_lente', $dados, null),
+                    'largura_ponte' => element('largura_ponte', $dados, null),
+                    'comprimento_haste' => element('comprimento_haste', $dados, null),
+                    'modelo' => element('modelo', $dados, null),
+                    'id_fornecedor' => element('fornecedor', $dados, null),
                     'id_produto' => $condicao,
-                    'id_grife' => '' . element('id', element('grife', $dados))
+                    'id_grife' => element('id', element('grife', $dados), null),
                 );
                 $this->db->update('armacao', $tipoProduto, 'id_produto = ' . $condicao);
             }

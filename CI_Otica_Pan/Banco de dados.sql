@@ -1,4 +1,4 @@
-drop database `otica_pan`;
+drop database if exists `otica_pan`;
 
 /* 
 SQLyog v4.0
@@ -1662,4 +1662,3 @@ INSERT INTO `usuario` VALUES
 (7,'Fernando Neves','fernando','fernado','fernando','fdias.d.neves@gmail.com',1);
 
 SET FOREIGN_KEY_CHECKS=1;
-

@@ -60,16 +60,14 @@ class Produto extends CI_Controller {
             $this->form_validation->set_rules('largura_ponte', 'Largura da Ponte');
             $this->form_validation->set_rules('comprimento_haste', 'Comprimento da haste');
             $this->form_validation->set_rules('modelo', 'modelo', 'trim');
-            $this->form_validation->set_rules('grife', 'Grife', 'required');
-            $this->form_validation->set_rules('fornecedor', 'Fornecedor', 'required');
+            $this->form_validation->set_rules('grife', 'Grife');
+            $this->form_validation->set_rules('fornecedor', 'Fornecedor');
         }
 
         if ($this->form_validation->run()) {
             $dados = elements(array('cod_barra', 'nome', 'descricao', 'preco_custo', 'preco_venda', 'quantidade', 'validade',
                 'largura_lente', 'largura_ponte', 'comprimento_haste', 'modelo', 'grife', 'fornecedor',
                 'produto'), $this->input->post());
-            echo element('fornecedor', $dados);
-            break;
             $this->produto_model->do_insert($dados);
         }
 

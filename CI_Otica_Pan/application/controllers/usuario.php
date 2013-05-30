@@ -50,13 +50,15 @@ class usuario extends CI_Controller {
         $this->form_validation->set_rules('email', 'Email', 'trim');
         $this->form_validation->set_rules('id_nivel', 'Nivel de Acesso', 'trim|required');
         
-        //Dados do médico
-        $this->form_validation->set_rules('crm', 'CRM', 'trim');
+        if ($this->input->post('id_nivel') == "4") {
+            //Dados do médico
+            $this->form_validation->set_rules('crm', 'CRM', 'trim|required');
+            $crm = $this->input->post('crm');
+        } else {
+            $crm = null;
+        }
         
         if ($this->form_validation->run()) {
-            if ($this->input->post('id_nivel') == "4") {
-                $crm = $this->input->post('crm');
-            }
             if ($this->input->post('id_nivel') != "0") {
                 $dados = elements(array('nome', 'login', 'senha', 'lembrete_senha', 'email', 'id_nivel'), $this->input->post());
                 $this->usuario_model->do_insert($dados, $crm);
@@ -87,18 +89,25 @@ class usuario extends CI_Controller {
         $this->form_validation->set_rules('email', 'Email', 'trim');
         $this->form_validation->set_rules('id_nivel', 'Nivel de Acesso', 'trim|required');
         
-        //Dados do médico
-        $this->form_validation->set_rules('crm', 'CRM', 'trim');
-
-        if ($this->form_validation->run()) {
-             if ($this->input->post('id_nivel') == "4") {
-                $crm = $this->input->post('crm');
-            }
-            $dados = elements(array('nome', 'login', 'senha', 'lembrete_senha', 'email', 'id_nivel'), $this->input->post());
-            $this->usuario_model->do_update($dados, $crm, $this->input->post('id'));
+        if ($this->input->post('id_nivel') == "4") {
+            //Dados do médico
+            $this->form_validation->set_rules('crm', 'CRM', 'trim|required');
+            $crm = $this->input->post('crm');
+        } else {
+            $crm = null;
         }
-
-        $dados = array('titulo' => 'Altera dados do usuario', 'pagina' => 'atualiza_usuario');
+        
+        if ($this->form_validation->run()) {
+            if ($this->input->post('id_nivel') != "0") {
+                $dados = elements(array('nome', 'login', 'senha', 'lembrete_senha', 'email', 'id_nivel'), $this->input->post());
+                $this->usuario_model->do_update($dados, $crm, $this->input->post('id'));
+            } else {
+                $dados = array('titulo' => 'Alterar dados do usuario', 'pagina' => 'atualiza_usuario');
+            }
+        } else {
+            $dados = array('titulo' => 'Alterar dados do usuario', 'pagina' => 'atualiza_usuario');
+        }
+        
         $this->load->view('Principal_popup', $dados);
     }
 

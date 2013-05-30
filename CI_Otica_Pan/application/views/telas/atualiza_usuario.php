@@ -2,8 +2,12 @@
 echo"<div class=formulario style='  margin-left: 40px; width: 650px;  padding: 2px 2px 2px;  border-radius: 3px;'>";
 echo"<h2>$titulo</h2>";
 
-if($this->session->flashdata('cadastrook')){
-    $msg = $this->session->flashdata('cadastrook');
+if($this->session->flashdata('msgOk')){
+    $msg = $this->session->flashdata('msgOk');
+    echo "<body onload=\"alert('$msg');ocultaCampo('crm','id_crm');window.close();\">";
+}
+if ($this->session->flashdata('msg')) {
+    $msg = $this->session->flashdata('msg');
     echo "<body onload=\"alert('$msg');\">";
 }
 
@@ -13,7 +17,7 @@ $id = $this->uri->segment(3);
 $query = $this->usuario_model->get_byid($id);
 
 if ($query['usuario']->id_nivel != "4") {
-    echo '<body onload="ocultaCampo(\'crm\');" />';
+    echo '<body onload="ocultaCampo(\'crm\',\'id_crm\');" />';
 }
 
 echo"<fieldset>";
@@ -22,7 +26,7 @@ echo"<table>";
 echo"<tr><td>";
 echo form_label('Nome');
 echo"</td><td>"; 
-echo form_input(array('name'=>'nome'),  set_value('nome', $query['usuario']->nome), 'maxlength="100" placeholder="Nome do Usuário" autocomplete ="off" style="width:180px;" autofocus');
+echo form_input(array('name'=>'nome'),  set_value('nome', $query['usuario']->nome), 'maxlength="100" placeholder="Nome do Usuário" autocomplete ="off" style="width:180px;" autofocus required title="Campo nome é obrigatório"');
 echo"</td><td>";
 echo form_label('Email');
 echo"</td><td>"; 
@@ -57,12 +61,13 @@ echo form_input(array('name'=>'lembrete_senha'),  set_value('lembrete_senha', $q
 echo"</td></tr>";
 
 echo"<tr><td>"; 
-echo form_submit(array('name'=>'Alterar'),'Alterar');
+echo form_submit(array('name'=>'Alterar'),'Alterar','onClick="if (senha.value != senha_confirma.value) { alert(\'As senhas informadas não conferem!\'); return false;}"');
 echo"</tr></td>"; 
 echo"</table>"; 
 echo"</fieldset>";
 
 echo form_hidden('id_nivel',  $query['usuario']->id_nivel,'');
+echo form_hidden('id',  $id,'');
 
 echo form_close();
 echo"</div>";

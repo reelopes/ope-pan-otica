@@ -4,7 +4,7 @@ echo"<h2>$titulo</h2>";
 
 if($this->session->flashdata('cadastrook')){
     $msg = $this->session->flashdata('cadastrook');
-    echo "<body onload=\"alert('$msg');\">";
+    echo "<body onload=\"ocultaCampo('crm','id_crm'); alert('$msg');\">";
 }
 
 echo '<body onload="ocultaCampo(\'crm\',\'id_crm\');" />';
