@@ -85,8 +85,8 @@ echo"</td></tr>";//Essa linha pode remover
 echo"</table>"; //Essa linha pode remover
 echo"</fieldset>";
 
-echo anchor("cliente/listarClientes", '<img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" title="Voltar"/>');
-//echo'<img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" onClick="history.go(-1)" title="Voltar" />';
+//echo anchor("cliente/listarClientes", '<img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" title="Voltar"/>');
+echo'<img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" onClick="history.go(-1)" title="Voltar" />';
 echo"</div>";
 
 echo "<div style='float:left; margin-left:10px; padding: 90px 0px 0px;'}>";

@@ -4,6 +4,7 @@ echo "<h2>$titulo</h2>";
 if($this->session->flashdata('msg')){
     $msg = $this->session->flashdata('msg');
     echo "<body onLoad=\" alert('$msg');\">";
+    echo "<script>location.reload();</script>";
 }
 
 $fornecedor = $fornecedor;//Pega a variavel da Controller (boa pratica)

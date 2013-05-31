@@ -21,6 +21,7 @@ class Usuario_model extends CI_Model {
                 $this -> db -> trans_complete();
                 
                 $this -> session -> set_flashdata('cadastrook', 'Cadastro efetuado com sucesso');
+                
                 redirect('usuario');
             }
 	}
@@ -73,7 +74,13 @@ class Usuario_model extends CI_Model {
                 } else {
                     $this -> session -> set_flashdata('msg', 'Ocorreu um erro ao alterar o usuário!');
                 }
+                
                 $this->db->trans_complete();
+                
+                $this->session->set_userdata('nome', element('nome', $dados, null));
+//                $this -> session -> set_flashdata('name_user', element('nome', $dados, null));
+                
+                
                 redirect(current_url());
 	}
 

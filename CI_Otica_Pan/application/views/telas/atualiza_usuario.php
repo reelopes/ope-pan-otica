@@ -4,7 +4,7 @@ echo"<h2>$titulo</h2>";
 
 if($this->session->flashdata('msgOk')){
     $msg = $this->session->flashdata('msgOk');
-    echo "<body onload=\"alert('$msg');ocultaCampo('crm','id_crm');window.close();\">";
+    echo "<body onload=\"alert('$msg');ocultaCampo('crm','id_crm');window.close();\">"; //window.opener.document.getElementById('name_user').innerHTML='".$this->session->flashdata('name_user')."';
 }
 if ($this->session->flashdata('msg')) {
     $msg = $this->session->flashdata('msg');

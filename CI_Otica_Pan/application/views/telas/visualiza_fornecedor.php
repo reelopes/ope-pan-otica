@@ -46,12 +46,12 @@ echo form_input(array('name'=>'num_telefone2'),  set_value('num_telefone2',$quer
 echo"</td></tr>";//Essa linha pode remover
 echo"</table>"; //Essa linha pode remover
 echo "</fieldset>";
+//echo anchor("fornecedor/lista/", '<img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" title="Voltar"/>');
+echo '<img src="'.base_url('public/img/voltar.png').'" onClick="history.go(-1)" width="25" id="icone_desbotado" title="Voltar"/>';
 echo "</div>";
 
 echo form_hidden('id_pessoa',$id_pessoa);//Campo oculto que armazena id_pessoa
 echo form_hidden('id_fornecedor',$id_fornecedor);//Campo oculto que armazena id_cliente
-
-echo anchor("fornecedor/lista/", '<img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" title="Voltar"/>');
 
 echo form_close();
 ?>

@@ -118,7 +118,10 @@ echo'<div id="armacao">';
 echo"</div>";
 }
 echo"</fieldset>";
-echo anchor("produto/lista/", '<img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" title="Voltar"/>');
+
+echo '<img src="'.base_url('public/img/voltar.png').'" onClick="history.go(-1)" width="25" id="icone_desbotado" title="Voltar"/>';
+//echo anchor(base_url('produto/lista'), '<img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" title="Voltar"/>');
+//echo '<a href="#" onClick="history.go(-1);"> <img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" title="Voltar"/></a>';
 
 echo form_close();
 ?>
