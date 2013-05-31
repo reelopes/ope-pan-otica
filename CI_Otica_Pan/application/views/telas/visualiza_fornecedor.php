@@ -51,7 +51,7 @@ echo "</div>";
 echo form_hidden('id_pessoa',$id_pessoa);//Campo oculto que armazena id_pessoa
 echo form_hidden('id_fornecedor',$id_fornecedor);//Campo oculto que armazena id_cliente
 
-echo'<img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" onClick="history.go(-1)" title="Voltar" />';
+echo anchor("fornecedor/lista/", '<img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" title="Voltar"/>');
 
 echo form_close();
 ?>
