@@ -9,9 +9,6 @@
                     "bJQueryUI": true,
                     "sPaginationType": "full_numbers",
                     "bSort": false,
-                    "oLanguage": {
-                   "sLengthMenu": "<br>Escolhe um cliente para cadastrar o dependente"
-                  }
                 });
             });
         </script>
