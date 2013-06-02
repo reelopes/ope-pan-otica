@@ -1,5 +1,3 @@
-drop database if exists `otica_pan`;
-
 /* 
 SQLyog v4.0
 Host - localhost : Database - otica_pan
@@ -103,6 +101,20 @@ CREATE TABLE `catalogo_de_lentes` (
   PRIMARY KEY (`id`),
   KEY `id_fornecedor` (`id_fornecedor`),
   CONSTRAINT `catalogo_de_lentes_ibfk_1` FOREIGN KEY (`id_fornecedor`) REFERENCES `fornecedor` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*
+Table structure for cheque
+*/
+
+drop table if exists `cheque`;
+CREATE TABLE `cheque` (
+  `data` date NOT NULL,
+  `valor` double NOT NULL,
+  `id_venda` int(11) NOT NULL,
+  `descricao` text,
+  KEY `id_venda` (`id_venda`),
+  CONSTRAINT `cheque_ibfk_1` FOREIGN KEY (`id_venda`) REFERENCES `venda` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*
@@ -637,6 +649,26 @@ INSERT INTO `endereco` VALUES
 ('Vila Clemente','33333-333','Francisco Morato','2b','SP',505,'Rua da Lavoura, 200',603);
 
 /*
+Table structure for forma_pgto
+*/
+
+drop table if exists `forma_pgto`;
+CREATE TABLE `forma_pgto` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+/*
+Table data for otica_pan.forma_pgto
+*/
+
+INSERT INTO `forma_pgto` VALUES 
+(1,'Á Vista'),
+(2,'Cartão de Crédito'),
+(3,'Cheque');
+
+/*
 Table structure for fornecedor
 */
 
@@ -695,33 +727,35 @@ CREATE TABLE `informacoes_olho` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*
+Table structure for itens
+*/
+
+drop table if exists `itens`;
+CREATE TABLE `itens` (
+  `id_orcamento` int(11) NOT NULL,
+  `nome` varchar(50) NOT NULL,
+  `id_produto` int(11) NOT NULL,
+  `preco_unitario` double NOT NULL,
+  `quantidade` int(11) NOT NULL,
+  KEY `id_orcamento` (`id_orcamento`),
+  KEY `id_produto` (`id_produto`),
+  CONSTRAINT `itens_ibfk_1` FOREIGN KEY (`id_orcamento`) REFERENCES `orcamento` (`id`),
+  CONSTRAINT `itens_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*
 Table structure for lente
 */
 
 drop table if exists `lente`;
 CREATE TABLE `lente` (
-`id_orcamento` int(11) NOT NULL,
-`referencia` varchar(20) NOT NULL,
-`nome` varchar(50) NOT NULL,
-`preco_venda` double NOT NULL,
+  `id_orcamento` int(11) NOT NULL,
+  `referencia` varchar(20) NOT NULL,
+  `nome` varchar(50) NOT NULL,
+  `preco_venda` double NOT NULL,
   KEY `id_orcamento` (`id_orcamento`),
   CONSTRAINT `lente_ibfk_1` FOREIGN KEY (`id_orcamento`) REFERENCES `orcamento` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*
-Table structure for servico
-*/
-
-drop table if exists `servico`;
-CREATE TABLE `servico` (
-`id_orcamento` int(11) NOT NULL,
-`nome` varchar(50) NOT NULL,
-`preco_venda` double NOT NULL,
-  `descricao` text,
-  KEY `id_orcamento` (`id_orcamento`),
-  CONSTRAINT `servico_ibfk_1` FOREIGN KEY (`id_orcamento`) REFERENCES `orcamento` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 /*
 Table structure for medico
@@ -775,67 +809,18 @@ Table structure for orcamento
 drop table if exists `orcamento`;
 CREATE TABLE `orcamento` (
   `data` date NOT NULL,
-  `forma_pgto` varchar(20) NOT NULL,
+  `id_forma_pgto` int(11) NOT NULL,
   `vendedor` varchar(100) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `desconto` double NOT NULL,
-  `status` varchar(20) NOT NULL,
+  `status` tinyint(1) DEFAULT '1',
   `id_cliente` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_cliente` (`id_cliente`),
-  CONSTRAINT `orcamento_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`)
+  KEY `id_forma_pgto` (`id_forma_pgto`),
+  CONSTRAINT `orcamento_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`),
+  CONSTRAINT `orcamento_ibfk_2` FOREIGN KEY (`id_forma_pgto`) REFERENCES `forma_pgto` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*
-Table structure for orcamento_produto
-*/
-
-drop table if exists `itens`;
-CREATE TABLE `itens` (
-  `id_orcamento` int(11) NOT NULL,
-  `nome` varchar(50) NOT NULL,
-  `id_produto` int(11) NOT NULL,
-  `preco_unitario` double NOT NULL,
-  `quantidade` int(11) NOT NULL,
-  KEY `id_orcamento` (`id_orcamento`),
-  KEY `id_produto` (`id_produto`),
-  CONSTRAINT `itens_ibfk_1` FOREIGN KEY (`id_orcamento`) REFERENCES `orcamento` (`id`),
-  CONSTRAINT `itens_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-/*
-Table structure for venda
-*/
-
-drop table if exists `venda`;
-CREATE TABLE `venda` (
-  `data` date NOT NULL,
-  `horario` varchar(5) NOT NULL,
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_orcamento` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_orcamento` (`id_orcamento`),
-  CONSTRAINT `venda_ibfk_1` FOREIGN KEY (`id_orcamento`) REFERENCES `orcamento` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-/*
-Table structure for venda
-*/
-
-drop table if exists `cheque`;
-CREATE TABLE `cheque` (
-  `data` date NOT NULL,
-  `valor` double NOT NULL,
-  `id_venda` int(11) NOT NULL,
-  `descricao` text,
-  KEY `id_venda` (`id_venda`),
-  CONSTRAINT `cheque_ibfk_1` FOREIGN KEY (`id_venda`) REFERENCES `venda` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
 
 /*
 Table structure for ordem_servico
@@ -854,12 +839,6 @@ CREATE TABLE `ordem_servico` (
   CONSTRAINT `ordem_servico_ibfk_1` FOREIGN KEY (`id_receita`) REFERENCES `receita` (`id`),
   CONSTRAINT `ordem_servico_ibfk_2` FOREIGN KEY (`id_venda`) REFERENCES `venda` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*
-Table structure for ordem_servico
-*/
-
-
 
 /*
 Table structure for pessoa
@@ -1133,6 +1112,20 @@ CREATE TABLE `receita` (
   KEY `id_dependente` (`id_dependente`),
   CONSTRAINT `receita_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`),
   CONSTRAINT `receita_ibfk_2` FOREIGN KEY (`id_dependente`) REFERENCES `dependente` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*
+Table structure for servico
+*/
+
+drop table if exists `servico`;
+CREATE TABLE `servico` (
+  `id_orcamento` int(11) NOT NULL,
+  `nome` varchar(50) NOT NULL,
+  `preco_venda` double NOT NULL,
+  `descricao` text,
+  KEY `id_orcamento` (`id_orcamento`),
+  CONSTRAINT `servico_ibfk_1` FOREIGN KEY (`id_orcamento`) REFERENCES `orcamento` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*
@@ -1590,7 +1583,6 @@ INSERT INTO `telefone` VALUES
 (2695,'(11) 4749-8373',1,24666),
 (2696,'(11) 98373-6363',2,24666);
 
-
 /*
 Table structure for tipo_telefone
 */
@@ -1638,7 +1630,23 @@ INSERT INTO `usuario` VALUES
 (3,'Renan Lopes','renan','renan','renan','reee.lopes@gmail.com',1),
 (4,'Atendente Geral','atendente','atendente','atendente','atendente@gmail.com',2),
 (5,'Caixa Geral','caixa','caixa','caixa','caixa@gmail.com',3),
-(6,'Maria da Silva','oftalmologista','oftalmologista','oftalmologista','oftalmologista@gmail.com',4),
+(6,'Daniela Lima de Souza','oftalmologista','oftalmologista','oftalmologista','oftalmologista@gmail.com',4),
 (7,'Fernando Neves','fernando','fernado','fernando','fdias.d.neves@gmail.com',1);
 
+/*
+Table structure for venda
+*/
+
+drop table if exists `venda`;
+CREATE TABLE `venda` (
+  `data` date NOT NULL,
+  `horario` varchar(5) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_orcamento` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_orcamento` (`id_orcamento`),
+  CONSTRAINT `venda_ibfk_1` FOREIGN KEY (`id_orcamento`) REFERENCES `orcamento` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 SET FOREIGN_KEY_CHECKS=1;
+

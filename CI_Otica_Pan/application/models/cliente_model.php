@@ -74,6 +74,7 @@ class Cliente_model extends CI_Model {
         $this->db->join('cliente', 'pessoa.id = cliente.id_pessoa');
         $this->db->join('telefone', 'pessoa.id = telefone.id_pessoa');
         $this->db->where("nome like '%$pesquisa%' or email like '%$pesquisa%' or cpf like '%$pesquisa%' ");
+        $this->db->order_by('pessoa.nome');
         if ($limite != NULL)
             $this->db->limit($limite);
         $this->db->group_by('pessoa.id');
