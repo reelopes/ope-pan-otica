@@ -74,6 +74,150 @@ class Receita_model extends CI_Model {
         $this->db->where("id_receita = ".$id_receita);
         return $this->db->get()->result();
     }
+    
+    public function cadastraReceita($dados = null) {
+        if ($dados != null) {
+            $this->db->trans_start();
+
+            if (element('longe_od_esferico', $dados) != null ||
+                    element('longe_od_cilindrico', $dados) != null ||
+                    element('longe_od_eixo', $dados) != null ||
+                    element('longe_od_dnp', $dados) != null ||
+                    element('longe_oe_esferico', $dados) != null ||
+                    element('longe_oe_cilindrico', $dados) != null ||
+                    element('longe_oe_eixo', $dados) != null ||
+                    element('longe_oe_dnp', $dados) != null ||
+                    element('perto_od_esferico', $dados) != null ||
+                    element('perto_od_cilindrico', $dados) != null ||
+                    element('perto_od_eixo', $dados) != null ||
+                    element('perto_od_dnp', $dados) != null ||
+                    element('perto_oe_esferico', $dados) != null ||
+                    element('perto_oe_cilindrico', $dados) != null ||
+                    element('perto_oe_eixo', $dados) != null ||
+                    element('perto_oe_dnp', $dados) != null) {
+
+                //Insere informações de receita
+                $receita = array(
+                    'crm' => element('crm', $dados, null),
+                    'medico' => element('medico', $dados, null),
+                    'data' => element('data', $dados, null),
+                    'id_cliente' => element('id_cliente', $dados, null),
+                    'id_dependente' => element('dependente', $dados, null),
+                    'dp' => element('dp', $dados, null),
+                    'observacao' => element('obervacoes', $dados, null),
+                );
+                $this->db->insert('receita', $receita); //insere no BD
+                $id_receita = $this->db->insert_id(); //Pega o ultimo ID inserido no BD
+                
+                //LONGE OD
+                if (element('longe_od_esferico', $dados, null) != null ||
+                        element('longe_od_cilindrico', $dados, null) != null ||
+                        element('longe_od_eixo', $dados, null) != null ||
+                        element('longe_od_dnp', $dados, null) != null) {
+
+                    $longe_od = array(
+                        'id_receita' => $id_receita,
+                        'esferico' => $this->util->virgulaParaPonto(element('longe_od_esferico', $dados, null)),
+                        'cilindrico' => $this->util->virgulaParaPonto(element('longe_od_cilindrico', $dados, null)),
+                        'eixo' => element('longe_od_eixo', $dados, null),
+                        'dnp' => element('longe_od_dnp', $dados, null),
+                    );
+                    $this->db->insert('diagnostico', $longe_od); //insere no BD
+                    $id_diagnostico = $this->db->insert_id(); //Pega o ultimo ID inserido no BD
+
+                    $informacoes_olho = array(
+                        'id_diagnostico' => $id_diagnostico,
+                        'distancia' => 'Longe',
+                        'lado' => 'OD',
+                    );
+                    $this->db->insert('informacoes_olho', $informacoes_olho); //insere no BD
+                }
+                
+                //LONGE OE
+                if (element('longe_oe_esferico', $dados) != null ||
+                        element('longe_oe_cilindrico', $dados) != null ||
+                        element('longe_oe_eixo', $dados) != null ||
+                        element('longe_oe_dnp', $dados) != null) {
+
+                    $longe_oe = array(
+                        'id_receita' => $id_receita,
+                        'esferico' => $this->util->virgulaParaPonto(element('longe_oe_esferico', $dados, null)),
+                        'cilindrico' => $this->util->virgulaParaPonto(element('longe_oe_cilindrico', $dados, null)),
+                        'eixo' => element('longe_oe_eixo', $dados, null),
+                        'dnp' => element('longe_oe_dnp', $dados, null),
+                    );
+                    $this->db->insert('diagnostico', $longe_oe); //insere no BD
+                    $id_diagnostico = $this->db->insert_id(); //Pega o ultimo ID inserido no BD
+
+                    $informacoes_olho = array(
+                        'id_diagnostico' => $id_diagnostico,
+                        'distancia' => 'Longe',
+                        'lado' => 'OE',
+                    );
+                    $this->db->insert('informacoes_olho', $informacoes_olho); //insere no BD
+                }
+
+                //PERTO OD
+                if (element('perto_od_esferico', $dados, null) != null ||
+                        element('perto_od_cilindrico', $dados, null) != null ||
+                        element('perto_od_eixo', $dados, null) != null ||
+                        element('perto_od_dnp', $dados, null) != null) {
+
+                    $perto_od = array(
+                        'id_receita' => $id_receita,
+                        'esferico' => $this->util->virgulaParaPonto(element('perto_od_esferico', $dados, null)),
+                        'cilindrico' => $this->util->virgulaParaPonto(element('perto_od_cilindrico', $dados, null)),
+                        'eixo' => element('perto_od_eixo', $dados, null),
+                        'dnp' => element('perto_od_dnp', $dados, null),
+                    );
+                    $this->db->insert('diagnostico', $perto_od); //insere no BD
+                    $id_diagnostico = $this->db->insert_id(); //Pega o ultimo ID inserido no BD
+
+                    $informacoes_olho = array(
+                        'id_diagnostico' => $id_diagnostico,
+                        'distancia' => 'Perto',
+                        'lado' => 'OD',
+                    );
+                    $this->db->insert('informacoes_olho', $informacoes_olho); //insere no BD
+                }
+                
+                // PERTO OE
+                if (element('perto_oe_esferico', $dados, null) != null ||
+                        element('perto_oe_cilindrico', $dados, null) != null ||
+                        element('perto_oe_eixo', $dados, null) != null ||
+                        element('perto_oe_dnp', $dados, null) != null) {
+
+                    $perto_oe = array(
+                        'id_receita' => $id_receita,
+                        'esferico' => $this->util->virgulaParaPonto(element('perto_oe_esferico', $dados, null)),
+                        'cilindrico' => $this->util->virgulaParaPonto(element('perto_oe_cilindrico', $dados, null)),
+                        'eixo' => element('perto_oe_eixo', $dados, null),
+                        'dnp' => element('perto_oe_dnp', $dados, null),
+                    );
+                    $this->db->insert('diagnostico', $perto_oe); //insere no BD
+                    $id_diagnostico = $this->db->insert_id(); //Pega o ultimo ID inserido no BD
+
+                    $informacoes_olho = array(
+                        'id_diagnostico' => $id_diagnostico,
+                        'distancia' => 'Perto',
+                        'lado' => 'OE',
+                    );
+                    $this->db->insert('informacoes_olho', $informacoes_olho); //insere no BD
+                }
+                
+                if ($this->db->trans_complete()) {
+                    $this->session->set_flashdata('msgOk', 'Dados Salvos com sucesso'); //Adiciona na sessão temporaria o status do cadastro 
+                    redirect('receita/adicionaReceita');
+                } else {
+                    $this->session->set_flashdata('msg', 'Erro ao salvar os dados'); //Adiciona na sessão temporaria o status do cadastro
+                    redirect(current_url());
+                }
+            } else {
+                $this->session->set_flashdata('msg', 'Erro ao salvar os dados, todos os campos estão vazios'); //Adiciona na sessão temporaria o status do cadastro           
+                redirect(current_url());
+            }
+        }
+    }
 }
 
 ?>

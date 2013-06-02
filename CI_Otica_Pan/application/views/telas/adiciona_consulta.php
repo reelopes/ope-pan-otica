@@ -15,23 +15,23 @@ echo"<table>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Nome do Cliente');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'nome_cliente'), $agendamento->nome_cliente,'placeholder="Nome Completo do Cliete" style="width:300px;" readonly');
+echo form_input(array('name'=>'nome_cliente'), $agendamento->nome_cliente,'autocomplete ="off" placeholder="Nome Completo do Cliete" style="width:300px;" readonly');
 echo"</td></tr>";//Essa linha pode remover
 if($agendamento->nome_dependente != NULL){
     echo"<tr><td>";//Essa linha pode remover
 echo form_label('Nome do Dependente');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'nome_dependente'), $agendamento->nome_dependente,'placeholder="Nome Completo do Cliete" style="width:300px;" readonly');
+echo form_input(array('name'=>'nome_dependente'), $agendamento->nome_dependente,'autocomplete ="off" placeholder="Nome Completo do Cliete" style="width:300px;" readonly');
 echo"</td></tr>";//Essa linha pode remover
 }
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Email');
 echo"</td><td>";//Essa linha pode remover
-echo form_input(array('name'=>'email'),$agendamento->email,'placeholder="exemplo@exemplo.com.br" style="width:300px;" readonly');
+echo form_input(array('name'=>'email'),$agendamento->email,'autocomplete ="off" placeholder="exemplo@exemplo.com.br" style="width:300px;" readonly');
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('CPF');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'cpf'),$agendamento->cpf,'placeholder="XXX.XXX.XXX-XX" readonly');
+echo form_input(array('name'=>'cpf'),$agendamento->cpf,'autocomplete ="off" placeholder="XXX.XXX.XXX-XX" readonly');
 echo"</td></tr>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Data da Consulta');
@@ -58,18 +58,18 @@ echo"</tr>";
 echo"<tr style='border: 1px solid #666666;'>";
 echo"<td rowspan='2' align='center' valign='middle'>Longe</td>";
 echo"<td align='right' style='border-left:1px solid #666666;'>OD</td>";
-echo"<td align='center'><input type='text' name='longe_od_esferico' style='width:105px;' placeholder='Ex: X,XX' onkeyup='Mascara_double(this);' onkeypress='Mascara_double(this);' maxlength='6'></td>";
-echo"<td align='center'><input type='text' name='longe_od_cilindrico' style='width:105px;' placeholder='Ex: -X,XX' onkeyup='Mascara_double(this);' onkeypress='Mascara_double(this);' maxlength='6'></td>";
-echo"<td align='center'><input type='text' name='longe_od_eixo' style='width:105px;'placeholder='Eixo em graus' onkeypress='return SomenteNumeros(event);' maxlength='6'></td>";
-echo"<td align='center'><input type='text' name='longe_od_dnp' style='width:105px;' placeholder='DNP em mm' onkeypress='return SomenteNumeros(event);' maxlength='6'></td>";
+echo"<td align='center'><input type='text' name='longe_od_esferico' style='width:105px;' autocomplete ='off' placeholder='Ex: X,XX' onkeyup='Mascara_double(this);' onkeypress='Mascara_double(this);' maxlength='6'></td>";
+echo"<td align='center'><input type='text' name='longe_od_cilindrico' style='width:105px;' autocomplete ='off' placeholder='Ex: -X,XX' onkeyup='Mascara_double(this);' onkeypress='Mascara_double(this);' maxlength='6'></td>";
+echo"<td align='center'><input type='text' name='longe_od_eixo' style='width:105px;'autocomplete ='off' placeholder='Eixo em graus' onkeypress='return SomenteNumeros(event);' maxlength='6'></td>";
+echo"<td align='center'><input type='text' name='longe_od_dnp' style='width:105px;' autocomplete ='off' placeholder='DNP em mm' onkeypress='return SomenteNumeros(event);' maxlength='6'></td>";
 echo"</tr>";
 
 echo"<tr style='border: 1px solid #666666;'>";
 echo"<td align='right' style='border-left:1px solid #666666;'>OE</td>";
-echo"<td align='center'><input type='text' name='longe_oe_esferico' style='width:105px;' placeholder='Ex: -X,XX' onkeyup='Mascara_double(this);' onkeypress='Mascara_double(this);' maxlength='6'></td>";
-echo"<td align='center'><input type='text' name='longe_oe_cilindrico' style='width:105px;' placeholder='Ex: X,XX' onkeyup='Mascara_double(this);' onkeypress='Mascara_double(this);' maxlength='6'></td>";
-echo"<td align='center'><input type='text' name='longe_oe_eixo' style='width:105px;' placeholder='Eixo em graus' onkeypress='return SomenteNumeros(event);' maxlength='6'></td>";
-echo"<td align='center'><input type='text' name='longe_oe_dnp' style='width:105px;' placeholder='DNP em mm' onkeypress='return SomenteNumeros(event);' maxlength='6'></td>";
+echo"<td align='center'><input type='text' name='longe_oe_esferico' style='width:105px;' autocomplete ='off' placeholder='Ex: -X,XX' onkeyup='Mascara_double(this);' onkeypress='Mascara_double(this);' maxlength='6'></td>";
+echo"<td align='center'><input type='text' name='longe_oe_cilindrico' style='width:105px;' autocomplete ='off' placeholder='Ex: X,XX' onkeyup='Mascara_double(this);' onkeypress='Mascara_double(this);' maxlength='6'></td>";
+echo"<td align='center'><input type='text' name='longe_oe_eixo' style='width:105px;' autocomplete ='off' placeholder='Eixo em graus' onkeypress='return SomenteNumeros(event);' maxlength='6'></td>";
+echo"<td align='center'><input type='text' name='longe_oe_dnp' style='width:105px;' autocomplete ='off' placeholder='DNP em mm' onkeypress='return SomenteNumeros(event);' maxlength='6'></td>";
 echo"</tr>";
 
 echo"<tr>";
@@ -79,29 +79,29 @@ echo"</tr>";
 echo"<tr style='border: 1px solid #666666;'>";
 echo"<td rowspan='2' align='center' valign='middle'>Perto</td>";
 echo"<td align='right' style='border-left:1px solid #666666;'>OD</td>";
-echo"<td align='center'><input type='text' name='perto_od_esferico' style='width:105px;' placeholder='Ex: X,XX' onkeyup='Mascara_double(this);' onkeypress='Mascara_double(this);' maxlength='6'></td>";
-echo"<td align='center'><input type='text' name='perto_od_cilindrico' style='width:105px;' placeholder='Ex: -X,XX' onkeyup='Mascara_double(this);' onkeypress='Mascara_double(this);' maxlength='6'></td>";
-echo"<td align='center'><input type='text' name='perto_od_eixo' style='width:105px;' placeholder='Eixo em graus' onkeypress='return SomenteNumeros(event);' maxlength='6' ></td>";
-echo"<td align='center'><input type='text' name='perto_od_dnp' style='width:105px;' placeholder='DNP em mm' onkeypress='return SomenteNumeros(event);' maxlength='6'></td>";
+echo"<td align='center'><input type='text' name='perto_od_esferico' style='width:105px;' autocomplete ='off' placeholder='Ex: X,XX' onkeyup='Mascara_double(this);' onkeypress='Mascara_double(this);' maxlength='6'></td>";
+echo"<td align='center'><input type='text' name='perto_od_cilindrico' style='width:105px;' autocomplete ='off' placeholder='Ex: -X,XX' onkeyup='Mascara_double(this);' onkeypress='Mascara_double(this);' maxlength='6'></td>";
+echo"<td align='center'><input type='text' name='perto_od_eixo' style='width:105px;' autocomplete ='off' placeholder='Eixo em graus' onkeypress='return SomenteNumeros(event);' maxlength='6' ></td>";
+echo"<td align='center'><input type='text' name='perto_od_dnp' style='width:105px;' autocomplete ='off' placeholder='DNP em mm' onkeypress='return SomenteNumeros(event);' maxlength='6'></td>";
 echo"</tr>";
 
 echo"<tr style='border: 1px solid #666666;'>";
 echo"<td align='right' style='border-left:1px solid #666666;'>OE</td>";
-echo"<td align='center'><input type='text' name='perto_oe_esferico' style='width:105px;' placeholder='Ex: -X,XX' onkeyup='Mascara_double(this);' onkeypress='Mascara_double(this);' maxlength='6'></td>";
-echo"<td align='center'><input type='text' name='perto_oe_cilindrico' style='width:105px;' placeholder='Ex: X,XX' onkeyup='Mascara_double(this);' onkeypress='Mascara_double(this);' maxlength='6'></td>";
-echo"<td align='center'><input type='text' name='perto_oe_eixo' style='width:105px;' placeholder='Eixo em graus' onkeypress='return SomenteNumeros(event);' maxlength='6'></td>";
-echo"<td align='center'><input type='text' name='perto_oe_dnp' style='width:105px;' placeholder='DNP em mm' onkeypress='return SomenteNumeros(event);' maxlength='6'></td>";
+echo"<td align='center'><input type='text' name='perto_oe_esferico' style='width:105px;' autocomplete ='off' placeholder='Ex: -X,XX' onkeyup='Mascara_double(this);' onkeypress='Mascara_double(this);' maxlength='6'></td>";
+echo"<td align='center'><input type='text' name='perto_oe_cilindrico' style='width:105px;' autocomplete ='off' placeholder='Ex: X,XX' onkeyup='Mascara_double(this);' onkeypress='Mascara_double(this);' maxlength='6'></td>";
+echo"<td align='center'><input type='text' name='perto_oe_eixo' style='width:105px;' autocomplete ='off' placeholder='Eixo em graus' onkeypress='return SomenteNumeros(event);' maxlength='6'></td>";
+echo"<td align='center'><input type='text' name='perto_oe_dnp' style='width:105px;' autocomplete ='off' placeholder='DNP em mm' onkeypress='return SomenteNumeros(event);' maxlength='6'></td>";
 echo"</tr>";
 
 
 echo"<tr>";
 echo"<td align='left' valign='bottom'>Observações:</td>";
 echo"<td align='right' colspan='4'>".form_label('DP')."</td>";
-echo "<td align='center'>".form_input(array('name'=>'dp'),'','placeholder="DP em mm" style="width:105px;" onkeypress="return SomenteNumeros(event);" maxlength="6"')."</td>";
+echo "<td align='center'>".form_input(array('name'=>'dp'),'','autocomplete ="off" placeholder="DP em mm" style="width:105px;" onkeypress="return SomenteNumeros(event);" maxlength="6"')."</td>";
 echo"</tr>";
 
 echo"<tr>";
-echo"<td align='left' colspan='6'><textarea name=obervacoes cols=67 rows=4 placeholder='Digite aqui suas observações'></textarea></td>";
+echo"<td align='left' colspan='6'><textarea name=obervacoes cols=67 rows=4 autocomplete ='off' placeholder='Digite aqui suas observações'></textarea></td>";
 echo"</tr>";
 
 echo"<tr>";

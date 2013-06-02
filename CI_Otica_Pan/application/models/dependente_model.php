@@ -31,7 +31,7 @@ class Dependente_model extends CI_Model {
 
     public function listarDependentes($id_cliente=NULL) {
      
-        if($id_cliente==null) return $teste=banana;
+        if($id_cliente==null) return;
           
         $this->db->select('dependente.id as id_dependente,dependente.id_cliente as id_cliente, dependente.nome,dependente.data_nascimento,dependente.responsavel');
         $this->db->from('dependente');

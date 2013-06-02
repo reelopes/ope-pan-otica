@@ -17,6 +17,7 @@ echo"<hr>"
           <ul>
             <li><a href="<? echo base_url('cliente'); ?>">Cliente</a></li>
             <li><a href="<? echo base_url('dependente'); ?>">Dependente</a></li>
+            <li><a href="<? echo base_url('receita/adicionaReceita'); ?>">Receita</a></li>
             <li><a href="<? echo base_url('fornecedor/adiciona'); ?>">Fornecedor</a></li>
             <li><a href="<? echo base_url('produto'); ?>">Produto</a></li>
             <li><a href="<? echo base_url('grife'); ?>">Grife</a></li>
