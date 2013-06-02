@@ -36,7 +36,7 @@ echo"<tr><td>";
 echo form_label('CPF');
 echo"</td><td>"; 
 echo form_input(array('name'=>'cpf'),$cpf,'style="width:125px; height:25px;" readonly');
-echo "<img src='".base_url("public/img/pesquisar.png")."' width='33px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand;' OnClick=\"abrirPopUp('".base_url('receita/listarClientes')."','600','445');\">";
+echo "<img src='".base_url("public/img/search.png")."' width='33px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand;' OnClick=\"abrirPopUp('".base_url('receita/listarClientes')."','600','445');\">";
 echo"</td></tr>";
 echo"</table>";
 echo"<br>";

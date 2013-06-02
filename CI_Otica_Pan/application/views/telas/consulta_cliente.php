@@ -31,7 +31,7 @@ if ($mes == null) {
             if($linha->id_dependente!=NULL){
                 
                 $nome = $linha->nome_dependente;
-                $strCliente="<img src=../../../../../../../../../CI_otica_pan/public/img/false.png width=18>";
+                $strCliente="<img src=../../../../../../../../../CI_otica_pan/public/img/dependente.png width=23>";
             }else{
                 $nome = $linha->nome_cliente;
                 $strCliente="<img src=../../../../../../../../../CI_otica_pan/public/img/true.png width=18>";
