@@ -1,7 +1,5 @@
 <?php
-
-
-echo"<div class=formulario style='  margin-left: 40px; width: 700px;  padding: 2px 2px 2px;  border-radius: 3px;'>";
+echo"<div class=formulario style='  margin-left: 40px; float:left; width: 610px;  padding: 2px 2px 0px;  border-radius: 3px;'>";
 echo"<h2>$titulo</h2>";
 
 $id_cliente = $this->uri->segment(3);
@@ -140,10 +138,45 @@ echo"<td>"; //Essa linha pode remover
 echo form_submit(array('name'=>'Alterar'),'Alterar');
 echo"</td><tr>"; //Essa linha pode remover
 echo"</table>"; //Essa linha pode remover
-echo"</fildset>";
+echo"</fieldset>";
 
 echo form_hidden('id_pessoa',$query['cliente']->id_pessoa);//Campo oculto que armazena id_pessoa
 echo form_hidden('id_cliente',$id_cliente);//Campo oculto que armazena id_cliente
 echo form_close();
+echo'<img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" onClick="history.go(-1)" title="Voltar" />';
+echo"</div>";
+echo "<div style='float:left; margin-left:10px; padding: 90px 0px 0px;'}>";
 
+$dependentes = $this->dependente_model->listarDependentes($id_cliente);
+
+if($dependentes==NULL){
+?>
+            <table border="0">
+                <tr id="icone_desativado">
+        <td align="center">
+            <? echo"<img src='".base_url('public/img/dependente.png')."' title='Não possui Dependentes'>" ?>
+             <p>Não possui Dependentes</p>
+            </a>
+        </td>
+        </tr>
+
+        
+ <?
+}else {
+    ?>
+        <table border="0">
+            <tr id="icone_desbotado">
+        <td align="center">
+            <? echo"<a href=\"javascript:abrirPopUp('".base_url('dependente/listarDependentes/'.$id_cliente)."','500','350');\" title='Listar Dependentes'><img src='".base_url('public/img/dependente.png')."' title='Listar Dependentes'>"; ?>
+             <p>Listar Dependentes</p>
+            </a>
+        </td>
+        </tr>
+        </table>
+    
+<?
+    
+    
+}
+echo"</div>";
 ?>

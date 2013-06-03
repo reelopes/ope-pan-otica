@@ -139,7 +139,7 @@ class Venda_model extends CI_Model {
                 'id_forma_pgto' => $dados['forma_pagamento'],
                 'vendedor' => $dados['vendedor'],
                 'desconto' => $dados['desconto'],
-                'status' => '1',
+                'status' => '0',
                 'id_cliente'=> $dados['id_cliente'],
             );
             $this->db->insert('orcamento', $orcamento); //insere no BD
@@ -157,6 +157,13 @@ class Venda_model extends CI_Model {
                 'quantidade' => $item['quantidadeProduto'],
                 'id_orcamento' => $id_orcamento
             );
+            if($this->produto_model->decrement_quantidade($item['quantidade'],$item['id_produto'])){}
+            else{
+            $this->session->set_flashdata('msg','A quantidade do produto '.$item['nome'].' de código '.$item['id_produto'].' é maior do que está cadastrado no estoque.');
+            $this->db->trans_rollback();
+            redirect('venda/cadastrarVenda') ;              
+            }
+               
              $this->db->insert('itens', $item);//Insere is itens na tabeka
             }
             }
@@ -184,17 +191,43 @@ class Venda_model extends CI_Model {
              $this->db->insert('lente', $lente);//Insere is itens na tabeka
             }
             }
-          
-            $this->db->trans_complete();
-           
+               
+                $venda = array(
+                'data' => $dados['data'],
+                'horario' => date("H:i"),
+                'id_orcamento' => $id_orcamento
+            );
+             $this->db->insert('venda', $venda);//Insere na tabela venda 
             
-            $this->session->set_flashdata('orcamentoOk','Orçamento salvo com sucesso!\n\nDeseja Imprimir o Orçamento?');
-            $this->session->set_flashdata('id_orcamento', $id_orcamento);
+            $id_venda = $this->db->insert_id();//Captura o ID da venda
+            
+            if($dados['forma_pagamento']==3){
+            if($dados['cheques']!=null){    
+              foreach ($dados['cheques'] as $cheque) {//captura cada item do array
+                
+                $cheque = array(
+                'data' => $cheque['data'],
+                'valor' => $cheque['valor'],
+                'descricao' => $cheque['descricao'],
+                'id_venda' => $id_venda
+            );
+             $this->db->insert('cheque', $cheque);//insere os cheques cadastrados pelo cliente
+            }  
+            }
+                    
+            }
+              
+            if($this->db->trans_complete()){
+            $this->session->set_flashdata('vendaOk','Venda finalizada com sucesso!\n\nDeseja Imprimir o Cupom Fical?');
+            $this->session->set_flashdata('id_venda', $id_venda);
 
             redirect('venda/limparVenda');
-            
             }else{
-            $this->session->set_flashdata('msg','Não foi possível salvar o orçamento, verifique todos os dados e tente novamente.');
+            $this->session->set_flashdata('msg','Não foi possível realizar a venda, verifique todos os dados e tente novamente.');
+            redirect('venda/cadastrarVenda');   
+            }
+            }else{
+            $this->session->set_flashdata('msg','Não foi possível realizar a venda, verifique todos os dados e tente novamente.');
             redirect('venda/cadastrarVenda');
 
             }

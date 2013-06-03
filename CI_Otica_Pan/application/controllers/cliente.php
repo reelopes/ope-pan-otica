@@ -133,7 +133,7 @@ class Cliente extends CI_Controller {
             'pagina' => 'altera_cliente',
         );
 
-        $this->load->view('principal_popup', $dados);
+        $this->load->view('principal', $dados);
     }
 
     public function deletarCliente() {

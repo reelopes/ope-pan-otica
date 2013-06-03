@@ -285,9 +285,6 @@ class Venda extends CI_Controller {
     }
 
     public function gerarOrcamento() {
-        $this->session->set_userdata('formaPgto', $this->input->post('forma_pagamento'));   
-        $this->session->set_userdata('valor_desconto_venda', $this->util->virgulaParaPonto($this->input->post('desconto')));
-
         if ($this->session->userdata('id_cliente') == 0) {
             $idCliente = null;
         } else {
@@ -319,36 +316,27 @@ class Venda extends CI_Controller {
         $this->load->view('Principal_popup', $dados);
     }
     public function gerarVenda() {
-        $this->session->set_userdata('formaPgto',$this->input->post('forma_pagamento'));
-        $this->session->set_userdata('valor_desconto_venda', $this->util->virgulaParaPonto($this->input->post('desconto')));
-
         if ($this->session->userdata('id_cliente') == 0) {
             $idCliente = null;
         } else {
             $idCliente = $this->session->userdata('id_cliente');
         }
-       
-        if($this->input->post('forma_pagamento')==3){
-            
             $total = $this->util->virgulaParaPonto($this->input->post('total'));
-            $desconto = $this->util->virgulaParaPonto($this->input->post('desconto'));
+            $desconto = $this->session->userdata('valor_desconto_venda');
             $total_cheque= $this->util->virgulaParaPonto($this->session->userdata('valorCheques'));
             
-            if($total-$total_cheque < -0.02 || $total-$total_cheque > 0.02){
+        if($this->session->userdata('formaPgto')== '3'){
+              if($total-$total_cheque < -0.02 || $total-$total_cheque > 0.02){
                 
-                echo"cheques errados";
-                                break;
-                
-                
+                $this->session->set_flashdata('msg','O valor total dos cheques não está igual ao valor total da venda, é necessário corrigir esse problema para para finalizar a venda!');
+                redirect('venda/cadastrarVenda');
+              
             }
-            echo $total-$total_cheque;
-             break;
         $dados = array(
             'data' => date('Y-m-d'),
-            'forma_pagamento' => $this->input->post('forma_pagamento'),
+            'forma_pagamento' => $this->session->userdata('formaPgto'),
             'vendedor' => $this->session->userdata('nome'),
             'desconto' => $desconto,
-            'status' => 'Concluido',
             'id_cliente' => $idCliente,
             'itens' => $this->session->userdata('itens'),
             'lentes' => $this->session->userdata('lente'),
@@ -358,17 +346,16 @@ class Venda extends CI_Controller {
         }else{
             $dados = array(
             'data' => date('Y-m-d'),
-            'forma_pagamento' => $this->input->post('forma_pagamento'),
+            'forma_pagamento' => $this->session->userdata('formaPgto'),
             'vendedor' => $this->session->userdata('nome'),
-            'desconto' => $this->util->virgulaParaPonto($this->input->post('desconto')),
-            'status' => 'Concluido',
+            'desconto' => $desconto,
             'id_cliente' => $idCliente,
             'itens' => $this->session->userdata('itens'),
             'lentes' => $this->session->userdata('lente'),
             'servicos' => $this->session->userdata('servico'),
             );
         }
-       
+        
         $this->venda_model->cadastrarVenda($dados);
     }
     

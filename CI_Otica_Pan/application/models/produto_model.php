@@ -156,4 +156,24 @@ class produto_model extends CI_Model {
         return false;
     }
 
+    public function decrement_quantidade($quantidade = null, $id = null) {
+
+        if ($quantidade != null || $id != null) {
+
+            $this->db->select('quantidade');
+            $this->db->from('produto');
+            $this->db->where('id', $id);
+            $this->db->limit(1);
+            $campo_quantidade = $this->db->get()->result();
+            
+            if ($campo_quantidade[0]->quantidade >= $quantidade) {
+                $temp_quantidade = $campo_quantidade[0]->quantidade - $quantidade;
+                $this->db->update('produto', array('quantidade' => $temp_quantidade), 'id = ' . $id);
+                return TRUE;
+            }
+            return FALSE;
+        }
+        return FALSE;
+    }
+
 }

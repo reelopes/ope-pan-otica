@@ -101,7 +101,15 @@ if ($this->session->flashdata('orcamentoOk')) {
             
 \">";
 }
-
+if ($this->session->flashdata('vendaOk')) {
+    $msg = $this->session->flashdata('vendaOk');
+    echo "<body onLoad=\" 
+        if(confirm('$msg')){
+       abrirPopUp('" . base_url("venda/exibeOrcamento/" . $this->session->flashdata('id_orcamento')) . "','900','800');
+    }else{}
+            
+\">";
+}
 if($_GET['nomeCliente']!=null) $nome_cliente = $_GET['nomeCliente'];
 $cpf_cliente = $_GET['cpfCliente'];
 $id_cliente = $_GET['idCliente'];
@@ -237,6 +245,10 @@ foreach ($this->session->userdata('servico') as $servicos) {
 //Se não foi preenchido o valor de desconto adicionar o valor subtotal para o total
 $total = $subTotal - $this->session->userdata('valor_desconto_venda');
 
+//Se não tiver o adicionado o forma de pagamento ele tem valor 1
+if($this->session->userdata('formaPgto')==null)$this->session->set_userdata('formaPgto','1');
+
+
 echo"<table width='100%' align='right'>";
 echo"<tr align='right'>";
 echo"<td align ='left' colspan='2' width='70%'>";
@@ -256,9 +268,9 @@ echo"</tr>";
 echo"<tr align='right'>";
 echo"<td align ='left'></td>";
 echo"<td align='left' width='70%'>
-     <div align='left' style='float:left; width:100px;'><input type='button' name='finalizar' value='Finalizar' onClick=envia('" . base_url("venda/gerarVenda") . "');></div>
-     <div align='center' style='float:left;'><input type='button' name='orcamento' value='Orçamento' onClick=envia('" . base_url("venda/gerarOrcamento") . "');></div>
-     <div align='right' style='float:left; width:100px;'>" . anchor("venda/limparVenda", "<input type='button' value='Cancelar'>") . "</div>
+     <div align='left' style='float:left; width:100px;'><input type='button' name='finalizar' value='Finalizar' onClick= if(confirm('Tem&nbsp;certeza&nbsp;que&nbsp;deseja&nbsp;finalizar&nbsp;a&nbsp;venda?')){envia('" . base_url("venda/gerarVenda") . "');}else{} ></div>
+     <div align='center' style='float:left;'><input type='button' name='orcamento' value='Orçamento' onClick= if(confirm('Tem&nbsp;certeza&nbsp;que&nbsp;deseja&nbsp;salvar&nbsp;o&nbsp;Orçamento?')){envia('" . base_url("venda/gerarOrcamento") . "');}else{} ></div>
+     <div align='right' style='float:left; width:100px;'><input type='button' name='finalizar' value='Cancelar' onClick= if(confirm('Tem&nbsp;certeza&nbsp;que&nbsp;deseja&nbsp;cancelar&nbsp;a&nbsp;venda?')){envia('" . base_url("venda/limparVenda") . "');}else{} ></div>
 </td>";
 echo"<td>" . form_label('<b>Total</b>') . "</td>";
 echo"<td>" . form_input(array('name' => 'total'), number_format($total, '2', ',', ''), 'id="total" style="width:125px; height:23px;" readonly') . "</td>";
@@ -274,3 +286,4 @@ echo form_close();
 
 echo "</div>";
 ?>
+venda/limparVenda

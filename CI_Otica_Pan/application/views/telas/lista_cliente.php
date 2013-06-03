@@ -111,7 +111,7 @@ if($dependentes==NULL){
         <table border="0">
             <tr id="icone_desbotado">
         <td align="center">
-            <? echo"<a href=\"javascript:abrirPopUp('".base_url('dependente/listarDependentes/'.$id_cliente)."','500','350');\" title='Listar Dependentes'><img src='".base_url('public/img/dependente.png')."' title='Listar Dependentes'>"; ?>
+            <? echo"<a href=\"javascript:abrirPopUp('".base_url('dependente/listarDependentes/'.$id_cliente.'/visualizar')."','500','350');\" title='Listar Dependentes'><img src='".base_url('public/img/dependente.png')."' title='Listar Dependentes'>"; ?>
              <p>Listar Dependentes</p>
             </a>
         </td>

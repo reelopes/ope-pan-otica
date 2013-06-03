@@ -24,7 +24,7 @@ foreach ($clientes as $linha) {
         $nomeReduzido = $linha->nome;
     }
 
-    $this->table->add_row($nomeReduzido, $linha->cpf, $linha->email, $linha->num_telefone, anchor("cliente/listaCliente/$linha->id_cliente", '<center><img src="..\public/img/search.png" width="23"/></center>'), "<a href=\"javascript:abrirPopUp('" . base_url('cliente/atualizarCliente/' . $linha->id_cliente) . "','780','580');\"> <center><img src='..\public/img/edit.png' width='23'/></center></a>", '<center><p onClick="if (! confirm(\'Tem certeza que deseja excluir o cliente abaixo? \n\n Nome: ' . $linha->nome . '\n CPF: ' . $linha->cpf . '\n Email: ' . $linha->email . '\')) { return false; }">' . anchor('cliente/deletarCliente/' . $linha->id_pessoa . '/' . $linha->id_cliente, '<img src="..\public/img/delete.png" width="23"/>') . '</p></center>');
+    $this->table->add_row($nomeReduzido, $linha->cpf, $linha->email, $linha->num_telefone, anchor("cliente/listaCliente/$linha->id_cliente", '<center><img src="..\public/img/search.png" width="23"/></center>'),anchor("cliente/atualizarCliente/$linha->id_cliente", '<center><img src="..\public/img/edit.png" width="23"/></center>'), '<center><p onClick="if (! confirm(\'Tem certeza que deseja excluir o cliente abaixo? \n\n Nome: ' . $linha->nome . '\n CPF: ' . $linha->cpf . '\n Email: ' . $linha->email . '\')) { return false; }">' . anchor('cliente/deletarCliente/' . $linha->id_pessoa . '/' . $linha->id_cliente, '<img src="..\public/img/delete.png" width="23"/>') . '</p></center>');
 }
 
 /* * $tmpl = array(
