@@ -143,7 +143,7 @@ echo"</fieldset>";
 echo form_hidden('id_pessoa',$query['cliente']->id_pessoa);//Campo oculto que armazena id_pessoa
 echo form_hidden('id_cliente',$id_cliente);//Campo oculto que armazena id_cliente
 echo form_close();
-echo'<img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" onClick="history.go(-1)" title="Voltar" />';
+echo'<a href="'.$this->session->userdata('paginaAnterior').'"><img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" title="Voltar" /></a>';
 echo"</div>";
 echo "<div style='float:left; margin-left:10px; padding: 90px 0px 0px;'}>";
 

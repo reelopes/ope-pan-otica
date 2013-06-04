@@ -14,14 +14,18 @@ echo"<fieldset>";
 echo"<div style='background-image: url(".base_url('public/img/logo_venda.png').");background-repeat: no-repeat;background-size: 100px;'>";
 echo"<br>";
 
-echo"<font size='5'><center><b>Orçamento</b></center></font></h2>";//TITULO
+echo"<font size='5'><center><b>Recibo</b></center></font></h2>";//TITULO
 echo"<br>";
 
-$dados_orcamento = $dados_orcamento;//Boas praticas, captura o orçamento da controler
+$dados_venda = $dados_venda;//Boas praticas, captura a venda da controler
 
 echo"<p align='right'>";
-echo'<b>Data do Orçamento: </b>';
-echo $this->util->data_mysql_para_user($dados_orcamento['orcamento']->data);
+echo'<b>Data: </b>';
+echo $this->util->data_mysql_para_user($dados_venda['venda']->data);
+echo"&nbsp;&nbsp;&nbsp;&nbsp;";
+echo'<b> Hora: </b>';
+echo $dados_venda['venda']->horario;
+echo"&nbsp;&nbsp;&nbsp;&nbsp;";
 echo" </p>";
 echo"</div>";
 echo"<fieldset>";
@@ -31,17 +35,17 @@ echo"<table width='100%'>";//Essa linha pode remover
 //Mostra cabeçalhodo do cliente
 echo"<tr><td>";//Essa linha pode remover
 echo"<b>Nome: </b>";
-echo $dados_orcamento['pessoa']->nome;
+echo $dados_venda['pessoa']->nome;
 echo"</td>";
 echo"<td>";//Essa linha pode remover
 echo "<b>CPF: </b>";
-echo $dados_orcamento['cliente']->cpf;
+echo $dados_venda['cliente']->cpf;
 echo"</td>";
 echo"</tr>";
 echo"<tr><td>&nbsp;</td></tr>";
 echo"<tr>";
 echo"<td><b>Email: </b>";
-echo $dados_orcamento['pessoa']->email."</td>";   
+echo $dados_venda['pessoa']->email."</td>";   
 echo"</td></tr>";//Essa linha pode remover
 echo"</table>";
 echo"<br>";
@@ -58,8 +62,8 @@ echo"<td>Valor Unitário</td>";
 echo"<td>Sub Total</td>";
 echo"</tr>";
 
-if($dados_orcamento['itens']!=null){
-foreach ($dados_orcamento['itens'] as $itens){
+if($dados_venda['itens']!=null){
+foreach ($dados_venda['itens'] as $itens){
 
 echo"<tr>";
 echo"<td style='border-left: 1px solid #666666;'>".$itens->id_produto."</td>";
@@ -68,11 +72,11 @@ echo"<td style='border-left: 1px solid #666666;'>".$itens->quantidade."</td>";
 echo"<td style='border-left: 1px solid #666666;'>R$ ".number_format($itens->preco_unitario,'2',',','')."</td>";
 echo"<td style='border-left: 1px solid #666666;border-right: 1px solid #666666;'>R$ ".$subTotal_aux = number_format($itens->preco_unitario*$itens->quantidade,'2',',','')."</td>";
 echo"</tr>";
-$subTotal = $subTotal_aux + $subTotal;
+$subTotal = $this->util->virgulaParaPonto($subTotal_aux) + $subTotal;
 
 }}
-if($dados_orcamento['lentes']!=null){
-foreach ($dados_orcamento['lentes'] as $lente){
+if($dados_venda['lentes']!=null){
+foreach ($dados_venda['lentes'] as $lente){
 
 echo"<tr>";
 echo"<td style='border-left: 1px solid #666666;'>".$lente->referencia."</td>";
@@ -81,11 +85,11 @@ echo"<td style='border-left: 1px solid #666666;'>1</td>";
 echo"<td style='border-left: 1px solid #666666;'>R$ ".number_format($lente->preco_venda,'2',',','')."</td>";
 echo"<td style='border-left: 1px solid #666666;border-right: 1px solid #666666;'>R$ ".$subTotal_aux = number_format($lente->preco_venda,'2',',','')."</td>";
 echo"</tr>";
-$subTotal = $subTotal_aux + $subTotal;
+$subTotal = $this->util->virgulaParaPonto($subTotal_aux) + $subTotal;
 
 }}
-if($dados_orcamento['servicos']!=null){
-foreach ($dados_orcamento['servicos'] as $servico){
+if($dados_venda['servicos']!=null){
+foreach ($dados_venda['servicos'] as $servico){
 
 echo"<tr>";
 echo"<td style='border-left: 1px solid #666666;'>000</td>";
@@ -94,7 +98,7 @@ echo"<td style='border-left: 1px solid #666666;'>1</td>";
 echo"<td style='border-left: 1px solid #666666;'>R$ ".number_format($servico->preco_venda,'2',',','')."</td>";
 echo"<td style='border-left: 1px solid #666666;border-right: 1px solid #666666;'>R$ ".$subTotal_aux = number_format($servico->preco_venda,'2',',','')."</td>";
 echo"</tr>";
-$subTotal = $subTotal_aux + $subTotal;
+$subTotal = $this->util->virgulaParaPonto($subTotal_aux) + $subTotal;
 
 }}
 echo"<tr style='border-top: 1px solid #666666;'>";
@@ -115,16 +119,23 @@ echo"<br>";
 echo"<table width='100%'>";
 echo"<tr>";
 echo"<td>";
-echo"Forma de Pagamento: ".$dados_orcamento['formaPgto']->nome;
+
+if($dados_venda['orcamento']->id_forma_pgto==3){
+echo"<b>Forma de Pagamento: </b>".$dados_venda['formaPgto']->nome." em ".$dados_venda['parcelas']." vezes";
+}else{
+   echo"<b>Forma de Pagamento: </b>".$dados_venda['formaPgto']->nome;
+ 
+}
+
 echo "</td>";
 echo"<td>";
-echo"<div align='right'><b>Desconto: ".number_format($desconto=$dados_orcamento['orcamento']->desconto,'2',',','')."</b></div>";
+echo"<div align='right'><b>Desconto: ".number_format($desconto=$dados_venda['orcamento']->desconto,'2',',','')."</b></div>";
 echo "</td>";
 echo"</tr>";
 echo"<tr><td colspan='2'>&nbsp;</td></tr>";
 echo"<tr>";
 echo"<td>";
-echo"Vendedor: ".$dados_orcamento['orcamento']->vendedor;
+echo"<b>Vendedor: </b>".$dados_venda['orcamento']->vendedor;
 echo "</td>";
 echo"<td>";
 echo"<div align='right'><h3>Total: <font color='red'>".number_format($subTotal-$desconto,'2',',','')."</font><h3></div>";
@@ -134,6 +145,7 @@ echo"</tr>";
 echo"</table>";
 echo"<br>";
 echo"<br>";
+echo"<font size='3'>Obs.: Este recibo não vale como documento fiscal.</font>";
 echo"</fieldset>";
 echo"<center><font size='3'>Ótica Pan - Rua Vergueiro, 6359 Alto do Ipiranga São Paulo - Fone: (11) 5062-2429</font></center>";
 echo"</fieldset>";

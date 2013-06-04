@@ -200,7 +200,7 @@ class Venda extends CI_Controller {
                     'quantidade_servico' => '1'));
                 $this->session->set_userdata('servico', $array_servico);
             }
-            echo"<script>window.close();window.opener.location.reload();</script>";
+            echo"<script>window.close();window.opener.location='".base_url('venda/cadastrarVenda')."';</script>";
         }
         $dados = array(
             'titulo' => 'Cadastro de Serviço',
@@ -364,6 +364,18 @@ class Venda extends CI_Controller {
         if($_GET['descontoSessao']!= NULL) $this->session->set_userdata('valor_desconto_venda',$_GET['descontoSessao']);
         if($_GET['formaPgto']!= NULL) $this->session->set_userdata('formaPgto',$_GET['formaPgto']);
         
+    }
+    
+    public function exibeVenda() {
+
+        $id_venda = $this->uri->segment(3);
+
+        $dados = Array(
+            'pagina' => 'lista_venda',
+            'titulo' => 'Visualiza Venda',
+            'dados_venda' => $this->venda_model->retornaVenda($id_venda),
+        );
+        $this->load->view('Principal_popup', $dados);
     }
     
     

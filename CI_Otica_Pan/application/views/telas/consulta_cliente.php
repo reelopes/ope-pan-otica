@@ -31,10 +31,10 @@ if ($mes == null) {
             if($linha->id_dependente!=NULL){
                 
                 $nome = $linha->nome_dependente;
-                $strCliente="<img src=../../../../../../../../../CI_otica_pan/public/img/dependente.png width=23>";
+                $strCliente="<img src=../../../../../../../../../CI_otica_pan/public/img/dependente.png width=23 title='Consulta para um Dependente'>";
             }else{
                 $nome = $linha->nome_cliente;
-                $strCliente="<img src=../../../../../../../../../CI_otica_pan/public/img/true.png width=18>";
+                $strCliente="<img src=../../../../../../../../../CI_otica_pan/public/img/true.png width=18 title='Consulta para um Cliente'>";
             }
           
            if($linha->status=="Faltou"){
@@ -42,7 +42,7 @@ if ($mes == null) {
              }else{
                  $faltou=" ";
              }
-                $this->table->add_row('<center>'.$this->util->data_mysql_para_user($linha->data_consulta).'</center>', '<center>'.$linha->horario_consulta.'</center>', anchor('cliente/listaCliente/'.$linha->id_cliente,$nome),"<center>".$strCliente."</center>","<center><input type='checkbox' name='a' id=".$linha->id_agendamento." value='ON' ".$faltou." onClick=\"MarcarFalta('".$linha->id_agendamento."','".base_url('consulta/atualizarAgendamento')."');\"/></center>","<center><a href=\"javascript:abrirPopUp('" . base_url('consulta/cadastrarConsulta/' . $linha->id_agendamento) . "','700','700');\"><img src=../../../../../../../../../CI_otica_pan/public/img/ConsultaMedica.png width=23></a></center>");
+                $this->table->add_row('<center>'.$this->util->data_mysql_para_user($linha->data_consulta).'</center>', '<center>'.$linha->horario_consulta.'</center>', anchor('cliente/listaCliente/'.$linha->id_cliente,$nome,'title="Informações do Cliente"'),"<center>".$strCliente."</center>","<center><input type='checkbox' title='Marcar/Desmarcar falta para cliente' name='a' id=".$linha->id_agendamento." value='ON' ".$faltou." onClick=\"MarcarFalta('".$linha->id_agendamento."','".base_url('consulta/atualizarAgendamento')."');\"/></center>","<center><a href=\"javascript:abrirPopUp('" . base_url('consulta/cadastrarConsulta/' . $linha->id_agendamento) . "','700','700');\"><img src=../../../../../../../../../CI_otica_pan/public/img/ConsultaMedica.png width=23 title='Adicionar Dados da Consulta'></a></center>");
             
             }
           

@@ -105,7 +105,7 @@ if ($this->session->flashdata('vendaOk')) {
     $msg = $this->session->flashdata('vendaOk');
     echo "<body onLoad=\" 
         if(confirm('$msg')){
-       abrirPopUp('" . base_url("venda/exibeOrcamento/" . $this->session->flashdata('id_orcamento')) . "','900','800');
+       abrirPopUp('" . base_url("venda/exibeVenda/" . $this->session->flashdata('id_venda')) . "','900','800');
     }else{}
             
 \">";
@@ -286,4 +286,3 @@ echo form_close();
 
 echo "</div>";
 ?>
-venda/limparVenda

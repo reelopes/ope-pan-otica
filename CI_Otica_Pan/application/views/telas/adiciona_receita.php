@@ -1,6 +1,6 @@
 <?php
 
-echo"<div class=formulario>";
+echo"<div class=formulario style='  margin-left: 40px; float:left; width: 820px;  padding: 2px 2px 0px;  border-radius: 3px;'>";
 echo"<h2>$titulo</h2>";//TITULO
 
 echo form_open('receita/adicionaReceita');
@@ -61,7 +61,7 @@ echo"</fieldset>";
 
 echo"<fieldset>";
 echo"<legend>Dados da Receita:</legend>";
-echo"<table border='0' width='100%'>";
+echo"<table border='0' width='95%'>";
 
 echo"<tr  align='center'>";
 echo"<td colspan='2'></td>";
@@ -112,12 +112,12 @@ echo"</tr>";
 
 echo"<tr><td>";
 echo form_label('Data da consulta');
-echo"</td><td>";
+echo"</td><td colspan='3'>";
 echo form_type(array('name'=>'data'),  set_value('data'),'maxlength="10" autocomplete ="off" min="1900-01-01" max="'.date('Y-m-d').'"','date');
 echo"</td>";
 
 
-echo"<td align='right' colspan='3'>".form_label('DP')."</td>";
+echo"<td align='right'>".form_label('DP')."</td>";
 echo "<td align='center'>".form_input(array('name'=>'dp'),'','autocomplete ="off" placeholder="DP em mm" style="width:105px;" onkeypress="return SomenteNumeros(event);" maxlength="6"')."</td>";
 echo"</tr>";
 

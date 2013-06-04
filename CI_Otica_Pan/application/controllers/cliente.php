@@ -26,6 +26,7 @@ class Cliente extends CI_Controller {
         $this->load->model('cliente_model');
         $this->load->model('receita_model');
         $this->load->model('dependente_model');
+        $this->load->model('venda_model');
         $this->load->library('form_validation');
         $this->load->library('table');
             

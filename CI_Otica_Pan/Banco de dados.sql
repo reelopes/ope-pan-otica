@@ -425,7 +425,7 @@ CREATE TABLE `endereco` (
   `complemento` varchar(20) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `logradouro` varchar(80) NOT NULL,
+  `logradouro` varchar(80) DEFAULT NULL,
   `id_cliente` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_cliente` (`id_cliente`),
@@ -664,8 +664,8 @@ Table data for otica_pan.forma_pgto
 */
 
 INSERT INTO `forma_pgto` VALUES 
-(1,'¡ Vista'),
-(2,'Cart„o de CrÈdito'),
+(1,'√Å Vista'),
+(2,'Cart√£o de Cr√©dito'),
 (3,'Cheque');
 
 /*
