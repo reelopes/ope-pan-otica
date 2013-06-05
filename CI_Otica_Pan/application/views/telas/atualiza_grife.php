@@ -22,7 +22,7 @@ echo"<fieldset>";
 echo"<legend>Grife</legend>";
 echo"<table>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
-echo form_label('Descrição');
+echo form_label('Nome');
 echo"</td><td>"; //Essa linha pode remover
 echo form_input(array('name'=>'nome'),  set_value('descricao',$query['grife']->nome),'maxlength="50" placeholder="Nome da grife" autocomplete ="off" style="width:150px;"');
 echo"</td></tr>";//Essa linha pode remover
