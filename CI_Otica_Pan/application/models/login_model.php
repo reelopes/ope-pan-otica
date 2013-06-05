@@ -50,8 +50,14 @@ class Login_model extends CI_Model {
         $this->db->where('login', $login);
         $this->db->limit(1);
         $lembrete = $this->db->get('usuario')->row();
+  
+        if($lembrete->lembrete_senha != null) {
+            $this->session->set_flashdata('lembrete', $lembrete->lembrete_senha);
+        } else {
+            $this->session->set_flashdata('lembreteErro', 'Usuário não existe');
+        }
         
-        return $lembrete->lembrete_senha;
+        redirect('login/esqueciSenha');
     }
 
 }

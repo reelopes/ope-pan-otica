@@ -12,7 +12,7 @@ $grife = $grife;//Pega a variavel da Controller (boa pratica)
         $this -> table -> set_heading('NOME','&nbsp; ','&nbsp; ');
         foreach ($grife as $linha) {
 
-            $this -> table -> add_row($linha -> nome, anchor("grife/update/$linha->id","<center><img src='..\public/img/edit.png' width='23'/></center>"), anchor("grife/delete/$linha->id",'<center><img src="..\public/img/delete.png" width="23"/></center>'));
+            $this -> table -> add_row($linha -> nome, "<a href=\"javascript:abrirPopUp('" . base_url('grife/update/' . $linha->id) . "','400','300');\"> <center><img src='..\public/img/edit.png' width='23'/></center></a>", anchor("grife/delete/$linha->id",'<center><img src="..\public/img/delete.png" width="23"/></center>'));
         }
     }
         $tmpl = array(

@@ -14,7 +14,7 @@ if ($this->session->flashdata('msgOk')) {
     <form method="POST" action=<? echo base_url('contasAPagar/adiciona') ?>/>
     <table>
         <tr>
-            <td>Nome:</td><td><input type="text" style="width:310px;" name="nome" value="<? echo set_value('nome'); ?>"maxlength="50" placeholder='Nome da Conta' autocomplete="off" autofocus required title="Campo nome é obrigatório" autofocus /></td></tr><tr>
+            <td>Nome:</td><td><input type="text" style="width:310px;" name="nome" value="<? echo set_value('nome'); ?>"maxlength="50" placeholder='Nome do título' autocomplete="off" autofocus required title="Campo nome é obrigatório" autofocus /></td></tr><tr>
             <td>Valor:</td><td><input type="text" style="width:210px;" name="preco" value="<? echo set_value('preco'); ?>" autocomplete="off" placeholder='XXX,XX' required title="Campo preço é obrigatório" onkeypress="return(FormataReais(this,'.',',',event));" /></td></tr><tr>
             <td>Vencimento:</td><td><input type="date" style="width:155px;" name="data" value="<? echo set_value('data'); ?>" autocomplete="off" /></td></tr><tr>
             <td>Descrição:</td></tr><tr><td colspan="2"><textarea name="descricao" cols=46 rows=7 placeholder='Digite aqui a descrição.' title="Campo descrição é opcional"><? echo set_value('descricao'); ?></textarea></td></tr><tr>

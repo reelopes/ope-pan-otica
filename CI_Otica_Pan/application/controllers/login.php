@@ -59,17 +59,16 @@ class Login extends CI_Controller {
     }
     
     function esqueciSenha() {
-        $this->form_validation->set_rules('usuario', 'Username', 'required', 'strtolower');
+        $this->form_validation->set_rules('login', 'Login', 'required', 'strtolower');
         
         if ($this->form_validation->run()) {
-            $this->login_model->esqueceuSenha($this->input->post('usuario'));
+            $this->login_model->esqueceuSenha($this->input->post('login'));
         }
         
         $dados = Array(
             'pagina' => 'esqueci_minha_senha',
-            'titulo' => 'Esqueci minha senha'
+            'titulo' => 'Exibir lembrete de senha'
         );
-
         $this->load->view('Principal_popup', $dados);
     }
     

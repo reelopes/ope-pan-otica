@@ -74,22 +74,18 @@ class grife extends CI_Controller {
 	}
 
 	public function update() {
-            $this -> form_validation -> set_rules('nome', 'Nome', 'trim|max_length[60]|ucwords|required');
+            $this -> form_validation -> set_rules('nome', 'Nome', 'trim|max_length[50]|ucwords|required');
             
             if ($this->form_validation->run() == true) {
-
-            $dados = elements(array('nome'), $this->input->post());
-
-            $this->grife_model->do_update(
-                    $dados, array('id_grife' => $this->input->post('id_grife')));
-            
+                $dados = elements(array('nome'), $this->input->post());
+                $this->grife_model->do_update($dados, array('id_grife' => $this->input->post('id_grife')));
             }
 		$dados = array('titulo' => 'Alterar Grife', 'pagina' => 'atualiza_grife');
-		$this -> load -> view('Principal', $dados);
+		$this -> load -> view('Principal_popup', $dados);
             }
 
 	public function delete() {
-		$dados = array('titulo' => 'CRUD &raquo; Delete', 'tela' => 'Delete', );
+		$dados = array('titulo' => 'CRUD &raquo; Delete', 'tela' => 'Delete');
 		$id = $this -> uri -> segment(3);
 
 		if (! $id == NULL) {

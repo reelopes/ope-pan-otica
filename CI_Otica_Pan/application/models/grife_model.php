@@ -62,12 +62,10 @@ class grife_model extends CI_Model {
 			if ($this -> db -> trans_complete()) {
 				$this -> session -> set_flashdata('statusUpdate', 'Alterado com sucesso');
 			} else {
-				$this -> session -> set_flashdata('statusUpdate', 'Não foi possível alterar o fornecedor');
+				$this -> session -> set_flashdata('statusUpdate', 'Não foi possível alterar a grife');
 			}
-
-			redirect('grife/lista');
+                        redirect(current_url());
 		}
-		redirect('grife/lista');
 	}
 
 	public function do_delete($id = null) {

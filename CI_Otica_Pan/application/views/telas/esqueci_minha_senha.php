@@ -1,39 +1,28 @@
-<head>
-  <link href="../../CI_otica_pan/favicon.ico" rel="shortcut icon" type="image/ico" />
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>SisGO - Esqueci minha senha</title>
-  <link rel="stylesheet" href="../../CI_otica_pan/public/css/login.css">
-</head>
-<body>
+<!--Julia-->
+<?php
+echo"<div class=formulario style='margin-left: 40px; width: 400px;  padding: 2px 2px 2px;  border-radius: 3px;'>";
+echo"<h2>$titulo</h2>"; //TITULO
 
-        
-  <section class="container">
-    <div class="login">
-      <h1>Qual é a minha senha?</h1>
-      <form method="post" action="<? echo base_url('login/esqueciSenha'); ?>">
-          <p><input type="text" name="usuario" value="" autocomplete="off" placeholder="Qual o Usuário?" autofocus required title="O campo usuário é obrigatório"></p>
-          <p><input type="text" name="lembrete" value="<?if ($this->input->post('usuario') != null) {echo $this->login_model->esqueceuSenha($this->input->post('usuario'));}?>" readonly autocomplete="off" placeholder="Lembrete de senha"></p>
-        <p class="remember_me"><img src="..\..\..\../CI_Otica_Pan/public/img/Oculos.png" width="63" height="63" >
-
-        <table>
-            <tr><td>
-                <p class="submit"><input type="submit" name="commit" value="Exibir lembrete"></p>
-            </td><td>
-                <a href="login">Voltar</a>
-            </td>
-        </table>
-      </form>
-      <?
-      echo"<div class='erroLogin'>";
-      echo validation_errors('<p>','</p>');
-      if($this->session->flashdata('erroLogin')){
-      echo '<p>'.$this->session->flashdata('erroLogin').'</p>';
-      }
-    echo"</div>";
+?>
+<fieldset>
+    <legend>Lembrete de senha:</legend>
+    <form method="POST" action=<? echo base_url('login/esqueciSenha') ?>/>
+    <table>
+        <tr>
+            <td>Login:</td><td><input type="text" style="width:310px;" name="login" value="<? echo set_value('login'); ?>"maxlength="50" placeholder='Qual o login?' autocomplete="off" autofocus required title="Campo login é obrigatório" autofocus /></td></tr><tr>
+            <?
+            if ($this->session->flashdata('lembrete')) {
+                echo "<td colspan='4'><p><center>O lembrete de senha é: <span style='color:blue;'>".$this->session->flashdata('lembrete')."</span></center></p></td><tr>";
+            }
+            if ($this->session->flashdata('lembreteErro')) {
+                echo "<td colspan='4'><p><center><span style='color:red;'>".$this->session->flashdata('lembreteErro')."</span></center></p></td><tr>";
+            }
             ?>
-    </div>
-  </section>
-</body>
-</html>
+            <td align='center' colspan="2"><input type="submit" value="Exibir Lembrete"></td></tr>
+    </table>
+    </form>
+</fildset>
 
+<?
+echo"</div>";
+?>

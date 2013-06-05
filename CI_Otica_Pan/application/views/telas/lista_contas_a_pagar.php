@@ -14,8 +14,10 @@ $this->table->set_heading('NOME', 'VALOR','VENCIMENTO','DESCRIÇÃO','&nbsp; ','
 foreach ($contas as $linha) {
     
     $data = $this->util->data_mysql_para_user($linha->data);
-    if ($linha->data <= date('Y-m-d')) {
+    if ($linha->data < date('Y-m-d')) {
         $data = "<span title='Título vencido' style='color:red;'>".$data."</span>";
+    } else if($linha->data == date('Y-m-d')) {
+        $data = "<span title='Vence hoje'><b>".$data."</b></span>";
     }
     
     $this->table->add_row($linha->nome, '<p><center>'."R$ ".$this->util->pontoParaVirgula($linha->valor).'</center>','<center>'.$data.'</center>',$linha->descricao, anchor("contasAPagar/visualiza/$linha->id", '<center><img src="..\public/img/search.png" width="23"/></center>'),"<a href=\"javascript:abrirPopUp('" . base_url('contasAPagar/update/' . $linha->id) . "','500','450');\"> <center><img src='..\public/img/edit.png' width='23'/></center></a>", '<center><p onClick="if (! confirm(\'Tem certeza que deseja excluir a conta a pagar abaixo? \n\nNome: '.$linha->nome.'\nValor: '.$linha->valor.'\nData do pagamento: '.$this->util->data_mysql_para_user($linha->data).'\')) { return false; }">' . anchor('contasAPagar/delete/'.$linha->id, '<img src="..\public/img/delete.png" width="23"/>') . '</p></center>');
