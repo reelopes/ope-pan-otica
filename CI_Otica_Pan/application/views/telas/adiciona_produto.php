@@ -1,3 +1,7 @@
+<script language="javascript">
+document.onkeydown = applyKey;
+</script>
+
 <?php
 
 echo"<div class=formulario>";
@@ -5,7 +9,7 @@ echo"<h2>$titulo</h2>";
 
 if($this->session->flashdata('cadastrook')){
     $msg = $this->session->flashdata('cadastrook');
-    echo "<body onload=\"ocultaArmacao(); alert('$msg');\">";
+    echo "<body onload=\"ocultaDiv();ocultaArmacao(); alert('$msg');\">";
 }
 
 // Boa pratica, pega variavel da Controller
@@ -14,9 +18,9 @@ $todas_grife = $todas_grife;
 $carrega = $carrega;
 
 if($carrega == 1) {
-    echo '<body onload="mostraArmacao();" />';
+    echo '<body onload="mostraArmacao();ocultaDiv();" />';
 } else {
-    echo '<body onload="ocultaArmacao();" />';
+    echo '<body onload="ocultaArmacao();ocultaDiv();" />';
 }
 
 echo form_open('produto/adiciona');
@@ -146,6 +150,14 @@ echo "</div>";
 echo"</fieldset>";
 
 echo validation_errors('<p>','</p>');
+
+echo"<div id='div_dog'>";
+    echo "<img src='".base_url("public/img/true.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"abrirPopUp('".base_url("public/img/nika.jpg")."','628','628');\">";
+    echo "<img src='".base_url("public/img/true.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"abrirPopUp('".base_url("public/img/lisa.jpg")."','628','518');\">";
+    echo "<img src='".base_url("public/img/true.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"abrirPopUp('".base_url("public/img/mana.jpg")."','628','518');\">";
+    echo "<img src='".base_url("public/img/true.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"abrirPopUp('".base_url("public/img/manu.jpg")."','523','518');\">";
+    echo "<img src='".base_url("public/img/false.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"ocultaDiv();\">";
+echo"</div>";
 
 echo form_close();
 ?>

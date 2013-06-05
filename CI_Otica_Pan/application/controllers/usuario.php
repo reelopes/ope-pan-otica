@@ -123,4 +123,9 @@ class usuario extends CI_Controller {
         $this->load->view('Principal', $dados);
     }
 
+//    public function esqueciSenha() {
+//        $dados = array('pagina' => 'esqueci_minha_senha');
+//
+//        $this->load->view('login', $dados);
+//    }
 }

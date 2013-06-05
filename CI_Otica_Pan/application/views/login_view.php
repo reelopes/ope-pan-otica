@@ -27,9 +27,20 @@
     echo"</div>";
             ?>
     </div>
-
     <div class="login-help">
-      <p>Esqueceu a sua senha? <a href="index.html">Clique aqui.</a></p>
+<?
+$atts = array(
+              'width'      => '800',
+              'height'     => '600',
+              'scrollbars' => 'yes',
+              'status'     => 'yes',
+              'resizable'  => 'yes',
+              'screenx'    => '0',
+              'screeny'    => '0'
+            );
+
+echo "<p>Esqueceu a sua senha? ".anchor_popup('login/esqueciSenha', 'Clique aqui.', $atts)."</p>";
+?>
     </div>
   </section>
 </body>

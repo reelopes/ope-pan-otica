@@ -44,5 +44,14 @@ class Login_model extends CI_Model {
             redirect('login');
         }
     }
+    
+    function esqueceuSenha($login) {
+        $this->db->select('lembrete_senha');
+        $this->db->where('login', $login);
+        $this->db->limit(1);
+        $lembrete = $this->db->get('usuario')->row();
+        
+        return $lembrete->lembrete_senha;
+    }
 
 }

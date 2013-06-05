@@ -3,7 +3,7 @@ echo "<h2>$titulo</h2>";
 
 if($this->session->flashdata('msg')){
     $msg = $this->session->flashdata('msg');
-    echo "<body onLoad=\" alert('$msg');location.reload();\">";
+    echo "<body onLoad=\"alert('$msg');location.reload();\">";
 }
 
 $produto = $produto;//Pega a variavel da Controller (boa pratica)
@@ -20,12 +20,12 @@ foreach ($produto as $linha) {
     
     if ($linha->status == "0") {
         $ativo="<img src=../../../../../../../../../CI_otica_pan/public/img/false.png width=18>";
+        $value = 0;
     } else {
         $ativo="<img src=../../../../../../../../../CI_otica_pan/public/img/true.png width=18>";
+        $value = 1;
     }
-    
-    $this->table->add_row($linha->id_produto, $linha->cod_barra, $linha->nome, '<p R$ ><center>'."R$ ".$this->util->pontoParaVirgula($linha->preco_custo), '<center>'."R$ ".$this->util->pontoParaVirgula($linha->preco_venda), '<center>'.$linha->quantidade, "<center>".$ativo."</center>", anchor("produto/visualiza/$linha->id_produto", '<center><img src="..\public/img/search.png" width="23"/></center>'),"<a href=\"javascript:abrirPopUp('" . base_url('produto/update/' . $linha->id_produto) . "',".$lenPopUp.");\"> <center><img src='..\public/img/edit.png' width='23'/></center></a>", '<center><p onClick="if (! confirm(\'Tem certeza que deseja excluir o produto abaixo? \n\n Código de barra: ' . $linha->cod_barra.'\n Nome: '.$linha->nome.'\')) { return false; }">' . anchor('produto/delete/'.$linha->id_produto, '<img src="..\public/img/delete.png" width="23"/>') . '</p></center>');
-    
+    $this->table->add_row($linha->id_produto, $linha->cod_barra, $linha->nome, '<p R$ ><center>'."R$ ".$this->util->pontoParaVirgula($linha->preco_custo), '<center>'."R$ ".$this->util->pontoParaVirgula($linha->preco_venda), '<center>'.$linha->quantidade, "<center><p id='num_ativo' style='display: none;'>".$value."</p>".$ativo."</center>", anchor("produto/visualiza/$linha->id_produto", '<center><img src="..\public/img/search.png" width="23"/></center>'),"<a href=\"javascript:abrirPopUp('" . base_url('produto/update/' . $linha->id_produto) . "',".$lenPopUp.");\"> <center><img src='..\public/img/edit.png' width='23'/></center></a>", '<center><p onClick="if (! confirm(\'Tem certeza que deseja excluir o produto abaixo? \n\n Código de barra: ' . $linha->cod_barra.'\n Nome: '.$linha->nome.'\')) { return false; }">' . anchor('produto/delete/'.$linha->id_produto, '<img src="..\public/img/delete.png" width="23"/>') . '</p></center>');
 }
 
 $tmpl = array(

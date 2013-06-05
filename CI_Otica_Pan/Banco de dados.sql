@@ -1648,5 +1648,14 @@ CREATE TABLE `venda` (
   CONSTRAINT `venda_ibfk_1` FOREIGN KEY (`id_orcamento`) REFERENCES `orcamento` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-SET FOREIGN_KEY_CHECKS=1;
+drop table if exists `contas_pagar`;
+CREATE TABLE `contas_pagar` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `nome` varchar(50) NOT NULL,
+    `descricao` text DEFAULT NULL,
+    `valor` double NOT NULL,
+    `data` date DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+SET FOREIGN_KEY_CHECKS=1;

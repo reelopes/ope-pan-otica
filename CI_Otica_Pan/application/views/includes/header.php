@@ -27,9 +27,8 @@
                     echo 'Data: ' . date('d') . '/' . date('m') . '/' . date('Y').'&nbsp; &nbsp; (' . anchor('login/logoff', 'sair') . ')';
                     echo "</p>";
                     echo"<br>";
-                    echo '<p>'; // <span id="name_user"> </span>
-                    echo 'Usuário: ' . $this->session->userdata('nome').' &nbsp; '."<a href=\"javascript:abrirPopUp('" . base_url('usuario/update/'.$this->session->userdata('id')) . "','706','370');\"> <img src='".base_url('public/img/config.png')."' width='20' style='vertical-align: middle;' title='Alterar dados Pessoais' /></a>";
-//                    .anchor("usuario/update/".$this->session->userdata('id')."/", '<img src="'.base_url('public/img/config.png').'" width="20" title="Configuração"/>')
+                    echo '<p>';
+                    echo 'Usuário: <span id="name_user">' . $this->session->userdata('nome').'</span> &nbsp; '."<a href=\"javascript:abrirPopUp('" . base_url('usuario/update/'.$this->session->userdata('id')) . "','706','370');\"> <img src='".base_url('public/img/config.png')."' width='20' style='vertical-align: middle;' title='Alterar dados Pessoais' /></a>";
                     echo "</p>";
                     ?>
                 </div>

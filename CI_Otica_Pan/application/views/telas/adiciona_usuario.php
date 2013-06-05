@@ -61,7 +61,7 @@ echo"</table><table>";
 echo"<tr><td>";
 echo form_label('Lembrete da senha');
 echo"</td><td>"; 
-echo form_input(array('name'=>'lembrete_senha'),  set_value('lembrete_senha'), 'maxlength="200" placeholder="Use uma palavra chave para lembrar sua senha" autocomplete ="off" style="width:405px;"');
+echo form_input(array('name'=>'lembrete_senha'),  set_value('lembrete_senha'), 'maxlength="200" placeholder="Use uma palavra chave para lembrar sua senha" autocomplete ="off" style="width:405px;" required title="Campo Lembrete de senha é obrigatório"');
 echo"</td></tr>";
 
 echo"<tr><td>"; 

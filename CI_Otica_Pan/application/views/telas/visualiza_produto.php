@@ -1,3 +1,4 @@
+<!--Manuela-->
 <?php
 
 echo"<div class=formulario style='  margin-left: 40px; width: 700px;  padding: 2px 2px 2px;  border-radius: 3px;'>";
@@ -117,9 +118,9 @@ echo'<div id="armacao">';
         echo"</table>";
 echo"</div>";
 }
+echo '<img src="'.base_url('public/img/voltar.png').'" onClick="history.go(-1)" width="25" id="icone_desbotado" title="Voltar"/>';
 echo"</fieldset>";
 
-echo '<img src="'.base_url('public/img/voltar.png').'" onClick="history.go(-1)" width="25" id="icone_desbotado" title="Voltar"/>';
 //echo anchor(base_url('produto/lista'), '<img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" title="Voltar"/>');
 //echo '<a href="#" onClick="history.go(-1);"> <img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" title="Voltar"/></a>';
 
