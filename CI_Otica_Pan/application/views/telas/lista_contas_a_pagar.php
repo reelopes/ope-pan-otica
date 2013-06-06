@@ -9,7 +9,7 @@ if($this->session->flashdata('msg')){
 
 $contas = $contas;//Pega a variavel da Controller (boa pratica)
 
-$this->table->set_heading('NOME', 'VALOR','VENCIMENTO','DESCRIÇÃO','&nbsp; ','&nbsp; ','&nbsp; ');
+$this->table->set_heading('VENCIMENTO','NOME', 'VALOR','DESCRIÇÃO','&nbsp; ','&nbsp; ','&nbsp; ');
 
 foreach ($contas as $linha) {
     
@@ -20,13 +20,13 @@ foreach ($contas as $linha) {
         $data = "<span title='Vence hoje'><b>".$data."</b></span>";
     }
     
-    $this->table->add_row($linha->nome, '<p><center>'."R$ ".$this->util->pontoParaVirgula($linha->valor).'</center>','<center>'.$data.'</center>',$linha->descricao, anchor("contasAPagar/visualiza/$linha->id", '<center><img src="..\public/img/search.png" width="23"/></center>'),"<a href=\"javascript:abrirPopUp('" . base_url('contasAPagar/update/' . $linha->id) . "','500','450');\"> <center><img src='..\public/img/edit.png' width='23'/></center></a>", '<center><p onClick="if (! confirm(\'Tem certeza que deseja excluir a conta a pagar abaixo? \n\nNome: '.$linha->nome.'\nValor: '.$linha->valor.'\nData do pagamento: '.$this->util->data_mysql_para_user($linha->data).'\')) { return false; }">' . anchor('contasAPagar/delete/'.$linha->id, '<img src="..\public/img/delete.png" width="23"/>') . '</p></center>');
+    $this->table->add_row('<center>'.$data.'</center>',$linha->nome, '<p>'."R$ ".$this->util->pontoParaVirgula($linha->valor),$linha->descricao, anchor("contasAPagar/visualiza/$linha->id", '<center><img src="..\public/img/search.png" width="23"/></center>'),"<a href=\"javascript:abrirPopUp('" . base_url('contasAPagar/update/' . $linha->id) . "','500','450');\"> <center><img src='..\public/img/edit.png' width='23'/></center></a>", '<center><p onClick="if (! confirm(\'Tem certeza que deseja excluir a conta a pagar abaixo? \n\nNome: '.$linha->nome.'\nValor: '.$linha->valor.'\nData do pagamento: '.$this->util->data_mysql_para_user($linha->data).'\')) { return false; }">' . anchor('contasAPagar/delete/'.$linha->id, '<img src="..\public/img/delete.png" width="23"/>') . '</p></center>');
 }
 
 $tmpl = array(
     'table_open'=>'<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">',
     'cell_start' => '<td valign="middle">',
-    'cell_end' => '</td">',
+    'cell_end' => '</td>',
     'cell_alt_start' => '<td valign="middle">',
     'cell_alt_end' => '</td>',
 );
