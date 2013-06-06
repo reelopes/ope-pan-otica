@@ -8,8 +8,9 @@ if($this->session->flashdata('msg')){
 }
 
 $contas = $contas;//Pega a variavel da Controller (boa pratica)
-
-$this->table->set_heading('VENCIMENTO','NOME', 'VALOR','DESCRIÇÃO','&nbsp; ','&nbsp; ','&nbsp; ');
+// A MAIOR GAMBIARRA DA MINHA VIDA! POR FALTA DE TEMPO O AMIGÃO NÃO DEIXOU EU ALTERAR NA TABELA E SETAR OS TAMANHOS,
+// O QUE EU FIZ: ESSA GAMBI RIDICULA, dei uns &nbsp; PRA AJUSTAR AO TAMANHO e.e kkkkkk
+$this->table->set_heading('VENCIMENTO','&nbsp; &nbsp; &nbsp; &nbsp; NOME DO TÍTULO &nbsp; &nbsp; &nbsp; &nbsp; ', '&nbsp; &nbsp; VALOR &nbsp; &nbsp; ','&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DESCRIÇÃO &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ','&nbsp; ','&nbsp; ','&nbsp; ');
 
 foreach ($contas as $linha) {
     
@@ -20,7 +21,7 @@ foreach ($contas as $linha) {
         $data = "<span title='Vence hoje'><b>".$data."</b></span>";
     }
     
-    $this->table->add_row('<center>'.$data.'</center>',$linha->nome, '<p>'."R$ ".$this->util->pontoParaVirgula($linha->valor),$linha->descricao, anchor("contasAPagar/visualiza/$linha->id", '<center><img src="..\public/img/search.png" width="23"/></center>'),"<a href=\"javascript:abrirPopUp('" . base_url('contasAPagar/update/' . $linha->id) . "','500','450');\"> <center><img src='..\public/img/edit.png' width='23'/></center></a>", '<center><p onClick="if (! confirm(\'Tem certeza que deseja excluir a conta a pagar abaixo? \n\nNome: '.$linha->nome.'\nValor: '.$linha->valor.'\nData do pagamento: '.$this->util->data_mysql_para_user($linha->data).'\')) { return false; }">' . anchor('contasAPagar/delete/'.$linha->id, '<img src="..\public/img/delete.png" width="23"/>') . '</p></center>');
+    $this->table->add_row('<center>'.$data, $linha->nome, '<p>'."R$ ".$this->util->pontoParaVirgula($linha->valor),$linha->descricao, anchor("contasAPagar/visualiza/$linha->id", '<center><img src="..\public/img/search.png" width="23"/></center>'),"<a href=\"javascript:abrirPopUp('" . base_url('contasAPagar/update/' . $linha->id) . "','500','450');\"> <center><img src='..\public/img/edit.png' width='23'/></center></a>", '<center><p onClick="if (! confirm(\'Tem certeza que deseja excluir a conta a pagar abaixo? \n\nNome: '.$linha->nome.'\nValor: '.$linha->valor.'\nData do pagamento: '.$this->util->data_mysql_para_user($linha->data).'\')) { return false; }">' . anchor('contasAPagar/delete/'.$linha->id, '<img src="..\public/img/delete.png" width="23"/>') . '</p></center>');
 }
 
 $tmpl = array(
