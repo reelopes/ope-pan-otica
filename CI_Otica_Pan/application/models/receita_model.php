@@ -78,7 +78,12 @@ class Receita_model extends CI_Model {
     public function cadastraReceita($dados = null) {
         if ($dados != null) {
             $this->db->trans_start();
-
+            
+            if (element('id_cliente', $dados) == null) {
+                $this->session->set_flashdata('msg', 'Escolha um cliente para cadastrar a receita'); //Adiciona na sessão temporaria o status do cadastro           
+                redirect(current_url()."?idCliente=".element('id_cliente', $dados)."&nomeCliente=".element('nomeCliente', $dados)."&cpfCliente=".element('cpfCliente', $dados)."&emailCliente=".element('emailCliente', $dados)."&medico=".element('medico', $dados)."&crm=".element('crm', $dados)."&data=".element('data', $dados));
+            }
+            
             if (element('longe_od_esferico', $dados) != null ||
                     element('longe_od_cilindrico', $dados) != null ||
                     element('longe_od_eixo', $dados) != null ||
@@ -210,11 +215,13 @@ class Receita_model extends CI_Model {
                     redirect('receita/adicionaReceita');
                 } else {
                     $this->session->set_flashdata('msg', 'Erro ao salvar os dados'); //Adiciona na sessão temporaria o status do cadastro
-                    redirect(current_url());
+                    redirect(current_url()."?idCliente=".element('id_cliente', $dados)."&nomeCliente=".element('nomeCliente', $dados)."&cpfCliente=".element('cpfCliente', $dados)."&emailCliente=".element('emailCliente', $dados)."&medico=".element('medico', $dados)."&crm=".element('crm', $dados)."&data=".element('data', $dados));
+//                    redirect($this->session->userdata('paginaAnterior'));
                 }
             } else {
                 $this->session->set_flashdata('msg', 'Erro ao salvar os dados, todos os campos estão vazios'); //Adiciona na sessão temporaria o status do cadastro           
-                redirect(current_url());
+                redirect(current_url()."?idCliente=".element('id_cliente', $dados)."&nomeCliente=".element('nomeCliente', $dados)."&cpfCliente=".element('cpfCliente', $dados)."&emailCliente=".element('emailCliente', $dados)."&medico=".element('medico', $dados)."&crm=".element('crm', $dados)."&data=".element('data', $dados));
+//                redirect($this->session->userdata('paginaAnterior'));
             }
         }
     }

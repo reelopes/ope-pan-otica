@@ -5,11 +5,15 @@ echo"<h2>$titulo</h2>";//TITULO
 
 echo form_open('receita/adicionaReceita');
 
+//$dados = $dados;
 $id_cliente = $_GET['idCliente'];
 $dependentes = $this->dependente_model->listarDependentes($id_cliente);
 $nome = $_GET['nomeCliente'];
 $cpf = $_GET['cpfCliente'];
 $email = $_GET['emailCliente'];
+$medico = $_GET['medico'];
+$crm = $_GET['crm'];
+$data = $_GET['data'];
 
 echo"<fieldset>";
 echo"<legend>Dados do Cliente:</legend>";
@@ -17,7 +21,7 @@ echo"<table>";
 echo"<tr><td>";
 echo form_label('Nome do Cliente');
 echo"</td><td>"; 
-echo form_input(array('name'=>'cliente'),$nome,'style="width:350px; height:25px;" readonly required title="Campo nome é obrigatório"');
+echo form_input(array('name'=>'cliente'),$nome,'style="width:350px; height:25px;" required title="Campo nome é obrigatório" readonly')."<span title='Campo obrigatório'> * </span>";
 echo"</td><td>";
 echo form_label('Para: ');
 echo"</td><td>";
@@ -37,7 +41,7 @@ echo form_input(array('name'=>'email'),$email,'style="width:300px;" readonly');
 echo"<tr><td>";
 echo form_label('CPF');
 echo"</td><td>";
-echo form_input(array('name'=>'cpf'),$cpf,'style="width:125px; height:25px;" readonly required title="Campo CPF é obrigatório"');
+echo form_input(array('name'=>'cpf'),$cpf,'style="width:125px; height:25px;" readonly required title="Campo CPF é obrigatório"')."<span title='Campo obrigatório'>*</span>";
 echo"</td></tr>";
 echo"</table>";
 echo"<br>";
@@ -49,12 +53,12 @@ echo"<table>";
 echo"<tr><td>";
 echo form_label('Nome do Médico');
 echo"</td><td>"; 
-echo form_input(array('name'=>'medico'),'','autocomplete ="off" placeholder="nome do médico" style="width:400px;" required title="Campo Nome do Médico é obrigatório"');
+echo form_input(array('name'=>'medico'), $medico,'autocomplete ="off" placeholder="nome do médico" style="width:400px;" required title="Campo Nome do Médico é obrigatório"')."<span title='Campo obrigatório'>*</span>";
 echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('CRM');
 echo"</td><td>";
-echo form_input(array('name'=>'crm'),'','autocomplete ="off" placeholder="crm do médico" style="width:150px;" required title="Campo CRM é obrigatório"');
+echo form_input(array('name'=>'crm'), $crm,'autocomplete ="off" placeholder="crm do médico" style="width:150px;" required title="Campo CRM é obrigatório"')."<span title='Campo obrigatório'>*</span>";
 echo"<tr><td>";
 echo"</table>";
 echo"<br>";
@@ -114,7 +118,7 @@ echo"</tr>";
 echo"<tr><td>";
 echo form_label('Data da consulta');
 echo"</td><td colspan='3'>";
-echo form_type(array('name'=>'data'),  set_value('data'),'maxlength="10" autocomplete ="off" min="1900-01-01" max="'.date('Y-m-d').'" required title="Campo Data é obrigatório"','date');
+echo form_type(array('name'=>'data'), $data,'maxlength="10" autocomplete ="off" min="1900-01-01" max="'.date('Y-m-d').'" required title="Campo Data é obrigatório"','date')."<span title='Campo obrigatório'>*</span>";
 echo"</td>";
 
 
@@ -136,6 +140,9 @@ echo"</table>";
 echo"</fieldset>";
 
 echo form_hidden('id_cliente',  $id_cliente,'');
+echo form_hidden('nomeCliente',  $nome,'');
+echo form_hidden('cpfCliente',  $cpf,'');
+echo form_hidden('emailCliente',  $email,'');
 
 echo form_close();
 
@@ -143,8 +150,13 @@ echo form_close();
 
 echo "</div>";
 
+//Exime mensagem de erro
+if ($this->session->flashdata('msg')) {
+    $msg = $this->session->flashdata('msg');
+    echo "<body onLoad=\" alert('$msg');\">";
+}
 
-//Exime mensagem de dados da consulta 
+//Exime mensagem de dados da receita
 if ($this->session->flashdata('msgOk')) {
     $msg = $this->session->flashdata('msgOk');
     echo "<body onLoad=\" alert('$msg');\">";

@@ -17,7 +17,7 @@ echo"<table>";
 echo"<tr><td>";
 echo form_label('Nome');
 echo"</td><td>";
-echo form_input(array('name'=>'nome'),  set_value('nome'),'maxlength="50" placeholder="Nome da grife" autocomplete ="off" style="width:150px;"');
+echo form_input(array('name'=>'nome'),  set_value('nome'),'maxlength="50" placeholder="Nome da grife" autocomplete ="off" style="width:150px;"')."<span title='Campo obrigatório'>* &nbsp; </span>";
 echo"</td></tr>";
 echo"<tr><td>";
 echo"</fieldset>";

@@ -35,6 +35,7 @@ class Receita extends CI_Controller {
         $this->load->helper('url');
         $this->load->library('table');
         $this->load->library('uri');
+        $this->load->library('form_validation');
         $this->load->helper('form');
         $this->load->model('receita_model');
         $this->load->model('cliente_model');
@@ -67,14 +68,12 @@ class Receita extends CI_Controller {
     }
     
     public function adicionaReceita() {
-
-        $dados = Array(
-        'pagina' => 'adiciona_receita',
-        'titulo' => 'Cadastro de Receita'
-        );
+        $this->form_validation->set_rules('medico', 'Nome do medico', 'trim|required');
+        $this->form_validation->set_rules('crm', 'CRM', 'trim|required');
+        $this->form_validation->set_rules('data', 'Data', 'trim|required');
         
-        if ($this->input->post('id_cliente') != null) {
-            $dados = elements(array('medico','crm','data', 'id_cliente',
+        if ($this->form_validation->run()) {
+            $dados = elements(array('medico','crm','data', 'id_cliente', 'nomeCliente', 'cpfCliente', 'emailCliente',
                     'dependente','longe_od_esferico', 'longe_od_cilindrico', 'longe_od_eixo', 'longe_od_dnp','longe_oe_esferico', 
                     'longe_oe_cilindrico', 'longe_oe_eixo', 'longe_oe_dnp','perto_od_esferico', 'perto_od_cilindrico', 
                     'perto_od_eixo', 'perto_od_dnp','perto_oe_esferico', 'perto_oe_cilindrico', 'perto_oe_eixo', 
@@ -82,9 +81,14 @@ class Receita extends CI_Controller {
                     ), $this->input->post());
             
             $this->receita_model->cadastraReceita($dados);
+        } else {
+            $dados = Array(
+            'pagina' => 'adiciona_receita',
+            'titulo' => 'Cadastro de Receita'
+            );
+            
+            $this->load->view('Principal', $dados);
         }
-        
-        $this->load->view('Principal', $dados);
     }
     
     public function listarClientes() {

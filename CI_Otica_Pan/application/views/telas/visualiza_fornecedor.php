@@ -20,7 +20,7 @@ echo"<table>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Nome');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'nome'),  set_value('nome',$query['pessoa']->nome),'autocomplete ="off" placeholder="Nome Completo do Fornecedor" autofocus style="width:300px;" readonly');
+echo form_input(array('name'=>'nome'),  set_value('nome',$query['pessoa']->nome),'autocomplete ="off" placeholder="Nome Completo do Fornecedor" style="width:300px;" readonly');
 echo"</tr></td>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Email');

@@ -25,9 +25,6 @@ if($carrega == 1) {
 
 echo form_open('produto/adiciona');
 
-//echo  '<p onClick="if (! confirm(\'Preço de custo é maior que Preço de venda.\n Deseja Cadastrar mesmo assim?\')) { return false; }">';
-
-
 // Campos da tabela Produto
 echo"<fieldset>";
 echo"<legend>Produto</legend>";
@@ -58,7 +55,7 @@ echo form_input(array('name'=>'cod_barra'),  set_value('cod_barra'), 'maxlength=
 echo"<tr><td>";
 echo form_label('Nome');
 echo"</td><td>";
-echo form_input(array('name'=>'nome'),  set_value('nome'), 'maxlength="50" placeholder="Nome do produto" autocomplete ="off" style="width:250px;" required title="Campo nome é obrigatório"');
+echo form_input(array('name'=>'nome'),  set_value('nome'), 'maxlength="50" placeholder="Nome do produto" autocomplete ="off" style="width:250px;" required title="Campo nome é obrigatório"')."<span title='Campo obrigatório'>* &nbsp; </span>";
 echo"</td>";
 echo"<td>";
 echo form_label('Descrição');
@@ -68,12 +65,12 @@ echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('Preço de custo');
 echo"</td><td>"; 
-echo form_input(array('name'=>'preco_custo'),  set_value('preco_custo'), 'id="precoCusto" maxlength="3" placeholder="0.000,00" autocomplete ="off" onkeypress="return(FormataReais(this,\'.\',\',\',event));" style="width:80px;" onpaste="return false;" required title="Campo preço é obrigatório"');
+echo form_input(array('name'=>'preco_custo'),  set_value('preco_custo'), 'id="precoCusto" maxlength="3" placeholder="0.000,00" autocomplete ="off" onkeypress="return(FormataReais(this,\'.\',\',\',event));" style="width:80px;" onpaste="return false;" required title="Campo preço é obrigatório"')."<span title='Campo obrigatório'>*</span>";
 echo"</td>";
 echo"<td>";
 echo form_label('Preço de venda');
 echo"</td><td>"; 
-echo form_input(array('name'=>'preco_venda'),  set_value('preco_venda'), 'id="precoVenda" maxlength="3" placeholder="0.000,00" autocomplete ="off" onkeypress="return(FormataReais(this,\'.\',\',\',event));" style="width:80px;" onpaste="return false;" required title="Campo preço é obrigatório"');
+echo form_input(array('name'=>'preco_venda'),  set_value('preco_venda'), 'id="precoVenda" maxlength="3" placeholder="0.000,00" autocomplete ="off" onkeypress="return(FormataReais(this,\'.\',\',\',event));" style="width:80px;" onpaste="return false;" required title="Campo preço é obrigatório"')."<span title='Campo obrigatório'>*</span>";
 echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('Quantidade');
@@ -149,15 +146,13 @@ echo"</table>";
 echo "</div>";
 echo"</fieldset>";
 
-echo validation_errors('<p>','</p>');
-
-echo"<div id='div_dog'>";
-    echo "<img src='".base_url("public/img/true.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"abrirPopUp('".base_url("public/img/nika.jpg")."','628','628');\">";
-    echo "<img src='".base_url("public/img/true.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"abrirPopUp('".base_url("public/img/lisa.jpg")."','628','518');\">";
-    echo "<img src='".base_url("public/img/true.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"abrirPopUp('".base_url("public/img/mana.jpg")."','628','518');\">";
-    echo "<img src='".base_url("public/img/true.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"abrirPopUp('".base_url("public/img/manu.jpg")."','523','518');\">";
-    echo "<img src='".base_url("public/img/false.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"ocultaDiv();\">";
-echo"</div>";
+//echo"<div id='div_dog'>";
+//    echo "<img src='".base_url("public/img/true.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"abrirPopUp('".base_url("public/img/nika.jpg")."','628','628');\">";
+//    echo "<img src='".base_url("public/img/true.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"abrirPopUp('".base_url("public/img/lisa.jpg")."','628','518');\">";
+//    echo "<img src='".base_url("public/img/true.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"abrirPopUp('".base_url("public/img/mana.jpg")."','628','518');\">";
+//    echo "<img src='".base_url("public/img/true.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"abrirPopUp('".base_url("public/img/manu.jpg")."','523','518');\">";
+//    echo "<img src='".base_url("public/img/false.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"ocultaDiv();\">";
+//echo"</div>";
 
 echo form_close();
 ?>
