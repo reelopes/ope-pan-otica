@@ -1,3 +1,20 @@
+     <script type="text/javascript">
+    $(document).ready(function() {
+        oTable = $('#listarReceitas').dataTable({
+            "bPaginate": false,
+            "bJQueryUI": true,
+            "sPaginationType": "full_numbers",
+            "bSort": false,
+            "bInfo": false,
+            "bProcessing" : true,
+            "bLengthChange": false,
+            "bFilter": true,
+
+        });
+    });
+</script>
+
+
 <?
 $receitas = $receitas;
 
@@ -9,7 +26,7 @@ if ($this->session->flashdata('msg')) {
 ?>
 
 <div class='tabela'>
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="lista_dependentes_table1">
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="listarReceitas">
         
         <thead>
             <tr>
@@ -38,7 +55,7 @@ foreach ($receitas as $linha) {
         <td valign='middle'>".$nome."</td>
         <td valign='middle'>".$this->util->data_mysql_para_user($linha->data)."</td>
         <td valign='middle'>$linha->medico</td>
-        <td valign='middle'><a onClick=\"window.close();window.open('".base_url('receita/exibeReceita/'.$linha->id)."','','width=900,height=800');\"/><center><img src=".base_url('public/img/pesquisar.png')." width='23' title='Visualizar'></center></a></td>
+        <td valign='middle'><a onClick=\"window.close();window.open('".base_url('receita/exibeReceita/'.$linha->id)."','','width=900,height=800');\"/><center><img src=".base_url('public/img/pesquisar.png')." width='23' title='Visualizar' style='cursor: hand;'></center></a></td>
         </tr>";
 }
 

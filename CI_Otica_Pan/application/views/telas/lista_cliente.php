@@ -110,7 +110,7 @@ if ($dependentes == NULL) {//Verifica se existe dependentes
         
             <tr id="icone_desbotado">
                 <td align="center">
-    <? echo"<a href=\"javascript:abrirPopUp('" . base_url('dependente/listarDependentes/' . $id_cliente . '/visualizar') . "','500','350');\" title='Listar Dependentes'><img src='" . base_url('public/img/dependente.png') . "' title='Listar Dependentes'>"; ?>
+    <? echo"<a href=\"javascript:abrirPopUp('" . base_url('dependente/listarDependentes/' . $id_cliente . '/visualizar') . "','600','280');\" title='Listar Dependentes'><img src='" . base_url('public/img/dependente.png') . "' title='Listar Dependentes'>"; ?>
                     <p>Listar Dependentes</p>
                     </a>
                 </td>
@@ -141,7 +141,7 @@ if ($dependentes == NULL) {//Verifica se existe dependentes
 
             <tr id="icone_desbotado">
                 <td align="center">
-    <? echo"<a href=\"javascript:abrirPopUp('" . base_url('receita/listaReceita/' . $id_cliente) . "','700','350');\" title='Listar Receitas'><img src='" . base_url('public/img/check_list.png') . "' title='Listar Receitas' width='60'>"; ?>
+    <? echo"<a href=\"javascript:abrirPopUp('" . base_url('receita/listaReceita/' . $id_cliente) . "','600','280');\" title='Listar Receitas'><img src='" . base_url('public/img/check_list.png') . "' title='Listar Receitas' width='60'>"; ?>
                     <p>Listar Receitas</p>
                     </a>
                 </td>
@@ -171,7 +171,7 @@ if ($dependentes == NULL) {//Verifica se existe dependentes
 
             <tr id="icone_desbotado">
                 <td align="center">
-    <? echo"<a href=\"javascript:abrirPopUp('" . base_url('venda/listaVendasCliente/' . $id_cliente) . "','700','350');\" title='Listar Compras'><img src='" . base_url('public/img/compras.png') . "' title='Listar Compras' width='75'>"; ?>
+    <? echo"<a href=\"javascript:abrirPopUp('" . base_url('venda/listaVendasCliente/' . $id_cliente) . "','600','280');\" title='Listar Compras'><img src='" . base_url('public/img/compras.png') . "' title='Listar Compras' width='75'>"; ?>
                     <p>Listar Compras</p>
                     </a>
                 </td>

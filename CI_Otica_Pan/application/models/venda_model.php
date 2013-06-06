@@ -282,7 +282,7 @@ class Venda_model extends CI_Model {
      public function vendasCliente($id_cliente = NULL) {
         if ($id_cliente != NULL) {
             //Captura os dados para listar a venda
-            $this->db->select('venda.data as data_venda, venda.horario as horario_venda, 
+            $this->db->select('venda.id as id_venda,venda.data as data_venda, venda.horario as horario_venda, 
                 orcamento.id_forma_pgto as id_forma_pagamento, orcamento.vendedor,orcamento.desconto,
                 forma_pgto.nome as forma_pagamento,sum(DISTINCT(itens.preco_unitario*itens.quantidade)) as preco_total_itens,
                 sum(DISTINCT(lente.preco_venda)) as preco_total_lentes ,sum(DISTINCT(servico.preco_venda)) as preco_total_servicos');

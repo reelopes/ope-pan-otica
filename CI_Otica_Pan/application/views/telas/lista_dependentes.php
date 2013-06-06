@@ -1,5 +1,21 @@
+     <script type="text/javascript">
+    $(document).ready(function() {
+        oTable = $('#listarDependentes').dataTable({
+            "bPaginate": false,
+            "bJQueryUI": true,
+            "sPaginationType": "full_numbers",
+            "bSort": false,
+            "bInfo": false,
+            "bProcessing" : true,
+            "bLengthChange": false,
+            "bFilter": true,
+
+        });
+    });
+</script>
+
+
 <?
-echo"<h2>$titulo</h2>";
 $id_cliente = $this->uri->segment(3);
 if($this->uri->segment(4)=='visualizar')$manter = TRUE;
 $dependentes = $this->dependente_model->listarDependentes($id_cliente);
@@ -12,7 +28,7 @@ if ($this->session->flashdata('msg')) {
 ?>
 
 <div class='tabela'>
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="lista_dependentes_table1">
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="listarDependentes">
         
         <thead>
             <tr>

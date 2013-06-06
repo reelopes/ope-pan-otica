@@ -326,7 +326,7 @@ class Venda extends CI_Controller {
             $total_cheque= $this->util->virgulaParaPonto($this->session->userdata('valorCheques'));
             
         if($this->session->userdata('formaPgto')== '3'){
-              if($total-$total_cheque < -0.02 || $total-$total_cheque > 0.02){
+              if($total-$total_cheque < -0.01 || $total-$total_cheque > 0.01){
                 
                 $this->session->set_flashdata('msg','O valor total dos cheques não está igual ao valor total da venda, é necessário corrigir esse problema para para finalizar a venda!');
                 redirect('venda/cadastrarVenda');
@@ -377,6 +377,19 @@ class Venda extends CI_Controller {
         );
         $this->load->view('Principal_popup', $dados);
     }
+    
+     public function listaVendasCliente(){
+
+        $id_cliente = $this->uri->segment(3);
+        
+        $dados = Array(
+        'pagina' => 'listar_venda_cliente',
+        'titulo' => 'Listar Vendas',
+        'vendas' => $this->venda_model->vendasCliente($id_cliente)
+        );
+        $this->load->view('Principal_popup', $dados);
+    }
+    
     
     
     

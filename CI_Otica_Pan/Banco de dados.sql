@@ -88,31 +88,18 @@ CREATE TABLE `armacao` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*
-Table structure for catalogo_de_lentes
-*/
-
-drop table if exists `catalogo_de_lentes`;
-CREATE TABLE `catalogo_de_lentes` (
-  `descricao` text,
-  `edicao` varchar(50) DEFAULT NULL,
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `marca` varchar(50) DEFAULT NULL,
-  `id_fornecedor` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_fornecedor` (`id_fornecedor`),
-  CONSTRAINT `catalogo_de_lentes_ibfk_1` FOREIGN KEY (`id_fornecedor`) REFERENCES `fornecedor` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*
 Table structure for cheque
 */
 
 drop table if exists `cheque`;
 CREATE TABLE `cheque` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `data` date NOT NULL,
   `valor` double NOT NULL,
   `id_venda` int(11) NOT NULL,
   `descricao` text,
+  `status` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`),
   KEY `id_venda` (`id_venda`),
   CONSTRAINT `cheque_ibfk_1` FOREIGN KEY (`id_venda`) REFERENCES `venda` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -354,9 +341,9 @@ Table structure for consulta
 
 drop table if exists `consulta`;
 CREATE TABLE `consulta` (
-  `id_agendamento` int(11) DEFAULT NULL,
+  `id_agendamento` int(11) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_medico` int(11) DEFAULT NULL,
+  `id_medico` int(11) NOT NULL,
   `id_receita` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_agendamento` (`id_agendamento`),
@@ -377,7 +364,7 @@ CREATE TABLE `dependente` (
   `nome` varchar(100) DEFAULT NULL,
   `responsavel` varchar(20) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_cliente` int(11) DEFAULT NULL,
+  `id_cliente` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`),
   KEY `dependente_ibfk_1` (`id_cliente`),
@@ -823,24 +810,6 @@ CREATE TABLE `orcamento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*
-Table structure for ordem_servico
-*/
-
-drop table if exists `ordem_servico`;
-CREATE TABLE `ordem_servico` (
-  `data` date NOT NULL,
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `prazo_entrega` date DEFAULT NULL,
-  `id_receita` int(11) NOT NULL,
-  `id_venda` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_receita` (`id_receita`),
-  KEY `id_venda` (`id_venda`),
-  CONSTRAINT `ordem_servico_ibfk_1` FOREIGN KEY (`id_receita`) REFERENCES `receita` (`id`),
-  CONSTRAINT `ordem_servico_ibfk_2` FOREIGN KEY (`id_venda`) REFERENCES `venda` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*
 Table structure for pessoa
 */
 
@@ -1135,7 +1104,7 @@ Table structure for telefone
 drop table if exists `telefone`;
 CREATE TABLE `telefone` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `num_telefone` varchar(15) NOT NULL,
+  `num_telefone` varchar(15) default NULL,
   `id_tipo_telefone` int(11) NOT NULL,
   `id_pessoa` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -1654,7 +1623,7 @@ CREATE TABLE `contas_pagar` (
     `nome` varchar(50) NOT NULL,
     `descricao` text DEFAULT NULL,
     `valor` double NOT NULL,
-    `data` date DEFAULT NULL,
+    `data` date NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
