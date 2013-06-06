@@ -1,15 +1,21 @@
-<script language="javascript">
-document.onkeydown = applyKey;
-</script>
+<!--<script language="javascript"> document.onkeydown = applyKey;-->
+<!--</script>-->
 
 <?php
+//echo"<div id='div_dog'>";
+//    echo "<img src='".base_url("public/img/true.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"abrirPopUp('".base_url("public/img/nika.jpg")."','628','628');\">";
+//    echo "<img src='".base_url("public/img/true.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"abrirPopUp('".base_url("public/img/lisa.jpg")."','628','518');\">";
+//    echo "<img src='".base_url("public/img/true.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"abrirPopUp('".base_url("public/img/mana.jpg")."','628','518');\">";
+//    echo "<img src='".base_url("public/img/true.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"abrirPopUp('".base_url("public/img/manu.jpg")."','523','518');\">";
+//    echo "<img src='".base_url("public/img/false.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"ocultaDiv();\">";
+//echo"</div>";
 
 echo"<div class=formulario>";
 echo"<h2>$titulo</h2>";
 
 if($this->session->flashdata('cadastrook')){
     $msg = $this->session->flashdata('cadastrook');
-    echo "<body onload=\"ocultaDiv();ocultaArmacao(); alert('$msg');\">";
+    echo "<body onload=\"ocultaArmacao(); alert('$msg');\">";
 }
 
 // Boa pratica, pega variavel da Controller
@@ -18,9 +24,9 @@ $todas_grife = $todas_grife;
 $carrega = $carrega;
 
 if($carrega == 1) {
-    echo '<body onload="mostraArmacao();ocultaDiv();" />';
+    echo '<body onload="mostraArmacao();" />';
 } else {
-    echo '<body onload="ocultaArmacao();ocultaDiv();" />';
+    echo '<body onload="ocultaArmacao();" />';
 }
 
 echo form_open('produto/adiciona');
@@ -145,14 +151,6 @@ echo"</td></tr>";
 echo"</table>";
 echo "</div>";
 echo"</fieldset>";
-
-//echo"<div id='div_dog'>";
-//    echo "<img src='".base_url("public/img/true.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"abrirPopUp('".base_url("public/img/nika.jpg")."','628','628');\">";
-//    echo "<img src='".base_url("public/img/true.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"abrirPopUp('".base_url("public/img/lisa.jpg")."','628','518');\">";
-//    echo "<img src='".base_url("public/img/true.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"abrirPopUp('".base_url("public/img/mana.jpg")."','628','518');\">";
-//    echo "<img src='".base_url("public/img/true.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"abrirPopUp('".base_url("public/img/manu.jpg")."','523','518');\">";
-//    echo "<img src='".base_url("public/img/false.png")."' width='20px' title='Pesquisar Cliente' style='vertical-align: middle; cursor: hand; position:relative; top:-2px; left:8px; right:0px;' OnClick=\"ocultaDiv();\">";
-//echo"</div>";
 
 echo form_close();
 ?>

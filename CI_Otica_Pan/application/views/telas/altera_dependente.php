@@ -32,7 +32,7 @@ echo"<table>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Nome do Dependente');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'nome'), set_value('nome',$query->nome),'maxlength="100" autocomplete ="off"  placeholder="Nome do Dependente" autofocus style="width:150px;" required title="Campo nome é obrigatório" onkeypress="return SomenteLetras(event);"');
+echo form_input(array('name'=>'nome'), set_value('nome',$query->nome),'maxlength="100" autocomplete ="off"  placeholder="Nome do Dependente" autofocus style="width:150px;" required title="Campo nome é obrigatório" onkeypress="return SomenteLetras(event);"')."<span title='Campo obrigatório'>* &nbsp; </span>";
 echo"</td></tr>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
 echo form_label('Data de Nascimento');
