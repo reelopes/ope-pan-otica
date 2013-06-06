@@ -32,8 +32,10 @@ echo"<hr>"
             <li><a href="<? echo base_url('fornecedor/lista'); ?>">Fornecedor</a></li>
             <li><a href="<? echo base_url('produto/lista'); ?>">Produto</a></li>
             <li><a href="<? echo base_url('grife/lista'); ?>">Grife</a></li>
-            <li><a href="<? echo base_url('usuario/lista'); ?>">Usuário</a></li>
             <li><a href="<? echo base_url('contasAPagar/lista'); ?>">Contas a Pagar</a></li>
+            <li><a href="<? echo base_url('venda/listaOrcamentos'); ?>">Orçamento</a></li>
+            <li><a href="<? echo base_url('usuario/lista'); ?>">Usuário</a></li>
+            
           </ul>
         </li>
         <li><a href="<? echo base_url('agendamento'); ?>">Agendamento</a></li>

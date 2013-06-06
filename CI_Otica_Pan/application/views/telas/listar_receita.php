@@ -30,8 +30,8 @@ if ($this->session->flashdata('msg')) {
         
         <thead>
             <tr>
-            <th>Nome</th>
             <th>Data</th>
+            <th>Nome</th>
             <th>Médico</th>
             <th>&nbsp</th>
             </tr>
@@ -52,8 +52,8 @@ foreach ($receitas as $linha) {
     }
     
     echo "<tr>
-        <td valign='middle'>".$nome."</td>
         <td valign='middle'>".$this->util->data_mysql_para_user($linha->data)."</td>
+        <td valign='middle'>".$nome."</td>
         <td valign='middle'>$linha->medico</td>
         <td valign='middle'><a onClick=\"window.close();window.open('".base_url('receita/exibeReceita/'.$linha->id)."','','width=900,height=800');\"/><center><img src=".base_url('public/img/pesquisar.png')." width='23' title='Visualizar' style='cursor: hand;'></center></a></td>
         </tr>";

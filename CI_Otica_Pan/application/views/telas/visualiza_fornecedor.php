@@ -47,7 +47,7 @@ echo"</td></tr>";//Essa linha pode remover
 echo"</table>"; //Essa linha pode remover
 echo "</fieldset>";
 //echo anchor("fornecedor/lista/", '<img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" title="Voltar"/>');
-echo '<img src="'.base_url('public/img/voltar.png').'" onClick="history.go(-1)" width="25" id="icone_desbotado" title="Voltar"/>';
+echo'<a href="'.$this->session->userdata('paginaAnterior').'"><img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" title="Voltar" /></a>';
 echo "</div>";
 
 echo form_hidden('id_pessoa',$id_pessoa);//Campo oculto que armazena id_pessoa

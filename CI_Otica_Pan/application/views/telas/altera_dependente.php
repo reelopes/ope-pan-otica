@@ -45,7 +45,7 @@ echo"</td><td>"; //Essa linha pode remover
 echo form_input(array('name'=>'responsavel'), set_value('responsavel',$query->responsavel),'maxlength="100" autocomplete ="off" autofocus style="width:150px;" placeholder="Grau de Parentesco"');
 echo"</td></tr>";//Essa linha pode remover
 echo"<tr><td valign='middle'>";//Essa linha pode remover
-echo'<img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" onClick="history.go(-1)" title="Voltar" />';
+echo'<a href="'.$this->session->userdata('paginaAnterior').'"><img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" title="Voltar" /></a>';
 echo"</td><td>";//Essa linha pode remover
 
 echo form_submit(array('name'=>'Alterar'),'Alterar');

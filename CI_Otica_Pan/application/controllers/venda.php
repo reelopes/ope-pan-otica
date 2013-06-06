@@ -390,7 +390,13 @@ class Venda extends CI_Controller {
         $this->load->view('Principal_popup', $dados);
     }
     
-    
+        public function listaOrcamentos() {
+        $dados = array('pagina' => 
+            'lista_orcamentos_pendentes', 
+            'titulo' => 'Orçamentos Pendentes', 
+            'orcamentos' => $this->venda_model->listaOrcamentos());
+        $this->load->view('Principal', $dados);
+    }
     
     
 }

@@ -53,7 +53,7 @@ foreach ($vendas as $linha) {
         <td valign='middle'>".$this->util->data_mysql_para_user($linha->data_venda)."</td>
         <td valign='middle'>".$linha->horario_venda."</td>
         <td valign='middle'>$linha->forma_pagamento</td>
-        <td valign='middle'>".  number_format((($linha->preco_total_itens+$linha->preco_total_lentes+$linha->preco_total_servicos)-$linha->desconto),'2',',','')."</td>
+        <td valign='middle'>R$ ".  number_format((($linha->preco_total_itens+$linha->preco_total_lentes+$linha->preco_total_servicos)-$linha->desconto),'2',',','')."</td>
         <td valign='middle'>".$linha->vendedor."</td>
         <td valign='middle'><a onClick=\"window.open('".base_url('venda/exibeVenda/'.$linha->id_venda)."','','width=900,height=800');\"/><center><img src=".base_url('public/img/pesquisar.png')." width='23' title='Visualizar Recibo' style='cursor: hand;'></center></a></td>
         </tr>";

@@ -68,7 +68,7 @@ echo"<td style='border-left: 1px solid #666666;'>".$itens->quantidade."</td>";
 echo"<td style='border-left: 1px solid #666666;'>R$ ".number_format($itens->preco_unitario,'2',',','')."</td>";
 echo"<td style='border-left: 1px solid #666666;border-right: 1px solid #666666;'>R$ ".$subTotal_aux = number_format($itens->preco_unitario*$itens->quantidade,'2',',','')."</td>";
 echo"</tr>";
-$subTotal = $subTotal_aux + $subTotal;
+$subTotal = $this->util->virgulaParaPonto($subTotal_aux) + $subTotal;
 
 }}
 if($dados_orcamento['lentes']!=null){
@@ -81,7 +81,7 @@ echo"<td style='border-left: 1px solid #666666;'>1</td>";
 echo"<td style='border-left: 1px solid #666666;'>R$ ".number_format($lente->preco_venda,'2',',','')."</td>";
 echo"<td style='border-left: 1px solid #666666;border-right: 1px solid #666666;'>R$ ".$subTotal_aux = number_format($lente->preco_venda,'2',',','')."</td>";
 echo"</tr>";
-$subTotal = $subTotal_aux + $subTotal;
+$subTotal = $this->util->virgulaParaPonto($subTotal_aux) + $subTotal;
 
 }}
 if($dados_orcamento['servicos']!=null){
@@ -94,7 +94,7 @@ echo"<td style='border-left: 1px solid #666666;'>1</td>";
 echo"<td style='border-left: 1px solid #666666;'>R$ ".number_format($servico->preco_venda,'2',',','')."</td>";
 echo"<td style='border-left: 1px solid #666666;border-right: 1px solid #666666;'>R$ ".$subTotal_aux = number_format($servico->preco_venda,'2',',','')."</td>";
 echo"</tr>";
-$subTotal = $subTotal_aux + $subTotal;
+$subTotal = $this->util->virgulaParaPonto($subTotal_aux) + $subTotal;
 
 }}
 echo"<tr style='border-top: 1px solid #666666;'>";

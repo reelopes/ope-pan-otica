@@ -21,6 +21,6 @@ $valor = $this->util->pontoParaVirgula($query->valor);
 </fildset>
 
 <?
-echo '<img src="'.base_url('public/img/voltar.png').'" onClick="history.go(-1)" width="25" id="icone_desbotado" title="Voltar"/>';
+echo'<a href="'.$this->session->userdata('paginaAnterior').'"><img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" title="Voltar" /></a>';
 echo"</div>";
 ?>

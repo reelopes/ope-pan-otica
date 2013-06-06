@@ -118,7 +118,7 @@ echo'<div id="armacao">';
         echo"</table>";
 echo"</div>";
 }
-echo '<img src="'.base_url('public/img/voltar.png').'" onClick="history.go(-1)" width="25" id="icone_desbotado" title="Voltar"/>';
+echo'<a href="'.$this->session->userdata('paginaAnterior').'"><img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" title="Voltar" /></a>';
 echo"</fieldset>";
 
 //echo anchor(base_url('produto/lista'), '<img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" title="Voltar"/>');

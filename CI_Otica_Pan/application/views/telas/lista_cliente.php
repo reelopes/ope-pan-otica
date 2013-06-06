@@ -86,7 +86,7 @@ echo"</table>"; //Essa linha pode remover
 echo"</fieldset>";
 
 //echo anchor("cliente/listarClientes", '<img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" title="Voltar"/>');
-echo'<a href="' . $this->session->userdata('paginaAnterior') . '"><img src="' . base_url('public/img/voltar.png') . '" width="25" id="icone_desbotado" title="Voltar" /></a>';
+echo'<a href="'.$this->session->userdata('paginaAnterior').'"><img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" title="Voltar" /></a>';
 echo"</div>";
 echo "<div style='float:left; margin-left:10px; padding: 90px 0px 0px;'}>";
 
