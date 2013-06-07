@@ -398,6 +398,102 @@ class Venda extends CI_Controller {
         $this->load->view('Principal', $dados);
     }
     
+        public function deletarOrcamento() {
+
+        if ($this->uri->segment(3) != NULL) {
+
+            $id_orcamento = $this->uri->segment(3);
+       
+            $this->venda_model->deleteOrcamento($id_orcamento);
+            redirect($this->session->userdata('paginaAnterior'));  
+        }
+    }
+    
+     public function finalizarOrcamento() {
+         
+         //Limpa as variaveis que estão no cache
+         
+        $this->session->unset_userdata('nome_cliente');
+        $this->session->unset_userdata('cpf_cliente');
+        $this->session->unset_userdata('id_cliente');
+        $this->session->unset_userdata('itens');
+        $this->session->unset_userdata('produtos');
+        $this->session->unset_userdata('lente');
+        $this->session->unset_userdata('servico');
+
+
+        $this->session->unset_userdata('autoFocusQuantidade');
+        $this->session->unset_userdata('codigo_barras_temp');
+        $this->session->unset_userdata('codigo_produto_temp');
+        $this->session->unset_userdata('quantidade_temp');
+        $this->session->unset_userdata('quantidade_max');
+        $this->session->unset_userdata('nome_produto_temp');
+        $this->session->unset_userdata('preco_venda_temp');
+        
+        $this->session->unset_userdata('valor_desconto_venda');
+        $this->session->unset_userdata('id_produto_temp');
+        $this->session->unset_userdata('Cheques');
+        $this->session->unset_userdata('valorCheques');
+        $this->session->unset_userdata('formaPgto');
+        $this->session->unset_userdata('parcelas');
+         
+        //Captura o id do orçamento
+        $id_orcamento = $this->uri->segment(3);
+        
+       $orcamento =  $this->venda_model->retornaOrcamento($id_orcamento);
+       
+       $this->session->set_userdata('nome_cliente',$orcamento['pessoa']->nome);
+       $this->session->set_userdata('cpf_cliente',$orcamento['cliente']->cpf);
+       $this->session->set_userdata('id_cliente',$orcamento['cliente']->id);
+       //Trata os itens para mostrar na tela de vendas
+       $itensVenda = array();
+       foreach ($orcamento['itens'] as $itens){
+           array_push($itensVenda,array(
+               'idProduto'=>$itens->id_produto,
+               'nomeProduto'=>$itens->nome,
+               'quantidadeProduto'=>$itens->quantidade,
+               'precoVenda' => number_format($itens->preco_unitario,'2',',',''),
+               ));
+}
+            $this->session->set_userdata('itens',$itensVenda);
+            
+//trata as lentes para mostrar na tela de vendas
+       $lentesVenda = array();
+       foreach ($orcamento['lentes'] as $lentes){
+           array_push($lentesVenda,array(
+               'referencia'=>$lentes->referencia,
+               'nome_lente'=>$lentes->nome,
+               'quantidade_lente'=>'1',
+               'preco_venda' => number_format($lentes->preco_venda,'2',',',''),
+               ));
+}
+            $this->session->set_userdata('lente',$lentesVenda);
+            
+//trata as lentes para mostrar na tela de vendas
+       $servicosVenda = array();
+       foreach ($orcamento['servicos'] as $servicos){
+           array_push($servicosVenda,array(
+               'nome'=>$servicos->nome,
+               'quantidade_servico'=>'1',
+               'preco' => number_format($servicos->preco_venda,'2',',',''),
+               ));
+}
+            $this->session->set_userdata('servico',$servicosVenda);
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        $this->cadastrarVenda();
+    }
+    
     
 }
 ?>

@@ -284,8 +284,7 @@ class Venda_model extends CI_Model {
             //Captura os dados para listar a venda
             $this->db->select('venda.id as id_venda,venda.data as data_venda, venda.horario as horario_venda, 
                 orcamento.id_forma_pgto as id_forma_pagamento, orcamento.vendedor,orcamento.desconto,
-                forma_pgto.nome as forma_pagamento,sum(DISTINCT(itens.preco_unitario*itens.quantidade)) as preco_total_itens,
-                sum(DISTINCT(lente.preco_venda)) as preco_total_lentes ,sum(DISTINCT(servico.preco_venda)) as preco_total_servicos');
+                forma_pgto.nome as forma_pagamento,(select sum(itens.preco_unitario*itens.quantidade) from itens where id_orcamento = orcamento.id) as preco_total_itens,(select  sum(lente.preco_venda) from lente where id_orcamento = orcamento.id) as preco_total_lentes ,(select sum(servico.preco_venda) from servico where id_orcamento = orcamento.id) as preco_total_servicos');
             $this->db->where('orcamento.id_cliente', $id_cliente);
             $this->db->where('status', 0);
             $this->db->join('venda', 'venda.id_orcamento = orcamento.id');
@@ -301,21 +300,42 @@ class Venda_model extends CI_Model {
     }
 
     public function listaOrcamentos() {
-        
-        $this->db->select('orcamento.id as id_orcamento, orcamento.data as data_orcamento, orcamento.id_forma_pgto as id_forma_pagamento, orcamento.vendedor,orcamento.desconto,
-                forma_pgto.nome as forma_pagamento,sum(DISTINCT(itens.preco_unitario*itens.quantidade)) as preco_total_itens,
-                sum(DISTINCT(lente.preco_venda)) as preco_total_lentes ,sum(DISTINCT(servico.preco_venda)) as preco_total_servicos,pessoa.nome as nome_cliente');
-            $this->db->where('status', 1);
-            $this->db->join('itens', 'itens.id_orcamento = orcamento.id', 'left');
-            $this->db->join('lente', 'lente.id_orcamento = orcamento.id', 'left');
-            $this->db->join('servico', 'servico.id_orcamento = orcamento.id', 'left');
-            $this->db->join('forma_pgto', 'orcamento.id_forma_pgto = forma_pgto.id', 'left');
-            $this->db->join('cliente', 'cliente.id = orcamento.id_cliente', 'left');
-            $this->db->join('pessoa', 'pessoa.id = cliente.id_pessoa', 'left');            
-            $this->db->group_by('orcamento.id');
-            $this->db->from('orcamento');
-            return $this->db->get()->result();
 
-}
+        $this->db->select('pessoa.nome as nome_cliente,orcamento.id as id_orcamento, orcamento.data as data_orcamento, orcamento.id_forma_pgto as id_forma_pagamento, orcamento.vendedor,orcamento.desconto,
+                forma_pgto.nome as forma_pagamento,(select sum(itens.preco_unitario*itens.quantidade) from itens where id_orcamento = orcamento.id) as preco_total_itens,(select  sum(lente.preco_venda) from lente where id_orcamento = orcamento.id) as preco_total_lentes ,(select sum(servico.preco_venda) from servico where id_orcamento = orcamento.id) as preco_total_servicos');
+        $this->db->where('status', 1);
+        $this->db->join('itens', 'itens.id_orcamento = orcamento.id', 'left');
+        $this->db->join('lente', 'lente.id_orcamento = orcamento.id', 'left');
+        $this->db->join('servico', 'servico.id_orcamento = orcamento.id', 'left');
+        $this->db->join('forma_pgto', 'orcamento.id_forma_pgto = forma_pgto.id', 'left');
+        $this->db->join('cliente', 'cliente.id = orcamento.id_cliente', 'left');
+        $this->db->join('pessoa', 'pessoa.id = cliente.id_pessoa', 'left');
+        $this->db->group_by('orcamento.id');
+        $this->db->from('orcamento');
+        return $this->db->get()->result();
+    }
+
+    public function deleteOrcamento($id = null) {
+
+        if ($id != null) {
+
+            $this->db->where('id', $id);
+            $this->db->where('status', '1');
+            $this->db->delete('orcamento');
+
+            if ($this->db->_error_number() == '0') {
+                $this->session->set_flashdata('msg', 'Orcamento deletado com sucesso');
+                return true;
+            } else if ($this->db->_error_number() == '1451') {
+                $this->session->set_flashdata('msg', 'Não foi possível deletar o cliente porque \njá está associado a outro evento');
+                return false;
+            } else {
+                $this->session->set_flashdata('msg', 'Não foi possível deletar o cliente, informe este erro ao administrador do sistema:\n\n' . $this->db->_error_message());
+                return false;
+            }
+            return false;
+        }
+        return false;
+    }
 
 }

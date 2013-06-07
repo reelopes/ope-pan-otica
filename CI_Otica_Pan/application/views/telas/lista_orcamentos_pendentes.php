@@ -23,14 +23,22 @@ if($this->session->flashdata('msg')){
 
 $orcamentos = $orcamentos;//Pega a variavel da Controller (boa pratica)
 
-$this->table->set_heading('Data', 'Forma Pgto','Valor Total','Cliente','Vendedor ','&nbsp; ','&nbsp; ');
-
+$this->table->set_heading('Data', 'Forma Pgto','Valor Total','Cliente','Vendedor ','&nbsp; ','&nbsp;','&nbsp;');
+$atts = array(
+              'width'      => '900',
+              'height'     => '800',
+              'scrollbars' => 'yes',
+              'status'     => 'yes',
+              'resizable'  => 'yes',
+              'screenx'    => '200',
+              'screeny'    => '0'
+            );
 foreach ($orcamentos as $linha) {
     
     $data = $this->util->data_mysql_para_user($linha->data_orcamento);
     if($linha->nome_cliente==null){$nomeCliente = 'Cliente não definido';}else{$nomeCliente=$linha->nome_cliente;}    
     
-    $this->table->add_row($data,$linha->forma_pagamento,"R$ ".  number_format((($linha->preco_total_itens+$linha->preco_total_lentes+$linha->preco_total_servicos)-$linha->desconto),'2',',',''),$nomeCliente,$linha->vendedor,"<a href=\"javascript:abrirPopUp('" . base_url('contasAPagar/update/' . $linha->id) . "','500','450');\"> <center><img src='..\public/img/edit.png' width='23'/></center></a>", '<center><p onClick="if (! confirm(\'Tem certeza que deseja excluir a conta a pagar abaixo? \n\nNome: '.$linha->nome.'\nValor: '.$linha->valor.'\nData do pagamento: '.$this->util->data_mysql_para_user($linha->data).'\')) { return false; }">' . anchor('contasAPagar/delete/'.$linha->id, '<img src="..\public/img/delete.png" width="23"/>') . '</p></center>');
+    $this->table->add_row($data,$linha->forma_pagamento,"R$ ".  number_format((($linha->preco_total_itens+$linha->preco_total_lentes+$linha->preco_total_servicos)-$linha->desconto),'2',',',''),$nomeCliente,$linha->vendedor,anchor('venda/finalizarOrcamento/'.$linha->id_orcamento,"<center><img src='..\public/img/finalizarOrcamento.png' width='26' title='Finalizar Orçamento' /></center>"),anchor_popup('venda/exibeOrcamento/'.$linha->id_orcamento,"<center><img src='..\public/img/impressora.png' width='25' title='Imprimir Orçamento' /></center>",$atts), '<center><p onClick="if (! confirm(\'Tem certeza que deseja excluir o orçamento abaixo? \n\nData: '.$data.'\nForma Pgto: '.$linha->forma_pagamento.'\nValor Total: R$ '.number_format((($linha->preco_total_itens+$linha->preco_total_lentes+$linha->preco_total_servicos)-$linha->desconto),'2',',','').'\nCliente: '.$nomeCliente.'\')) { return false; }">' . anchor('venda/deletarOrcamento/'.$linha->id_orcamento, '<img src="..\public/img/delete.png" width="23" title="Excluir Orçamento" />') . '</p></center>');
 }
 
 $tmpl = array(
