@@ -1,5 +1,5 @@
 <?php
-echo"<div class=formulario>";
+echo"<div class=formulario style='  margin-left: 20px; width: 676px;  padding: 2px 2px 2px;  border-radius: 3px;'>";
 echo"<h2>$titulo</h2>";
 
 if($this->session->flashdata('cadastrook')){
@@ -19,7 +19,7 @@ echo"<table>";
 echo"<tr><td>";
 echo form_label('Nome <span style="color:gray;" title="Campo obrigatório">*</span>');
 echo"</td><td>"; 
-echo form_input(array('name'=>'nome'),  set_value('nome'), 'maxlength="100" placeholder="Nome do Usuário" autocomplete ="off" style="width:180px;" autofocus required title="Campo Nome é obrigatório"');
+echo form_input(array('name'=>'nome'),  set_value('nome'), 'maxlength="100" placeholder="Nome do Usuário" autocomplete ="off" style="width:180px;" autofocus required title="Campo Nome é obrigatório"')."<span>&nbsp;&nbsp;</span>";
 echo"</td><td>";
 echo form_label('Email');
 echo"</td><td>"; 

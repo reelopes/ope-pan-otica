@@ -1597,7 +1597,7 @@ INSERT INTO `usuario` VALUES
 (2,'Eduardo Pereira','eduardo','eduardo','eduardo','eduardo.pereira2806@gmail.com',1),
 (3,'Renan Lopes','renan','renan','renan','reee.lopes@gmail.com',1),
 (4,'Atendente Geral','atendente','atendente','atendente','atendente@gmail.com',2),
-(5,'Daniela Lima de Souza','oftalmologista','oftalmologista','oftalmologista','oftalmologista@gmail.com',4),
+(5,'Daniela Lima de Souza','oftalmologista','oftalmologista','oftalmologista','oftalmologista@gmail.com',3),
 (6,'Fernando Neves','fernando','fernado','fernando','fdias.d.neves@gmail.com',1);
 
 /*
