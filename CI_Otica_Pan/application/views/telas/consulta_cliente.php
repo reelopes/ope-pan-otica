@@ -34,7 +34,7 @@ if ($mes == null) {
                 $strCliente="<img src=../../../../../../../../../CI_otica_pan/public/img/dependente.png width=23 title='Consulta para um Dependente'>";
             }else{
                 $nome = $linha->nome_cliente;
-                $strCliente="<img src=../../../../../../../../../CI_otica_pan/public/img/true.png width=18 title='Consulta para um Cliente'>";
+                $strCliente="<img src=../../../../../../../../../CI_otica_pan/public/img/cliente.png width=23 title='Consulta para um Cliente'>";
             }
           
            if($linha->status=="Faltou"){

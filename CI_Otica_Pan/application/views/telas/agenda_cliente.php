@@ -102,10 +102,10 @@ if ($horarioAgendamento == null) {
 
         if ($linha->id_dependente == NULL) {
             $nome = $linha->nome_cliente;
-            $strDependente = "<center><img src=" . base_url('/public/img/true.png') . " width='18' title='Cliente'></center>";
+            $strDependente = "<center><img src=" . base_url('/public/img/cliente.png') . " width='23' title='Cliente'></center>";
         } else {
             $nome = $linha->nome_dependente;
-            $strDependente = "<center><img src=" . base_url('/public/img/false.png') . " width='18' title='Dependente'></center>";
+            $strDependente = "<center><img src=" . base_url('/public/img/dependente.png') . " width='23' title='Dependente'></center>";
         }
 
         if ($anoCalendario . $mesCalendario . $diaCalendario >= date('Y') . date('m') . date('d')) {
