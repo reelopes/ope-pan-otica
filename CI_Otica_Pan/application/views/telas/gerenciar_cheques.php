@@ -37,7 +37,7 @@ $cheques = $this->cheque_model->listaChequesPendentes();
                 echo "<td>" . $linha->descricao . "</td>";
                 echo "<td>R$ " . $this->util->pontoParaVirgula($linha->valor) . "</td>";
                 echo "<td><center><input type='checkbox' title='Baixa no cheque' name='a' id=".$linha->id." value='ON' ".$faltou." onClick=\"Baixa('".$linha->id."','".base_url('cheque/baixaCheque')."');\"/></center></td>";
-                echo "<td><center><a href=\"javascript:abrirPopUp('" . base_url('cheque/atualizarCheque/' . $linha->id) . "','700','700');\"><img src=../../../../../../../../../CI_otica_pan/public/img/gerenciar_cheques.png width=23 title='Alterar data do cheque'></a></center></td>";
+                echo "<td><center><a href=\"javascript:abrirPopUp('" . base_url('cheque/atualizarCheque/' . $linha->id) . "','600','350');\"><img src=../../../../../../../../../CI_otica_pan/public/img/gerenciar_cheques.png width=23 title='Alterar data do cheque'></a></center></td>";
                 echo"</tr>";
             }
             ?>

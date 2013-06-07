@@ -49,7 +49,13 @@ class Cheque extends CI_Controller {
     }
     
     public function atualizarCheque() {
+        $this->form_validation->set_rules('data', 'Data', 'required|trim');
         
+        if ($this->form_validation->run()) {
+            $this->cheque_model->atualizaCheque($this->input->post('id'), $this->input->post('data'));
+        }
+        $dados = array('pagina' => 'altera_cheque', 'titulo' => 'Altera data do Cheque');
+        $this->load->view('Principal_popup', $dados);
     }
 }
 ?>
