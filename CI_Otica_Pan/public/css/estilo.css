@@ -277,3 +277,17 @@ display: none;
 input[readonly] {
 background-color: #E0E2FF;
 }
+
+textarea[readonly] {
+background-color: #E0E2FF;
+margin: 5px;
+padding: 0 10px;
+color: #404040;
+border: 1px solid;
+border-color: #c4c4c4 #d1d1d1 #d4d4d4;
+border-radius: 2px;
+outline: 5px solid #eff4f7;
+-moz-outline-radius: 3px;
+-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+}
