@@ -10,7 +10,8 @@ if($this->session->flashdata('msg')){
 $contas = $contas;//Pega a variavel da Controller (boa pratica)
 // A MAIOR GAMBIARRA DA MINHA VIDA! POR FALTA DE TEMPO O AMIGÃO NÃO DEIXOU EU ALTERAR NA TABELA E SETAR OS TAMANHOS,
 // O QUE EU FIZ: ESSA GAMBI RIDICULA, dei uns &nbsp; PRA AJUSTAR AO TAMANHO e.e kkkkkk
-$this->table->set_heading('VENCIMENTO','&nbsp; &nbsp; &nbsp; &nbsp; NOME DO TÍTULO &nbsp; &nbsp; &nbsp; &nbsp; ', '&nbsp; &nbsp; VALOR &nbsp; &nbsp; ','&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DESCRIÇÃO &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ','&nbsp; ','&nbsp; ','&nbsp; ');
+$espaco = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;";
+$this->table->set_heading('VENCIMENTO',$espaco.'NOME DO TÍTULO'.$espaco, '&nbsp; &nbsp; VALOR &nbsp; &nbsp; ',$espaco.$espaco.'DESCRIÇÃO'.$espaco.$espaco,'&nbsp; ','&nbsp; ','&nbsp; &nbsp; &nbsp; ');
 
 foreach ($contas as $linha) {
     
@@ -25,12 +26,16 @@ foreach ($contas as $linha) {
 }
 
 $tmpl = array(
-    'table_open'=>'<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">',
-    'cell_start' => '<td valign="middle">',
-    'cell_end' => '</td>',
-    'cell_alt_start' => '<td valign="middle">',
-    'cell_alt_end' => '</td>',
-);
+            'table_open' => '<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">',
+        );
+
+//$tmpl = array(
+//    'table_open'=>'<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">',
+//    'cell_start' => '<td valign="middle">',
+//    'cell_end' => '</td>',
+//    'cell_alt_start' => '<td valign="middle">',
+//    'cell_alt_end' => '</td>',
+//);
 
 echo"<div class='tabela'>";
 $this->table->set_template($tmpl);

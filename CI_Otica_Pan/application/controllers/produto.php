@@ -3,7 +3,6 @@
 <script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/jquery/js/jquery.mim.js"></script>
 <script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/jquery/js/jquery.dataTables.min.js">
 </script>
-<script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/js/util.js"></script>
 <script type="text/javascript" src="../../../../../../../../../CI_otica_pan/public/js/produto.js"></script>
 
 <script type="text/javascript">

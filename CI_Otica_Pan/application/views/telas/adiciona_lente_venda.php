@@ -17,9 +17,9 @@ if ($this->session->flashdata('msgOk')) {
     <form method="POST" action=<? echo base_url('venda/adicionaLente') ?>/>
     <table>
         <tr>
-            <td>Ref.:</td><td><input type="text" style="width:210px;" name="referencia" value="<? echo set_value('referencia'); ?>" placeholder='Referência da Lente.' autocomplete="off" autofocus required title="Campo referencia custo é obrigatório" /></td></tr><tr>
-            <td>Nome:</td><td><input type="text" style="width:210px;" name="nome_lente" value="<? echo set_value('nome_lente'); ?>" placeholder='Nome da Lente.' autocomplete="off" required title="Campo nome é obrigatório" /></td></tr><tr>
-            <td>Preço Venda:</td><td><input type="text" style="width:210px;" name="preco_venda" value="<? echo set_value('preco_venda'); ?>" placeholder="XXX,XX" autocomplete="off"   required title="Campo preço custo é obrigatório" onkeypress="return(FormataReais(this,'.',',',event));" /></td></tr><tr>
+            <td>Ref. <span style="color:gray;" title="Campo obrigatório">*</span></td><td><input type="text" style="width:210px;" name="referencia" value="<? echo set_value('referencia'); ?>" placeholder='Referência da Lente.' autocomplete="off" autofocus required title="Campo referencia custo é obrigatório" /></td></tr><tr>
+            <td>Nome <span style="color:gray;" title="Campo obrigatório">*</span></td><td><input type="text" style="width:210px;" name="nome_lente" value="<? echo set_value('nome_lente'); ?>" placeholder='Nome da Lente.' autocomplete="off" required title="Campo nome é obrigatório" /></td></tr><tr>
+            <td>Preço Venda <span style="color:gray;" title="Campo obrigatório">*</span></td><td><input type="text" style="width:210px;" name="preco_venda" value="<? echo set_value('preco_venda'); ?>" placeholder="XXX,XX" autocomplete="off"   required title="Campo preço custo é obrigatório" onkeypress="return(FormataReais(this,'.',',',event));" /></td></tr><tr>
             <td></td><td><input type="submit" value="Cadastrar"></td></tr>
 
     </table>

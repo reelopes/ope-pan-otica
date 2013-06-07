@@ -9,7 +9,7 @@ echo"<h2>$titulo</h2>"; //TITULO
     <form method="POST" action=<? echo base_url('login/esqueciSenha') ?>/>
     <table>
         <tr>
-            <td>Login:</td><td><input type="text" style="width:310px;" name="login" value="<? echo set_value('login'); ?>"maxlength="50" placeholder='Qual o login?' autocomplete="off" autofocus required title="Campo login é obrigatório" autofocus /></td></tr><tr>
+            <td>Login <span style="color:gray;" title="Campo obrigatório">*</span></td><td><input type="text" style="width:300px;" name="login" value="<? echo set_value('login'); ?>"maxlength="50" placeholder='Qual o login?' autocomplete="off" autofocus required title="Campo login é obrigatório" autofocus /></td></tr><tr>
             <?
             if ($this->session->flashdata('lembrete')) {
                 echo "<td colspan='4'><p><center>O lembrete de senha é: <span style='color:blue;'>".$this->session->flashdata('lembrete')."</span></center></p></td><tr>";

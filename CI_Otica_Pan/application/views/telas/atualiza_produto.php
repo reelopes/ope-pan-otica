@@ -29,7 +29,7 @@ echo form_label('Código de Barras');
 echo"</td><td>";
 echo form_input(array('name'=>'cod_barra'), set_value('cod_barra', $query['produto']->cod_barra), 'maxlength="20" placeholder="Código do Produto" autocomplete ="off" style="width:150px;" onpaste="return false;"');
 echo"</td><td align='right'>";
-echo form_label('Nome');
+echo form_label('Nome <span style="color:gray;" title="Campo obrigatório">*</span>');
 echo"</td><td>";
 echo form_input(array('name'=>'nome'),
         set_value('nome', $query['produto']->nome), 'maxlength="50" placeholder="Nome do produto" autocomplete ="off" style="width:260px;" required title="Campo nome é obrigatório"');
@@ -41,21 +41,21 @@ echo form_input(array('name'=>'descricao'),
         set_value('descricao', $query['produto']->descricao), 'placeholder="Descrição do produto" autocomplete ="off" style="width:520px;"');
 echo"</td></tr>";
 echo"<tr><td>";
-echo form_label('Preco de custo');
+echo form_label('Preco de custo <span style="color:gray;" title="Campo obrigatório">*</span>');
 echo"</td><td>"; 
 echo form_input(array('name'=>'preco_custo'),
-        set_value('preco_custo', $this->util->pontoParaVirgula($query['produto']->preco_custo)), 'maxlength="3" placeholder="0.000,00" autocomplete ="off" onkeypress="return(FormataReais(this,\'.\',\',\',event));" style="width:80px;" onpaste="return false;" required title="Campo preço é obrigatório"');
+        set_value('preco_custo', $this->util->pontoParaVirgula($query['produto']->preco_custo)), 'maxlength="3" placeholder="0.000,00" autocomplete ="off" onkeypress="return(FormataReais(this,\'.\',\',\',event));" style="width:120px;" onpaste="return false;" required title="Campo preço é obrigatório"');
 echo"</td><td>";
-echo form_label('Preco de venda');
+echo form_label('Preco de venda <span style="color:gray;" title="Campo obrigatório">*</span>');
 echo"</td><td>"; 
 echo form_input(array('name'=>'preco_venda'),
-        set_value('preco_venda', $this->util->pontoParaVirgula($query['produto']->preco_venda)), 'maxlength="3" placeholder="0.000,00" autocomplete ="off" onkeypress="return(FormataReais(this,\'.\',\',\',event));" style="width:80px;" onpaste="return false;" required title="Campo preço é obrigatório"');
+        set_value('preco_venda', $this->util->pontoParaVirgula($query['produto']->preco_venda)), 'maxlength="3" placeholder="0.000,00" autocomplete ="off" onkeypress="return(FormataReais(this,\'.\',\',\',event));" style="width:120px;" onpaste="return false;" required title="Campo preço é obrigatório"');
 echo"</td></tr>";
 echo"<tr><td>";
-echo form_label('Quantidade');
+echo form_label('Quantidade <span style="color:gray;" title="Campo obrigatório">*</span>');
 echo"</td><td>"; 
 echo form_type(array('name'=>'quantidade'),
-        set_value('quantidade', $query['produto']->quantidade), 'maxlenght="11" min="0" autocomplete="off" style="width:80px;" OnKeyPress="mascaraInteiro(this)" onpaste="return false;" required title="Campo quantidade é obrigatório"', 'number');
+        set_value('quantidade', $query['produto']->quantidade), 'max="99999999999" min="0" autocomplete="off" style="width:80px;" OnKeyPress="mascaraInteiro(this)" onpaste="return false;" required title="Campo quantidade é obrigatório"', 'number');
 echo"</td><td>";
 echo form_label('Validade');
 echo"</td><td>"; 

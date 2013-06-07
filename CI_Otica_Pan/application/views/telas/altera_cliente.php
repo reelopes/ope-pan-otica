@@ -65,9 +65,9 @@ echo"<fieldset>";
 echo"<legend>Dados Pessoais:</legend>";
 echo"<table>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
-echo form_label('Nome');
+echo form_label('Nome <span style="color:gray;" title="Campo obrigatório">*</span>');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'nome'),  set_value('nome',$query['pessoa']->nome),'maxlength="100" autocomplete ="off" placeholder="Nome Completo do Cliete" required title="Campo nome é obrigatório" style="width:300px;"')."<span title='Campo obrigatório'>* &nbsp; </span>";
+echo form_input(array('name'=>'nome'),  set_value('nome',$query['pessoa']->nome),'maxlength="100" autocomplete ="off" placeholder="Nome Completo do Cliete" required title="Campo nome é obrigatório" style="width:300px;"');
 echo form_error('nome');
 echo"</td></tr>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover

@@ -27,7 +27,7 @@ function putData(url,idCliente,nomeCliente,cpfCliente,emailCliente) {
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
 <thead>
 <tr>
-<th>NOME</th><th>CPF</th></tr>
+<th>NOME</th><th>EMAIL</th><th>CPF</th></tr>
 </thead>
 <tbody>
         
@@ -44,6 +44,7 @@ foreach ($clientes as $linha) {
    
    echo "<tr class='alt' OnClick=\"putData('".base_url('receita/adicionaReceita/')."','".$linha->id_cliente."','".$linha->nome."','".$linha->cpf."','".$linha->email."');\">";
    echo "<td>".$nomeReduzido."</td>";
+   echo "<td>".$linha->email."</td>";
    echo "<td>".$linha->cpf."</td>";
    echo"</tr>";
    

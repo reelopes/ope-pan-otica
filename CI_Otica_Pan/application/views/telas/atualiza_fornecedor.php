@@ -1,5 +1,5 @@
 <?php
-echo"<div class=formulario style='  margin-left: 40px; width: 770px;  padding: 2px 2px 2px;  border-radius: 3px;'>";
+echo"<div class=formulario style='  margin-left: 20px; width: 500px;  padding: 2px 2px 2px;  border-radius: 3px;'>";
 echo"<h2>$titulo</h2>";
 
 
@@ -23,7 +23,7 @@ echo"<fieldset>";
 echo"<legend>Dados Básicos:</legend>";
 echo"<table>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
-echo form_label('Nome');
+echo form_label('Nome <span style="color:gray;" title="Campo obrigatório">*</span>');
 echo"</td><td>"; //Essa linha pode remover
 echo form_input(array('name'=>'nome'),  set_value('nome',$query['pessoa']->nome),'maxlength="100" autocomplete ="off" placeholder="Nome Completo do Fornecedor" autofocus style="width:300px;" required title="Campo Nome é obrigatório"');
 echo"</tr></td>";//Essa linha pode remover
@@ -34,9 +34,9 @@ echo form_input(array('name'=>'email'),set_value('email',$query['pessoa']->email
 echo form_error('email');
 echo"</tr></td>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover
-echo form_label('CNPJ');
+echo form_label('CNPJ <span style="color:gray;" title="Campo obrigatório">*</span>');
 echo"</td><td>"; //Essa linha pode remover
-echo form_input(array('name'=>'cnpj'),  set_value('cnpj',$query['fornecedor']->cnpj),'maxlength="18" autocomplete ="off" placeholder="XX.XXX.XXX/XXXX-XX" OnKeyPress="MascaraCNPJ(this)" required title="Campo CNPJ é obrigatório"');
+echo form_input(array('name'=>'cnpj'),  set_value('cnpj',$query['fornecedor']->cnpj),'maxlength="18" autocomplete ="off" placeholder="XX.XXX.XXX/XXXX-XX" OnKeyPress="MascaraCNPJ(this)" required title="Campo CNPJ é obrigatório" readonly');
 echo form_error('cnpj');
 echo"</tr></td>";//Essa linha pode remover
 echo"<tr><td>";//Essa linha pode remover

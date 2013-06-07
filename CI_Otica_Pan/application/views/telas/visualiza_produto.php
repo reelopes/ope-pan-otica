@@ -28,34 +28,34 @@ echo"</td><td align='right'>";
 echo form_label('Nome');
 echo"</td><td>";
 echo form_input(array('name'=>'nome'),
-        set_value('nome', $query['produto']->nome), 'maxlength="20" placeholder="Nome do produto" autocomplete ="off" style="width:260px;" required title="Campo nome é obrigatório" readonly');
+        set_value('nome', $query['produto']->nome), 'placeholder="Nome do produto" style="width:260px;" readonly');
 echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('Descricao');
 echo"</td><td colspan='4'>"; 
 echo form_input(array('name'=>'descricao'),
-        set_value('descricao', $query['produto']->descricao), 'maxlength="200" placeholder="Descrição do produto" autocomplete ="off" style="width:520px;" readonly');
+        set_value('descricao', $query['produto']->descricao), 'placeholder="Descrição do produto" style="width:520px;" readonly');
 echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('Preco de custo');
 echo"</td><td>"; 
 echo form_input(array('name'=>'preco_custo'),
-        set_value('preco_custo', $this->util->pontoParaVirgula($query['produto']->preco_custo)), 'maxlength="3" placeholder="0.000,00" autocomplete ="off" onkeypress="return(FormataReais(this,\'.\',\',\',event));" style="width:80px;" onpaste="return false;" required title="Campo preço é obrigatório" readonly');
+        set_value('preco_custo', $this->util->pontoParaVirgula($query['produto']->preco_custo)), 'placeholder="0.000,00" style="width:80px;" readonly');
 echo"</td><td>";
 echo form_label('Preco de venda');
 echo"</td><td>"; 
 echo form_input(array('name'=>'preco_venda'),
-        set_value('preco_venda', $this->util->pontoParaVirgula($query['produto']->preco_venda)), 'maxlength="3" placeholder="0.000,00" autocomplete ="off" onkeypress="return(FormataReais(this,\'.\',\',\',event));" style="width:80px;" onpaste="return false;" required title="Campo preço é obrigatório" readonly');
+        set_value('preco_venda', $this->util->pontoParaVirgula($query['produto']->preco_venda)), 'placeholder="0.000,00" style="width:80px;" readonly');
 echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('Quantidade');
 echo"</td><td>"; 
 echo form_type(array('name'=>'quantidade'),
-        set_value('quantidade', $query['produto']->quantidade), ' maxlenght="2" min="0" autocomplete="off" style="width:80px;" OnKeyPress="mascaraInteiro(this)" onpaste="return false;" required title="Campo quantidade é obrigatório" readonly', 'number');
+        set_value('quantidade', $query['produto']->quantidade), 'style="width:80px;" readonly', 'number');
 echo"</td><td>";
 echo form_label('Validade');
 echo"</td><td>"; 
-echo form_type(array('name'=>'validade'),  set_value('validade', $query['produto']->validade),'maxlength="10" autocomplete ="off" min="'.date('Y-m-d').'" readonly','date');
+echo form_type(array('name'=>'validade'),  set_value('validade', $query['produto']->validade),'readonly','date');
 echo form_error('validade');
 echo"</td></tr>";
 echo "</table>";
@@ -70,21 +70,21 @@ echo'<div id="armacao">';
         echo"<tr><td>";
         echo form_label('Largura da lente');
         echo"</td><td>"; 
-        echo form_input(array('name'=>'largura_lente'), set_value('largura_lente', $query['armacao']->largura_lente),'maxlength="11" placeholder="xx" autocomplete ="off" OnKeyPress="mascaraInteiro(this)" onpaste="return false;" readonly');
+        echo form_input(array('name'=>'largura_lente'), set_value('largura_lente', $query['armacao']->largura_lente),'placeholder="xx" readonly');
         echo"</td><td>";
         echo form_label('Largura da ponte');
         echo"</td><td>"; 
-        echo form_input(array('name'=>'largura_ponte'), set_value('largura_ponte', $query['armacao']->largura_ponte),'maxlength="11" placeholder="xx" autocomplete ="off" OnKeyPress="mascaraInteiro(this)" onpaste="return false;" readonly');
+        echo form_input(array('name'=>'largura_ponte'), set_value('largura_ponte', $query['armacao']->largura_ponte),'placeholder="xx" readonly');
         echo"</td></tr>";
         echo"<tr><td>";
         echo form_label('Comprimento da haste');
         echo"</td><td>"; 
         echo form_input(array('name'=>'comprimento_haste'),
-                set_value('comprimento_haste', $query['armacao']->comprimento_haste),'maxlength="11" placeholder="xxx" autocomplete ="off" OnKeyPress="mascaraInteiro(this)" onpaste="return false;" readonly');
+                set_value('comprimento_haste', $query['armacao']->comprimento_haste),'placeholder="xxx" readonly');
         echo"</td><td>";
         echo form_label('Modelo');
         echo"</td><td>"; 
-        echo form_input(array('name'=>'modelo'), set_value('modelo', $query['armacao']->modelo),'maxlength="11" placeholder="XX-xxx" autocomplete ="off" readonly');
+        echo form_input(array('name'=>'modelo'), set_value('modelo', $query['armacao']->modelo),'placeholder="XX-xxx" readonly');
         echo"</td></tr>";
         if ($query['grife']->id != null) {
             echo"<tr><td>";
@@ -120,9 +120,6 @@ echo"</div>";
 }
 echo'<a href="'.$this->session->userdata('paginaAnterior').'"><img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" title="Voltar" /></a>';
 echo"</fieldset>";
-
-//echo anchor(base_url('produto/lista'), '<img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" title="Voltar"/>');
-//echo '<a href="#" onClick="history.go(-1);"> <img src="'.base_url('public/img/voltar.png').'" width="25" id="icone_desbotado" title="Voltar"/></a>';
 
 echo form_close();
 ?>
