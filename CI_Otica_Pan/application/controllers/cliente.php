@@ -189,8 +189,4 @@ class Cliente extends CI_Controller {
             $this->load->view('Principal_popup', $dados);
     }}
     }
-    
-    
-
-
-?>
+ ?>
