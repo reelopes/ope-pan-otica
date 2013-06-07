@@ -75,14 +75,14 @@
         <td>&nbsp;</td>
         <td align="center">
             <a href="<? echo base_url('produto'); ?>">
-                <img src="public/img/cadastro_produto.png"/>
+                <img src="public/img/produto.png" width="74px" heigth="74px"/>
                 <br />
                 Cadastro de Produtos
             </a>
         </td>
         <td align="center">
             <a href="<? echo base_url('produto/lista'); ?>" >
-                <img src="public/img/pesquisa_produto.png"/>
+                <img src="public/img/lista_produto.png" width="74px" heigth="74px"/>
                 <br />
                 Pesquisa de Produtos
             </a>
