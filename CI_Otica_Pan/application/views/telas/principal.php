@@ -21,10 +21,10 @@
             </a>
         </td>
         <td align="center">
-            <a href="<? echo base_url('agendamento'); ?>">
-                <img src="public/img/agendamento.png" width="72px" heigth="72px"/>
+            <a href="<? echo base_url('venda/listaOrcamentos'); ?>">
+                <img src="public/img/orçamentos.png" width="74px" heigth="74px"/>
                 <br />
-                Agendamento
+                Gerenciar Orçamentos
             </a>
         </td>
         <td align="center">
@@ -37,6 +37,20 @@
     </tr>
     <tr><td><br></td></tr>
     <tr>
+        <td align="center">
+            <a href="<? echo base_url('agendamento'); ?>">
+                <img src="public/img/agendamento.png" width="72px" heigth="72px"/>
+                <br />
+                Agendamento
+            </a>
+        </td>
+        <td align="center">
+            <a href="<? echo base_url('receita/adicionaReceita'); ?>" >
+                <img src="public/img/check_list_1.png" width="65px" heigth="65px"/>
+                <br />
+                Cadastrar Receita
+            </a>
+        </td>
         <td align="center">
             <a href="<? echo base_url('cliente'); ?>" >
                 <img src="public/img/cadastro_cliente.png"/>
@@ -51,6 +65,15 @@
                 Pesquisa de Clientes  
             </a>
         </td>
+        
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
         <td align="center">
             <a href="<? echo base_url('fornecedor/adiciona'); ?>">
                 <img src="public/img/cadastro_fornecedor.png"/>
@@ -65,15 +88,6 @@
                 Pesquisa de Fornecedores    
             </a>
         </td>
-    </tr>
-    <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td>&nbsp;</td>
         <td align="center">
             <a href="<? echo base_url('produto'); ?>">
                 <img src="public/img/adiciona_produto_1.png" width="74px" heigth="74px"/>
@@ -157,16 +171,37 @@
     <tr>
         <td align="center">
             <a href="<? echo base_url('consulta'); ?>">
-                <img src="public/img/ConsultaMedica.png" width="74px" heigth="74px"/>
+                <img src="public/img/ConsultaMedica.png" width="65px" heigth="65px"/>
                 <br />
                 Consulta Oftalmológica
             </a>
         </td>
         <td align="center">
-            <a href="<? echo base_url('receita'); ?>" >
-                <img src="public/img/check_list.png" width="74px" heigth="74px"/>
+            <a href="<? echo base_url('receita/adicionaReceita'); ?>" >
+                <img src="public/img/check_list_1.png" width="65px" heigth="65px"/>
                 <br />
                 Cadastrar Receita
+            </a>
+        </td>
+        <td align="center" style="visibility: hidden;">
+            <a href="<? echo base_url(''); ?>" >
+                <img src="public/img/nada.png" width="65px" heigth="65px"/>
+                <br />
+                &nbsp;
+            </a>
+        </td>
+        <td align="center" style="visibility: hidden;">
+            <a href="<? echo base_url(''); ?>" >
+                <img src="public/img/nada.png" width="65px" heigth="65px"/>
+                <br />
+                &nbsp;
+            </a>
+        </td>
+        <td align="center" style="visibility: hidden;">
+            <a href="<? echo base_url(''); ?>" >
+                <img src="public/img/nada.png" width="65px" heigth="65px"/>
+                <br />
+                &nbsp;
             </a>
         </td>
     </tr>
