@@ -37,17 +37,18 @@ echo"<hr>"
             <li><a href="<? echo base_url('usuario/lista'); ?>">Usuário</a></li>
             <li><a href="<? echo base_url('cheque'); ?>">Cheques</a></li>
           </ul>
-        </li>
-        <li><a href="<? echo base_url('agendamento'); ?>">Agendamento</a></li>
-        <li><a href="<? echo base_url('consulta'); ?>">Consulta Oftalm.</a></li>
-        <li><a href="<? echo base_url('venda'); ?>">Venda</a></li>
-        
-        <li class="dropdown">
+          
+          <li class="dropdown">
           <a href="#">Relatórios</a>
           <ul class="large">
             <li><a href="<? echo base_url('fluxoFinanceiro'); ?>">Fluxo Financeiro</a></li>
           </ul>
         </li>
+          
+        </li>
+        <li><a href="<? echo base_url('agendamento'); ?>">Agendamento</a></li>
+        <li><a href="<? echo base_url('consulta'); ?>">Consulta Oftalm.</a></li>
+        <li><a href="<? echo base_url('venda'); ?>">Venda</a></li>
         
       </ul>
     </nav>
