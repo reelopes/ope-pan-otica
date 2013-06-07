@@ -168,7 +168,7 @@ input[type=submit]:active,input[type=button]:active {
 
 .headerInfo {
 	position: absolute;
-	width: 300px;
+	width: 255px;
 	height: 0px;
 	z-index: 1;
 	left: 75%;
