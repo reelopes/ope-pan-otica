@@ -2,16 +2,21 @@
 echo"<div class=formulario style='margin-left: 40px; width: 460px;  padding: 2px 2px 2px;  border-radius: 3px;'>";
 echo"<h2>$titulo</h2>"; //TITULO
 
+
+
+if(url!="")echo $url;
+
+
 ?>
 <fieldset>
     <legend>Filtros:</legend>
-    <form method="POST" action=<? echo base_url('fluxoFinanceiro/gerarRelatorio') ?>/>
+    <form method="POST" action=<? echo base_url('fluxoFinanceiro/relatorio') ?>/>
         <fieldset>
             <legend>Período:</legend>
             <table>
                 <tr>
-                    <td>De&nbsp;</td><td><input type="date" style="width:155px;" name="data" value="<? echo set_value('data'); ?>"autocomplete="off" /><span>&nbsp;&nbsp;</span></td>
-                    <td>Até&nbsp;</td><td><input type="date" style="width:155px;" name="data" value="<? echo set_value('data'); ?>"autocomplete="off" /></td>
+                    <td>De&nbsp;</td><td><input type="date" style="width:155px;" name="dataInicial" autocomplete="off" required /><span>&nbsp;&nbsp;</span></td>
+                    <td>Até&nbsp;</td><td><input type="date" style="width:155px;" name="dataFinal" autocomplete="off" required  /></td>
                 </tr>
             </table>
         </fieldset>

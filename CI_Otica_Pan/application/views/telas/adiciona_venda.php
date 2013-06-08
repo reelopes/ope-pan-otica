@@ -6,8 +6,16 @@
                 var campoBusca = 'cod_barra';
             if (id === 'codigoProduto')
                 var campoBusca = 'id';
-
-
+            
+            var valor = document.getElementById(id).value;
+            if(valor.match(' ') || valor.match('%')){
+                alert('Produto não encontrado');
+                document.getElementById(id).value='';
+                return false;
+            }
+            
+            
+            
             document.forms['formularioVenda'].onsubmit = function() {
                 return false;
             }
@@ -207,12 +215,12 @@ foreach ($this->session->userdata('itens') as $itens) {
 }
 foreach ($this->session->userdata('lente') as $lentes) {
 
-    echo '{"Cod":"' . $lentes["referencia"] . '","nome":"' . $lentes["nome_lente"] . '","Qtd":"' . $lentes["quantidade_lente"] . '","valor_unitario":" R$ ' . $lentes["preco_venda"] . '","sub_total":"R$ ' . $subTotal_aux = $this->util->pontoParaVirgula($this->util->virgulaParaPonto($lentes["preco_venda"]) * $lentes["quantidade_lente"]) . '"},';
+    echo '{"Cod":"' .'R'. $lentes["referencia"] . '","nome":"' .$lentes["nome_lente"] . '","Qtd":"' . $lentes["quantidade_lente"] . '","valor_unitario":" R$ ' . $lentes["preco_venda"] . '","sub_total":"R$ ' . $subTotal_aux = $this->util->pontoParaVirgula($this->util->virgulaParaPonto($lentes["preco_venda"]) * $lentes["quantidade_lente"]) . '"},';
     $subTotal = $this->util->virgulaParaPonto($subTotal_aux) + $subTotal;
 }
 foreach ($this->session->userdata('servico') as $servicos) {
 
-    echo '{"Cod":"000","nome":"' . $servicos["nome"] . '","Qtd":"' . $servicos["quantidade_servico"] . '","valor_unitario":" R$ ' . $servicos["preco"] . '","sub_total":"R$ ' . $subTotal_aux = $this->util->pontoParaVirgula($this->util->virgulaParaPonto($servicos["preco"]) * $servicos["quantidade_servico"]) . '"},';
+    echo '{"Cod":"S000","nome":"' . $servicos["nome"] . '","Qtd":"' . $servicos["quantidade_servico"] . '","valor_unitario":" R$ ' . $servicos["preco"] . '","sub_total":"R$ ' . $subTotal_aux = $this->util->pontoParaVirgula($this->util->virgulaParaPonto($servicos["preco"]) * $servicos["quantidade_servico"]) . '"},';
     $subTotal = $this->util->virgulaParaPonto($subTotal_aux) + $subTotal;
 }
 ?>

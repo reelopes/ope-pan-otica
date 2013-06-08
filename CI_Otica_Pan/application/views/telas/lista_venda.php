@@ -79,7 +79,7 @@ if($dados_venda['lentes']!=null){
 foreach ($dados_venda['lentes'] as $lente){
 
 echo"<tr>";
-echo"<td style='border-left: 1px solid #666666;'>".$lente->referencia."</td>";
+echo"<td style='border-left: 1px solid #666666;'>R".$lente->referencia."</td>";
 echo"<td style='border-left: 1px solid #666666;'>".$lente->nome."</td>";
 echo"<td style='border-left: 1px solid #666666;'>1</td>";
 echo"<td style='border-left: 1px solid #666666;'>R$ ".number_format($lente->preco_venda,'2',',','')."</td>";
@@ -92,7 +92,7 @@ if($dados_venda['servicos']!=null){
 foreach ($dados_venda['servicos'] as $servico){
 
 echo"<tr>";
-echo"<td style='border-left: 1px solid #666666;'>000</td>";
+echo"<td style='border-left: 1px solid #666666;'>S000</td>";
 echo"<td style='border-left: 1px solid #666666;'>".$servico->nome."</td>";
 echo"<td style='border-left: 1px solid #666666;'>1</td>";
 echo"<td style='border-left: 1px solid #666666;'>R$ ".number_format($servico->preco_venda,'2',',','')."</td>";
