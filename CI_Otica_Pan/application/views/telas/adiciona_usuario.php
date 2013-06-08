@@ -68,6 +68,7 @@ echo form_submit('', 'Cadastrar','onClick="if (senha.value != senha_confirma.val
 echo"</tr></td>"; 
 echo"</table>"; 
 echo"</fieldset>";
+echo"<p><font color=red>".form_error('login')."</font></p>";
 echo form_close();
 echo"</div>";
 ?>

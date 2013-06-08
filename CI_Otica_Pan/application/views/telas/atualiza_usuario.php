@@ -35,7 +35,7 @@ echo"</td></tr>";
 echo"<tr><td>";
 echo form_label('Login <span style="color:gray;" title="Campo obrigatório">*</span>');
 echo"</td><td>"; 
-echo form_input(array('name'=>'login'),  set_value('login', $query['usuario']->login),'maxlength="20" placeholder="Login" autocomplete ="off" style="width:180px;" required title="Campo Login é obrigatório"');
+echo form_input(array('name'=>'login'),  set_value('login', $query['usuario']->login),'maxlength="20" placeholder="Login" autocomplete ="off" style="width:180px;" required title="Campo Login é obrigatório" readonly');
 echo"</td><td>";
 echo form_label('Nivel');
 echo"</td><td>"; 

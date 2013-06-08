@@ -43,7 +43,7 @@ class usuario extends CI_Controller {
     public function adiciona() {
         //Dados do usuário
         $this->form_validation->set_rules('nome', 'Nome', 'trim');
-        $this->form_validation->set_rules('login', 'Login', 'trim|required');
+        $this->form_validation->set_rules('login', 'Login', 'trim|required|is_unique[usuario.login]');
         $this->form_validation->set_rules('senha', 'Senha', 'trim|required');
         $this->form_validation->set_rules('senha_confirma', 'Senha', 'trim|required');
         $this->form_validation->set_rules('lembrete_senha', 'Lembrete de Senha', 'trim');

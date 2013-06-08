@@ -84,6 +84,13 @@ class Usuario_model extends CI_Model {
                 redirect(current_url());
 	}
 
+        public function select($campo = null, $dado = null) {
+            $this -> db -> where($campo, $dado);
+            $this -> db -> limit(1);
+            return $this -> db -> get('usuario') -> row();
+        }
+
+
         public function do_delete($id = null) {
             if ($id != null) {               
                 $this->db->where('id_usuario', $id);

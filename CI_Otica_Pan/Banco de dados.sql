@@ -726,7 +726,7 @@ CREATE TABLE `itens` (
   `quantidade` int(11) NOT NULL,
   KEY `id_orcamento` (`id_orcamento`),
   KEY `id_produto` (`id_produto`),
-  CONSTRAINT `itens_ibfk_1` FOREIGN KEY (`id_orcamento`) REFERENCES `orcamento` (`id`),
+  CONSTRAINT `itens_ibfk_1` FOREIGN KEY (`id_orcamento`) REFERENCES `orcamento` (`id`) ON DELETE CASCADE,
   CONSTRAINT `itens_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -741,7 +741,7 @@ CREATE TABLE `lente` (
   `nome` varchar(50) NOT NULL,
   `preco_venda` double NOT NULL,
   KEY `id_orcamento` (`id_orcamento`),
-  CONSTRAINT `lente_ibfk_1` FOREIGN KEY (`id_orcamento`) REFERENCES `orcamento` (`id`)
+  CONSTRAINT `lente_ibfk_1` FOREIGN KEY (`id_orcamento`) REFERENCES `orcamento` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*
@@ -1093,7 +1093,7 @@ CREATE TABLE `servico` (
   `preco_venda` double NOT NULL,
   `descricao` text,
   KEY `id_orcamento` (`id_orcamento`),
-  CONSTRAINT `servico_ibfk_1` FOREIGN KEY (`id_orcamento`) REFERENCES `orcamento` (`id`)
+  CONSTRAINT `servico_ibfk_1` FOREIGN KEY (`id_orcamento`) REFERENCES `orcamento` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*
