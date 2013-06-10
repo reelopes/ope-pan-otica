@@ -235,7 +235,7 @@ class Venda_model extends CI_Model {
             if ($orcamento->id_forma_pgto == 3) {
                 $this->db->where('id_venda', $id_venda);
                 $cheques = $this->db->get('cheque')->result();
-                $parcelas = $this->db->count_all_results('cheque');
+                $parcelas = count($cheques);
             }
 
             $this->db->where('id_orcamento', $venda->id_orcamento);

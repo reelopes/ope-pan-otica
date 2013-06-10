@@ -54,11 +54,18 @@ foreach ($dadosRelatorio as $dados){
     }else{
         $lucro = $lucro + $valor;
         $vendas = $vendas + $valor;
+        
     }
+    if($dados->tipo=='1' && $dados->descricao==''){
+        $descricao = 'Venda sem cliente';
+    }else{
+        $descricao = $dados->descricao;
+    }
+    
    
 echo"<tr>";
 echo"<td style='border-left: 1px solid #666666;'>".$this->util->data_mysql_para_user($dados->data)."</td>";
-echo"<td style='border-left: 1px solid #666666;'>".$dados->descricao."</td>";
+echo"<td style='border-left: 1px solid #666666;'>".$descricao."</td>";
 if($dados->tipo=='0'){
 echo"<td style='border-left: 1px solid #666666;border-right: 1px solid #666666;'><font color='red'>R$ -".number_format($valor,2,',','')."</font></td>";
 }else{
@@ -79,9 +86,9 @@ echo"<table width='100%'>";
 
 
 echo"<tr>";
-echo"<td align='right'><b>Total de débito </b></td>";
+echo"<td align='right'><b>Total de Débito </b></td>";
 echo"<td align='left'>R$ ".  number_format($contasAPagar,'2',',','')."</td>";
-echo"<td align='right'><b>Total de crédito </b></td>";
+echo"<td align='right'><b>Total de Crédito </b></td>";
 echo"<td align='left'>R$ ".  number_format($vendas,'2',',','')."</td>";
 echo"</tr>";
 echo"<tr>";
