@@ -10,7 +10,7 @@ if(url!="")echo $url;
 ?>
 <fieldset>
     <legend>Filtros:</legend>
-    <form method="POST" action=<? echo base_url('fluxoFinanceiro/relatorio') ?>/>
+    <form method="POST" action=<? echo base_url('fluxoFinanceiro/relatorioPopUp') ?>/>
         <fieldset>
             <legend>Período:</legend>
             <table>
