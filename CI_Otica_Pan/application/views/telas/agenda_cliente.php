@@ -42,7 +42,7 @@ echo $this->calendar->generate($anoCalendario, $mesCalendario, $dados);
 echo "</div>";
 $diaCalendario = $this->uri->segment(5); //Captura o dia do mes que o usuario escolheu no calendario
 
-echo "<div style='float:left; margin-left:80px; padding: 30px 20px 0px;'}>";
+echo "<div style='float:left; margin-left:0px; padding: 70px 20px 0px;'}>";
 
 $diaSemana_url = date("w", mktime(0, 0, 0, $mesCalendario, $dia, $anoCalendario)); //Captura o dia da semana que vem na URL (ex: 0 Domingo, 1 Segunda 2 terça ...
 //Verifica se a data escolhida é menor que a data atual se for não deixa adicionar cliente
@@ -123,7 +123,6 @@ if ($horarioAgendamento == null) {
     );
     $this->table->set_template($tmpl);
 }
-
 echo"<div class='tabela'>";
 echo $this->table->generate();
 echo"</div>";

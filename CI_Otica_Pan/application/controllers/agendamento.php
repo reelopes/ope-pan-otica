@@ -51,8 +51,8 @@ class Agendamento extends CI_Controller {
     {week_day_cell}<th class="day_header">{week_day}</th>{/week_day_cell}
    {cal_cell_content}<div class="day_listing"> <a href="{content}">{day}</a></div>{/cal_cell_content}
    {cal_cell_content_today}<div class="today"><a href="{content}">{day}</a></div>{/cal_cell_content_today}
-   {cal_cell_no_content}<span class="day_listing">{day}</span>&nbsp;{/cal_cell_no_content}
-    {cal_cell_no_content_today}<div class="today"><span class="day_listing">{day}</span></div>{/cal_cell_no_content_today}
+   {cal_cell_no_content}<div class="day_listing">{day}</span>&nbsp;{/cal_cell_no_content}
+    {cal_cell_no_content_today}<div class="today">{day}</div>{/cal_cell_no_content_today}
 ');
         
         $this->load->model('agendamento_model');

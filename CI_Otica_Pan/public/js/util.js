@@ -360,3 +360,41 @@ function number_format( number, decimals, dec_point, thousands_sep ) {
 //    }
 //    return true;
 //}
+/**
+jQuery.noConflict();
+
+function msgAlert(title1,msg1,type1){
+    jQuery.msgBox({
+    title: title1,
+    content: msg1,
+	type: type1,
+	opacity:0.5
+       
+});
+}
+        
+function msgConfirm (title1,msg1){
+
+    jQuery.msgBox({
+    title: title1,
+    content: msg1,
+    type: "confirm",
+    buttons: [{ value: "Yes" }, { value: "No" }, { value: "Cancel"}],
+    success: function (result) {
+        if (result == "Yes") {
+            return true;
+        }else{
+            return false;
+        }
+    }
+});
+    
+    
+}
+
+
+
+
+*/
+
+
