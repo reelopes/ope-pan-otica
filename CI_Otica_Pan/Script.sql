@@ -1196,7 +1196,7 @@ CREATE TABLE `produto` (
   `status` tinyint(1) DEFAULT '1',
   `validade` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 /*
 Table data for otica_pan.produto
@@ -1223,7 +1223,9 @@ INSERT INTO `produto` VALUES
 ('3491331018802','Óculos Real back M290',0,'',25,100,200,100,1,NULL),
 ('3491331019216','Óculos HB 8272',0,'',26,100,230,100,1,NULL),
 ('3491331019630','Lente de Contato 2,73G M',0,'',27,90,173,89,1,NULL),
-('3491331020044','Lente de Contato Vende 2,98M',0,'',28,92,282,92,1,NULL);
+('3491331020044','Lente de Contato Vende 2,98M',0,'',28,92,282,92,1,NULL),
+('7896422514866','Limpador De Lentes 40ML',0,'Limpador De Lentes 40ML Bad Boy',29,30,50,60,1,NULL),
+('7896112141839','Óculos HB 9200',0,'Óculos Preto HB 9200',30,100,200,89,1,NULL);
 
 /*
 Table structure for receita
